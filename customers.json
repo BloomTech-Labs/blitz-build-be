@@ -1,0 +1,124 @@
+{
+	"customers": [
+		{
+			"id": 1,
+			"first_name": "Gerry",
+			"last_name": "Gulgowski",
+			"address": "050 Heathcote Ways",
+			"city": "Reingertown",
+			"state": "IL",
+			"zip": "25895",
+			"email": "Sheridan20@gmail.com",
+			"phone #": "634-620-3458 x50912",
+			"project_id": ""
+		},
+		{
+			"id": 2,
+			"first_name": "Caleigh",
+			"last_name": "Reynolds",
+			"address": "6863 Daniel Harbor",
+			"city": "Port Javon",
+			"state": "ND",
+			"zip": "48710-1427",
+			"email": "Kirk_Schmeler@yahoo.com",
+			"phone #": "453-227-9782",
+			"project_id": ""
+		},
+		{
+			"id": 3,
+			"first_name": "Robert",
+			"last_name": "Cruickshank",
+			"address": "3444 Gerhold Parks",
+			"city": "Janniebury",
+			"state": "MO",
+			"zip": "50257",
+			"email": "Judah_Mante2@gmail.com",
+			"phone #": "(763) 345-3848",
+			"project_id": ""
+		},
+		{
+			"id": 4,
+			"first_name": "Rowena",
+			"last_name": "Rice",
+			"address": "54462 Austen Rapid",
+			"city": "Eloyland",
+			"state": "SD",
+			"zip": "91681",
+			"email": "Noah.Heathcote91@yahoo.com",
+			"phone #": "694-940-6908 x5949",
+			"project_id": ""
+		},
+		{
+			"id": 5,
+			"first_name": "Jedediah",
+			"last_name": "Daniel",
+			"address": "36120 Winifred Stream",
+			"city": "West Melyssaview",
+			"state": "IA",
+			"zip": "25993",
+			"email": "Kamryn_Leuschke97@hotmail.com",
+			"phone #": "1-144-785-1024",
+			"project_id": ""
+		},
+		{
+			"id": 6,
+			"first_name": "Alfonzo",
+			"last_name": "Heidenreich",
+			"address": "148 Gavin Mountains",
+			"city": "South Berniece",
+			"state": "OH",
+			"zip": "18100-5742",
+			"email": "Rossie96@hotmail.com",
+			"phone #": "685.001.0272 x1629",
+			"project_id": ""
+		},
+		{
+			"id": 7,
+			"first_name": "Prudence",
+			"last_name": "Becker",
+			"address": "23052 Conn Terrace",
+			"city": "Damianborough",
+			"state": "MO",
+			"zip": "01233",
+			"email": "Brice70@hotmail.com",
+			"phone #": "(695) 760-3487",
+			"project_id": ""
+		},
+		{
+			"id": 8,
+			"first_name": "Jesus",
+			"last_name": "McGlynn",
+			"address": "9393 Zachariah Spurs",
+			"city": "Yolandaside",
+			"state": "AL",
+			"zip": "71502",
+			"email": "Myrtle.Boyle45@yahoo.com",
+			"phone #": "763-659-8843",
+			"project_id": ""
+		},
+		{
+			"id": 9,
+			"first_name": "Dejah",
+			"last_name": "Hintz",
+			"address": "67553 Ziemann Ville",
+			"city": "South Marilieport",
+			"state": "IA",
+			"zip": "50485-7024",
+			"email": "Finn.Kuhn@gmail.com",
+			"phone #": "(722) 340-3845",
+			"project_id": ""
+		},
+		{
+			"id": 10,
+			"first_name": "Mitchell",
+			"last_name": "Daugherty",
+			"address": "575 Danny Brooks",
+			"city": "Beattyville",
+			"state": "ID",
+			"zip": "50517-2610",
+			"email": "Linnie14@yahoo.com",
+			"phone #": "(660) 704-2167 x12519",
+			"project_id": ""
+		}
+	]
+}
