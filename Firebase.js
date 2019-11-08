@@ -5,7 +5,7 @@ const config = {
     authDomain: "blitzbuild-8d5a6.firebaseapp.com",
     databaseURL: "https://blitzbuild-8d5a6.firebaseio.com",
     projectId: "blitzbuild-8d5a6",
-    storageBucket: "blitzbuild-8d5a6.appspot.com",
+    storageBucket: process.env.STORAGE_BUCKET,
     messagingSenderId: process.env.MESSAGE_ID,
     appId: process.env.APP_ID,
     measurementId: "G-J1DR7ZF188"
