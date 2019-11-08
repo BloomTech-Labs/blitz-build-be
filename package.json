@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "nodemon":"nodemon index.js"
+    "nodemon": "nodemon index.js"
   },
   "author": "",
   "license": "MIT",
@@ -13,6 +13,7 @@
     "@google-cloud/storage": "^4.1.1",
     "bcrypt": "^3.0.6",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "firebase": "^7.2.3",
     "firebase-admin": "^8.7.0",

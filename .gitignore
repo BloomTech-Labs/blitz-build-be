@@ -176,3 +176,4 @@ $RECYCLE.BIN/
 *.lnk
 .env
 app.txt
+service-key.json
