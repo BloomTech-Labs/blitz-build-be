@@ -1,23 +1,6 @@
-const express = require('express');
-
-const cors = require('cors')
-const helmet = require('helmet')
-const server = express(helmet(cors))
-
-
-
-
-
-
-
-server.get('/',(req,res)=>{
-    res.status(200).send({messesage:'I Work'})
-
-} )
-
-server.listen(5000,()=>{
-    console.log('Server running on 5000')
+const server = require('./api/server')
+const port = process.env.PORT || 4500
+server.listen(port,()=>{
+  console.log(`\n********* I work I'm Listening on Port ${port}  *******\n `)
 })
 
-
-module.exports =  server
