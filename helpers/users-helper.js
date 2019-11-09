@@ -1,18 +1,22 @@
-const Firebase = require('../Firebase')
-const dbRef =  Firebase.database().ref()
-const usersRef =  dbRef.child('users')
 
-module.exports ={
-    find,
-}
 
-function find(){
-    return usersRef.on('value',snap =>{
-   
-        console.log(snap.val())
+
+// module.exports ={
+//     find,
+// }
+
+// function find(){
+//      dbRef.on('value',snap =>{
+
+//      console.log('SNAP.VAL LOG',snap.val())
+//         console.log('FROM SNAP',snap)
+       
+      
+          
      
-    })
-}
+//     })
+
+// }
 
 
 
