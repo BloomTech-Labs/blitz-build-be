@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const Firebase = require('../Firebase')
-const dbRef =  Firebase.database().ref()
+const Firebaseconfig = require('../Firebaseconfig')
+const dbRef =  Firebaseconfig.database().ref()
 
 const projectsRef = dbRef.child('projects');
 const projects = require('../projects.json');

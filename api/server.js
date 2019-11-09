@@ -3,7 +3,8 @@ const cors = require('cors')
 const helmet = require('helmet')
 const userRouter = require('../routes/users-routes')
 const projectsRouter = require('../routes/projects-routes')
-const authRouter = require('../auth/auth')
+const authRouter = require('../auth/authorized')
+const register = require('../auth/authRouter')
 const server = express()
 
 // define logger middleware
@@ -18,13 +19,14 @@ server.use(helmet())
 server.use(express.json())
 server.use(logger)
 
-// Add auth 
+// Add auth route for testing
 server.use('/auth',authRouter)
+server.use('/api',register)
 
 // Add routes
 
-server.use('/api',userRouter);
-server.use('/api',projectsRouter);
+server.use('/api/users',authRouter,userRouter);
+server.use('/api/projects',authRouter,projectsRouter);
 
 
 module.exports=server
