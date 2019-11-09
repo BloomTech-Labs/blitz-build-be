@@ -14,25 +14,62 @@ router.post('/register', (req, res) => {
 
 
   //Encrypts Password before storing it to the DB
-  const hash = bcrypt.hashSync(user.password,10); // 2 ^ n
- user.password = hash 
+//   const hash = bcrypt.hashSync(user.password,10); // 2 ^ n
+//  user.password = hash 
 
- Firebaseconfig.auth().createUserWithEmailAndPassword(user.email,hash).then(newUser=>{
+ Firebaseconfig.auth().createUserWithEmailAndPassword(user.email,user.password).then(newUser=>{
      res.status(201).json({message:`${newUser.user.email} added to the database`,uid:`${newUser.user.uid}`,createdAt:moment().format('LLL')})
-     console.log(newUser.user.uid,newUser.user.email)
+
  })
-
-
- 
-
- 
- 
- .catch(error=>{
+   .catch(error=>{
      const errorCode = error.code
      const errorMessage =error.message
    })
  
 })
+// Login 
+router.post('/login', (req, res) => {
+    let { email, password } = req.body;
+    // Make sure email and password are sent
+    if(!email || !password){
+      
+      res.status(403).json({message:'Please enter login information'}) 
+    }
+    // Call to firebase to auth the login info
+  Firebaseconfig.auth().signInWithEmailAndPassword(email,password).then(userObj =>{
+           // Firebase will return a refresh  token 
+           //pass it to the client so they can display it in the headers
+         res.status(200).json({message:`${userObj.user.email} signed in }`,token:userObj.user.refreshToken})
+  
+  })
+})
+
+
+
+
+
+
+//     db.findBy({ username })
+//       .first()
+//       .then(user => {
+    
+//          if (user && bcrypt.compareSync(password, user.password)) {
+//           // produce token
+//           const token = generateToken(user);
+  
+//           // add token to response
+//           res.status(200).json({
+//             message: `Welcome ${user.username}!`,
+//             token,
+//           });
+//         } else {
+//           res.status(404).json({ message: 'User does not exist' });
+//         }
+//       })
+//       .catch(error => {
+//         res.status(500).json(error);
+//       });
+//   });
 router.put('/username/update', (req, res) => {
   const username = req.params.username;
   const changes = req.body;
