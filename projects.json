@@ -1,0 +1,115 @@
+{
+	"projects": [
+		{
+			"UID": 1,
+			"tasks_id": 1,
+			"project_name": "Manager",
+			"date_created": "12-24-18",
+			"date_last_modified": "",
+			"status": "ok",
+			"beds": 4,
+			"baths": 2,
+			"sqft": 2500
+		},
+		{
+			"UID": 2,
+			"tasks_id": 2,
+			"project_name": "Engineer",
+			"date_created": "2019-07-29",
+			"date_last_modified": "",
+			"status": "ok",
+			"beds": 3,
+			"baths": 1,
+			"sqft": 2900
+		},
+		{
+			"UID": 3,
+			"tasks_id": 3,
+			"project_name": "Technician",
+			"date_created": "2019-05-07",
+			"date_last_modified": "",
+			"status": "ok",
+			"beds": 6,
+			"baths": 2.5,
+			"sqft": 3800
+		},
+		{
+			"UID": 4,
+			"tasks_id":3,
+			"project_name": "Analyst",
+			"date_created": "2019-04-09",
+			"date_last_modified": "",
+			"status": "ok",
+			"beds": "3",
+			"baths": "1",
+			"sqft": 3800
+		},
+		{
+			"UID": 5,
+			"tasks_id":4,
+			"project_name": "Liaison",
+			"date_created": "2018-12-09",
+			"date_last_modified": "",
+			"status": "",
+			"beds": 1,
+			"baths": 1,
+			"sqft":3200 
+		},
+		{
+			"UID": 6,
+			"tasks_id": 5,
+			"project_name": "Officer",
+			"date_created": "2019-06-07",
+			"date_last_modified": "",
+			"status": "ok",
+			"beds": 4,
+			"baths": 2,
+			"sqft": 2566
+		},
+		{
+			"UID": 7,
+			"tasks_id": 6,
+			"project_name": "Administrator",
+			"date_created": "2019-01-02",
+			"date_last_modified": "",
+			"status": "",
+			"beds": 3,
+			"baths": 2,
+			"sqft": 2800
+		},
+		{
+			"UID": 8,
+			"tasks_id": 7,
+			"project_name": "Assistant",
+			"date_created": "2019-09-05",
+			"date_last_modified": "",
+			"status": "",
+			"beds": 3,
+			"baths": 2,
+			"sqft": 2800
+		},
+		{
+			"UID": 9,
+			"tasks_id": 8,
+			"project_name": "Analyst",
+			"date_created": "2019-05-25",
+			"date_last_modified": "",
+			"status": "ok",
+			"beds": 2,
+			"baths": 1,
+			"sqft": 2800
+		},
+		{
+			"UID": 10,
+			"tasks_id": 9,
+			"project_name": "Specialist",
+			"date_created": "2019-04-03",
+			"date_last_modified": "",
+			"status": "",
+			"beds": 4,
+			"baths": 2,
+			"sqft": 2500
+		}
+		
+	]
+}

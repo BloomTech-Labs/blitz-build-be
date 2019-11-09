@@ -176,4 +176,4 @@ $RECYCLE.BIN/
 *.lnk
 .env
 app.txt
-service-key.json
+service-key.json"sendgrid.env" 
