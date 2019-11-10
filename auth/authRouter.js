@@ -18,9 +18,10 @@ admin.initializeApp({
   ***********************************Requires****************************** 
         email:string ;
         emailVerified:bool ;
-       phoneNumber:[+][country code][areacode and phone number] example '+12065551212';
+       phoneNumber:[+][country code][areacode and phone number] example '+12065551212' or null;
        password:string ;
        displayName:string example 'John Smith' 
+       imageURL:string or null
    *************************************************************************
 *********************************Returns a userObj************************** */
 
@@ -35,7 +36,7 @@ router.post('/register',(req,res) =>{
     phoneNumber:user.phoneNumber,
     password:user.password,
     displayName:user.displayName,
-  
+    imageURL:user.imageURL,
     disabled:false
   })
 

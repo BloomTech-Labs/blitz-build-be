@@ -1,0 +1,423 @@
+openapi: 3.0.0
+info:
+  title: Blitz Build Api
+  version: '1.0'
+  contact:
+    name: Mike Harley
+    email: info@mike-harley.tech
+  description: Node/Express Rest Api Using Firebase Realtime Database
+servers:
+  - url: 'http://localhost:4000'
+    description: localhost
+  - url: 'https://api-blitz-build-dev.herokuapp.com'
+    description: Heroku
+paths:
+  /api/login:
+    post:
+      summary: Post
+      tags:
+        - Login
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example:
+                  value:
+                    message: 'joe@smith.com signed in @ November 9, 2019 8:11 PM'
+                    token: AEu4IL0uDQEbKH8fmn0JktgO67Yomwv5BVOdF83N9aw4_910xevgFZM0h0SqOxA_r9EgG3ZEVW-r2ZdA0souYxDqaLsraB4--GCqQStSwuhBL3yZLf7TtZUlV6c-6hyo1JmdUSj-onvYwOSvOKKEd8sm1FehRJPkOFhf2LYoicxRV6gCkq3Z89Q1Skiw_YvBwu4z8G2uAlLFbJih6HxnReav8puHbAS8GQ
+                    userObj:
+                      user:
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                        displayName: Joe Smith
+                        photoURL: 'http://www.example.com/12345678/photo.png'
+                        email: joe@smith.com
+                        emailVerified: false
+                        phoneNumber: '+16505554567'
+                        isAnonymous: false
+                        tenantId: null
+                        providerData:
+                          - uid: '+16505554567'
+                            displayName: null
+                            photoURL: null
+                            email: null
+                            phoneNumber: '+16505554567'
+                            providerId: phone
+                          - uid: joe@smith.com
+                            displayName: Joe Smith
+                            photoURL: 'http://www.example.com/12345678/photo.png'
+                            email: joe@smith.com
+                            phoneNumber: null
+                            providerId: password
+                        apiKey: AIzaSyBa2eSzmAvPkFNEO0zVUE0zp4IEKfFO0Kc
+                        appName: '[DEFAULT]'
+                        authDomain: blitzbuild-8d5a6.firebaseapp.com
+                        stsTokenManager:
+                          apiKey: AIzaSyBa2eSzmAvPkFNEO0zVUE0zp4IEKfFO0Kc
+                          refreshToken: AEu4IL0uDQEbKH8fmn0JktgO67Yomwv5BVOdF83N9aw4_910xevgFZM0h0SqOxA_r9EgG3ZEVW-r2ZdA0souYxDqaLsraB4--GCqQStSwuhBL3yZLf7TtZUlV6c-6hyo1JmdUSj-onvYwOSvOKKEd8sm1FehRJPkOFhf2LYoicxRV6gCkq3Z89Q1Skiw_YvBwu4z8G2uAlLFbJih6HxnReav8puHbAS8GQ
+                          accessToken: eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1MDgxMWNkYzYwOWQ5MGY5ODE1MTE5MWIyYmM5YmQwY2ViOWMwMDQiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiSm9lIFNtaXRoIiwicGljdHVyZSI6Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vMTIzNDU2NzgvcGhvdG8ucG5nIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2JsaXR6YnVpbGQtOGQ1YTYiLCJhdWQiOiJibGl0emJ1aWxkLThkNWE2IiwiYXV0aF90aW1lIjoxNTczMzU5MTA4LCJ1c2VyX2lkIjoiUjNmRTZEUDNVZ1A4aFFTV2JHdWJzSGI3bE93MiIsInN1YiI6IlIzZkU2RFAzVWdQOGhRU1diR3Vic0hiN2xPdzIiLCJpYXQiOjE1NzMzNTkxMDgsImV4cCI6MTU3MzM2MjcwOCwiZW1haWwiOiJqb2VAc21pdGguY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwaG9uZV9udW1iZXIiOiIrMTY1MDU1NTQ1NjciLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIisxNjUwNTU1NDU2NyJdLCJlbWFpbCI6WyJqb2VAc21pdGguY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.D_alBrOdGsov1AGz9--nqjPo59guZ4jQu4vFhGjZPQ-3dsPIQ0iOzNt8yIR8jQzmvkFkFNH1HGrnqxEkfKRJXY37etJHGwAf4aVqVgOREyAfahoQZTShIZfUO8hnzJ6ShgZY4x12cY5UklRzXlplIV5sY2MbI6zu99UJNfDBxBlQ2mC7TzMRa0ESx2bjJvh7S1ys3B-AkLPyw5dES9k_tGkztwkRuSs3evTMvhkfRHoK44vh4n6CbsfsFPoEZLMi2zD_SbcKd8GJJVZ7vw6TOtHpu6mQWi_7FKyfA8rWBvnJqYm4Pq5Bear4WtZ0o8n9OMSWsGNU5xE8l9oekTkoog
+                          expirationTime: 1573362708662
+                        redirectEventId: null
+                        lastLoginAt: '1573359108140'
+                        createdAt: '1573348525021'
+                      credential: null
+                      additionalUserInfo:
+                        providerId: password
+                        isNewUser: false
+                      operationType: signIn
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+      description: User Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+            examples:
+              example:
+                value:
+                  email: joe@smith.com
+                  password: smithjoe
+        description: All Fields Required
+      operationId: Login
+  /api/resister:
+    post:
+      summary: Post
+      tags:
+        - Register
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example:
+                  value:
+                    message: 'Sucessfully created new users: Mike Jones @ November 10, 2019 12:04 AM'
+                    userObj:
+                      uid: MFhS8YlE0YdtP8QyZ8FQQ7OaEJo1
+                      email: mikejones@imapimp.com
+                      emailVerified: false
+                      displayName: Mike Jones
+                      phoneNumber: '+12065551212'
+                      disabled: false
+                      metadata:
+                        lastSignInTime: null
+                        creationTime: 'Sun, 10 Nov 2019 08:04:08 GMT'
+                      tokensValidAfterTime: 'Sun, 10 Nov 2019 08:04:08 GMT'
+                      providerData:
+                        - uid: '+12065551212'
+                          providerId: phone
+                          phoneNumber: '+12065551212'
+                        - uid: mikejones@imapimp.com
+                          displayName: Mike Jones
+                          email: mikejones@imapimp.com
+                          providerId: password
+                example-2:
+                  value:
+                    message: 'Sucessfully created new users: Mike Smith @ November 10, 2019 12:00 AM'
+                    userObj:
+                      uid: FxuSyX9QD7RA36W9TUa34bwwoti2
+                      email: mike@smith.com
+                      emailVerified: false
+                      displayName: Mike Smith
+                      phoneNumber: '+12066051212'
+                      disabled: false
+                      metadata:
+                        lastSignInTime: null
+                        creationTime: 'Sun, 10 Nov 2019 08:00:25 GMT'
+                      tokensValidAfterTime: 'Sun, 10 Nov 2019 08:00:25 GMT'
+                      providerData:
+                        - uid: '+12066051212'
+                          providerId: phone
+                          phoneNumber: '+12066051212'
+                        - uid: mike@smith.com
+                          displayName: Mike Smith
+                          email: mike@smith.com
+                          providerId: password
+      description: Register New User
+      operationId: Register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                displayName:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                phoneNumber:
+                  type: string
+                  description: 'format +12065551212 '
+              required:
+                - displayName
+                - email
+                - password
+                - phoneNumber
+            examples:
+              example:
+                value:
+                  displayName: Mike Jones
+                  email: mikejones@imapimp.com
+                  password: pimpinainteasy
+                  phoneNumber: '+12065551212'
+              example-2:
+                value:
+                  displayName: Mike Smith
+                  email: mike@smith.com
+                  password: pimpinainteasy
+                  phoneNumber: '+12066051212'
+                  imgaeURL: ''
+        description: All Fields Required.
+  '/api/:uid/updateuser':
+    put:
+      summary: Update User
+      tags:
+        - Update User
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                User Photo Update Response:
+                  value:
+                    message: 'Sucessfully updated user @ November 9, 2019 11:31 PM'
+                    updatedUserObj:
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      email: joe@smith.com
+                      emailVerified: false
+                      displayName: Joe Smith
+                      photoURL: 'http://www.example.com/12345678/photo.png'
+                      phoneNumber: '+16505554567'
+                      disabled: false
+                      metadata:
+                        lastSignInTime: 'Sun, 10 Nov 2019 04:11:48 GMT'
+                        creationTime: 'Sun, 10 Nov 2019 01:15:25 GMT'
+                      tokensValidAfterTime: 'Sun, 10 Nov 2019 01:15:25 GMT'
+                      providerData:
+                        - uid: '+16505554567'
+                          providerId: phone
+                          phoneNumber: '+16505554567'
+                        - uid: joe@smith.com
+                          displayName: Joe Smith
+                          email: joe@smith.com
+                          photoURL: 'http://www.example.com/12345678/photo.png'
+                          providerId: password
+                Incorrect Response:
+                  value:
+                    message: 'Sucessfully updated user @ November 9, 2019 11:36 PM'
+                    updatedUserObj:
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      email: joe@smith.com
+                      emailVerified: false
+                      displayName: ''
+                      photoURL: 'http://www.example.com/joe_smith/photo.png'
+                      phoneNumber: '+16505554567'
+                      disabled: false
+                      metadata:
+                        lastSignInTime: 'Sun, 10 Nov 2019 04:11:48 GMT'
+                        creationTime: 'Sun, 10 Nov 2019 01:15:25 GMT'
+                      tokensValidAfterTime: 'Sun, 10 Nov 2019 01:15:25 GMT'
+                      providerData:
+                        - uid: '+16505554567'
+                          providerId: phone
+                          phoneNumber: '+16505554567'
+                        - uid: joe@smith.com
+                          displayName: ''
+                          email: joe@smith.com
+                          photoURL: 'http://www.example.com/joe_smith/photo.png'
+                          providerId: password
+      description: Update User Data. uid and refresh token required in headers
+      operationId: PutUser
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: uid
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: refreshToken
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                photoURL:
+                  type: string
+            examples:
+              Correct Updates User Photo URL ONLY:
+                value:
+                  photoURL: 'http://www.example.com/12345678/photo.png'
+              'Incorrect Updates User Photo URL. Also Changes DISPLAY NAME TO ""':
+                value:
+                  displayName: ''
+                  photoURL: 'http://www.example.com/joe_smith/photo.png'
+        description: 'All user data can be updated. If you only want to update 1 key:value only send 1 key:value in the request. *************If you send a key with an empty value the database will update that key to a value of "" and that data will be lost.************************************'
+  '/api/auth/:uid/projects':
+    get:
+      summary: Get all projects
+      tags:
+        - Get Projects
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example:
+                  value:
+                    projects:
+                      jones-demo:
+                        baths: 1.5
+                        beds: 3
+                        imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8hQSWbGubsHb7lOw2/blitz-test-jones-image.jpg'
+                        projectID: jones-demo
+                        project_name: Jones Demo
+                        square_ft: 2700
+                        status: onTime
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      smith-newbuild:
+                        baths: 3
+                        beds: 5
+                        imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8hQSWbGubsHb7lOw2/blitz-test-image.jpeg'
+                        projectID: smith-newbuild
+                        project_name: Smith House
+                        square_ft: 3200
+                        status: onTime
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+      description: 'Get All User Projects. uid and refreshToken required in headers '
+      operationId: GetProjects
+      parameters:
+        - schema:
+            type: string
+          in: header
+          required: true
+          name: uid
+        - schema:
+            type: string
+          in: header
+          name: refreshToken
+          required: true
+    post:
+      summary: Add Project
+      tags:
+        - Add Project
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example:
+                  value:
+                    message: 'Project Smith House createdAT: November 9, 2019 10:05 PM'
+                    projectObj:
+                      smith-newbuild:
+                        baths: 3
+                        beds: 5
+                        imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8hQSWbGubsHb7lOw2/blitz-test-image.jpeg'
+                        projectID: smith-newbuild
+                        project_name: Smith House
+                        square_ft: 3200
+                        status: onTime
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+      description: 'Add User Project '
+      operationId: Post
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: uid
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: refreshToken
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectID:
+                  type: string
+                project_name:
+                  type: string
+                status:
+                  type: string
+                  description: '3 Options onTime,Delayed,Completed'
+                beds:
+                  type: number
+                baths:
+                  type: number
+                square_ft:
+                  type: number
+                imageURL:
+                  type:
+                    - string
+                    - 'null'
+                  description: |+
+                    This Field is required it will except null
+
+
+                uid:
+                  description: 'This is taken from the headers. No need to send in the body of the request. '
+                  type: string
+              required:
+                - projectID
+                - project_name
+                - status
+                - beds
+                - baths
+                - square_ft
+                - imageURL
+                - uid
+            examples:
+              example:
+                value:
+                  projectID: smith-newbuild
+                  project_name: Smith House
+                  status: onTime
+                  beds: 5
+                  baths: 3
+                  square_ft: 3200
+                  imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8hQSWbGubsHb7lOw2/blitz-test-image.jpeg'
+        description: 'All Fields Required '
+components:
+  schemas: {}

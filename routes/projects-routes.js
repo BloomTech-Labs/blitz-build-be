@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const Firebaseconfig = require('../Firebaseconfig')
 const dbRef =  Firebaseconfig.database().ref()
-
+const moment = require('moment')
 
 
 /* **************************************Projects***************************************
@@ -91,7 +91,8 @@ router.post('/:uid/projects',  async (req,res)=>{
 
                             if(data){
 
-                                res.status(201).json(data)
+                                res.status(201)
+                                .json({message:`Project ${body.project_name} createdAT: ${moment().format('LLL')}`,projectObj:data})
 
                             }
 
