@@ -1,20 +1,34 @@
 require('dotenv').config()
 const router = require('express').Router();
 const moment = require('moment')
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const Firebaseconfig = require('../Firebaseconfig')
 const admin = require('firebase-admin')
 
-const secrets = process.env.SECRETS;
+/* Connects Backend to firebase database */
 admin.initializeApp({
   credential:admin.credential.applicationDefault(),
   databaseURL:process.env.DATABASE_URL
 })
-// for endpoints beginning with /api
+/* ****** All Endpoints Begin With /api  ********* */
+
+
+
+/*  User Registration  
+  
+  ***********************************Requires****************************** 
+        email:string ;
+        emailVerified:bool ;
+       phoneNumber:[+][country code][areacode and phone number] example '+12065551212';
+       password:string ;
+       displayName:string example 'John Smith' 
+   *************************************************************************
+*********************************Returns a userObj************************** */
+
+/* If a post to endpoint /api/register is called */
 router.post('/register',(req,res) =>{
   let user = req.body
-
+  
+ /* It fires a function that makes a call to the firebase auth database */ 
   admin.auth().createUser({
     email:user.email,
     emailVerified:false,
@@ -24,19 +38,34 @@ router.post('/register',(req,res) =>{
   
     disabled:false
   })
-  .then(userRecord =>{
-    res.status(201).json({message:`Sucessfully created new users: ${userRecord.displayName} @ ${moment().format('LLL')}`,
-                             userObj:userRecord})
+
+  /* It waits for the database call to finish if sucessful it then returns the userObj to the client */
+  .then(userObj =>{
+    res.status(201)
+    .json({message:`Sucessfully created new users: ${userObj.displayName} @ ${moment().format('LLL')}`,
+                             userObj:userObj})
 
   })
+
+  /* If unsucessful it returns an error message to the client */
+  
   .catch(error =>{
      res.status(401).json({message:`Error creating new user:${error}`})
   })
 })
-// Update User 
+
+
+/* ************************** Update User ************************
+
+          IF a Put request is  made to /api/:uid/update */
+  
 router.put('/:uid/updateuser',(req,res) =>{
  let uid = req.params.uid
- console.log('IAM THE BODY LOG',req.body.photoURL)
+ 
+  console.log('IAM THE BODY LOG',req.body)
+
+ /* It fires a function that makes a call to the auth database */
+
 admin.auth().updateUser(uid,{
   email: req.body.email,
   phoneNumber: req.body.phoneNumber,
@@ -46,144 +75,78 @@ admin.auth().updateUser(uid,{
   photoURL: req.body.photoURL,
   disabled: req.body.disabled
 })
+
+/* It waits for the database call to finish if sucessful it then returns the updatedUserObj to the client */
+
 .then(updatedUserObj =>{
- res.status(200).json({message:`Sucessfully updated user @ ${moment().format('LLL')}`,updatedUserObj:updatedUserObj})
+ res.status(200)
+ .json({message:`Sucessfully updated user @ ${moment().format('LLL')}`
+ ,updatedUserObj:updatedUserObj})
 })
+
+ /* If unsucessful it returns an error message to the client */
+
 .catch(error =>{
-  console.log('Error updating user',error)
+   res.status(401)
+   .json({message:'Error updating user',error:error})
 })
+
 })
-// Login 
+
+
+/* ***************************** Login *****************************************
+         
+                If a post request is made to /api/login */
+ 
 router.post('/login', (req, res) => {
     let { email, password } = req.body;
 
-    // Make sure email and password are entered
+    // 1st it checks to  make sure email and password are entered
    
     if(!email || !password){
-      
-      res.status(403).json(
+
+      /* IF email or password are missing it sends error message back to client */
+   
+    res.status(403).json(
           {message:'Please enter login information'}
           ) 
     }
-    // Call to firebase to auth the login info
+
+
+    /* If email and password are present 
+       it makes a call to firebase auth database to verfiy 
+       the login info */
  
     Firebaseconfig.auth()
     .signInWithEmailAndPassword(email,password)
+     
+    /* IF verfied it returns a userObj to the client */
     
     .then(userObj =>{
     
-        // Firebase will return a refresh  token 
     
-        //pass it to the client so they can display it in the headers
     
         res.status(200)
         .json(
-            {message:`${userObj.user.email} signed in @ ${moment().format('LLL')}`
-            ,token:userObj.user.refreshToken})
+            {
+              message:`${userObj.user.email} signed in @ ${moment().format('LLL')}`,
+              token:userObj.user.refreshToken,
+               userObj:userObj
+            }
+              )
   
   })
-})
-
-
-
-
-
-
-//     db.findBy({ username })
-//       .first()
-//       .then(user => {
-    
-//          if (user && bcrypt.compareSync(password, user.password)) {
-//           // produce token
-//           const token = generateToken(user);
-  
-//           // add token to response
-//           res.status(200).json({
-//             message: `Welcome ${user.username}!`,
-//             token,
-//           });
-//         } else {
-//           res.status(404).json({ message: 'User does not exist' });
-//         }
-//       })
-//       .catch(error => {
-//         res.status(500).json(error);
-//       });
-//   });
-router.put('/username/update', (req, res) => {
-  const username = req.params.username;
-  const changes = req.body;
-
-
-  if(changes) {
-      Receipts.updateReceipt(username, changes)
-          .then(count => {
-              if(count){ 
-              res.status(202).json(count);
-               }else{ res.status(404).json({ error: "Please enter a valid password" })
-          }})
-          .catch(err => res.status(500).json({ error: err }));
-  } else {
-      res.status(400).json({ error: "Please provide all required fields." });
-  }
-});
-
-router.post('/login', (req, res) => {
-  let { username, password } = req.body;
-  
-  if(!username || !password){
-    
-    res.status(403).json({message:'Please enter login information'}) 
-  }
-  db.findBy({ username })
-    .first()
-    .then(user => {
-  
-       if (user && bcrypt.compareSync(password, user.password)) {
-        // produce token
-        const token = generateToken(user);
-
-        // add token to response
-        res.status(200).json({
-          message: `Welcome ${user.username}!`,
-          token,
-        });
-      } else {
-        res.status(404).json({ message: 'User does not exist' });
-      }
-    })
-    .catch(error => {
-      res.status(500).json(error);
-    });
-});
-router.get("/logout",(req,res) =>{
-  if(req.session){
-    req.session.destroy(err =>{
-      res
-        .status(200)
-        .json({
-          message:
-          'Logout successfull'
+  /* If not verfied it returns an error message to the client */
+  .catch(error =>
+    {
+      res.status(404)
+      .json(
+        {
+          message:error.message
         })
     })
-  }else {
-    res.status(200).json({message:'Not logged in'})
-  }
 })
 
-
-function generateToken(user) {
-  const payload = {
-    username: user.username,
-    subject: user.id,
-    role: user.role,
-  };
-  const options = {
-    expiresIn: '8h',
-  };
-
-  return jwt.sign(payload, secrets.jwtSecret, options);
-}
 
 
 module.exports = router;
