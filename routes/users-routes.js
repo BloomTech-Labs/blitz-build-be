@@ -4,7 +4,7 @@ const Firebaseconfig = require('../Firebaseconfig')
 const dbRef =  Firebaseconfig.database().ref()
  const usersRef =  dbRef.child('users')
 
-// route /api
+// route /api/auth
 
 // GET ALL 
 router.get('/all', async (req,res) =>{

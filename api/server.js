@@ -5,6 +5,7 @@ const userRouter = require('../routes/users-routes')
 const projectsRouter = require('../routes/projects-routes')
 const authRouter = require('../auth/authorized')
 const register = require('../auth/authRouter')
+const login = require('../auth/authRouter')
 const server = express()
 
 // define logger middleware
@@ -19,14 +20,14 @@ server.use(helmet())
 server.use(express.json())
 server.use(logger)
 
-// Add auth route for testing
-server.use('/auth',authRouter)
-server.use('/api',register)
+// Sign in / Register 
+server.use('/api',login,register)
 
-// Add routes
+// Add auth to routes
+server.use('/api/auth',projectsRouter)
 
-server.use('/api/users',authRouter,userRouter);
-server.use('/api/projects',authRouter,projectsRouter);
+
+
 
 
 module.exports=server

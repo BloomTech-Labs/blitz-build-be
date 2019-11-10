@@ -4,42 +4,82 @@ const moment = require('moment')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Firebaseconfig = require('../Firebaseconfig')
-
+const admin = require('firebase-admin')
 
 const secrets = process.env.SECRETS;
-
+admin.initializeApp({
+  credential:admin.credential.applicationDefault(),
+  databaseURL:process.env.DATABASE_URL
+})
 // for endpoints beginning with /api
-router.post('/register', (req, res) => {
+router.post('/register',(req,res) =>{
   let user = req.body
 
+  admin.auth().createUser({
+    email:user.email,
+    emailVerified:false,
+    phoneNumber:user.phoneNumber,
+    password:user.password,
+    displayName:user.displayName,
+  
+    disabled:false
+  })
+  .then(userRecord =>{
+    res.status(201).json({message:`Sucessfully created new users: ${userRecord.displayName} @ ${moment().format('LLL')}`,
+                             userObj:userRecord})
 
-  //Encrypts Password before storing it to the DB
-//   const hash = bcrypt.hashSync(user.password,10); // 2 ^ n
-//  user.password = hash 
-
- Firebaseconfig.auth().createUserWithEmailAndPassword(user.email,user.password).then(newUser=>{
-     res.status(201).json({message:`${newUser.user.email} added to the database`,uid:`${newUser.user.uid}`,createdAt:moment().format('LLL')})
-
- })
-   .catch(error=>{
-     const errorCode = error.code
-     const errorMessage =error.message
-   })
- 
+  })
+  .catch(error =>{
+     res.status(401).json({message:`Error creating new user:${error}`})
+  })
+})
+// Update User 
+router.put('/:uid/updateuser',(req,res) =>{
+ let uid = req.params.uid
+ console.log('IAM THE BODY LOG',req.body.photoURL)
+admin.auth().updateUser(uid,{
+  email: req.body.email,
+  phoneNumber: req.body.phoneNumber,
+  emailVerified: req.body.emailVerified,
+  password: req.body.password,
+  displayName: req.body.displayName,
+  photoURL: req.body.photoURL,
+  disabled: req.body.disabled
+})
+.then(updatedUserObj =>{
+ res.status(200).json({message:`Sucessfully updated user @ ${moment().format('LLL')}`,updatedUserObj:updatedUserObj})
+})
+.catch(error =>{
+  console.log('Error updating user',error)
+})
 })
 // Login 
 router.post('/login', (req, res) => {
     let { email, password } = req.body;
-    // Make sure email and password are sent
+
+    // Make sure email and password are entered
+   
     if(!email || !password){
       
-      res.status(403).json({message:'Please enter login information'}) 
+      res.status(403).json(
+          {message:'Please enter login information'}
+          ) 
     }
     // Call to firebase to auth the login info
-  Firebaseconfig.auth().signInWithEmailAndPassword(email,password).then(userObj =>{
-           // Firebase will return a refresh  token 
-           //pass it to the client so they can display it in the headers
-         res.status(200).json({message:`${userObj.user.email} signed in }`,token:userObj.user.refreshToken})
+ 
+    Firebaseconfig.auth()
+    .signInWithEmailAndPassword(email,password)
+    
+    .then(userObj =>{
+    
+        // Firebase will return a refresh  token 
+    
+        //pass it to the client so they can display it in the headers
+    
+        res.status(200)
+        .json(
+            {message:`${userObj.user.email} signed in @ ${moment().format('LLL')}`
+            ,token:userObj.user.refreshToken})
   
   })
 })

@@ -3,8 +3,8 @@ const server = require('./api/server')
 
 
 
-server.get('/auth',(req,res)=>{
-  res.send('<h1>I Work</h1>')
+server.get('/',(req,res)=>{
+  res.send('<title>Blitz Build</title><h1>Welcome To Blitz Build</h1>')
 })
 
 const port = process.env.PORT || 4500

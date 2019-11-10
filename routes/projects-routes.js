@@ -4,9 +4,20 @@ const dbRef =  Firebaseconfig.database().ref()
 
 const projectsRef = dbRef.child('projects');
 const projects = require('../projects.json');
-// Route /api
+// Route /api/auth
 
-router.post('/projects/0',  async (req,res)=>{
+router.get('/projects',async (req,res) =>{
+    let uid = req.headers.uid
+    let body = req.body
+  Firebaseconfig.database().ref(uid)
+  projectsRef.on('value',snap =>{
+      let data = snap.val()
+      console.log(data)
+  })
+})
+
+
+router.post('/projects',  async (req,res)=>{
        let body = req.body
     dbRef.child('/projects/').update(body);
    projectsRef.on('value',snap =>{
