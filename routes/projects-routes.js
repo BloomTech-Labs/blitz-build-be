@@ -62,11 +62,16 @@ router.post('/:uid/projects',  async (req,res)=>{
        let projectID = req.body.projectID
        let body = req.body
        let uid = req.params.uid
+       let tasks = [
+             {"due_date":String,"task_description":String,"task_name":String}        
+    
+    ]
   await  dbRef.child(`/${uid}/projects/${projectID}`).set(
                     
                       {
                            uid:req.headers.uid,
                            projectID:body.projectID,
+                        
                            baths:body.baths,
                            beds:body.beds,
                            imageURL:body.imageURL,
