@@ -6,6 +6,7 @@ const projectsRouter = require('../routes/projects-routes')
 const taskRouter = require('../routes/tasks-routes')
 const register = require('../auth/authRouter')
 const login = require('../auth/authRouter')
+const weather = require('../routes/weather')
 const server = express()
 
 // define logger middleware
@@ -26,6 +27,7 @@ server.use('/api',login,register)
 // Add auth to routes
 server.use('/api/auth',projectsRouter)
 server.use('/api/auth/:uid/projects',taskRouter)
+server.use('/api/auth/:uid/projects/:projectID',weather)
 
 
 
