@@ -7,10 +7,10 @@ const moment = require('moment')
                             /* Route /api/auth/:uid/projects/:project_id/tasks   */
                              
                                      //Get All Tasks
-                                     router.get('/:project_id/tasks',  async (req,res)=>{
+                                     router.get('/:uid/projects/:project_id/tasks',  async (req,res)=>{
                           try{      let projectID = req.params.project_id
                                     
-                                        let uid = req.headers.uid
+                                        let uid = req.params.uid
                                       
                                     await  dbRef.child(`/${uid}/projects/${projectID}/tasks`).on('value',snap=>{
                                                             let data = snap.val()
