@@ -7,34 +7,51 @@ const moment = require('moment')
                             /* Route /api/auth/:uid/projects/:project_id/tasks   */
                              
                                      //Get All Tasks
-                            router.get('/:project_id/tasks',async (req,res) =>{
-                                let uid = req.params.uid
-                                let projectID = req.params.project_id
-                                
-                                      dbRef.child(`/${uid}/projects/${projectID}/tasks`)
+                                     router.get('/:project_id/tasks',  async (req,res)=>{
+                          try{      let projectID = req.params.project_id
+                                    
+                                        let uid = req.headers.uid
                                       
-                                      .on('value',snap =>{
-                                 
-                                        let data = snap.val()
-                                 
-                                        console.log(data)
-                            try{ 
-                                if(data){
-                                 res.status(200).json(data)
-                                    }
-                                else{
-                                    res.status(404)
-                                    .json(
-                                        {
-                                            message:'Sorry No Tasks Where Returned From Search. Please Check Your Request And Verify All Information Is Entered Correctly'
-                                        })
-                                }
-                                }
-                            catch(err)
-                                {res.status(500).json({message:err.message})}
-                                 })
-                            })
-                            
+                                    await  dbRef.child(`/${uid}/projects/${projectID}/tasks`).on('value',snap=>{
+                                                            let data = snap.val()
+                                                        
+                                   
+                                    
+                                                     
+                                     
+                                    
+                                    
+                                                  
+                                    
+                                                             if(data){
+                                    
+                                                                 res.status(200)
+                                                                 .json(data)                                    
+                                                             }
+                                                             else{
+                                                                 res.status(404).json({message:'Sorry No Tasks Where Returned From Search. Please Check Your URL'})
+                                                             }})
+                                    
+                                                         }
+                                    
+                                                         catch
+                                                         
+                                                         (err)
+                                                         {
+                                                             res.status(500)
+                                                             
+                                                             .json(
+                                                                 {
+                                                                     message:err.message
+                                                                 }
+                                                                 )
+                                                         }
+                                    
+                                    
+                                    
+                                    })
+                                    
+                                    
 
 
 router.post('/:project_id/tasks',  async (req,res)=>{
