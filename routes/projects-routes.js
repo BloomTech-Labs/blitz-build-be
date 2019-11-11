@@ -2,6 +2,7 @@ const router = require('express').Router();
 const Firebaseconfig = require('../Firebaseconfig')
 const dbRef =  Firebaseconfig.database().ref()
 const moment = require('moment')
+const zipcodes = require('zipcodes')
 
 
 /* **************************************Projects***************************************
@@ -76,6 +77,7 @@ router.post('/:uid/projects',  async (req,res)=>{
                            state:body.state,
                            zip_code:body.zip_code,
                            status:body.status,
+                           gps_cords:zipcodes.lookup(body.zip_code)
 
 
                        })
