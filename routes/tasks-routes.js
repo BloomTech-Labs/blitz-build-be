@@ -8,8 +8,8 @@ const moment = require('moment')
                              
                                      //Get All Tasks
                             router.get('/:project_id/tasks',async (req,res) =>{
-                                let uid = req.params.uid
-                                let projectID = req.params.project_id
+                                let uid = req.headers.uid
+                                let projectID = req.headers.project_id
                                 
                                       dbRef.child(`/${uid}/projects/${projectID}`)
                                       

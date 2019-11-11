@@ -419,5 +419,141 @@ paths:
                   square_ft: 3200
                   imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8hQSWbGubsHb7lOw2/blitz-test-image.jpeg'
         description: 'All Fields Required '
+  '/api/auth/:projectID/tasks':
+    post:
+      summary: Add Task
+      tags:
+        - Add Task
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  tasksObj:
+                    type: object
+                    properties:
+                      task_id:
+                        type: object
+                        properties:
+                          due_date:
+                            type: string
+                          project_id:
+                            type: string
+                          task_description:
+                            type: string
+                          task_id:
+                            type: string
+                          task_name:
+                            type: string
+                          uid:
+                            type: string
+              examples:
+                example-1:
+                  value:
+                    message: 'Task task-2-test createdAT: November 11, 2019 2:36 PM'
+                    tasksObj:
+                      task-2:
+                        due_date: 11-1-2019
+                        project_id: jones-demo
+                        task_description: This is a test this is only a test
+                        task_id: task-2
+                        task_name: task-2-test
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: uid
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: string
+                task_name:
+                  type: string
+                due_date:
+                  type: string
+                task_description:
+                  type: string
+              required:
+                - task_id
+                - task_name
+                - due_date
+                - task_description
+            examples:
+              example-1:
+                value:
+                  task_id: task-2
+                  task_name: task-2-test
+                  due_date: 11-1-2019
+                  task_description: This is a test this is only a test
+      description: Add task to user projects
+      operationId: postTask
+    get:
+      summary: Get Tasks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    baths: 1.5
+                    beds: 3
+                    city: Auburn
+                    gps_cords:
+                      city: Auburn
+                      country: US
+                      latitude: 47.3099
+                      longitude: -122.2653
+                      state: WA
+                      zip: '98001'
+                    imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8h...'
+                    projectID: jones-demo
+                    project_name: Jones Demo
+                    square_ft: 2700
+                    state: Wa
+                    status: onTime
+                    street_address: 545 Test Ln
+                    tasks:
+                      task-2:
+                        due_date: 11-1-2019
+                        project_id: jones-demo
+                        task_description: This is a test this is only a test
+                        task_id: task-2
+                        task_name: task-2-test
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                    uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                    zip_code: 98001
+        '201':
+          description: Created
+      description: Returns projectObj with tasks listed
+      operationId: getTasks
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: uid
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: project_id
+          required: true
+      tags:
+        - Get Tasks
 components:
   schemas: {}
