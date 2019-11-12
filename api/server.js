@@ -27,7 +27,7 @@ server.use('/api',login,register)
 // Add auth to routes
 server.use('/api/auth',projectsRouter)
 server.use('/api/auth',taskRouter)
-server.use('/api/auth/:uid/projects/:projectID',weather)
+server.use('/api/auth/:uid',weather)
 
 
 
