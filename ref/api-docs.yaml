@@ -2236,5 +2236,80 @@ paths:
                   latitude: 47.3099
                   longitude: -122.2653
         description: Requires latitude and longitude in the body which can be pulled from the projectObj
+  '/api/auth/:uid/templates':
+    post:
+      summary: Add Template
+      tags:
+        - Add Template
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  templateObj:
+                    type: object
+                    properties:
+                      templateName:
+                        type: object
+                        properties:
+                          due_date:
+                            type: string
+                          task_description:
+                            type: string
+                          task_name:
+                            type: string
+                          templateID:
+                            type: string
+                          uid:
+                            type: string
+              examples:
+                example-1:
+                  value:
+                    message: 'Template 90 Day Build createdAT: November 12, 2019 11:39 AM'
+                    templateObj:
+                      90 Day Build:
+                        due_date: 11-22-2019
+                        task_description: This is a test only a test
+                        task_name: test
+                        templateID: 90 Day Build
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                templateID:
+                  type: string
+                task_name:
+                  type: string
+                due_date:
+                  type: string
+                task_description:
+                  type: string
+                '':
+                  type: string
+              required:
+                - templateID
+                - task_name
+                - due_date
+                - task_description
+                - ''
+            examples:
+              example-1:
+                value:
+                  templateID: 90 Day Build
+                  task_name: test
+                  due_date: 11-22-2019
+                  task_description: This is a test only a test
+        description: 'All Fields Required '
+      operationId: PostTemplate
+      description: 'Add Tasks Template for user '
 components:
   schemas: {}
