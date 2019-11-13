@@ -4,12 +4,11 @@ const dbRef =  Firebaseconfig.database().ref()
 const moment = require('moment') 
 
 
-                            /* Route /api/auth/:uid/projects/:project_id/tasks   */
+                            /* Route /api/auth/:uid/templates  */
                              
-                                     //Get All Tasks
+                                     //Get all tasks/templates hard coded 
                                      router.get('/:uid/templates',  async (req,res)=>{
-                                        let templateID = req.body.templateID
-                                        let body = req.body
+                                   
                                         let uid = req.params.uid
                                  
                                   
@@ -114,8 +113,7 @@ const moment = require('moment')
                          
                          })
                          router.get('/:uid/templates',async (req,res) =>{
-                            let templateID = req.body.templateID
-                                let body = req.body
+                         
                                 let uid = req.params.uid
                         
                          

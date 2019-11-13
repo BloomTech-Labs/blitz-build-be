@@ -5,6 +5,7 @@ const moment = require('moment')
 const zipcodes = require('zipcodes')
 
 
+
 /* **************************************Projects***************************************
 
                                        Route /api/auth
@@ -59,16 +60,16 @@ catch(err)
 ********************************************************************************************************
  */
 router.post('/:uid/projects',  async (req,res)=>{
-       let projectID = req.body.projectID
+       let projectID = req.body.project_name
        let body = req.body
        let uid = req.params.uid
-
+   
   await  dbRef.child(`/${uid}/projects/${projectID}`).set(
                     
                       {
                            uid:req.headers.uid,
-                           projectID:body.projectID,
-                        
+                           projectID:projectID,
+                 
                            baths:body.baths,
                            beds:body.beds,
                            imageURL:body.imageURL,
