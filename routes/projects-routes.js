@@ -111,9 +111,9 @@ router.post('/:uid/projects',  async (req,res)=>{
                            imageURL:body.imageURL,
                            project_name:body.project_name,
                            square_ft:body.square_ft,
-                           street_address:body.street_address,
-                           city:body.city,
-                           state:body.state,
+                        //    street_address:body.street_address,
+                        //    city:body.city,
+                        //    state:body.state,
                            zip_code:body.zip_code,
                            status:body.status,
                            gps_cords:zipcodes.lookup(body.zip_code)

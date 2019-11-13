@@ -1,10 +1,17 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "build",
+    "FIREBASE_DATABASE_EMULATOR_HOST":"localhost:9000",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ]
+  },
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
   }
 }
