@@ -495,6 +495,18 @@ paths:
                         street_address: 1234 any street
                         uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
                         zip_code: '98001'
+                Update  ProjectID does not need to be entered in the request:
+                  value:
+                    baths: 2
+                    beds: 9
+                    city: Collingdale
+                    imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8h...'
+                    project_name: Templates Demo
+                    square_ft: 2700
+                    state: Pa
+                    status: onTime
+                    street_address: 545 Test Ln
+                    zip_code: 19023
       description: 'Add User Project '
       operationId: Post
       parameters:
@@ -514,8 +526,6 @@ paths:
             schema:
               type: object
               properties:
-                projectID:
-                  type: string
                 project_name:
                   type: string
                 status:
@@ -544,7 +554,6 @@ paths:
                 zip_code:
                   type: number
               required:
-                - projectID
                 - project_name
                 - status
                 - beds
@@ -590,6 +599,18 @@ paths:
                   imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8h...'
                   projectID: mike-test-demo
                   project_name: Mike Test Demo
+                  square_ft: 2700
+                  state: Pa
+                  status: onTime
+                  street_address: 545 Test Ln
+                  zip_code: 19023
+              Update  ProjectID does not need to be entered in the request:
+                value:
+                  baths: 2
+                  beds: 9
+                  city: Collingdale
+                  imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8h...'
+                  project_name: Templates Demo
                   square_ft: 2700
                   state: Pa
                   status: onTime

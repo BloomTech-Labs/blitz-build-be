@@ -1,7 +1,7 @@
 require('dotenv').config()
 const router = require('express').Router()
 const axios = require('axios')
-router.get('/weather', (req, res) => {
+router.post('/weather', (req, res) => {
     const api_key = process.env.WEATHER_API_KEY;
     const latitude = req.body.latitude;
     const longitude = req.body.longitude;
