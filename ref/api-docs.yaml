@@ -94,7 +94,7 @@ paths:
                   password: smithjoe
         description: All Fields Required
       operationId: Login
-  /api/resister:
+  /api/register:
     post:
       summary: Post
       tags:
@@ -189,6 +189,7 @@ paths:
                   phoneNumber: '+12066051212'
                   imgaeURL: ''
         description: All Fields Required.
+    parameters: []
   '/api/:uid/updateuser':
     put:
       summary: Update User
@@ -507,6 +508,48 @@ paths:
                     status: onTime
                     street_address: 545 Test Ln
                     zip_code: 19023
+                templateID:
+                  value:
+                    message: 'Project smith-newbuild createdAT: November 13, 2019 12:20 AM'
+                    projectObj:
+                      baths: 3
+                      beds: 5
+                      city: Any City
+                      gps_cords:
+                        city: Auburn
+                        country: US
+                        latitude: 47.3099
+                        longitude: -122.2653
+                        state: WA
+                        zip: '98001'
+                      imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8hQSWbGubsHb7lOw2/blitz-test-image.jpeg'
+                      projectID: smith-newbuild
+                      project_name: smith-newbuild
+                      square_ft: '3800'
+                      state: Wa
+                      status: onTime
+                      street_address: 1234 any street
+                      tasks:
+                        - Task-1:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 1
+                          Task-2:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task2
+                          Task-3:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 3
+                          Task-4:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 4
+                          Task-5:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 5
+                          Task-6:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 6
+                      uid: jDVWo6oiDESrYKljPIaAjZ1N7Xy2
+                      zip_code: '98001'
       description: 'Add User Project '
       operationId: Post
       parameters:
@@ -553,6 +596,10 @@ paths:
                   type: string
                 zip_code:
                   type: number
+                templateID:
+                  type: string
+                  description: |
+                    required if nothing selected it will return all templates and tasks. Options Are 90 Day Build coming soon 60 Day Build, 30 Day Build
               required:
                 - project_name
                 - status
@@ -564,6 +611,7 @@ paths:
                 - city
                 - state
                 - zip_code
+                - templateID
             examples:
               example:
                 value:
@@ -616,6 +664,20 @@ paths:
                   status: onTime
                   street_address: 545 Test Ln
                   zip_code: 19023
+              templateID:
+                value:
+                  templateID: 90 Day Build
+                  baths: 3
+                  beds: 5
+                  city: Any City
+                  imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8hQSWbGubsHb7lOw2/blitz-test-image.jpeg'
+                  project_name: smith-newbuild
+                  square_ft: '3800'
+                  state: Wa
+                  status: onTime
+                  street_address: 1234 any street
+                  uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                  zip_code: '98001'
         description: 'All Fields Required '
   '/api/auth/:uid/weather':
     get:
@@ -2155,5 +2217,85 @@ paths:
       operationId: GetTasks
       tags:
         - Get Tasks
+  '/api/auth/:uid/projects/:projectID':
+    put:
+      summary: Update Project
+      tags:
+        - Update Project
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    message: 'Templates Demo updated @ November 13, 2019 1:45 AM'
+                    newProjectObj:
+                      baths: 5
+                      beds: 7
+                      city: Collingdale
+                      gps_cords:
+                        city: Darby
+                        country: US
+                        latitude: 39.9176
+                        longitude: -75.2696
+                        state: PA
+                        zip: '19023'
+                      imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8h...'
+                      projectID: Templates Demo
+                      project_name: Templates Demo
+                      square_ft: 2700
+                      state: Pa
+                      status: onTime
+                      street_address: 545 Test Ln
+                      tasks:
+                        - Task-1:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 1
+                          Task-2:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task2
+                          Task-3:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 3
+                          Task-4:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 4
+                          Task-5:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 5
+                          Task-6:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 6
+                      uid: jDVWo6oiDESrYKljPIaAjZ1N7Xy2
+                      zip_code: 19023
+      description: Updates a Single Project
+      operationId: PutProjects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                baths:
+                  type:
+                    - number
+                    - string
+                beds:
+                  type:
+                    - string
+                    - number
+            examples:
+              example-1:
+                value:
+                  baths: 5
+                  beds: 7
+              example-2: {}
+        description: |
+          Update project
 components:
   schemas: {}

@@ -12,7 +12,7 @@ const zipcodes = require('zipcodes')
 */
 
 
-/* Get request to /api/auth/:uid/projects with return all projects for that uid */
+/* Get request to /api/auth/:uid/projects will return all projects for that uid */
 
 router.get('/:uid/projects',async (req,res) =>{
     let uid = req.params.uid
@@ -41,9 +41,13 @@ catch(err)
     {res.status(500).json({message:err.message})}
      })
 })
+/* Return single project */
+
 router.get('/:uid/projects/:projectID',(req,res)=>{
 let uid = req.params.uid
 let projectID = req.params.projectID
+
+
 dbRef.child(`${uid}/projects/${projectID}`)
           
 .on('value',snap =>{
@@ -90,13 +94,16 @@ router.post('/:uid/projects',  async (req,res)=>{
        let uid = req.params.uid
       let taskObj=[]
       let templateID = req.body.templateID
+    
+      // Pulls the tasks stored in templates and adds them to the project
+
       let tasks = Firebaseconfig.database().ref(`${uid}/templates/${templateID}`)
-      let task = tasks.on("value",snap=>{return taskObj.push(snap.val())})
+       tasks.on("value",snap=>{return taskObj.push(snap.val())})
 
   await  dbRef.child(`/${uid}/projects/${projectID}`).set(
                     
                       {
-                           uid:req.headers.uid,
+                           uid:uid,
                            projectID:projectID,
                           
                            baths:body.baths,
@@ -154,6 +161,8 @@ router.post('/:uid/projects',  async (req,res)=>{
    })
 
 })
+
+// Updates a project 
 router.put(`/:uid/projects/:projectID`,(req,res)=>{
     let uid = req.params.uid
     let projectID = req.params.projectID
@@ -171,4 +180,14 @@ projectsRef.on("value",snap=>{
 
 
 })
+
+//Removes a project 
+ router.delete('/:uid/projects/:projectID',(req,res)=>{
+     let uid = req.params.uid
+     let projectID = req.params.projectID
+     let projectsRef = dbRef.child(`/${uid}/projects/${projectID}`)
+     projectsRef.remove(()=>{
+         res.status(200).json({message:"Project removed"})
+     })
+ })
 module.exports = router

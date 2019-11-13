@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test":  "jest --watch",
     "nodemon": "nodemon index.js",
     "start": "node index.js"
   },
@@ -27,6 +27,8 @@
     "zipcodes": "^8.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.19.4"
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.4",
+    "supertest": "^4.0.2"
   }
 }

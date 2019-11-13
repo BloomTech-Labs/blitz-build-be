@@ -74,7 +74,7 @@ router.post('/register',(req,res) =>{
 router.put('/:uid/updateuser',(req,res) =>{
  let uid = req.params.uid
  
-  console.log('IAM THE BODY LOG',req.body)
+
 
  /* It fires a function that makes a call to the auth database */
 
@@ -128,10 +128,10 @@ router.post('/login', (req, res) => {
     /* If email and password are present 
        it makes a call to firebase auth database to verfiy 
        the login info */
- 
+
     Firebaseconfig.auth()
     .signInWithEmailAndPassword(email,password)
-     
+
     /* IF verfied it returns a userObj to the client */
     
     .then(userObj =>{
@@ -158,7 +158,24 @@ router.post('/login', (req, res) => {
         })
     })
 })
+// Auth event change listner
 
+Firebaseconfig.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    var displayName = user.displayName;
+    var email = user.email;
+    var emailVerified = user.emailVerified;
+    var photoURL = user.photoURL;
+    var isAnonymous = user.isAnonymous;
+    var uid = user.uid;
+    var providerData = user.providerData;
+    // ...
+  } else {
+    // User is signed out.
+    // ...
+  }
+});
 
 
 module.exports = router;

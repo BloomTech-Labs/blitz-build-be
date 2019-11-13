@@ -41,9 +41,11 @@ https://app.swaggerhub.com/apis-docs/mharley12345/blitz-build_api/1.0
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
 | PUT    | `/api/:uid/updateuser` |Logged In User | *Please see above link for detailed instructions |
-| GET    | `/api/auth/:uid/projects`        |   Logged In User           | Returns a list of user projects.*Please see above link for detailed instructions                |
-|POST | `api/auth/:uid/porjects`|Logged In User|*Please see above link for detailed instructions |
-
+| GET    | `/api/auth/:uid/projects`        |   Logged In User           | Returns a list of user projects.*Please see above link for detailed instructions   
+| GET| `/api/auth/:uid/projects/:projectID` |Logged In User|            |Returns a single project|
+|POST | `api/auth/:uid/projects`|Logged In User|*Please see above link for detailed instructions |
+|PUT|`api/auth/:uid/projects/:projectID`|Logged in User|Ability to update a project|
+|DELETE|`api/auth/:uid/projects/:projectID`|Logged in User| Ability to delete a project|
 
 
 # Data Model
