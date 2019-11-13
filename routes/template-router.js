@@ -16,7 +16,7 @@ const moment = require('moment')
                                    
                                                    await     templatesRef.on("value",templateObj =>{
                                    
-                                                         console.log(templateObj.val())
+                                                        //  console.log(templateObj.val())
                                            
                                                          let templates = templateObj.val()
                                         
@@ -66,7 +66,7 @@ const moment = require('moment')
                                                
                                                 
                                                      
-                                              { due_date:body.due_date, task_description:body.task_description}
+                                              { due_date:body.due_date, task_description:body.task_description,task_name:task_name}
                                             
                          
                          
@@ -76,7 +76,7 @@ const moment = require('moment')
                            
                                                 templatesRef.on("value",templateObj =>{
                            
-                                                 console.log(templateObj.val())
+                                                //  console.log(templateObj.val())
                                    
                                                  let templates = templateObj.val()
                                 
@@ -112,33 +112,7 @@ const moment = require('moment')
                             })
                          
                          })
-                         router.get('/:uid/templates',async (req,res) =>{
-                         
-                                let uid = req.params.uid
+                     
                         
-                         
-                                  dbRef.child(`${uid}/templates`)
-                                  
-                                  .on('value',snap =>{
-                             
-                                    let data = snap.val()
-                             
-                                    console.log(data)
-                        try{ 
-                            if(data){
-                             res.status(200).json(data)
-                                }
-                            else{
-                                res.status(404)
-                                .json(
-                                    {
-                                        message:'Sorry No Projects Where Returned From Search. Please Check Your Request And Verify All Information Is Entered Correctly'
-                                    })
-                            }
-                            }
-                        catch(err)
-                            {res.status(500).json({message:err.message})}
-                             })
-                        })
                         
                          module.exports = router
