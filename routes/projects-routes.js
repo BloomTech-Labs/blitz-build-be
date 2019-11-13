@@ -108,24 +108,24 @@ router.post('/:uid/projects',  async (req,res)=>{
                           
                            baths:body.baths,
                            beds:body.beds,
-                        //    imageURL:body.imageURL,
+                           imageURL:body.imageURL,
                            project_name:body.project_name,
                            square_ft:body.square_ft,
-                        //    street_address:body.street_address,
-                        //    city:body.city,
-                        //    state:body.state,
+                           street_address:body.street_address,
+                           city:body.city,
+                           state:body.state,
                            zip_code:body.zip_code,
-                        //    status:body.status,
+                           status:body.status,
                            gps_cords:zipcodes.lookup(body.zip_code)
 
 
                        })
-                    
-                       const projectsRef = dbRef.child(`/${uid}/projects/${projectID}`);
+                    async
+                    const projectsRef = dbRef.child(`/${uid}/projects/${projectID}`);
                        projectsRef.update({tasks:taskObj})
-                       projectsRef.on("value",projectsObj =>{
+                      projectsRef.on("value", projectsObj =>{
   
-                        console.log(projectsObj.val())
+                    console.log(projectsObj.val())
           
                         let data = projectsObj.val()
        
@@ -136,7 +136,7 @@ router.post('/:uid/projects',  async (req,res)=>{
 
                             if(data){
 
-                                res.status(201)
+                             await   res.status(201)
                                 .json({message:`Project ${body.project_name} createdAT: ${moment().format('LLL')}`,projectObj:data})
 
                             }
