@@ -123,13 +123,13 @@ router.post('/login', (req, res) => {
     .then(userObj =>{
     
     
-    
+  
         res.status(200)
         .json(
             {
               message:`${userObj.user.email} signed in @ ${moment().format('LLL')}`,
-              token:userObj.user.refreshToken,
-               userObj:userObj
+              accessToken:userObj.user.b.b,
+              refreshToken:userObj.user.refreshToken
             }
               )
   
