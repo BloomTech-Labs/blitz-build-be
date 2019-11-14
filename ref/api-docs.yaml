@@ -544,8 +544,8 @@ paths:
                   type: number
                 imageURL:
                   type:
-                    - string
-                    - 'null'
+                    string
+                  
                   description: |+
                     This Field is required it will except null
 
@@ -642,7 +642,7 @@ paths:
                   zip_code: '98001'
         description: 'All Fields Required '
   '/api/auth/:uid/weather':
-    get:
+    post:
       summary: Get Weather for project
       tags:
         - Get Weather
@@ -2245,12 +2245,11 @@ paths:
               properties:
                 baths:
                   type:
-                    - number
-                    - string
+
+                     string
                 beds:
-                  type:
-                    - string
-                    - number
+                  type: string
+                     
             examples:
               example-1:
                 value:
@@ -2381,12 +2380,7 @@ paths:
           required: true
       description: Get All Tasks for a project
       operationId: GetAllTasks
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
+
   '/api/auth/:uid/projects/:projectID/tasks/:filter':
     get:
       summary: Sort by key
@@ -2509,7 +2503,8 @@ paths:
       description: Update tasks
   '/api/auth/:uid/tasks':
     get:
-      summary: Get all tasks for a project
+      summary: Get all tasks for a user
+      
       tags:
         - Get All Tasks for User
       responses:
