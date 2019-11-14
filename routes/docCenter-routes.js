@@ -1,14 +1,16 @@
 require('dotenv').config()
 const router = require('express').Router();
-const Firebaseconfig = require('../Firebaseconfig')
-const cloudStorage = process.env.STORAGE_BUCKET
 
+const cloudStorage = process.env.STORAGE_BUCKET
+const storage = storage(cloudStorage)
 const upLoadDocs = require('express-fileupload')
 
 router.post('/:uid/doc-center/upload',(req,res,next)=>{
-    let uploadFile = req.files.file
+    console.log(req.data)
+    let uploadFile = upLoadDocs 
     let uid = req.params.uid
-    const fileName = req.files.file.name
+    const fileName = req.uid/'test'
+ 
     uploadFile.mv(
         `gs://${cloudStorage}/${uid}/${fileName}`,
         function (err){
@@ -16,7 +18,7 @@ router.post('/:uid/doc-center/upload',(req,res,next)=>{
                 res.status(500).send(err)
             }
             res.json({
-                file:`${uid}/${req.files.file.name}`
+                file:`${uid}/${fileName}`
             })
         }
     )

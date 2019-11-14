@@ -79,8 +79,8 @@ catch(err)
                                        uid: TAKEN FROM HEADERS 
                                        templateID: 90 Day , 60 Day , 30 Day 
                                        project_name: string,
-                                       baths: INT,
-                                       beds: INT,
+                                       baths: num,
+                                       beds: num,
                                        imageURL: URL,
                                        square_ft: INT,
                                        status: string ***** 3 options****** onTime,Delayed,Completed,
@@ -105,7 +105,7 @@ router.post('/:uid/projects',  async (req,res)=>{
                       {
                            uid:uid,
                            projectID:projectID,
-                          
+                           createdAt:moment().format("L"),
                            baths:body.baths,
                            beds:body.beds,
                         //    imageURL:body.imageURL,
@@ -169,7 +169,7 @@ router.put(`/:uid/projects/:projectID`,(req,res)=>{
     let projectID = req.params.projectID
 const projectsRef = dbRef.child(`/${uid}/projects/${projectID}`)
 let body = req.body
-projectsRef.update(body)
+projectsRef.update({body,updatedAt:moment().format('L')})
 projectsRef.on("value",snap=>{
      let newProjectObj = snap.val()
    if(newProjectObj){

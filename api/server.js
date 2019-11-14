@@ -1,12 +1,13 @@
 const express = require('express')
 const cors = require('cors')
 const helmet = require('helmet')
-const docCenter = require('../routes/docCenter-routes')
+// const docCenter = require('../routes/docCenter-routes')
 const projectsRouter = require('../routes/projects-routes')
 const templateRouter = require('../routes/template-router')
 const register = require('../auth/authRouter')
 const login = require('../auth/authRouter')
 const weather = require('../routes/weather')
+const Verify = require('../auth/validate')
 const server = express()
 
 // define logger middleware
@@ -25,10 +26,10 @@ server.use(logger)
 server.use('/api',login,register)
 
 // Add auth to routes
-server.use('/api/auth',projectsRouter)
-server.use('/api/auth',templateRouter)
-server.use('/api/auth',docCenter)
-server.use('/api/auth/:uid',weather)
+server.use('/api/auth',Verify,projectsRouter)
+server.use('/api/auth',Verify,templateRouter)
+// server.use('/api/auth',Verify,docCenter)
+server.use('/api/auth/:uid',Verify,weather)
 
 
 
