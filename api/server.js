@@ -3,7 +3,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 // const docCenter = require('../routes/docCenter-routes')
 const projectsRouter = require('../routes/projects-routes')
-const templateRouter = require('../routes/template-router')
+const tasksRouter = require('../routes/tasks-router')
 const register = require('../auth/authRouter')
 const login = require('../auth/authRouter')
 const weather = require('../routes/weather')
@@ -27,7 +27,8 @@ server.use('/api',login,register)
 
 // Add auth to routes
 server.use('/api/auth',Verify,projectsRouter)
-server.use('/api/auth',Verify,templateRouter)
+// server.use('/api/auth',Verify,templateRouter)
+server.use('/api/auth',Verify,tasksRouter)
 // server.use('/api/auth',Verify,docCenter)
 server.use('/api/auth/:uid',Verify,weather)
 
