@@ -136,7 +136,7 @@ router.post('/:uid/projects',  async (req,res)=>{
 
                             if(data){
 
-                             await   res.status(201)
+                             res.status(201)
                                 .json({message:`Project ${body.project_name} createdAT: ${moment().format('LLL')}`,projectObj:data})
 
                             }

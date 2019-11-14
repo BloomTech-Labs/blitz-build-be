@@ -16,7 +16,7 @@ const logger = (req, res, next) => {
 };
 
 // Add Middleware
-server.use(cors())
+server.use(cors('*'))
 server.use(helmet())
 server.use(express.json())
 server.use(logger)
