@@ -65,7 +65,7 @@ router.get('/:uid/projects/:projectID/tasks/:filter', async (req, res) => {
 
         //  console.log(templateObj.val())
 
-        let tasks = tasksObj.val()
+        let tasks = tasksObj.val().orderByChild()
 
 
 
@@ -103,7 +103,7 @@ router.put('/:uid/projects/:projectID/tasks/:taskID', async (req,res)=>{
     let body = req.body
     let projectID = req.params.projectID
     let taskID= req.params.taskID
-    let tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks/${taskID}`)
+    let tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks/${taskID}/`)
     let taskRef = dbRef.child(`/${uid}/tasks/${taskID}`)
  
       tasksRef.update(body)
@@ -130,6 +130,7 @@ router.put('/:uid/projects/:projectID/tasks/:taskID', async (req,res)=>{
         }
     })
     })
+    // Get all tasks for all projects for user
 
 router.get('/:uid/tasks', async (req, res) => {
 

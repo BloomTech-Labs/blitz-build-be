@@ -19,7 +19,7 @@ paths:
         - Login
       responses:
         '200':
-          description: OK
+          description: 'OK Returns message with accessToken place accessToken as token in headers!!!!!!'
           headers: {}
           content:
             application/json:
@@ -28,47 +28,9 @@ paths:
               examples:
                 example:
                   value:
-                    message: 'joe@smith.com signed in @ November 9, 2019 8:11 PM'
-                    token: AEu4IL0uDQEbKH8fmn0JktgO67Yomwv5BVOdF83N9aw4_910xevgFZM0h0SqOxA_r9EgG3ZEVW-r2ZdA0souYxDqaLsraB4--GCqQStSwuhBL3yZLf7TtZUlV6c-6hyo1JmdUSj-onvYwOSvOKKEd8sm1FehRJPkOFhf2LYoicxRV6gCkq3Z89Q1Skiw_YvBwu4z8G2uAlLFbJih6HxnReav8puHbAS8GQ
-                    userObj:
-                      user:
-                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
-                        displayName: Joe Smith
-                        photoURL: 'http://www.example.com/12345678/photo.png'
-                        email: joe@smith.com
-                        emailVerified: false
-                        phoneNumber: '+16505554567'
-                        isAnonymous: false
-                        tenantId: null
-                        providerData:
-                          - uid: '+16505554567'
-                            displayName: null
-                            photoURL: null
-                            email: null
-                            phoneNumber: '+16505554567'
-                            providerId: phone
-                          - uid: joe@smith.com
-                            displayName: Joe Smith
-                            photoURL: 'http://www.example.com/12345678/photo.png'
-                            email: joe@smith.com
-                            phoneNumber: null
-                            providerId: password
-                        apiKey: AIzaSyBa2eSzmAvPkFNEO0zVUE0zp4IEKfFO0Kc
-                        appName: '[DEFAULT]'
-                        authDomain: blitzbuild-8d5a6.firebaseapp.com
-                        stsTokenManager:
-                          apiKey: AIzaSyBa2eSzmAvPkFNEO0zVUE0zp4IEKfFO0Kc
-                          refreshToken: AEu4IL0uDQEbKH8fmn0JktgO67Yomwv5BVOdF83N9aw4_910xevgFZM0h0SqOxA_r9EgG3ZEVW-r2ZdA0souYxDqaLsraB4--GCqQStSwuhBL3yZLf7TtZUlV6c-6hyo1JmdUSj-onvYwOSvOKKEd8sm1FehRJPkOFhf2LYoicxRV6gCkq3Z89Q1Skiw_YvBwu4z8G2uAlLFbJih6HxnReav8puHbAS8GQ
-                          accessToken: eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1MDgxMWNkYzYwOWQ5MGY5ODE1MTE5MWIyYmM5YmQwY2ViOWMwMDQiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiSm9lIFNtaXRoIiwicGljdHVyZSI6Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vMTIzNDU2NzgvcGhvdG8ucG5nIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2JsaXR6YnVpbGQtOGQ1YTYiLCJhdWQiOiJibGl0emJ1aWxkLThkNWE2IiwiYXV0aF90aW1lIjoxNTczMzU5MTA4LCJ1c2VyX2lkIjoiUjNmRTZEUDNVZ1A4aFFTV2JHdWJzSGI3bE93MiIsInN1YiI6IlIzZkU2RFAzVWdQOGhRU1diR3Vic0hiN2xPdzIiLCJpYXQiOjE1NzMzNTkxMDgsImV4cCI6MTU3MzM2MjcwOCwiZW1haWwiOiJqb2VAc21pdGguY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwaG9uZV9udW1iZXIiOiIrMTY1MDU1NTQ1NjciLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIisxNjUwNTU1NDU2NyJdLCJlbWFpbCI6WyJqb2VAc21pdGguY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.D_alBrOdGsov1AGz9--nqjPo59guZ4jQu4vFhGjZPQ-3dsPIQ0iOzNt8yIR8jQzmvkFkFNH1HGrnqxEkfKRJXY37etJHGwAf4aVqVgOREyAfahoQZTShIZfUO8hnzJ6ShgZY4x12cY5UklRzXlplIV5sY2MbI6zu99UJNfDBxBlQ2mC7TzMRa0ESx2bjJvh7S1ys3B-AkLPyw5dES9k_tGkztwkRuSs3evTMvhkfRHoK44vh4n6CbsfsFPoEZLMi2zD_SbcKd8GJJVZ7vw6TOtHpu6mQWi_7FKyfA8rWBvnJqYm4Pq5Bear4WtZ0o8n9OMSWsGNU5xE8l9oekTkoog
-                          expirationTime: 1573362708662
-                        redirectEventId: null
-                        lastLoginAt: '1573359108140'
-                        createdAt: '1573348525021'
-                      credential: null
-                      additionalUserInfo:
-                        providerId: password
-                        isNewUser: false
-                      operationType: signIn
+                    message: 'joe@smith.com signed in @ November 14, 2019 2:40 PM'
+                    accessToken: eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1MDgxMWNkYzYwOWQ5MGY5ODE1MTE5MWIyYmM5YmQwY2ViOWMwMDQiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiSm9lIFNtaXRoIiwicGljdHVyZSI6Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vam9lX3NtaXRoL3Bob3RvLnBuZyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9ibGl0emJ1aWxkLThkNWE2IiwiYXVkIjoiYmxpdHpidWlsZC04ZDVhNiIsImF1dGhfdGltZSI6MTU3Mzc3MTIzNCwidXNlcl9pZCI6IlIzZkU2RFAzVWdQOGhRU1diR3Vic0hiN2xPdzIiLCJzdWIiOiJSM2ZFNkRQM1VnUDhoUVNXYkd1YnNIYjdsT3cyIiwiaWF0IjoxNTczNzcxMjM0LCJleHAiOjE1NzM3NzQ4MzQsImVtYWlsIjoiam9lQHNtaXRoLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicGhvbmVfbnVtYmVyIjoiKzE2NTA1NTU0NTY3IiwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJwaG9uZSI6WyIrMTY1MDU1NTQ1NjciXSwiZW1haWwiOlsiam9lQHNtaXRoLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.CIfW-JhGTa11owBlwrKdz3RXoC_lBzOGP3aVCNZAeRUaU3dZL_YNG8ByBA-FGY5alxB5edb593-2HvDPWI2ocH3GTIHrEuuQiA_1qYufR0rgC_9DIfd4YV5uFV1XyXMgA5j_xyOsAsjV_RV2SjftxSYcWZgU0RNPzZDGD1zIx2nnNdExs_FFt_mOHG_gG-wLiTBO1gQ7zvX2hW9m7taB5VZJUnwsRUaQU2bnYurp-yKpvvQ89ebyDsFSz5P4cINmDHzZGFb1hqvldauLnnrBPiBadToXgKlucfKhd4R66GVavot7Vdbp8SQCy97av_JgwabeLpnv3m3lqBl7Wny7KQ
+                    refreshToken: AEu4IL1f9-8-xF0gn48DdoM3QA1DbGj0Ap0Y8qI53KB-Ylhk2QXE1nhmwsjPAnxVpDFoQw0MZRh5lA12hgDd0Ake7S6zFkCfK5LwtppMt-vxC090tkBr_j2PJDK0N26wIeEkKO3mHNBqqdPe-C6G6TCh-UhWtLMEqbfrYR4UVYQs1VYUiM-s_KAhs-K_EpwFSwbWXMEdPWr8jc3YsmPqdo_Bl6uglGqGRw
             application/xml:
               schema:
                 type: object
@@ -2297,5 +2259,295 @@ paths:
               example-2: {}
         description: |
           Update project
+  '/api/auth/:uid/projects/:projectID/tasks':
+    post:
+      summary: Add task to a project
+      tags:
+        - Add Task
+      responses:
+        '201':
+          description: 'Created returns tasksObj with unique key. Take reference of key as you will need it for additional requests!!!!'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    message: 'Task createdAT: November 14, 2019 2:14 PM'
+                    tasksObj:
+                      '-LtfqW7xsFlIgiTAxFE3':
+                        due_date: 11-19-2019
+                        isComplete: false
+                        projectID: My New Project
+                        task_description: Testing Testing 123
+                        task_name: Test Task 1
+                      '-Ltfyv3W5lmRGhy_PbBb':
+                        due_date: 11-22-2019
+                        isComplete: false
+                        projectID: My New Project
+                        task_description: Testing Testing 123
+                        task_name: Test Task 7
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: token
+          required: true
+      description: Add a task to a project
+      operationId: PostTasks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_name:
+                  type: string
+                due_date:
+                  type: string
+                task_description:
+                  type: string
+              required:
+                - task_name
+                - due_date
+                - task_description
+            examples:
+              example-1:
+                value:
+                  task_name: Test Task 7
+                  due_date: 11-22-2019
+                  task_description: Testing Testing 123
+          application/xml:
+            schema:
+              type: object
+              properties:
+                task_name:
+                  type: string
+                due_date:
+                  type: string
+                task_description:
+                  type: string
+              required:
+                - task_name
+                - due_date
+                - task_description
+            examples:
+              example-1:
+                value:
+                  task_name: Test Task 7
+                  due_date: 11-22-2019
+                  task_description: Testing Testing 123
+        description: 'All fields REQUIRED!!!!!!!!!!!!!!!!!!!!!!!!!! '
+    get:
+      summary: Get all tasks for a project
+      tags:
+        - Add Task
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    '-LtfgI0Ve5IUWNSymT_o':
+                      '-LtfgHz7Q6-7rX20sfsd':
+                        due_date: 11-18-2019
+                        isComplete: false
+                        projectID: "MIKE'S UI TEST"
+                        task_description: Testing Testing 123
+                        task_name: Test Task 8
+                    '-LtfhJiYnbNQ5IaTcPmr':
+                      '-LtfhJgR5J7np69Mr2gG':
+                        due_date: 11-19-2019
+                        isComplete: false
+                        projectID: My New Project
+                        task_description: Testing Testing 123
+                        task_name: Test Task 1
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: token
+          required: true
+      description: Get All Tasks for a project
+      operationId: GetAllTasks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+  '/api/auth/:uid/projects/:projectID/tasks/:filter':
+    get:
+      summary: Sort by key
+      tags:
+        - Filter Tasks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                GET to .../due_date:
+                  value:
+                    '-LtfqW7xsFlIgiTAxFE3':
+                      due_date: 11-19-2019
+                      isComplete: false
+                      projectID: My New Project
+                      task_description: Testing Testing 123
+                      task_name: Test Task 1
+                    '-Ltfyv3W5lmRGhy_PbBb':
+                      due_date: 11-22-2019
+                      isComplete: false
+                      projectID: My New Project
+                      task_description: Testing Testing 123
+                      task_name: Test Task 7
+      description: Returns tasks sorted by filter value. Filter can be the task ID or any task key
+      operationId: GetByKey
+      parameters:
+        - schema:
+            type: string
+          in: header
+          description: ''
+          required: true
+          name: token
+  '/api/auth/:uid/projects/:projectID/tasks/:taskID':
+    delete:
+      summary: Delete task for project
+      tags:
+        - Update Task
+        - Delete Task
+        - Get Tasks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    message: '-Ltfyv3W5lmRGhy_Pb deleted November 14, 2019 2:36 PM'
+      operationId: DeleteTask
+      description: Delete a task for a project
+      parameters:
+        - schema:
+            type: string
+          in: header
+          required: true
+          name: token
+    put:
+      summary: Update task
+      tags:
+        - Update Task
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    due_date: 11-19-2019
+                    isComplete: true
+                    projectID: My New Project
+                    task_description: Testing Testing 123
+                    task_name: Test Task 100
+                    uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                example-2:
+                  value:
+                    due_date: 11-19-2019
+                    isComplete: false
+                    projectID: My New Project
+                    task_description: Testing Testing 123
+                    task_name: Test Task 100
+                    uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+      operationId: PutTask
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isComplete:
+                  type: string
+                due_date:
+                  type: string
+                task_description:
+                  type: string
+            examples:
+              example-1:
+                value:
+                  isComplete: true
+              example-2:
+                value:
+                  isComplete: false
+      description: Update tasks
+  '/api/auth/:uid/tasks':
+    get:
+      summary: Get all tasks for a project
+      tags:
+        - Get All Tasks for User
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    '-LtfqW7xsFlIgiTAxFE3':
+                      due_date: 11-19-2019
+                      isComplete: false
+                      projectID: My New Project
+                      task_description: Testing Testing 123
+                      task_name: Test Task 1
+                    '-Ltfyv3W5lmRGhy_PbBb':
+                      due_date: 11-22-2019
+                      isComplete: false
+                      projectID: My New Project
+                      task_description: Testing Testing 123
+                      task_name: Test Task 7
+                    '-Ltg8mLXz3ddIUnmPK1N':
+                      due_date: 11-22-2019
+                      isComplete: false
+                      projectID: jones-demo
+                      task_description: Testing Testing 123
+                      task_name: 'Jones Demo '
+      description: 'Returns all tasks for that user '
+      operationId: GetTasksforUser
+      parameters:
+        - schema:
+            type: string
+          in: header
+          required: true
+          name: token
 components:
   schemas: {}
