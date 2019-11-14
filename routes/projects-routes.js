@@ -108,14 +108,14 @@ router.post('/:uid/projects',  async (req,res)=>{
                           
                            baths:body.baths,
                            beds:body.beds,
-                           imageURL:body.imageURL,
+                        //    imageURL:body.imageURL,
                            project_name:body.project_name,
                            square_ft:body.square_ft,
                            street_address:body.street_address,
                            city:body.city,
                            state:body.state,
                            zip_code:body.zip_code,
-                           status:body.status,
+                        //    status:body.status,
                            gps_cords:zipcodes.lookup(body.zip_code)
 
 
