@@ -119,8 +119,8 @@ router.post('/:uid/projects',  async (req,res)=>{
                            gps_cords:zipcodes.lookup(body.zip_code)
 
 
-                       })
-                    async
+                       }).then(()=>{
+               
                     const projectsRef = dbRef.child(`/${uid}/projects/${projectID}`);
                        projectsRef.update({tasks:taskObj})
                       projectsRef.on("value", projectsObj =>{
@@ -160,6 +160,7 @@ router.post('/:uid/projects',  async (req,res)=>{
 
    })
 
+})
 })
 
 // Updates a project 
