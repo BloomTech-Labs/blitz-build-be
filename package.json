@@ -8,7 +8,7 @@
     "nodemon": "nodemon index.js",
     "start": "node index.js"
   },
-  "author": "",
+  "author": "Michael Harley",
   "license": "MIT",
   "dependencies": {
     "@firebase/testing": "^0.15.0",
@@ -18,6 +18,8 @@
     "bcrypt": "^3.0.6",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "eslint": "^6.6.0",
+    "eslint-plugin-promise": "^4.2.1",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.6-alpha.6",
     "firebase": "^7.3.0",

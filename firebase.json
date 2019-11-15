@@ -1,7 +1,10 @@
 {
   "hosting": {
     "public": "build",
-    "FIREBASE_DATABASE_EMULATOR_HOST":"localhost:9000",
+    "rewrites":[{
+      "source":"**",
+      "function":"server"
+    }],
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -13,5 +16,10 @@
   },
   "storage": {
     "rules": "storage.rules"
+  },
+  "functions": {
+    "predeploy": [
+      "npm --prefix \"$RESOURCE_DIR\" run lint"
+    ]
   }
 }
