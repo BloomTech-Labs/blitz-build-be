@@ -129,7 +129,8 @@ router.post('/login', (req, res) => {
             {
               message:`${userObj.user.email} signed in @ ${moment().format('LLL')}`,
               accessToken:userObj.user.b.b,
-              refreshToken:userObj.user.refreshToken
+              refreshToken:userObj.user.refreshToken,
+              uid:userObj.user.uid
             }
               )
   

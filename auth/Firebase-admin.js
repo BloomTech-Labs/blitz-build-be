@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config('./env')
 const  admin = require('firebase-admin')
 
 admin.initializeApp({
