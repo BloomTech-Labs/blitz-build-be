@@ -57,7 +57,7 @@ router.get('/:uid/projects/:projectID/tasks/:filter', async (req, res) => {
     let filter = req.params.filter
     let uid = req.params.uid
     let projectID = req.params.projectID
-    
+
     const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks`);
 
     await tasksRef.orderByChild(`tasks/${filter}`)
@@ -229,39 +229,40 @@ router.post('/:uid/projects/:projectID/tasks', async (req, res) => {
     let task_name = body.task_name
     let due_date = req.body.due_date
     let task_description = req.body.task_description
-   
+    
 
     await dbRef.child(`/${uid}/projects/${projectID}/tasks`).push(
 
          
 
 
-        { due_date: due_date, projectID:projectID,task_description: task_description, task_name: task_name,isComplete:false}
+        
+            { id:`${Date.now()}`, due_date: due_date, projectID:projectID,task_description: task_description, task_name: task_name,isComplete:false}
 
 
 
     )
 
     const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks`);
-      let newTasksRef = tasksRef.push()
-      let taskID = newTasksRef.key
+      
+      
   
-     
-    tasksRef.update({taskID:taskID}).on("value",tasksObj =>{
+    tasksRef.on("value", tasksObj => {
 
-          console.log(tasksObj.key)
+        //  console.log(templateObj.val())
 
         let tasks = tasksObj.val()
-    
+       
+
       
-     dbRef.child(`/${uid}/tasks`).update({tasks:tasks,taskID:tasksObj.key})
+     dbRef.child(`/${uid}/tasks`).update(tasks)
 
         try {
 
             if (tasks) {
 
                 res.status(201)
-                    .json({ message: `Task ${taskID} createdAT: ${moment().format('LLL')}`, tasksObj: tasks })
+                    .json({ message: `Task createdAT: ${moment().format('LLL')}`, tasksObj:tasksObj,  })
 
             }
 
