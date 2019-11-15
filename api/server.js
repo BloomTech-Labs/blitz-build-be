@@ -8,6 +8,7 @@ const register = require('../auth/authRouter')
 const login = require('../auth/authRouter')
 const weather = require('../routes/weather')
 const Verify = require('../auth/validate')
+const delayRouter = require('../routes/delay-router')
 const server = express()
 
 // define logger middleware
@@ -31,6 +32,7 @@ server.use('/api/auth',Verify,projectsRouter)
 server.use('/api/auth',Verify,tasksRouter)
 // server.use('/api/auth',Verify,docCenter)
 server.use('/api/auth/:uid',Verify,weather)
+server.use('/api/auth',delayRouter)
 
 
 
