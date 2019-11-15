@@ -57,7 +57,7 @@ router.get('/:uid/projects/:projectID/tasks/:filter', async (req, res) => {
     let filter = req.params.filter
     let uid = req.params.uid
     let projectID = req.params.projectID
-
+    
     const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks`);
 
     await tasksRef.orderByChild(`tasks/${filter}`)
@@ -245,15 +245,16 @@ router.post('/:uid/projects/:projectID/tasks', async (req, res) => {
     const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks`);
       let newTasksRef = tasksRef.push()
       let taskID = newTasksRef.key
-    console.log(taskID)
-    tasksRef.on("value", tasksObj => {
+  
+     
+    tasksRef.update({taskID:taskID}).on("value",tasksObj =>{
 
-        //  console.log(templateObj.val())
+          console.log(tasksObj.key)
 
         let tasks = tasksObj.val()
-
+    
       
-     dbRef.child(`/${uid}/tasks`).update(tasks)
+     dbRef.child(`/${uid}/tasks`).update({tasks:tasks,taskID:tasksObj.key})
 
         try {
 

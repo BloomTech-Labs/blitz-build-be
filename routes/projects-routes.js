@@ -112,6 +112,7 @@ router.post('/:uid/projects', async (req, res) => {
             createdAt: moment().format("L"),
             baths: baths,
             beds:  beds,
+            status: "onTime",
             //    imageURL:body.imageURL,
             project_name: project_name,
             square_ft: square_ft,
