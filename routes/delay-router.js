@@ -46,4 +46,12 @@ dbRef.child(`/${uid}/delay_logs`).on("value",delayObj=>{
 })  
   
 })
+
+router.get('/set',(req,res)=>{
+    Firebaseconfig.database().ref('/iTSHTnTwLvPXtPlVdMo87AR1KXZ2').set("Mike")
+    dbRef.on('value', snap=>{
+        res.status(201).json(snap.val())
+    })
+  
+})
 module.exports= router

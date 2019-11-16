@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Firebaseconfig = require('../Firebaseconfig')
 const dbRef = Firebaseconfig.database().ref()
 const moment = require('moment')
-
+const key = Date.now()
 
 /* Route /api/auth/:uid/projects/:projectID/tasks  */
 
@@ -61,66 +61,67 @@ router.get('/:uid/projects/:projectID/tasks/:filter', async (req, res) => {
     const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks`);
 
     await tasksRef.orderByChild(`tasks/${filter}`)
-    .on("value",tasksObj => {
+        .on("value", tasksObj => {
 
-        //  console.log(templateObj.val())
+            //  console.log(templateObj.val())
 
-        let tasks = tasksObj.val().orderByChild()
-
-
+            let tasks = tasksObj.val().orderByChild()
 
 
-        try {
 
-            if (tasks) {
 
-                res.status(200)
-                    .json(tasks)
+            try {
+
+                if (tasks) {
+
+                    res.status(200)
+                        .json(tasks)
+
+                }
 
             }
 
-        }
+            catch
 
-        catch
+            (err) {
+                res.status(500)
 
-        (err) {
-            res.status(500)
-
-                .json(
-                    {
-                        message: err.message
-                    }
-                )
-        }
+                    .json(
+                        {
+                            message: err.message
+                        }
+                    )
+            }
 
 
 
-    })
+        })
 
 })
-router.put('/:uid/projects/:projectID/tasks/:taskID', async (req,res)=>{
+router.put('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
     let uid = req.params.uid
     let body = req.body
     let projectID = req.params.projectID
-    let taskID= req.params.taskID
+    let taskID = req.params.taskID
     let tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks/${taskID}/`)
     let taskRef = dbRef.child(`/${uid}/tasks/${taskID}`)
- 
-      tasksRef.update(body)
 
-      tasksRef.on("value",updateObj =>{
+    tasksRef.update(body)
+
+    tasksRef.on("value", updateObj => {
         let updates = updateObj.val()
-        
-      taskRef.update(updates)
-        try {if (updates) {
+
+        taskRef.update(updates)
+        try {
+            if (updates) {
 
                 res.status(200)
                     .json(updates)
 
             }
         }
-      catch
-          (err) {
+        catch
+        (err) {
             res.status(500)
                 .json(
                     {
@@ -129,17 +130,15 @@ router.put('/:uid/projects/:projectID/tasks/:taskID', async (req,res)=>{
                 )
         }
     })
-    })
-    // Get all tasks for all projects for user
+})
+// Get all tasks for all projects for user
 
 router.get('/:uid/tasks', async (req, res) => {
 
     let uid = req.params.uid
-   
 
-    const tasksRef = dbRef.child(`/${uid}/tasks`);
-     
-    await tasksRef.on("value", tasksObj => {
+
+    const tasksRef = dbRef.child(`/${uid}/tasks`).orderByChild('task_name').on("value", tasksObj => {
 
         //  console.log(templateObj.val())
 
@@ -176,15 +175,15 @@ router.get('/:uid/tasks', async (req, res) => {
     })
 
 })
-router.get('/:uid/projects/:projectID/:taskID', async (req, res) => {
+router.get('/:uid/projects/:projectID/tasks', async (req, res) => {
 
     let uid = req.params.uid
     let projectID = req.params.projectID
-    let taskID = req.params.taskID
-    const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks/${taskID}`);
+ 
+    const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks`).orderByChild('*/id');
 
     await tasksRef.on("value", tasksObj => {
-
+      console.log(tasksObj.val())
         //  console.log(templateObj.val())
 
         let tasks = tasksObj.val()
@@ -222,47 +221,46 @@ router.get('/:uid/projects/:projectID/:taskID', async (req, res) => {
 })
 
 router.post('/:uid/projects/:projectID/tasks', async (req, res) => {
-    
+
     let body = req.body
     let uid = req.params.uid
     let projectID = req.params.projectID
     let task_name = body.task_name
     let due_date = req.body.due_date
     let task_description = req.body.task_description
-    
 
-    await dbRef.child(`/${uid}/projects/${projectID}/tasks`).push(
 
-         
+   let newDataRef = await dbRef.child(`/${uid}/projects/${projectID}/tasks`).child(`/${key}`).set(
 
+
+
+
+
+        { id: `${Date.now()}`, due_date: due_date, projectID: projectID, task_description: task_description, task_name: task_name, isComplete: false }
 
         
-            { id:`${Date.now()}`, due_date: due_date, projectID:projectID,task_description: task_description, task_name: task_name,isComplete:false}
-
-
 
     )
-
-    const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks`);
+    
+         
       
-      
-  
-    tasksRef.on("value", tasksObj => {
+    
+    dbRef.child(`/${uid}/projects/${projectID}/tasks`).on("value", tasksObj => {
 
         //  console.log(templateObj.val())
 
-        let tasks = tasksObj.val()
-       
+        let tasks = tasksObj.exportVal()
+        
 
-      
-     dbRef.child(`/${uid}/tasks`).update(tasks)
+
+        dbRef.child(`/${uid}/tasks`).child(`${key}`).set(tasks)
 
         try {
 
             if (tasks) {
 
                 res.status(201)
-                    .json({ message: `Task createdAT: ${moment().format('LLL')}`, tasksObj:tasksObj,  })
+                    .json({ message: `Task createdAT: ${moment().format('LLL')}`, tasksObj: tasksObj, })
 
             }
 
@@ -283,24 +281,25 @@ router.post('/:uid/projects/:projectID/tasks', async (req, res) => {
 
 
     })
-
+dbRef.child(`/${uid}/projects/${projectID}/tasks`).orderByChild(`key`)
 })
 //Delete Tasks
 
-router.delete('/:uid/projects/:projectID/tasks/:taskID', async (req,res)=>{
+router.delete('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
     let uid = req.params.uid
     let body = req.body
+
     let projectID = req.params.projectID
-    let taskID= req.params.taskID
-    let tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks/${taskID}`)
+    let taskID = req.params.taskID
+    let tasksRef = dbRef.orderByKey(`/${uid}/projects/${projectID}/tasks/${taskID}`)
     let taskRef = dbRef.child(`/${uid}/tasks/${taskID}`)
- 
-    
-       tasksRef.remove()
-       taskRef.remove()
-     .then(delObj=>{
-         res.status(200).json({message:`${taskID} deleted ${moment().format('LLL')}`,delObj})
-     })
-    })
+
+
+    tasksRef.remove()
+    taskRef.remove()
+        .then(delObj => {
+            res.status(200).json({ message: `${taskID} deleted ${moment().format('LLL')}`, delObj })
+        })
+})
 
 module.exports = router
