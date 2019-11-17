@@ -120,7 +120,7 @@ router.post('/:uid/projects', async (req, res) => {
             city: city,
             state: state,
             zip_code: zip_code,
-            //    status:body.status,
+      //    status:body.status,
             gps_cords: zipcodes.lookup(zip_code)
 
 

@@ -17,4 +17,6 @@ admin.initializeApp({
     databaseURL:process.env.DATABASE_URL
   })
 
+  
+
 module.exports=admin

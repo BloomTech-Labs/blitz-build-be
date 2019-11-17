@@ -1,4 +1,6 @@
 require('dotenv').config('./env')
+require('express')
+const functions = require('firebase-functions')
 const server = require('./api/server')
 
 
