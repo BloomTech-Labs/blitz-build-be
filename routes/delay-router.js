@@ -27,7 +27,7 @@ router.post('/:uid/delays',(req,res)=>{
           timestamp:moment().format("LLL"),
           username:username
       }
-  ).on("value",delayObj =>{
+  ).once("value",delayObj =>{
       res.status(201).json(delayObj.val())
   }
      
@@ -37,7 +37,7 @@ router.post('/:uid/delays',(req,res)=>{
 
 router.get('/:uid/delay_logs',(req,res)=>{
    let uid = req.params.uid
-dbRef.child(`/${uid}/delay_logs`).on("value",delayObj=>{
+dbRef.child(`/${uid}/delay_logs`).once("value",delayObj=>{
      if(delayObj){
     res.status(200).json(delayObj)
      }else (err)=>{
@@ -49,7 +49,7 @@ dbRef.child(`/${uid}/delay_logs`).on("value",delayObj=>{
 
 router.get('/set',(req,res)=>{
     Firebaseconfig.database().ref('/iTSHTnTwLvPXtPlVdMo87AR1KXZ2').set("Mike")
-    dbRef.on('value', snap=>{
+    dbRef.once('value', snap=>{
         res.status(201).json(snap.val())
     })
   
