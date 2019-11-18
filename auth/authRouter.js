@@ -33,7 +33,7 @@ router.post('/register',(req,res) =>{
     phoneNumber:user.phoneNumber,
     password:user.password,
     displayName:user.displayName,
-    imageURL:user.imageURL,
+    imageURL: 'https://fakeuser.com',
     disabled:false
   })
 
