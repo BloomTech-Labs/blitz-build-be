@@ -183,6 +183,7 @@ projects.json
 functions/
 *docCenter-router*
 "sendgrid.env" 
+*env*
 
 node_modules
 
