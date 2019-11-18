@@ -1,0 +1,2301 @@
+openapi: 3.0.0
+info:
+  title: Blitz Build Api
+  version: '1.0'
+  contact:
+    name: Mike Harley
+    email: info@mike-harley.tech
+  description: Node/Express Rest Api Using Firebase Realtime Database
+servers:
+  - url: 'http://localhost:4000'
+    description: localhost
+  - url: 'https://api-blitz-build-dev.herokuapp.com'
+    description: Heroku
+paths:
+  /api/login:
+    post:
+      summary: Post
+      tags:
+        - Login
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                example:
+                  value:
+                    message: 'joe@smith.com signed in @ November 9, 2019 8:11 PM'
+                    token: AEu4IL0uDQEbKH8fmn0JktgO67Yomwv5BVOdF83N9aw4_910xevgFZM0h0SqOxA_r9EgG3ZEVW-r2ZdA0souYxDqaLsraB4--GCqQStSwuhBL3yZLf7TtZUlV6c-6hyo1JmdUSj-onvYwOSvOKKEd8sm1FehRJPkOFhf2LYoicxRV6gCkq3Z89Q1Skiw_YvBwu4z8G2uAlLFbJih6HxnReav8puHbAS8GQ
+                    userObj:
+                      user:
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                        displayName: Joe Smith
+                        photoURL: 'http://www.example.com/12345678/photo.png'
+                        email: joe@smith.com
+                        emailVerified: false
+                        phoneNumber: '+16505554567'
+                        isAnonymous: false
+                        tenantId: null
+                        providerData:
+                          - uid: '+16505554567'
+                            displayName: null
+                            photoURL: null
+                            email: null
+                            phoneNumber: '+16505554567'
+                            providerId: phone
+                          - uid: joe@smith.com
+                            displayName: Joe Smith
+                            photoURL: 'http://www.example.com/12345678/photo.png'
+                            email: joe@smith.com
+                            phoneNumber: null
+                            providerId: password
+                        apiKey: AIzaSyBa2eSzmAvPkFNEO0zVUE0zp4IEKfFO0Kc
+                        appName: '[DEFAULT]'
+                        authDomain: blitzbuild-8d5a6.firebaseapp.com
+                        stsTokenManager:
+                          apiKey: AIzaSyBa2eSzmAvPkFNEO0zVUE0zp4IEKfFO0Kc
+                          refreshToken: AEu4IL0uDQEbKH8fmn0JktgO67Yomwv5BVOdF83N9aw4_910xevgFZM0h0SqOxA_r9EgG3ZEVW-r2ZdA0souYxDqaLsraB4--GCqQStSwuhBL3yZLf7TtZUlV6c-6hyo1JmdUSj-onvYwOSvOKKEd8sm1FehRJPkOFhf2LYoicxRV6gCkq3Z89Q1Skiw_YvBwu4z8G2uAlLFbJih6HxnReav8puHbAS8GQ
+                          accessToken: eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1MDgxMWNkYzYwOWQ5MGY5ODE1MTE5MWIyYmM5YmQwY2ViOWMwMDQiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiSm9lIFNtaXRoIiwicGljdHVyZSI6Imh0dHA6Ly93d3cuZXhhbXBsZS5jb20vMTIzNDU2NzgvcGhvdG8ucG5nIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2JsaXR6YnVpbGQtOGQ1YTYiLCJhdWQiOiJibGl0emJ1aWxkLThkNWE2IiwiYXV0aF90aW1lIjoxNTczMzU5MTA4LCJ1c2VyX2lkIjoiUjNmRTZEUDNVZ1A4aFFTV2JHdWJzSGI3bE93MiIsInN1YiI6IlIzZkU2RFAzVWdQOGhRU1diR3Vic0hiN2xPdzIiLCJpYXQiOjE1NzMzNTkxMDgsImV4cCI6MTU3MzM2MjcwOCwiZW1haWwiOiJqb2VAc21pdGguY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwaG9uZV9udW1iZXIiOiIrMTY1MDU1NTQ1NjciLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIisxNjUwNTU1NDU2NyJdLCJlbWFpbCI6WyJqb2VAc21pdGguY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.D_alBrOdGsov1AGz9--nqjPo59guZ4jQu4vFhGjZPQ-3dsPIQ0iOzNt8yIR8jQzmvkFkFNH1HGrnqxEkfKRJXY37etJHGwAf4aVqVgOREyAfahoQZTShIZfUO8hnzJ6ShgZY4x12cY5UklRzXlplIV5sY2MbI6zu99UJNfDBxBlQ2mC7TzMRa0ESx2bjJvh7S1ys3B-AkLPyw5dES9k_tGkztwkRuSs3evTMvhkfRHoK44vh4n6CbsfsFPoEZLMi2zD_SbcKd8GJJVZ7vw6TOtHpu6mQWi_7FKyfA8rWBvnJqYm4Pq5Bear4WtZ0o8n9OMSWsGNU5xE8l9oekTkoog
+                          expirationTime: 1573362708662
+                        redirectEventId: null
+                        lastLoginAt: '1573359108140'
+                        createdAt: '1573348525021'
+                      credential: null
+                      additionalUserInfo:
+                        providerId: password
+                        isNewUser: false
+                      operationType: signIn
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+      description: User Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - email
+                - password
+            examples:
+              example:
+                value:
+                  email: joe@smith.com
+                  password: smithjoe
+        description: All Fields Required
+      operationId: Login
+  /api/register:
+    post:
+      summary: Post
+      tags:
+        - Register
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example:
+                  value:
+                    message: 'Sucessfully created new users: Mike Jones @ November 10, 2019 12:04 AM'
+                    userObj:
+                      uid: MFhS8YlE0YdtP8QyZ8FQQ7OaEJo1
+                      email: mikejones@imapimp.com
+                      emailVerified: false
+                      displayName: Mike Jones
+                      phoneNumber: '+12065551212'
+                      disabled: false
+                      metadata:
+                        lastSignInTime: null
+                        creationTime: 'Sun, 10 Nov 2019 08:04:08 GMT'
+                      tokensValidAfterTime: 'Sun, 10 Nov 2019 08:04:08 GMT'
+                      providerData:
+                        - uid: '+12065551212'
+                          providerId: phone
+                          phoneNumber: '+12065551212'
+                        - uid: mikejones@imapimp.com
+                          displayName: Mike Jones
+                          email: mikejones@imapimp.com
+                          providerId: password
+                example-2:
+                  value:
+                    message: 'Sucessfully created new users: Mike Smith @ November 10, 2019 12:00 AM'
+                    userObj:
+                      uid: FxuSyX9QD7RA36W9TUa34bwwoti2
+                      email: mike@smith.com
+                      emailVerified: false
+                      displayName: Mike Smith
+                      phoneNumber: '+12066051212'
+                      disabled: false
+                      metadata:
+                        lastSignInTime: null
+                        creationTime: 'Sun, 10 Nov 2019 08:00:25 GMT'
+                      tokensValidAfterTime: 'Sun, 10 Nov 2019 08:00:25 GMT'
+                      providerData:
+                        - uid: '+12066051212'
+                          providerId: phone
+                          phoneNumber: '+12066051212'
+                        - uid: mike@smith.com
+                          displayName: Mike Smith
+                          email: mike@smith.com
+                          providerId: password
+      description: Register New User
+      operationId: Register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                displayName:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                phoneNumber:
+                  type: string
+                  description: 'format +12065551212 '
+              required:
+                - displayName
+                - email
+                - password
+                - phoneNumber
+            examples:
+              example:
+                value:
+                  displayName: Mike Jones
+                  email: mikejones@imapimp.com
+                  password: pimpinainteasy
+                  phoneNumber: '+12065551212'
+              example-2:
+                value:
+                  displayName: Mike Smith
+                  email: mike@smith.com
+                  password: pimpinainteasy
+                  phoneNumber: '+12066051212'
+                  imgaeURL: ''
+        description: All Fields Required.
+    parameters: []
+  '/api/:uid/updateuser':
+    put:
+      summary: Update User
+      tags:
+        - Update User
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                User Photo Update Response:
+                  value:
+                    message: 'Sucessfully updated user @ November 9, 2019 11:31 PM'
+                    updatedUserObj:
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      email: joe@smith.com
+                      emailVerified: false
+                      displayName: Joe Smith
+                      photoURL: 'http://www.example.com/12345678/photo.png'
+                      phoneNumber: '+16505554567'
+                      disabled: false
+                      metadata:
+                        lastSignInTime: 'Sun, 10 Nov 2019 04:11:48 GMT'
+                        creationTime: 'Sun, 10 Nov 2019 01:15:25 GMT'
+                      tokensValidAfterTime: 'Sun, 10 Nov 2019 01:15:25 GMT'
+                      providerData:
+                        - uid: '+16505554567'
+                          providerId: phone
+                          phoneNumber: '+16505554567'
+                        - uid: joe@smith.com
+                          displayName: Joe Smith
+                          email: joe@smith.com
+                          photoURL: 'http://www.example.com/12345678/photo.png'
+                          providerId: password
+                Incorrect Response:
+                  value:
+                    message: 'Sucessfully updated user @ November 9, 2019 11:36 PM'
+                    updatedUserObj:
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      email: joe@smith.com
+                      emailVerified: false
+                      displayName: ''
+                      photoURL: 'http://www.example.com/joe_smith/photo.png'
+                      phoneNumber: '+16505554567'
+                      disabled: false
+                      metadata:
+                        lastSignInTime: 'Sun, 10 Nov 2019 04:11:48 GMT'
+                        creationTime: 'Sun, 10 Nov 2019 01:15:25 GMT'
+                      tokensValidAfterTime: 'Sun, 10 Nov 2019 01:15:25 GMT'
+                      providerData:
+                        - uid: '+16505554567'
+                          providerId: phone
+                          phoneNumber: '+16505554567'
+                        - uid: joe@smith.com
+                          displayName: ''
+                          email: joe@smith.com
+                          photoURL: 'http://www.example.com/joe_smith/photo.png'
+                          providerId: password
+      description: Update User Data. uid and refresh token required in headers
+      operationId: PutUser
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: uid
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: refreshToken
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                photoURL:
+                  type: string
+            examples:
+              Correct Updates User Photo URL ONLY:
+                value:
+                  photoURL: 'http://www.example.com/12345678/photo.png'
+              'Incorrect Updates User Photo URL. Also Changes DISPLAY NAME TO ""':
+                value:
+                  displayName: ''
+                  photoURL: 'http://www.example.com/joe_smith/photo.png'
+        description: 'All user data can be updated. If you only want to update 1 key:value only send 1 key:value in the request. *************If you send a key with an empty value the database will update that key to a value of "" and that data will be lost.************************************'
+  '/api/auth/:uid/projects':
+    get:
+      summary: Get all projects
+      tags:
+        - Get Projects
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example:
+                  value:
+                    projects:
+                      jones-demo:
+                        baths: 1.5
+                        beds: 3
+                        imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8hQSWbGubsHb7lOw2/blitz-test-jones-image.jpg'
+                        projectID: jones-demo
+                        project_name: Jones Demo
+                        square_ft: 2700
+                        status: onTime
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      smith-newbuild:
+                        baths: 3
+                        beds: 5
+                        imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8hQSWbGubsHb7lOw2/blitz-test-image.jpeg'
+                        projectID: smith-newbuild
+                        project_name: Smith House
+                        square_ft: 3200
+                        status: onTime
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+      description: 'Get All User Projects. uid and refreshToken required in headers '
+      operationId: GetProjects
+      parameters:
+        - schema:
+            type: string
+          in: header
+          required: true
+          name: uid
+        - schema:
+            type: string
+          in: header
+          name: refreshToken
+          required: true
+    post:
+      summary: Add Project
+      tags:
+        - Add Project
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example:
+                  value:
+                    message: 'Project Jones Demo createdAT: November 11, 2019 2:06 PM'
+                    projectObj:
+                      jones-demo:
+                        baths: 1.5
+                        beds: 3
+                        city: Auburn
+                        gps_cords:
+                          city: Auburn
+                          country: US
+                          latitude: 47.3099
+                          longitude: -122.2653
+                          state: WA
+                          zip: '98001'
+                        imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8h...'
+                        projectID: jones-demo
+                        project_name: Jones Demo
+                        square_ft: 2700
+                        state: Wa
+                        status: onTime
+                        street_address: 545 Test Ln
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                        zip_code: 98001
+                      smith-newbuild:
+                        baths: 3
+                        beds: 5
+                        city: Any City
+                        gps_cords:
+                          city: Auburn
+                          country: US
+                          latitude: 47.3099
+                          longitude: -122.2653
+                          state: WA
+                          zip: '98001'
+                        imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8hQSWbGubsHb7lOw2/blitz-test-image.jpeg'
+                        projectID: smith-newbuild
+                        project_name: Smith House
+                        square_ft: '3800'
+                        state: Wa
+                        status: onTime
+                        street_address: 1234 any street
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                        zip_code: '98001'
+                example-2:
+                  value:
+                    message: 'Project Jones Demo createdAT: November 12, 2019 9:42 AM'
+                    projectObj:
+                      jones-demo:
+                        baths: 2
+                        beds: 9
+                        city: Collingdale
+                        gps_cords:
+                          city: Darby
+                          country: US
+                          latitude: 39.9176
+                          longitude: -75.2696
+                          state: PA
+                          zip: '19023'
+                        imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8h...'
+                        projectID: jones-demo
+                        project_name: Jones Demo
+                        square_ft: 2700
+                        state: Pa
+                        status: onTime
+                        street_address: 545 Test Ln
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                        zip_code: 19023
+                      smith-newbuild:
+                        baths: 3
+                        beds: 5
+                        city: Any City
+                        gps_cords:
+                          city: Auburn
+                          country: US
+                          latitude: 47.3099
+                          longitude: -122.2653
+                          state: WA
+                          zip: '98001'
+                        imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8hQSWbGubsHb7lOw2/blitz-test-image.jpeg'
+                        projectID: smith-newbuild
+                        project_name: Smith House
+                        square_ft: '3800'
+                        state: Wa
+                        status: onTime
+                        street_address: 1234 any street
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                        zip_code: '98001'
+                example-3:
+                  value:
+                    message: 'Project Mike Test Demo createdAT: November 12, 2019 5:44 PM'
+                    projectObj:
+                      jones-demo:
+                        baths: 2
+                        beds: 9
+                        city: Collingdale
+                        gps_cords:
+                          city: Darby
+                          country: US
+                          latitude: 39.9176
+                          longitude: -75.2696
+                          state: PA
+                          zip: '19023'
+                        imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8h...'
+                        projectID: jones-demo
+                        project_name: Jones Demo
+                        square_ft: 2700
+                        state: Pa
+                        status: onTime
+                        street_address: 545 Test Ln
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                        zip_code: 19023
+                      mike-test-demo:
+                        baths: 2
+                        beds: 9
+                        city: Collingdale
+                        gps_cords:
+                          city: Darby
+                          country: US
+                          latitude: 39.9176
+                          longitude: -75.2696
+                          state: PA
+                          zip: '19023'
+                        imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8h...'
+                        projectID: mike-test-demo
+                        project_name: Mike Test Demo
+                        square_ft: 2700
+                        state: Pa
+                        status: onTime
+                        street_address: 545 Test Ln
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                        zip_code: 19023
+                      smith-newbuild:
+                        baths: 3
+                        beds: 5
+                        city: Any City
+                        gps_cords:
+                          city: Auburn
+                          country: US
+                          latitude: 47.3099
+                          longitude: -122.2653
+                          state: WA
+                          zip: '98001'
+                        imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8hQSWbGubsHb7lOw2/blitz-test-image.jpeg'
+                        projectID: smith-newbuild
+                        project_name: Smith House
+                        square_ft: '3800'
+                        state: Wa
+                        status: onTime
+                        street_address: 1234 any street
+                        uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                        zip_code: '98001'
+                Update  ProjectID does not need to be entered in the request:
+                  value:
+                    baths: 2
+                    beds: 9
+                    city: Collingdale
+                    imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8h...'
+                    project_name: Templates Demo
+                    square_ft: 2700
+                    state: Pa
+                    status: onTime
+                    street_address: 545 Test Ln
+                    zip_code: 19023
+                templateID:
+                  value:
+                    message: 'Project smith-newbuild createdAT: November 13, 2019 12:20 AM'
+                    projectObj:
+                      baths: 3
+                      beds: 5
+                      city: Any City
+                      gps_cords:
+                        city: Auburn
+                        country: US
+                        latitude: 47.3099
+                        longitude: -122.2653
+                        state: WA
+                        zip: '98001'
+                      imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8hQSWbGubsHb7lOw2/blitz-test-image.jpeg'
+                      projectID: smith-newbuild
+                      project_name: smith-newbuild
+                      square_ft: '3800'
+                      state: Wa
+                      status: onTime
+                      street_address: 1234 any street
+                      tasks:
+                        - Task-1:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 1
+                          Task-2:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task2
+                          Task-3:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 3
+                          Task-4:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 4
+                          Task-5:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 5
+                          Task-6:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 6
+                      uid: jDVWo6oiDESrYKljPIaAjZ1N7Xy2
+                      zip_code: '98001'
+      description: 'Add User Project '
+      operationId: Post
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: uid
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project_name:
+                  type: string
+                status:
+                  type: string
+                  description: '3 Options onTime,Delayed,Completed'
+                beds:
+                  type: number
+                baths:
+                  type: number
+                square_ft:
+                  type: number
+                imageURL:
+                  type:
+                    - string
+                    - 'null'
+                  description: |+
+                    This Field is required it will except null
+
+
+                street_address:
+                  type: string
+                city:
+                  type: string
+                state:
+                  type: string
+                zip_code:
+                  type: number
+                templateID:
+                  type: string
+                  description: |
+                    required if nothing selected it will return all templates and tasks. Options Are 90 Day Build coming soon 60 Day Build, 30 Day Build
+              required:
+                - project_name
+                - status
+                - beds
+                - baths
+                - square_ft
+                - imageURL
+                - street_address
+                - city
+                - state
+                - zip_code
+                - templateID
+            examples:
+              example:
+                value:
+                  baths: 1.5
+                  beds: 3
+                  city: Auburn
+                  imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8h...'
+                  projectID: jones-demo
+                  project_name: Jones Demo
+                  square_ft: 2700
+                  state: Wa
+                  status: onTime
+                  street_address: 545 Test Ln
+                  zip_code: 98001
+              example-2:
+                value:
+                  baths: 2
+                  beds: 9
+                  city: Collingdale
+                  imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8h...'
+                  projectID: jones-demo
+                  project_name: Jones Demo
+                  square_ft: 2700
+                  state: Pa
+                  status: onTime
+                  street_address: 545 Test Ln
+                  zip_code: 19023
+              example-3:
+                value:
+                  baths: 2
+                  beds: 9
+                  city: Collingdale
+                  imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8h...'
+                  projectID: mike-test-demo
+                  project_name: Mike Test Demo
+                  square_ft: 2700
+                  state: Pa
+                  status: onTime
+                  street_address: 545 Test Ln
+                  zip_code: 19023
+              Update  ProjectID does not need to be entered in the request:
+                value:
+                  baths: 2
+                  beds: 9
+                  city: Collingdale
+                  imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8h...'
+                  project_name: Templates Demo
+                  square_ft: 2700
+                  state: Pa
+                  status: onTime
+                  street_address: 545 Test Ln
+                  zip_code: 19023
+              templateID:
+                value:
+                  templateID: 90 Day Build
+                  baths: 3
+                  beds: 5
+                  city: Any City
+                  imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8hQSWbGubsHb7lOw2/blitz-test-image.jpeg'
+                  project_name: smith-newbuild
+                  square_ft: '3800'
+                  state: Wa
+                  status: onTime
+                  street_address: 1234 any street
+                  uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                  zip_code: '98001'
+        description: 'All Fields Required '
+  '/api/auth/:uid/weather':
+    get:
+      summary: Get Weather for project
+      tags:
+        - Get Weather
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    latitude: 47.3099
+                    longitude: -122.2653
+                    timezone: America/Los_Angeles
+                    currently:
+                      time: 1573577900
+                      summary: Drizzle
+                      icon: rain
+                      nearestStormDistance: 0
+                      precipIntensity: 0.014
+                      precipIntensityError: 0.001
+                      precipProbability: 1
+                      precipType: rain
+                      temperature: 46.45
+                      apparentTemperature: 46.46
+                      dewPoint: 46.45
+                      humidity: 1
+                      pressure: 1020
+                      windSpeed: 2.39
+                      windGust: 2.65
+                      windBearing: 45
+                      cloudCover: 0.94
+                      uvIndex: 0
+                      visibility: 3.571
+                      ozone: 274.3
+                    minutely:
+                      summary: Drizzle stopping in 14 min.
+                      icon: rain
+                      data:
+                        - time: 1573577880
+                          precipIntensity: 0.014
+                          precipIntensityError: 0.001
+                          precipProbability: 1
+                          precipType: rain
+                        - time: 1573577940
+                          precipIntensity: 0.014
+                          precipIntensityError: 0.001
+                          precipProbability: 1
+                          precipType: rain
+                        - time: 1573578000
+                          precipIntensity: 0.014
+                          precipIntensityError: 0.002
+                          precipProbability: 1
+                          precipType: rain
+                        - time: 1573578060
+                          precipIntensity: 0.015
+                          precipIntensityError: 0.002
+                          precipProbability: 1
+                          precipType: rain
+                        - time: 1573578120
+                          precipIntensity: 0.014
+                          precipIntensityError: 0.003
+                          precipProbability: 1
+                          precipType: rain
+                        - time: 1573578180
+                          precipIntensity: 0.013
+                          precipIntensityError: 0.004
+                          precipProbability: 1
+                          precipType: rain
+                        - time: 1573578240
+                          precipIntensity: 0.012
+                          precipIntensityError: 0.004
+                          precipProbability: 0.98
+                          precipType: rain
+                        - time: 1573578300
+                          precipIntensity: 0.01
+                          precipIntensityError: 0.005
+                          precipProbability: 0.94
+                          precipType: rain
+                        - time: 1573578360
+                          precipIntensity: 0.009
+                          precipIntensityError: 0.005
+                          precipProbability: 0.89
+                          precipType: rain
+                        - time: 1573578420
+                          precipIntensity: 0.008
+                          precipIntensityError: 0.005
+                          precipProbability: 0.78
+                          precipType: rain
+                        - time: 1573578480
+                          precipIntensity: 0.007
+                          precipIntensityError: 0.005
+                          precipProbability: 0.69
+                          precipType: rain
+                        - time: 1573578540
+                          precipIntensity: 0.007
+                          precipIntensityError: 0.004
+                          precipProbability: 0.58
+                          precipType: rain
+                        - time: 1573578600
+                          precipIntensity: 0.006
+                          precipIntensityError: 0.004
+                          precipProbability: 0.47
+                          precipType: rain
+                        - time: 1573578660
+                          precipIntensity: 0.006
+                          precipIntensityError: 0.004
+                          precipProbability: 0.38
+                          precipType: rain
+                        - time: 1573578720
+                          precipIntensity: 0.005
+                          precipIntensityError: 0.004
+                          precipProbability: 0.3
+                          precipType: rain
+                        - time: 1573578780
+                          precipIntensity: 0.005
+                          precipIntensityError: 0.004
+                          precipProbability: 0.24
+                          precipType: rain
+                        - time: 1573578840
+                          precipIntensity: 0.005
+                          precipIntensityError: 0.004
+                          precipProbability: 0.18
+                          precipType: rain
+                        - time: 1573578900
+                          precipIntensity: 0.005
+                          precipIntensityError: 0.003
+                          precipProbability: 0.14
+                          precipType: rain
+                        - time: 1573578960
+                          precipIntensity: 0.005
+                          precipIntensityError: 0.003
+                          precipProbability: 0.11
+                          precipType: rain
+                        - time: 1573579020
+                          precipIntensity: 0.004
+                          precipIntensityError: 0.003
+                          precipProbability: 0.09
+                          precipType: rain
+                        - time: 1573579080
+                          precipIntensity: 0.004
+                          precipIntensityError: 0.003
+                          precipProbability: 0.07
+                          precipType: rain
+                        - time: 1573579140
+                          precipIntensity: 0.004
+                          precipIntensityError: 0.003
+                          precipProbability: 0.05
+                          precipType: rain
+                        - time: 1573579200
+                          precipIntensity: 0.004
+                          precipIntensityError: 0.003
+                          precipProbability: 0.04
+                          precipType: rain
+                        - time: 1573579260
+                          precipIntensity: 0.004
+                          precipIntensityError: 0.003
+                          precipProbability: 0.03
+                          precipType: rain
+                        - time: 1573579320
+                          precipIntensity: 0.004
+                          precipIntensityError: 0.003
+                          precipProbability: 0.02
+                          precipType: rain
+                        - time: 1573579380
+                          precipIntensity: 0.004
+                          precipIntensityError: 0.003
+                          precipProbability: 0.02
+                          precipType: rain
+                        - time: 1573579440
+                          precipIntensity: 0.003
+                          precipIntensityError: 0.002
+                          precipProbability: 0.02
+                          precipType: rain
+                        - time: 1573579500
+                          precipIntensity: 0.004
+                          precipIntensityError: 0.003
+                          precipProbability: 0.01
+                          precipType: rain
+                        - time: 1573579560
+                          precipIntensity: 0.004
+                          precipIntensityError: 0.003
+                          precipProbability: 0.01
+                          precipType: rain
+                        - time: 1573579620
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573579680
+                          precipIntensity: 0.004
+                          precipIntensityError: 0.003
+                          precipProbability: 0.01
+                          precipType: rain
+                        - time: 1573579740
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573579800
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573579860
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573579920
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573579980
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573580040
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573580100
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573580160
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573580220
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573580280
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573580340
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573580400
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573580460
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573580520
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573580580
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573580640
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573580700
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573580760
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573580820
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573580880
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573580940
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573581000
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573581060
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573581120
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573581180
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573581240
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573581300
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573581360
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573581420
+                          precipIntensity: 0
+                          precipProbability: 0
+                        - time: 1573581480
+                          precipIntensity: 0
+                          precipProbability: 0
+                    hourly:
+                      summary: Light rain until this afternoon.
+                      icon: rain
+                      data:
+                        - time: 1573574400
+                          summary: Light Rain
+                          icon: rain
+                          precipIntensity: 0.0528
+                          precipProbability: 1
+                          precipType: rain
+                          temperature: 46.04
+                          apparentTemperature: 46.04
+                          dewPoint: 45.32
+                          humidity: 0.97
+                          pressure: 1019.9
+                          windSpeed: 2.68
+                          windGust: 3.08
+                          windBearing: 35
+                          cloudCover: 1
+                          uvIndex: 0
+                          visibility: 3.024
+                          ozone: 270.6
+                        - time: 1573578000
+                          summary: Light Rain
+                          icon: rain
+                          precipIntensity: 0.0228
+                          precipProbability: 1
+                          precipType: rain
+                          temperature: 46.46
+                          apparentTemperature: 46.46
+                          dewPoint: 46.46
+                          humidity: 1
+                          pressure: 1020
+                          windSpeed: 2.4
+                          windGust: 2.66
+                          windBearing: 45
+                          cloudCover: 0.94
+                          uvIndex: 0
+                          visibility: 3.603
+                          ozone: 274.4
+                        - time: 1573581600
+                          summary: Light Rain
+                          icon: rain
+                          precipIntensity: 0.0207
+                          precipProbability: 0.86
+                          precipType: rain
+                          temperature: 46.72
+                          apparentTemperature: 45.94
+                          dewPoint: 46.72
+                          humidity: 1
+                          pressure: 1020
+                          windSpeed: 3.02
+                          windGust: 3.81
+                          windBearing: 264
+                          cloudCover: 0.95
+                          uvIndex: 1
+                          visibility: 5.369
+                          ozone: 277.7
+                        - time: 1573585200
+                          summary: Possible Light Rain
+                          icon: rain
+                          precipIntensity: 0.0254
+                          precipProbability: 0.61
+                          precipType: rain
+                          temperature: 46.48
+                          apparentTemperature: 45.48
+                          dewPoint: 46.48
+                          humidity: 1
+                          pressure: 1019.2
+                          windSpeed: 3.22
+                          windGust: 7.46
+                          windBearing: 206
+                          cloudCover: 0.88
+                          uvIndex: 1
+                          visibility: 9.607
+                          ozone: 280.7
+                        - time: 1573588800
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-day
+                          precipIntensity: 0.0133
+                          precipProbability: 0.31
+                          precipType: rain
+                          temperature: 47.18
+                          apparentTemperature: 45.69
+                          dewPoint: 47.18
+                          humidity: 1
+                          pressure: 1018.9
+                          windSpeed: 3.91
+                          windGust: 9.3
+                          windBearing: 204
+                          cloudCover: 0.78
+                          uvIndex: 1
+                          visibility: 10
+                          ozone: 283.3
+                        - time: 1573592400
+                          summary: Partly Cloudy
+                          icon: partly-cloudy-day
+                          precipIntensity: 0.004
+                          precipProbability: 0.17
+                          precipType: rain
+                          temperature: 48.61
+                          apparentTemperature: 47.18
+                          dewPoint: 47.99
+                          humidity: 0.98
+                          pressure: 1019.1
+                          windSpeed: 4.11
+                          windGust: 8.89
+                          windBearing: 202
+                          cloudCover: 0.55
+                          uvIndex: 1
+                          visibility: 10
+                          ozone: 284
+                        - time: 1573596000
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-day
+                          precipIntensity: 0.0015
+                          precipProbability: 0.1
+                          precipType: rain
+                          temperature: 50.33
+                          apparentTemperature: 50.33
+                          dewPoint: 48.51
+                          humidity: 0.93
+                          pressure: 1019.5
+                          windSpeed: 3.91
+                          windGust: 8.09
+                          windBearing: 207
+                          cloudCover: 0.62
+                          uvIndex: 1
+                          visibility: 10
+                          ozone: 282
+                        - time: 1573599600
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-day
+                          precipIntensity: 0.0004
+                          precipProbability: 0.05
+                          precipType: rain
+                          temperature: 51.68
+                          apparentTemperature: 51.68
+                          dewPoint: 48.96
+                          humidity: 0.9
+                          pressure: 1020.4
+                          windSpeed: 3.42
+                          windGust: 6.5
+                          windBearing: 204
+                          cloudCover: 0.8
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 278.4
+                        - time: 1573603200
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-day
+                          precipIntensity: 0.0022
+                          precipProbability: 0.08
+                          precipType: rain
+                          temperature: 52.42
+                          apparentTemperature: 52.42
+                          dewPoint: 49.6
+                          humidity: 0.9
+                          pressure: 1020.9
+                          windSpeed: 3.39
+                          windGust: 6.18
+                          windBearing: 194
+                          cloudCover: 0.86
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 275.2
+                        - time: 1573606800
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-night
+                          precipIntensity: 0.0006
+                          precipProbability: 0.03
+                          precipType: rain
+                          temperature: 51.97
+                          apparentTemperature: 51.97
+                          dewPoint: 50
+                          humidity: 0.93
+                          pressure: 1020.9
+                          windSpeed: 3.37
+                          windGust: 6.11
+                          windBearing: 186
+                          cloudCover: 0.87
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 273.7
+                        - time: 1573610400
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-night
+                          precipIntensity: 0.0014
+                          precipProbability: 0.05
+                          precipType: rain
+                          temperature: 50.78
+                          apparentTemperature: 50.78
+                          dewPoint: 49.46
+                          humidity: 0.95
+                          pressure: 1020.9
+                          windSpeed: 3.25
+                          windGust: 5.61
+                          windBearing: 178
+                          cloudCover: 0.87
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 272.8
+                        - time: 1573614000
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-night
+                          precipIntensity: 0.0006
+                          precipProbability: 0.04
+                          precipType: rain
+                          temperature: 49.27
+                          apparentTemperature: 49.27
+                          dewPoint: 48.46
+                          humidity: 0.97
+                          pressure: 1021
+                          windSpeed: 2.96
+                          windGust: 4.41
+                          windBearing: 165
+                          cloudCover: 0.74
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 271.5
+                        - time: 1573617600
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-night
+                          precipIntensity: 0.0013
+                          precipProbability: 0.06
+                          precipType: rain
+                          temperature: 48.34
+                          apparentTemperature: 47.66
+                          dewPoint: 48.03
+                          humidity: 0.99
+                          pressure: 1021.3
+                          windSpeed: 3.15
+                          windGust: 4.47
+                          windBearing: 149
+                          cloudCover: 0.79
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 269.6
+                        - time: 1573621200
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-night
+                          precipIntensity: 0.0014
+                          precipProbability: 0.07
+                          precipType: rain
+                          temperature: 47.47
+                          apparentTemperature: 46.72
+                          dewPoint: 47.47
+                          humidity: 1
+                          pressure: 1021.9
+                          windSpeed: 3.09
+                          windGust: 4.1
+                          windBearing: 132
+                          cloudCover: 0.83
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 267.4
+                        - time: 1573624800
+                          summary: Overcast
+                          icon: cloudy
+                          precipIntensity: 0.0027
+                          precipProbability: 0.13
+                          precipType: rain
+                          temperature: 46.88
+                          apparentTemperature: 46.04
+                          dewPoint: 46.88
+                          humidity: 1
+                          pressure: 1022.3
+                          windSpeed: 3.11
+                          windGust: 3.9
+                          windBearing: 130
+                          cloudCover: 0.95
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 265.5
+                        - time: 1573628400
+                          summary: Overcast
+                          icon: cloudy
+                          precipIntensity: 0.0014
+                          precipProbability: 0.06
+                          precipType: rain
+                          temperature: 46.4
+                          apparentTemperature: 46.4
+                          dewPoint: 46.4
+                          humidity: 1
+                          pressure: 1022.4
+                          windSpeed: 2.92
+                          windGust: 3.76
+                          windBearing: 150
+                          cloudCover: 0.95
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 264.4
+                        - time: 1573632000
+                          summary: Overcast
+                          icon: cloudy
+                          precipIntensity: 0.0007
+                          precipProbability: 0.03
+                          precipType: rain
+                          temperature: 45.93
+                          apparentTemperature: 45.93
+                          dewPoint: 45.93
+                          humidity: 1
+                          pressure: 1022
+                          windSpeed: 2.65
+                          windGust: 3.19
+                          windBearing: 169
+                          cloudCover: 0.92
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 263.5
+                        - time: 1573635600
+                          summary: Overcast
+                          icon: cloudy
+                          precipIntensity: 0.0004
+                          precipProbability: 0.03
+                          precipType: rain
+                          temperature: 45.72
+                          apparentTemperature: 45.72
+                          dewPoint: 45.22
+                          humidity: 0.98
+                          pressure: 1021.8
+                          windSpeed: 2.45
+                          windGust: 2.77
+                          windBearing: 176
+                          cloudCover: 0.9
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 263
+                        - time: 1573639200
+                          summary: Overcast
+                          icon: cloudy
+                          precipIntensity: 0.0003
+                          precipProbability: 0.02
+                          precipType: rain
+                          temperature: 45.87
+                          apparentTemperature: 45.87
+                          dewPoint: 44.77
+                          humidity: 0.96
+                          pressure: 1022
+                          windSpeed: 2.41
+                          windGust: 2.6
+                          windBearing: 162
+                          cloudCover: 0.93
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 262.7
+                        - time: 1573642800
+                          summary: Overcast
+                          icon: cloudy
+                          precipIntensity: 0.0002
+                          precipProbability: 0.02
+                          precipType: rain
+                          temperature: 45.99
+                          apparentTemperature: 45.99
+                          dewPoint: 44.38
+                          humidity: 0.94
+                          pressure: 1022.2
+                          windSpeed: 2.42
+                          windGust: 2.56
+                          windBearing: 139
+                          cloudCover: 0.97
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 262.7
+                        - time: 1573646400
+                          summary: Overcast
+                          icon: cloudy
+                          precipIntensity: 0.0002
+                          precipProbability: 0.02
+                          precipType: rain
+                          temperature: 45.83
+                          apparentTemperature: 45.83
+                          dewPoint: 43.69
+                          humidity: 0.92
+                          pressure: 1022.2
+                          windSpeed: 2.45
+                          windGust: 2.63
+                          windBearing: 115
+                          cloudCover: 0.99
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 262.5
+                        - time: 1573650000
+                          summary: Overcast
+                          icon: cloudy
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 44.86
+                          apparentTemperature: 44.86
+                          dewPoint: 42.41
+                          humidity: 0.91
+                          pressure: 1022.2
+                          windSpeed: 2.42
+                          windGust: 2.99
+                          windBearing: 89
+                          cloudCover: 0.94
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 262
+                        - time: 1573653600
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-night
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 43.68
+                          apparentTemperature: 43.68
+                          dewPoint: 41.14
+                          humidity: 0.91
+                          pressure: 1022
+                          windSpeed: 2.42
+                          windGust: 3.5
+                          windBearing: 61
+                          cloudCover: 0.87
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 261.4
+                        - time: 1573657200
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-night
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 42.93
+                          apparentTemperature: 42.93
+                          dewPoint: 40.42
+                          humidity: 0.91
+                          pressure: 1021.6
+                          windSpeed: 2.52
+                          windGust: 4.12
+                          windBearing: 38
+                          cloudCover: 0.8
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 261
+                        - time: 1573660800
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-day
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 43.59
+                          apparentTemperature: 43.59
+                          dewPoint: 41.36
+                          humidity: 0.92
+                          pressure: 1021.5
+                          windSpeed: 2.81
+                          windGust: 4.83
+                          windBearing: 21
+                          cloudCover: 0.7
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 260.7
+                        - time: 1573664400
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-day
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 45.09
+                          apparentTemperature: 43.92
+                          dewPoint: 43.03
+                          humidity: 0.92
+                          pressure: 1021.4
+                          windSpeed: 3.2
+                          windGust: 5.58
+                          windBearing: 7
+                          cloudCover: 0.61
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 260.5
+                        - time: 1573668000
+                          summary: Partly Cloudy
+                          icon: partly-cloudy-day
+                          precipIntensity: 0.0002
+                          precipProbability: 0.03
+                          precipType: rain
+                          temperature: 47.32
+                          apparentTemperature: 46.09
+                          dewPoint: 44.28
+                          humidity: 0.89
+                          pressure: 1020.9
+                          windSpeed: 3.61
+                          windGust: 6.28
+                          windBearing: 358
+                          cloudCover: 0.55
+                          uvIndex: 1
+                          visibility: 10
+                          ozone: 260.3
+                        - time: 1573671600
+                          summary: Partly Cloudy
+                          icon: partly-cloudy-day
+                          precipIntensity: 0.0002
+                          precipProbability: 0.03
+                          precipType: rain
+                          temperature: 49.36
+                          apparentTemperature: 48.06
+                          dewPoint: 45.48
+                          humidity: 0.86
+                          pressure: 1020.3
+                          windSpeed: 4.1
+                          windGust: 6.81
+                          windBearing: 356
+                          cloudCover: 0.57
+                          uvIndex: 1
+                          visibility: 10
+                          ozone: 259.9
+                        - time: 1573675200
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-day
+                          precipIntensity: 0.0002
+                          precipProbability: 0.02
+                          precipType: rain
+                          temperature: 52.23
+                          apparentTemperature: 52.23
+                          dewPoint: 46.25
+                          humidity: 0.8
+                          pressure: 1019.5
+                          windSpeed: 4.63
+                          windGust: 7.32
+                          windBearing: 0
+                          cloudCover: 0.63
+                          uvIndex: 2
+                          visibility: 10
+                          ozone: 259.3
+                        - time: 1573678800
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-day
+                          precipIntensity: 0.0002
+                          precipProbability: 0.02
+                          precipType: rain
+                          temperature: 54.26
+                          apparentTemperature: 54.26
+                          dewPoint: 46.41
+                          humidity: 0.75
+                          pressure: 1018.8
+                          windSpeed: 4.95
+                          windGust: 7.77
+                          windBearing: 2
+                          cloudCover: 0.68
+                          uvIndex: 1
+                          visibility: 10
+                          ozone: 259.2
+                        - time: 1573682400
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-day
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 55.19
+                          apparentTemperature: 55.19
+                          dewPoint: 46.78
+                          humidity: 0.73
+                          pressure: 1018.3
+                          windSpeed: 4.93
+                          windGust: 8.3
+                          windBearing: 2
+                          cloudCover: 0.68
+                          uvIndex: 1
+                          visibility: 10
+                          ozone: 259.6
+                        - time: 1573686000
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-day
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 54.84
+                          apparentTemperature: 54.84
+                          dewPoint: 46.99
+                          humidity: 0.75
+                          pressure: 1017.9
+                          windSpeed: 4.69
+                          windGust: 8.77
+                          windBearing: 2
+                          cloudCover: 0.66
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 260.5
+                        - time: 1573689600
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-day
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 53.77
+                          apparentTemperature: 53.77
+                          dewPoint: 46.57
+                          humidity: 0.77
+                          pressure: 1017.5
+                          windSpeed: 4.42
+                          windGust: 8.89
+                          windBearing: 7
+                          cloudCover: 0.65
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 261.8
+                        - time: 1573693200
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-night
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 52.04
+                          apparentTemperature: 52.04
+                          dewPoint: 45.8
+                          humidity: 0.79
+                          pressure: 1017.2
+                          windSpeed: 4.1
+                          windGust: 8.42
+                          windBearing: 16
+                          cloudCover: 0.67
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 264.1
+                        - time: 1573696800
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-night
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 50.04
+                          apparentTemperature: 50.04
+                          dewPoint: 44.62
+                          humidity: 0.82
+                          pressure: 1017.1
+                          windSpeed: 3.75
+                          windGust: 7.59
+                          windBearing: 30
+                          cloudCover: 0.71
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 266.8
+                        - time: 1573700400
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-night
+                          precipIntensity: 0.0002
+                          precipProbability: 0.01
+                          precipType: rain
+                          temperature: 48.01
+                          apparentTemperature: 46.92
+                          dewPoint: 43.84
+                          humidity: 0.85
+                          pressure: 1016.9
+                          windSpeed: 3.56
+                          windGust: 6.83
+                          windBearing: 44
+                          cloudCover: 0.73
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 269.1
+                        - time: 1573704000
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-night
+                          precipIntensity: 0.0002
+                          precipProbability: 0.01
+                          precipType: rain
+                          temperature: 47.13
+                          apparentTemperature: 45.82
+                          dewPoint: 43.06
+                          humidity: 0.86
+                          pressure: 1016.7
+                          windSpeed: 3.67
+                          windGust: 6.21
+                          windBearing: 53
+                          cloudCover: 0.72
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 270.1
+                        - time: 1573707600
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-night
+                          precipIntensity: 0.0002
+                          precipProbability: 0.01
+                          precipType: rain
+                          temperature: 46.36
+                          apparentTemperature: 44.72
+                          dewPoint: 42.3
+                          humidity: 0.86
+                          pressure: 1016.5
+                          windSpeed: 3.94
+                          windGust: 5.63
+                          windBearing: 63
+                          cloudCover: 0.7
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 270.7
+                        - time: 1573711200
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-night
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 45.63
+                          apparentTemperature: 43.8
+                          dewPoint: 41.71
+                          humidity: 0.86
+                          pressure: 1016.3
+                          windSpeed: 4.03
+                          windGust: 5.12
+                          windBearing: 70
+                          cloudCover: 0.71
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 271.2
+                        - time: 1573714800
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-night
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 44.95
+                          apparentTemperature: 43.2
+                          dewPoint: 41.13
+                          humidity: 0.86
+                          pressure: 1016.2
+                          windSpeed: 3.8
+                          windGust: 4.67
+                          windBearing: 78
+                          cloudCover: 0.76
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 272.2
+                        - time: 1573718400
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-night
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 44.38
+                          apparentTemperature: 42.9
+                          dewPoint: 40.56
+                          humidity: 0.86
+                          pressure: 1016.1
+                          windSpeed: 3.42
+                          windGust: 4.3
+                          windBearing: 83
+                          cloudCover: 0.84
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 273.1
+                        - time: 1573722000
+                          summary: Overcast
+                          icon: cloudy
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 44.06
+                          apparentTemperature: 42.86
+                          dewPoint: 39.9
+                          humidity: 0.85
+                          pressure: 1016
+                          windSpeed: 3.1
+                          windGust: 4
+                          windBearing: 88
+                          cloudCover: 0.91
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 273.6
+                        - time: 1573725600
+                          summary: Overcast
+                          icon: cloudy
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 43.67
+                          apparentTemperature: 43.67
+                          dewPoint: 39.19
+                          humidity: 0.84
+                          pressure: 1015.6
+                          windSpeed: 2.91
+                          windGust: 3.86
+                          windBearing: 95
+                          cloudCover: 0.94
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 272.9
+                        - time: 1573729200
+                          summary: Overcast
+                          icon: cloudy
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 43.28
+                          apparentTemperature: 43.28
+                          dewPoint: 38.64
+                          humidity: 0.84
+                          pressure: 1014.7
+                          windSpeed: 2.82
+                          windGust: 3.81
+                          windBearing: 101
+                          cloudCover: 0.97
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 271.7
+                        - time: 1573732800
+                          summary: Overcast
+                          icon: cloudy
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 42.71
+                          apparentTemperature: 42.71
+                          dewPoint: 38.17
+                          humidity: 0.84
+                          pressure: 1015.1
+                          windSpeed: 2.76
+                          windGust: 3.78
+                          windBearing: 106
+                          cloudCover: 0.97
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 271.1
+                        - time: 1573736400
+                          summary: Overcast
+                          icon: cloudy
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 42.24
+                          apparentTemperature: 42.24
+                          dewPoint: 37.77
+                          humidity: 0.84
+                          pressure: 1015.1
+                          windSpeed: 2.82
+                          windGust: 3.72
+                          windBearing: 113
+                          cloudCover: 0.94
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 271.9
+                        - time: 1573740000
+                          summary: Overcast
+                          icon: cloudy
+                          precipIntensity: 0
+                          precipProbability: 0
+                          temperature: 41.9
+                          apparentTemperature: 41.9
+                          dewPoint: 37.51
+                          humidity: 0.84
+                          pressure: 1015.1
+                          windSpeed: 2.91
+                          windGust: 3.66
+                          windBearing: 122
+                          cloudCover: 0.89
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 273.3
+                        - time: 1573743600
+                          summary: Mostly Cloudy
+                          icon: partly-cloudy-night
+                          precipIntensity: 0.0003
+                          precipProbability: 0.01
+                          precipType: rain
+                          temperature: 42.39
+                          apparentTemperature: 42.39
+                          dewPoint: 37.6
+                          humidity: 0.83
+                          pressure: 1015.2
+                          windSpeed: 2.93
+                          windGust: 3.63
+                          windBearing: 132
+                          cloudCover: 0.86
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 273.8
+                        - time: 1573747200
+                          summary: Overcast
+                          icon: cloudy
+                          precipIntensity: 0.0003
+                          precipProbability: 0.01
+                          precipType: rain
+                          temperature: 44.17
+                          apparentTemperature: 44.17
+                          dewPoint: 38.19
+                          humidity: 0.79
+                          pressure: 1015.2
+                          windSpeed: 2.71
+                          windGust: 3.62
+                          windBearing: 141
+                          cloudCover: 0.89
+                          uvIndex: 0
+                          visibility: 10
+                          ozone: 272.4
+                    daily:
+                      summary: Light rain throughout the week.
+                      icon: rain
+                      data:
+                        - time: 1573545600
+                          summary: Light rain in the morning and afternoon.
+                          icon: rain
+                          sunriseTime: 1573571400
+                          sunsetTime: 1573605540
+                          moonPhase: 0.52
+                          precipIntensity: 0.009
+                          precipIntensityMax: 0.0537
+                          precipIntensityMaxTime: 1573574940
+                          precipProbability: 1
+                          precipType: rain
+                          temperatureHigh: 52.92
+                          temperatureHighTime: 1573603560
+                          temperatureLow: 42.44
+                          temperatureLowTime: 1573657260
+                          apparentTemperatureHigh: 52.42
+                          apparentTemperatureHighTime: 1573603560
+                          apparentTemperatureLow: 42.93
+                          apparentTemperatureLowTime: 1573657260
+                          dewPoint: 46.67
+                          humidity: 0.96
+                          pressure: 1020
+                          windSpeed: 2.92
+                          windGust: 9.37
+                          windGustTime: 1573589520
+                          windBearing: 188
+                          cloudCover: 0.89
+                          uvIndex: 1
+                          uvIndexTime: 1573588740
+                          visibility: 7.447
+                          ozone: 270.6
+                          temperatureMin: 45.44
+                          temperatureMinTime: 1573632000
+                          temperatureMax: 52.92
+                          temperatureMaxTime: 1573603560
+                          apparentTemperatureMin: 45.45
+                          apparentTemperatureMinTime: 1573586460
+                          apparentTemperatureMax: 52.42
+                          apparentTemperatureMaxTime: 1573603560
+                        - time: 1573632000
+                          summary: Mostly cloudy throughout the day.
+                          icon: partly-cloudy-day
+                          sunriseTime: 1573657920
+                          sunsetTime: 1573691880
+                          moonPhase: 0.55
+                          precipIntensity: 0.0002
+                          precipIntensityMax: 0.0007
+                          precipIntensityMaxTime: 1573632000
+                          precipProbability: 0.17
+                          precipType: rain
+                          temperatureHigh: 55.71
+                          temperatureHighTime: 1573683000
+                          temperatureLow: 41.4
+                          temperatureLowTime: 1573739820
+                          apparentTemperatureHigh: 55.21
+                          apparentTemperatureHighTime: 1573683000
+                          apparentTemperatureLow: 41.89
+                          apparentTemperatureLowTime: 1573739820
+                          dewPoint: 43.95
+                          humidity: 0.86
+                          pressure: 1019.4
+                          windSpeed: 3.51
+                          windGust: 8.91
+                          windGustTime: 1573688700
+                          windBearing: 35
+                          cloudCover: 0.75
+                          uvIndex: 2
+                          uvIndexTime: 1573674720
+                          visibility: 10
+                          ozone: 263.7
+                          temperatureMin: 42.44
+                          temperatureMinTime: 1573657260
+                          temperatureMax: 55.71
+                          temperatureMaxTime: 1573683000
+                          apparentTemperatureMin: 42.9
+                          apparentTemperatureMinTime: 1573718400
+                          apparentTemperatureMax: 55.21
+                          apparentTemperatureMaxTime: 1573683000
+                        - time: 1573718400
+                          summary: Light rain in the evening and overnight.
+                          icon: rain
+                          sunriseTime: 1573744380
+                          sunsetTime: 1573778160
+                          moonPhase: 0.59
+                          precipIntensity: 0.0051
+                          precipIntensityMax: 0.045
+                          precipIntensityMaxTime: 1573804800
+                          precipProbability: 0.86
+                          precipType: rain
+                          temperatureHigh: 56.15
+                          temperatureHighTime: 1573769400
+                          temperatureLow: 48.62
+                          temperatureLowTime: 1573805100
+                          apparentTemperatureHigh: 55.65
+                          apparentTemperatureHighTime: 1573769400
+                          apparentTemperatureLow: 47.7
+                          apparentTemperatureLowTime: 1573807020
+                          dewPoint: 42.2
+                          humidity: 0.78
+                          pressure: 1015.2
+                          windSpeed: 3.38
+                          windGust: 10.66
+                          windGustTime: 1573804800
+                          windBearing: 152
+                          cloudCover: 0.9
+                          uvIndex: 1
+                          uvIndexTime: 1573761300
+                          visibility: 9.353
+                          ozone: 269.1
+                          temperatureMin: 41.4
+                          temperatureMinTime: 1573739820
+                          temperatureMax: 56.15
+                          temperatureMaxTime: 1573769400
+                          apparentTemperatureMin: 41.89
+                          apparentTemperatureMinTime: 1573739820
+                          apparentTemperatureMax: 55.65
+                          apparentTemperatureMaxTime: 1573769400
+                        - time: 1573804800
+                          summary: Light rain in the morning and afternoon.
+                          icon: rain
+                          sunriseTime: 1573830900
+                          sunsetTime: 1573864500
+                          moonPhase: 0.62
+                          precipIntensity: 0.0128
+                          precipIntensityMax: 0.05
+                          precipIntensityMaxTime: 1573808280
+                          precipProbability: 0.98
+                          precipType: rain
+                          temperatureHigh: 56.78
+                          temperatureHighTime: 1573852200
+                          temperatureLow: 45.01
+                          temperatureLowTime: 1573916400
+                          apparentTemperatureHigh: 56.28
+                          apparentTemperatureHighTime: 1573852200
+                          apparentTemperatureLow: 44.24
+                          apparentTemperatureLowTime: 1573915980
+                          dewPoint: 47.61
+                          humidity: 0.86
+                          pressure: 1021.1
+                          windSpeed: 7.4
+                          windGust: 24.66
+                          windGustTime: 1573821840
+                          windBearing: 203
+                          cloudCover: 0.7
+                          uvIndex: 1
+                          uvIndexTime: 1573847700
+                          visibility: 9.837
+                          ozone: 280.7
+                          temperatureMin: 47.28
+                          temperatureMinTime: 1573891200
+                          temperatureMax: 56.78
+                          temperatureMaxTime: 1573852200
+                          apparentTemperatureMin: 46.18
+                          apparentTemperatureMinTime: 1573888860
+                          apparentTemperatureMax: 56.28
+                          apparentTemperatureMaxTime: 1573852200
+                        - time: 1573891200
+                          summary: Overcast throughout the day.
+                          icon: cloudy
+                          sunriseTime: 1573917360
+                          sunsetTime: 1573950840
+                          moonPhase: 0.65
+                          precipIntensity: 0.0004
+                          precipIntensityMax: 0.0019
+                          precipIntensityMaxTime: 1573970400
+                          precipProbability: 0.35
+                          precipType: rain
+                          temperatureHigh: 53.12
+                          temperatureHighTime: 1573950360
+                          temperatureLow: 51.02
+                          temperatureLowTime: 1574003580
+                          apparentTemperatureHigh: 52.62
+                          apparentTemperatureHighTime: 1573950360
+                          apparentTemperatureLow: 51.51
+                          apparentTemperatureLowTime: 1574003580
+                          dewPoint: 43.73
+                          humidity: 0.8
+                          pressure: 1025.8
+                          windSpeed: 2.74
+                          windGust: 9.13
+                          windGustTime: 1573977600
+                          windBearing: 171
+                          cloudCover: 0.94
+                          uvIndex: 1
+                          uvIndexTime: 1573934160
+                          visibility: 10
+                          ozone: 260.4
+                          temperatureMin: 45.01
+                          temperatureMinTime: 1573916400
+                          temperatureMax: 53.12
+                          temperatureMaxTime: 1573950360
+                          apparentTemperatureMin: 44.24
+                          apparentTemperatureMinTime: 1573915980
+                          apparentTemperatureMax: 52.62
+                          apparentTemperatureMaxTime: 1573950360
+                        - time: 1573977600
+                          summary: Light rain until evening.
+                          icon: rain
+                          sunriseTime: 1574003880
+                          sunsetTime: 1574037180
+                          moonPhase: 0.69
+                          precipIntensity: 0.0079
+                          precipIntensityMax: 0.0294
+                          precipIntensityMaxTime: 1574012760
+                          precipProbability: 0.9
+                          precipType: rain
+                          temperatureHigh: 56.26
+                          temperatureHighTime: 1574031840
+                          temperatureLow: 49.81
+                          temperatureLowTime: 1574089500
+                          apparentTemperatureHigh: 55.76
+                          apparentTemperatureHighTime: 1574031840
+                          apparentTemperatureLow: 50.3
+                          apparentTemperatureLowTime: 1574089500
+                          dewPoint: 48.06
+                          humidity: 0.82
+                          pressure: 1019.3
+                          windSpeed: 5.73
+                          windGust: 21.01
+                          windGustTime: 1574029320
+                          windBearing: 209
+                          cloudCover: 1
+                          uvIndex: 1
+                          uvIndexTime: 1574020440
+                          visibility: 9.379
+                          ozone: 264.6
+                          temperatureMin: 51.02
+                          temperatureMinTime: 1574003580
+                          temperatureMax: 56.26
+                          temperatureMaxTime: 1574031840
+                          apparentTemperatureMin: 51.51
+                          apparentTemperatureMinTime: 1574003580
+                          apparentTemperatureMax: 55.76
+                          apparentTemperatureMaxTime: 1574031840
+                        - time: 1574064000
+                          summary: Light rain until evening.
+                          icon: rain
+                          sunriseTime: 1574090340
+                          sunsetTime: 1574123520
+                          moonPhase: 0.73
+                          precipIntensity: 0.0236
+                          precipIntensityMax: 0.0728
+                          precipIntensityMaxTime: 1574127480
+                          precipProbability: 0.94
+                          precipType: rain
+                          temperatureHigh: 51.16
+                          temperatureHighTime: 1574096460
+                          temperatureLow: 44.76
+                          temperatureLowTime: 1574175300
+                          apparentTemperatureHigh: 50.66
+                          apparentTemperatureHighTime: 1574096460
+                          apparentTemperatureLow: 43.44
+                          apparentTemperatureLowTime: 1574159580
+                          dewPoint: 45.31
+                          humidity: 0.85
+                          pressure: 1011.3
+                          windSpeed: 3.59
+                          windGust: 18.9
+                          windGustTime: 1574118840
+                          windBearing: 4
+                          cloudCover: 1
+                          uvIndex: 1
+                          uvIndexTime: 1574106780
+                          visibility: 9.275
+                          ozone: 297.4
+                          temperatureMin: 46.1
+                          temperatureMinTime: 1574150400
+                          temperatureMax: 52.05
+                          temperatureMaxTime: 1574064000
+                          apparentTemperatureMin: 44.89
+                          apparentTemperatureMinTime: 1574150400
+                          apparentTemperatureMax: 51.55
+                          apparentTemperatureMaxTime: 1574064000
+                        - time: 1574150400
+                          summary: Possible drizzle in the morning.
+                          icon: rain
+                          sunriseTime: 1574176860
+                          sunsetTime: 1574209860
+                          moonPhase: 0.76
+                          precipIntensity: 0.0034
+                          precipIntensityMax: 0.0082
+                          precipIntensityMaxTime: 1574180880
+                          precipProbability: 0.51
+                          precipType: rain
+                          temperatureHigh: 51.13
+                          temperatureHighTime: 1574199240
+                          temperatureLow: 40.7
+                          temperatureLowTime: 1574262240
+                          apparentTemperatureHigh: 50.69
+                          apparentTemperatureHighTime: 1574198880
+                          apparentTemperatureLow: 41.19
+                          apparentTemperatureLowTime: 1574262240
+                          dewPoint: 39.83
+                          humidity: 0.77
+                          pressure: 1019.8
+                          windSpeed: 3.61
+                          windGust: 20.84
+                          windGustTime: 1574219340
+                          windBearing: 334
+                          cloudCover: 0.74
+                          uvIndex: 1
+                          uvIndexTime: 1574193120
+                          visibility: 10
+                          ozone: 348.1
+                          temperatureMin: 42.81
+                          temperatureMinTime: 1574236800
+                          temperatureMax: 51.13
+                          temperatureMaxTime: 1574199240
+                          apparentTemperatureMin: 41.72
+                          apparentTemperatureMinTime: 1574236800
+                          apparentTemperatureMax: 50.69
+                          apparentTemperatureMaxTime: 1574198880
+                    flags:
+                      sources:
+                        - nwspa
+                        - cmc
+                        - gfs
+                        - hrrr
+                        - icon
+                        - isd
+                        - madis
+                        - nam
+                        - sref
+                        - darksky
+                        - nearest-precip
+                      nearest-station: 1.585
+                      units: us
+                    offset: -8
+      description: 'Returns Weather for a project '
+      operationId: GetWeather
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                latitude:
+                  type: number
+                longitude:
+                  type: number
+            examples:
+              example-1:
+                value:
+                  latitude: 47.3099
+                  longitude: -122.2653
+        description: Requires latitude and longitude in the body which can be pulled from the projectObj
+  '/api/auth/:uid/templates':
+    get:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    90 Day Build:
+                      Task-1:
+                        due_date: 11-22-2019
+                        task_description: This is a test only a test task2
+                      Task-2:
+                        due_date: 11-22-2019
+                        task_description: This is a test only a test task2
+                      Task-3:
+                        due_date: 11-22-2019
+                        task_description: This is a test only a test task 3
+                      Task-4:
+                        due_date: 11-22-2019
+                        task_description: This is a test only a test task 4
+                      Task-5:
+                        due_date: 11-22-2019
+                        task_description: This is a test only a test task 5
+      description: Get tasks from template
+      operationId: GetTasks
+      tags:
+        - Get Tasks
+  '/api/auth/:uid/projects/:projectID':
+    put:
+      summary: Update Project
+      tags:
+        - Update Project
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    message: 'Templates Demo updated @ November 13, 2019 1:45 AM'
+                    newProjectObj:
+                      baths: 5
+                      beds: 7
+                      city: Collingdale
+                      gps_cords:
+                        city: Darby
+                        country: US
+                        latitude: 39.9176
+                        longitude: -75.2696
+                        state: PA
+                        zip: '19023'
+                      imageURL: 'gs://blitzbuild-8d5a6.appspot.com/R3fE6DP3UgP8h...'
+                      projectID: Templates Demo
+                      project_name: Templates Demo
+                      square_ft: 2700
+                      state: Pa
+                      status: onTime
+                      street_address: 545 Test Ln
+                      tasks:
+                        - Task-1:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 1
+                          Task-2:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task2
+                          Task-3:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 3
+                          Task-4:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 4
+                          Task-5:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 5
+                          Task-6:
+                            due_date: 11-22-2019
+                            task_description: This is a test only a test task 6
+                      uid: jDVWo6oiDESrYKljPIaAjZ1N7Xy2
+                      zip_code: 19023
+      description: Updates a Single Project
+      operationId: PutProjects
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                baths:
+                  type:
+                    - number
+                    - string
+                beds:
+                  type:
+                    - string
+                    - number
+            examples:
+              example-1:
+                value:
+                  baths: 5
+                  beds: 7
+              example-2: {}
+        description: |
+          Update project
+components:
+  schemas: {}
