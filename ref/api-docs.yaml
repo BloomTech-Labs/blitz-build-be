@@ -2297,5 +2297,357 @@ paths:
               example-2: {}
         description: |
           Update project
+  '/api/auth/:uid/delay_logs/:delay_id':
+    delete:
+      summary: Delete Delay Log
+      tags:
+        - delete delay log
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    message: '-Ltzss-dS_I1t1tMLR1edeleted @November 18, 2019 12:09 PM'
+      description: Removes a delay log
+      operationId: DeleteLog
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: token
+          required: true
+    put:
+      summary: Update Delay Log
+      tags:
+        - delete delay log
+        - update delay log
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    delay_id: 1574104711349
+                    lastUpdated: 'November 18, 2019 12:15 PM'
+                    projectId: orc
+                    projectName: orc
+                    reason: "i don't know"
+                    taskId: '-LtlN9KDLrfltK4LNlAH'
+                    taskName: start paint
+                    timestamp: 'November 18, 2019 11:18 AM'
+                    uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                    username: joe@smith.com
+                example-2:
+                  value:
+                    delay_id: 1574104711349
+                    lastUpdated: 'November 18, 2019 12:15 PM'
+                    projectId: orc
+                    projectName: orc
+                    reason: "i don't know"
+                    taskId: '-LtlN9KDLrfltK4LNlAH'
+                    taskName: finish paint
+                    timestamp: 'November 18, 2019 11:18 AM'
+                    uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                    username: joe@smith.com
+      description: Update Delay Log
+      operationId: PutLog
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectName:
+                  type: string
+                reason:
+                  type: string
+                taskId:
+                  type: string
+                taskName:
+                  type: string
+            examples:
+              example-1: {}
+              example-2:
+                value:
+                  projectId: orc
+                  projectName: orc
+                  reason: "i don't know"
+                  taskId: '-LtlN9KDLrfltK4LNlAH'
+                  taskName: finish paint
+                  uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                  username: joe@smith.com
+        description: 'You can update any field. '
+  '/api/auth/:uid/delays':
+    post:
+      summary: Add Delay Log
+      tags:
+        - Add Delay
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    '-LtkYVe9DWzavELOhf6g':
+                      projectId: orc
+                      projectName: orc
+                      reason: "i don't know"
+                      taskId: '-LtkXMRfFmz3tdS9U34Z'
+                      taskName: finish the flooring
+                      timestamp: 'November 15, 2019 11:33 AM'
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      username: joe@smith.com
+                    '1574104494555':
+                      delay_id: 1574104494555
+                      projectId: orc
+                      projectName: orc
+                      reason: "i don't know"
+                      taskId: '-LtlN9KDLrfltK4LNlAH'
+                      taskName: finish paint
+                      timestamp: 'November 18, 2019 11:14 AM'
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      username: joe@smith.com
+                    '1574104552639':
+                      delay_id: 1574104552639
+                      projectId: orc
+                      projectName: orc
+                      reason: "i don't know"
+                      taskId: '-LtlN9KDLrfltK4LNlAH'
+                      taskName: finish paint
+                      timestamp: 'November 18, 2019 11:15 AM'
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      username: joe@smith.com
+                    '1574104711349':
+                      delay_id: 1574104711349
+                      lastUpdated: 'November 18, 2019 12:15 PM'
+                      projectId: orc
+                      projectName: orc
+                      reason: "i don't know"
+                      taskId: '-LtlN9KDLrfltK4LNlAH'
+                      taskName: finish paint
+                      timestamp: 'November 18, 2019 11:18 AM'
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      username: joe@smith.com
+                    '1574104792728':
+                      delay_id: 1574104792728
+                      projectId: orc
+                      projectName: orc
+                      reason: "i don't know"
+                      taskId: '-LtlN9KDLrfltK4LNlAH'
+                      taskName: finish paint
+                      timestamp: 'November 18, 2019 11:19 AM'
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      username: joe@smith.com
+                    '1574104947591':
+                      delay_id: 1574104947591
+                      projectId: orc
+                      projectName: orc
+                      reason: "i don't know"
+                      taskId: '-LtlN9KDLrfltK4LNlAH'
+                      taskName: finish paint
+                      timestamp: 'November 18, 2019 11:22 AM'
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      username: joe@smith.com
+                    '1574105058389':
+                      delay_id: 1574105058389
+                      projectId: orc
+                      projectName: orc
+                      reason: "i don't know"
+                      taskId: '-LtlN9KDLrfltK4LNlAH'
+                      taskName: finish paint
+                      timestamp: 'November 18, 2019 11:24 AM'
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      username: joe@smith.com
+                    '1574108469757':
+                      delay_id: 1574108469757
+                      projectId: orc
+                      projectName: orc
+                      reason: "i don't know"
+                      taskId: '-LtlN9KDLrfltK4LNlAH'
+                      taskName: finish paint
+                      timestamp: 'November 18, 2019 12:21 PM'
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      username: joe@smith.com
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: uid
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectId:
+                  type: string
+                projectName:
+                  type: string
+                reason:
+                  type: string
+                taskId:
+                  type: string
+                taskName:
+                  type: string
+                username:
+                  type: string
+              required:
+                - projectId
+                - projectName
+                - reason
+                - taskId
+                - taskName
+                - username
+            examples:
+              example-1:
+                value:
+                  projectId: orc
+                  projectName: orc
+                  reason: "i don't know"
+                  taskId: '-LtlN9KDLrfltK4LNlAH'
+                  taskName: finish paint
+                  uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                  username: joe@smith.com
+        description: ''
+      description: Add A Delay Log
+      operationId: PostLog
+  '/api/auth/:uid/delay_logs':
+    get:
+      summary: Get Delay Logs
+      tags:
+        - Get Delay Logs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                example-1:
+                  value:
+                    '-LtkYVe9DWzavELOhf6g':
+                      projectId: orc
+                      projectName: orc
+                      reason: "i don't know"
+                      taskId: '-LtkXMRfFmz3tdS9U34Z'
+                      taskName: finish the flooring
+                      timestamp: 'November 15, 2019 11:33 AM'
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      username: joe@smith.com
+                    '1574104494555':
+                      delay_id: 1574104494555
+                      projectId: orc
+                      projectName: orc
+                      reason: "i don't know"
+                      taskId: '-LtlN9KDLrfltK4LNlAH'
+                      taskName: finish paint
+                      timestamp: 'November 18, 2019 11:14 AM'
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      username: joe@smith.com
+                    '1574104552639':
+                      delay_id: 1574104552639
+                      projectId: orc
+                      projectName: orc
+                      reason: "i don't know"
+                      taskId: '-LtlN9KDLrfltK4LNlAH'
+                      taskName: finish paint
+                      timestamp: 'November 18, 2019 11:15 AM'
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      username: joe@smith.com
+                    '1574104711349':
+                      delay_id: 1574104711349
+                      lastUpdated: 'November 18, 2019 12:15 PM'
+                      projectId: orc
+                      projectName: orc
+                      reason: "i don't know"
+                      taskId: '-LtlN9KDLrfltK4LNlAH'
+                      taskName: finish paint
+                      timestamp: 'November 18, 2019 11:18 AM'
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      username: joe@smith.com
+                    '1574104792728':
+                      delay_id: 1574104792728
+                      projectId: orc
+                      projectName: orc
+                      reason: "i don't know"
+                      taskId: '-LtlN9KDLrfltK4LNlAH'
+                      taskName: finish paint
+                      timestamp: 'November 18, 2019 11:19 AM'
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      username: joe@smith.com
+                    '1574104947591':
+                      delay_id: 1574104947591
+                      projectId: orc
+                      projectName: orc
+                      reason: "i don't know"
+                      taskId: '-LtlN9KDLrfltK4LNlAH'
+                      taskName: finish paint
+                      timestamp: 'November 18, 2019 11:22 AM'
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      username: joe@smith.com
+                    '1574105058389':
+                      delay_id: 1574105058389
+                      projectId: orc
+                      projectName: orc
+                      reason: "i don't know"
+                      taskId: '-LtlN9KDLrfltK4LNlAH'
+                      taskName: finish paint
+                      timestamp: 'November 18, 2019 11:24 AM'
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      username: joe@smith.com
+                    '1574108469757':
+                      delay_id: 1574108469757
+                      projectId: orc
+                      projectName: orc
+                      reason: "i don't know"
+                      taskId: '-LtlN9KDLrfltK4LNlAH'
+                      taskName: finish paint
+                      timestamp: 'November 18, 2019 12:21 PM'
+                      uid: R3fE6DP3UgP8hQSWbGubsHb7lOw2
+                      username: joe@smith.com
+      operationId: GetLogs
+      requestBody: {}
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: uid
+          required: true
+        - schema:
+            type: string
+          in: header
+          name: token
+      description: 'Get a list of delay logs '
 components:
   schemas: {}
