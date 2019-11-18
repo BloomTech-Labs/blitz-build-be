@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest --watch",
     "nodemon": "nodemon index.js",
-    "start": "node index.js",
-    "build": "parcel build ./api/server.js"
+    "start": "node index.js"
+  
   },
   "author": "Michael Harley",
   "license": "MIT",
