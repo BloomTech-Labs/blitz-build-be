@@ -1,4 +1,5 @@
 const router = require('express').Router();
+
 const Firebaseconfig = require('../Firebaseconfig')
 const dbRef = Firebaseconfig.database().ref()
 const moment = require('moment')
@@ -14,13 +15,13 @@ const zipcodes = require('zipcodes')
 
 /* Get request to /api/auth/:uid/projects will return all projects for that uid */
 
-router.get('/:uid/projects', async (req, res) => {
+router.get('/:uid/projects', (req, res) => {
     let uid = req.params.uid
 
 
     dbRef.child(`/${uid}/projects`)
 
-        .once('value', snap => {
+        .on('value', snap => {
 
             let data = snap.val()
 
@@ -49,7 +50,7 @@ router.get('/:uid/projects/:projectID', (req, res) => {
 
     dbRef.child(`${uid}/projects/${projectID}`)
 
-        .once('value', snap => {
+        .on('value', snap => {
 
             let data = snap.val()
 
@@ -85,7 +86,7 @@ router.get('/:uid/projects/:projectID', (req, res) => {
                                    }
 ********************************************************************************************************
  */
-router.post('/:uid/projects',  (req, res) => {
+router.post('/:uid/projects', async (req, res) => {
     let body = req.body
     let projectID = req.body.project_name
    let  baths = body.baths
@@ -99,14 +100,9 @@ router.post('/:uid/projects',  (req, res) => {
      let  zip_code = body.zip_code
  
    
-    // let taskObj = []
-    //   let templateID = "90 Day Build"
 
-    // Pulls the tasks stored in templates and adds them to the project
-//     let tasks = Firebaseconfig.database().ref(`${uid}/templates/${templateID}`)
-//    tasks.on("value",snap=>{return taskObj.push(snap.val())})
 
-     dbRef.child(`/${uid}/projects/${projectID}`).set(
+    await Firebaseconfig().database().ref().child(`/${uid}/projects/${projectID}`).set(
 
         {
             uid: uid,
@@ -125,12 +121,12 @@ router.post('/:uid/projects',  (req, res) => {
             zip_code: zip_code,
           
             gps_cords: zipcodes.lookup(zip_code)
-
+    
 
         })
-        .then(projectObj =>{
-         
-            res.status(201).json(projectObj)
+      .on("value",projectObj =>{
+           console.log(projectObj)
+            res.status(201).json(projectObj.val())
         })
         .catch(err =>{res.status(500).json(err)})
     })

@@ -12,50 +12,51 @@ router.get('/:uid/projects/:projectID/tasks', async (req, res) => {
     let uid = req.params.uid
     let projectID = req.params.projectID
 
-    const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks`);
+    const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks`)
 
-    await tasksRef.on("value", tasksObj => {
-
+    tasksRef.on("value", tasksObj => {
         //  console.log(templateObj.val())
-
-        let tasks = tasksObj.val()
-  try { 
-       if (tasks) {
-           res.status(200).json(tasks)}
-        } 
-        catch(err) {
-            res.status(500).json({message: err.message})}})})
+        let tasks = tasksObj.val();
+        try {
+            if (tasks) {
+                res.status(200).json(tasks);
+            }
+        }
+        catch (err) {
+            res.status(500).json({ message: err });
+        }
+    })})
 
 // Get tasks by filter 
-router.get('/:uid/projects/:projectID/tasks/:filter', async (req, res) => {
-    let filter = req.params.filter
-    let uid = req.params.uid
-    let projectID = req.params.projectID
+// router.get('/:uid/projects/:projectID/tasks/:filter', async (req, res) => {
+//     let filter = req.params.filter
+//     let uid = req.params.uid
+//     let projectID = req.params.projectID
 
-    const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks`);
+//     const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks`);
 
-    await tasksRef.orderByChild(`/tasks/${filter}`)
-        .on("value", tasksObj => {
+//     await tasksRef.orderByChild(`/tasks/${filter}`)
+//         .on("value", tasksObj => {
 
-            //  console.log(templateObj.val())
+//             //  console.log(templateObj.val())
 
-            let tasks = tasksObj.val()
-            try {
-                if (tasks) {
-                    res.status(200).json(tasks)
-                }
-            } catch (err) {
-                res.status(500).json({
-                    message: err.message
-                }
-                )
-            }
+//             let tasks = tasksObj.val()
+//             try {
+//                 if (tasks) {
+//                     res.status(200).json(tasks)
+//                 }
+//             } catch (err) {
+//                 res.status(500).json({
+//                     message: err.message
+//                 }
+//                 )
+//             }
 
 
 
-        })
+//         })
 
-})
+// })
 router.put('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
     console.log(req.body)
     let uid = req.params.uid
@@ -65,11 +66,11 @@ router.put('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
     let tasksRef =  dbRef.child(`/${uid}/projects/${projectID}`).child('/tasks/').child(`${taskID}`)
     let taskRef =  dbRef.child(`/${uid}/tasks/${taskID}/`)
 
-    tasksRef.update(updates);
-    tasksRef.update({lastUpdated:moment().format('LLL')});
+    tasksRef.update(updates).then(
+    tasksRef.update({lastUpdated:moment().format('LLL')}))
 
-     taskRef.update(updates);
-     taskRef.update({lastUpdated:moment().format('LLL')});
+     taskRef.update(updates)
+     taskRef.update({lastUpdated:moment().format('LLL')})
    taskRef.once("value",updatedTasks =>{return updatedTasks})
    .then(tasksRef.once("value",updateTasks=>{res.status(200).json(updateTasks.val())}))
    .catch(error =>{ res.status(500).json(error.message)})
