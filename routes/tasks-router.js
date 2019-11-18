@@ -64,12 +64,12 @@ router.put('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
     let tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks/${taskID}/`)
     let taskRef = dbRef.child(`/${uid}/tasks/${taskID}`)
 
-    tasksRef.push(body)
+    tasksRef.update(body)
 
     tasksRef.on("value", updateObj => {
         let updates = updateObj.val()
 
-        taskRef.push(updates)
+        taskRef.update(updates)
         try {
             if (updates) {
 
@@ -111,7 +111,7 @@ router.get('/:uid/projects/:projectID/tasks', async (req, res) => {
     let uid = req.params.uid
     let projectID = req.params.projectID
 
-    const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks`).orderByChild('*/id');
+    const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks`).orderByChild('/id');
 
     await tasksRef.on("value", tasksObj => {
         console.log(tasksObj.val())
