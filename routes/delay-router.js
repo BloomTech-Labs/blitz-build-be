@@ -50,7 +50,19 @@ dbRef.child(`/${uid}/delay_logs`).once("value",delayObj=>{
 })  
   
 })
-router.get('/:uid/delay_logs/')
+router.delete('/:uid/delay_logs/:delay_id/',(req,res)=>{
+     let uid = req.params.uid
+     let delay_id = req.params.delay_id
+    let removeTask = dbRef.child(`/${uid}/delay_logs/${delay_id}`)
+    removeTask.remove()
+   .then(()=>{
+       res.status(200).json({message:delay_id + "deleted @" + moment().format('LLL')})
+   })
+   .catch(err =>{
+       res.status(500).json(err.message)
+   })
+    
+})
 
 router.get('/set',(req,res)=>{
     Firebaseconfig.database().ref('/iTSHTnTwLvPXtPlVdMo87AR1KXZ2').set("Mike")
