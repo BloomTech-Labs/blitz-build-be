@@ -20,7 +20,7 @@ router.get('/:uid/projects', async (req, res) => {
 
     dbRef.child(`/${uid}/projects`)
 
-        .on('value', snap => {
+        .once('value', snap => {
 
             let data = snap.val()
 
@@ -49,7 +49,7 @@ router.get('/:uid/projects/:projectID', (req, res) => {
 
     dbRef.child(`${uid}/projects/${projectID}`)
 
-        .on('value', snap => {
+        .once('value', snap => {
 
             let data = snap.val()
 
@@ -96,7 +96,8 @@ router.post('/:uid/projects',  (req, res) => {
    let square_ft = body.square_ft
     let  city = body.city
      let state = body.state
-   let  zip_code = body.zip_code
+     let  zip_code = body.zip_code
+ 
    
     // let taskObj = []
     //   let templateID = "90 Day Build"
@@ -127,9 +128,9 @@ router.post('/:uid/projects',  (req, res) => {
 
 
         })
-        .then("value",projetObj =>{
-            let data = projetObj.val();
-            res.status(201).json(data)
+        .then(projectObj =>{
+         
+            res.status(201).json(projectObj)
         })
         .catch(err =>{res.status(500).json(err)})
     })
@@ -142,7 +143,7 @@ router.put(`/:uid/projects/:projectID`, (req, res) => {
     const projectsRef = dbRef.child(`/${uid}/projects/${projectID}`)
     let body = req.body
     projectsRef.update(body,lastUpdated)
-    projectsRef.on("value", snap => {
+    projectsRef.once("value", snap => {
         let newProjectObj = snap.val()
         if (newProjectObj) {
             res.status(201).json({ message: `${projectID} updated @ ${moment().format('LLL')}`, newProjectObj })

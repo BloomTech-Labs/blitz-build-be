@@ -128,9 +128,9 @@ router.post('/:uid/projects/:projectID/tasks', async (req, res) => {
      let isComplete = false
      let createdAT = moment().format("LLL")
      let lastUpdated = moment().format("LLL")
-     let key = date.now()
+     let key = Date.now()
      if(projectID,task_name,due_date){
-    let newDataRef = await dbRef.child(`/${uid}/projects/${projectID}`).child('tasks/').set({
+    let newDataRef = await dbRef.child(`/${uid}/projects/${projectID}/tasks`).child(`${key}`).set({
              taskID:key,
             due_date:due_date,
             projectID: projectID,
