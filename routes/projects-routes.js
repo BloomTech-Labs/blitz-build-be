@@ -18,7 +18,7 @@ router.get('/:uid/projects', async (req, res) => {
     let uid = req.params.uid
 
 
-    dbRef.child(`${uid}/projects`)
+    dbRef.child(`/${uid}/projects`)
 
         .on('value', snap => {
 
