@@ -58,17 +58,18 @@ router.get('/:uid/projects/:projectID/tasks/:filter', async (req, res) => {
 })
 router.put('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
     let uid = req.params.uid
-    let body = req.body
+    let updates = req.body  
     let projectID = req.params.projectID
     let taskID = req.params.taskID
-    let tasksRef = await dbRef.child(`/${uid}/projects/${projectID}/tasks/${taskID}/`)
+    let tasksRef =  dbRef.child(`/${uid}/projects/${projectID}`).child('/tasks/').child(`${taskID}`)
     let taskRef =  dbRef.child(`/${uid}/tasks/${taskID}/`)
 
-    tasksRef.update(body);
+    tasksRef.update(updates);
     tasksRef.update({lastUpdated:moment().format('LLL')});
-    taskRef.update(body)
-    taskRef.update({lastUpdated:moment().format('LLL')})
-   taskRef.once("value",updatedTask =>{res.status(200).json(updatedTask.val())})
+
+     taskRef.update(updates);
+     taskRef.update({lastUpdated:moment().format('LLL')});
+   taskRef.once("value",updatedTasks =>{return updatedTasks}).then(tasksRef.once("value",updateTasks=>{res.status(200).json(updateTasks.val())}))
 })
 // Get all tasks for all projects for user
 
