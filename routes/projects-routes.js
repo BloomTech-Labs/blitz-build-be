@@ -20,7 +20,11 @@ router.get('/:uid/projects', async (req, res) => {
 
     dbRef.child(`/${uid}/projects`)
 
+<<<<<<< HEAD
         .once('value', snap => {
+=======
+        .on('value', snap => {
+>>>>>>> master
 
             let data = snap.val()
 
@@ -49,7 +53,11 @@ router.get('/:uid/projects/:projectID', (req, res) => {
 
     dbRef.child(`${uid}/projects/${projectID}`)
 
+<<<<<<< HEAD
         .once('value', snap => {
+=======
+        .on('value', snap => {
+>>>>>>> master
 
             let data = snap.val()
 
@@ -85,7 +93,11 @@ router.get('/:uid/projects/:projectID', (req, res) => {
                                    }
 ********************************************************************************************************
  */
+<<<<<<< HEAD
 router.post('/:uid/projects',  (req, res) => {
+=======
+router.post('/:uid/projects', async (req, res) => {
+>>>>>>> master
     let body = req.body
     let projectID = req.body.project_name
    let  baths = body.baths
@@ -96,9 +108,13 @@ router.post('/:uid/projects',  (req, res) => {
    let square_ft = body.square_ft
     let  city = body.city
      let state = body.state
+<<<<<<< HEAD
      let  zip_code = body.zip_code
  
    
+=======
+   let  zip_code = body.zip_code
+>>>>>>> master
     // let taskObj = []
     //   let templateID = "90 Day Build"
 
@@ -106,17 +122,30 @@ router.post('/:uid/projects',  (req, res) => {
 //     let tasks = Firebaseconfig.database().ref(`${uid}/templates/${templateID}`)
 //    tasks.on("value",snap=>{return taskObj.push(snap.val())})
 
+<<<<<<< HEAD
      dbRef.child(`/${uid}/projects/${projectID}`).set(
+=======
+    await dbRef.child(`/${uid}/projects/${projectID}`).set(
+>>>>>>> master
 
         {
             uid: uid,
             projectID: projectID,
+<<<<<<< HEAD
             createdAt: moment().format('LLL'),
             lastUpdated:moment().format("LLL"),
             baths: baths,
             beds:  beds,
             status: "onTime",
             // imageURL: imageURL,
+=======
+            createdAt: moment().format("L"),
+            lastUpdated:moment().format("L"),
+            baths: baths,
+            beds:  beds,
+            status: "onTime",
+//             imageURL:body.imageURL,
+>>>>>>> master
             project_name: project_name,
             square_ft: square_ft,
             street_address: street_address,
@@ -127,6 +156,7 @@ router.post('/:uid/projects',  (req, res) => {
             gps_cords: zipcodes.lookup(zip_code)
 
 
+<<<<<<< HEAD
         })
         .then(projectObj =>{
          
@@ -135,6 +165,51 @@ router.post('/:uid/projects',  (req, res) => {
         .catch(err =>{res.status(500).json(err)})
     })
     
+=======
+        }).then(() => {
+
+            const projectsRef = dbRef.child(`/${uid}/projects/${projectID}`);
+            // projectsRef.update({ tasks: taskObj })
+            projectsRef.on("value", projectsObj => {
+
+
+
+                let data = projectsObj.val()
+
+
+
+
+                try {
+
+                    if (data) {
+
+                        res.status(201)
+                            .json({ message: `Project ${body.project_name} createdAT: ${moment().format('LLL')}`, projectObj: data })
+
+                    }
+
+                }
+
+                catch
+
+                (err) {
+                    res.status(500)
+
+                        .json(
+                            {
+                                message: err.message
+                            }
+                        )
+                }
+
+
+
+            })
+
+        })
+})
+
+>>>>>>> master
 // Updates a project 
 router.put(`/:uid/projects/:projectID`, (req, res) => {
     let uid = req.params.uid
@@ -143,7 +218,11 @@ router.put(`/:uid/projects/:projectID`, (req, res) => {
     const projectsRef = dbRef.child(`/${uid}/projects/${projectID}`)
     let body = req.body
     projectsRef.update(body,lastUpdated)
+<<<<<<< HEAD
     projectsRef.once("value", snap => {
+=======
+    projectsRef.on("value", snap => {
+>>>>>>> master
         let newProjectObj = snap.val()
         if (newProjectObj) {
             res.status(201).json({ message: `${projectID} updated @ ${moment().format('LLL')}`, newProjectObj })
@@ -166,4 +245,8 @@ router.delete('/:uid/projects/:projectID', (req, res) => {
 })
 
 
+<<<<<<< HEAD
     module.exports = router
+=======
+    module.exports = router
+>>>>>>> master

@@ -1,7 +1,10 @@
 require('dotenv').config()
 const router = require('express').Router()
 const axios = require('axios')
+<<<<<<< HEAD
 const zipcodes = require('zipcodes')
+=======
+>>>>>>> master
 router.post('/weather', (req, res) => {
     const api_key = process.env.WEATHER_API_KEY;
     const latitude = req.body.latitude;
@@ -17,6 +20,7 @@ router.post('/weather', (req, res) => {
           console.log(err);
         });
  })
+<<<<<<< HEAD
  router.get('/weather/:zipcode', (req, res) => {
   const api_key = process.env.WEATHER_API_KEY;
   const body = req.body
@@ -57,4 +61,7 @@ let longitude = zipCodes.longitude
         console.log(err);
       });
 })
+=======
+
+>>>>>>> master
  module.exports = router
