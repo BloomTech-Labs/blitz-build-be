@@ -114,7 +114,7 @@ router.post('/:uid/projects', async (req, res) => {
             baths: baths,
             beds:  beds,
             status: "onTime",
-            imageURL:body.imageURL,
+//             imageURL:body.imageURL,
             project_name: project_name,
             square_ft: square_ft,
             street_address: street_address,
