@@ -3,7 +3,7 @@ let firebase = require('firebase')
 const config = {
     apiKey: process.env.API_KEY,
     authDomain: "blitzbuild-8d5a6.firebaseapp.com",
-    databaseURL: "https://blitzbuild-8d5a6.firebaseio.com",
+    databaseURL:process.env.DATABASE_URL,
     projectId: "blitzbuild-8d5a6",
     storageBucket: process.env.STORAGE_BUCKET,
     messagingSenderId: process.env.MESSAGE_ID,
