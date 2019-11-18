@@ -2,8 +2,7 @@ require('dotenv').config()
 const router = require('express').Router();
 const moment = require('moment')
 const Firebaseconfig = require('../Firebaseconfig')
-const ajax = require('ajax')
-const jquery = require('jquery')
+
 
 /* Connects Backend to firebase database */
 const admin = require('./Firebase-admin')
