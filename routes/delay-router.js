@@ -63,12 +63,17 @@ router.delete('/:uid/delay_logs/:delay_id/',(req,res)=>{
    })
     
 })
-
-router.get('/set',(req,res)=>{
-    Firebaseconfig.database().ref('/iTSHTnTwLvPXtPlVdMo87AR1KXZ2').set("Mike")
-    dbRef.once('value', snap=>{
-        res.status(201).json(snap.val())
-    })
   
+router.put('/:uid/delay_logs/:delay_id/',(req,res)=>{
+   let uid = req.params.uid
+   let delay_id = req.params.delay_id
+   let updates = req.body
+  let delayRef = dbRef.child(`/${uid}/delay_logs/`).child(`${delay_id}`)
+   delayRef.update(updates)
+   delayRef.update({lastUpdated:moment().format('LLL')});
+    delayRef.once("value",updatedLog=>{
+        res.status(200).json(updatedLog)
+    })
+    .catch(err =>{res.status(400).json(err.message)})
 })
 module.exports= router
