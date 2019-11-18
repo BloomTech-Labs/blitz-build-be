@@ -114,7 +114,7 @@ router.post('/:uid/projects', async (req, res) => {
             baths: baths,
             beds:  beds,
             status: "onTime",
-            imageURL:body.imageURL,
+            // imageURL: imageURL,
             project_name: project_name,
             square_ft: square_ft,
             street_address: street_address,
@@ -172,9 +172,10 @@ router.post('/:uid/projects', async (req, res) => {
 router.put(`/:uid/projects/:projectID`, (req, res) => {
     let uid = req.params.uid
     let projectID = req.params.projectID
+    let lastUpdated = moment().format("LLL")
     const projectsRef = dbRef.child(`/${uid}/projects/${projectID}`)
     let body = req.body
-    projectsRef.update({ body, lastUpdated: moment().format('L') })
+    projectsRef.update(body,lastUpdated)
     projectsRef.on("value", snap => {
         let newProjectObj = snap.val()
         if (newProjectObj) {

@@ -181,8 +181,8 @@ router.delete('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
     let taskRef = dbRef.child(`/${uid}/tasks/${taskID}`)
     let createdAT = body.createdAT
     let lastUpdated = moment().format("LLL")
-
-
+      
+         let updates= {...body,lastUpdated}
     tasksRef.remove()
     taskRef.remove()
         .then(delObj => {
