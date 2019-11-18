@@ -68,11 +68,11 @@ router.put('/:uid/updateuser',(req,res) =>{
 admin.auth().updateUser(uid,{
   email: req.body.email,
   phoneNumber: req.body.phoneNumber,
-  emailVerified: req.body.emailVerified,
+  emailVerified: false,
   password: req.body.password,
   displayName: req.body.displayName,
-  photoURL: req.body.photoURL,
-  disabled: req.body.disabled
+  photoURL: 'https://fakepics.com',
+  disabled: false
 })
 
 /* It waits for the database call to finish if sucessful it then returns the updatedUserObj to the client */

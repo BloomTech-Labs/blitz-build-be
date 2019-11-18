@@ -57,6 +57,7 @@ router.get('/:uid/projects/:projectID/tasks/:filter', async (req, res) => {
 
 })
 router.put('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
+    console.log(req.body)
     let uid = req.params.uid
     let updates = req.body  
     let projectID = req.params.projectID
@@ -69,7 +70,9 @@ router.put('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
 
      taskRef.update(updates);
      taskRef.update({lastUpdated:moment().format('LLL')});
-   taskRef.once("value",updatedTasks =>{return updatedTasks}).then(tasksRef.once("value",updateTasks=>{res.status(200).json(updateTasks.val())}))
+   taskRef.once("value",updatedTasks =>{return updatedTasks})
+   .then(tasksRef.once("value",updateTasks=>{res.status(200).json(updateTasks.val())}))
+   .catch(error =>{ res.status(500).json(error.message)})
 })
 // Get all tasks for all projects for user
 
@@ -114,7 +117,7 @@ router.get('/:uid/projects/:projectID/tasks', async (req, res) => {
 })
 
 router.post('/:uid/projects/:projectID/tasks', async (req, res) => {
-
+   console.log(req.body)
     let body = req.body
     let uid = req.params.uid
     let projectID = req.params.projectID
@@ -125,6 +128,7 @@ router.post('/:uid/projects/:projectID/tasks', async (req, res) => {
      let isComplete = false
      let createdAT = moment().format("LLL")
      let lastUpdated = moment().format("LLL")
+     if(projectID,task_name,due_date){
     let newDataRef = await dbRef.child(`/${uid}/projects/${projectID}`).child('/tasks/').child(`${key}`).set({
              taskID:key,
             due_date:due_date,
@@ -143,13 +147,14 @@ router.post('/:uid/projects/:projectID/tasks', async (req, res) => {
         try {
             if (tasks) {
                 res.status(201).json({ message: `Task createdAT: ${moment().format('LLL')}`, tasksObj: tasksObj, })
-
+                dbRef.child(`/${uid}/projects/${projectID}/tasks`).orderByChild(`key`)
             }
 
 
         } catch (err) { res.status(500).json({ message: err.message }) }
     })
-    dbRef.child(`/${uid}/projects/${projectID}/tasks`).orderByChild(`key`)
+    .catch(err =>{res.status(500).json(err.message)})
+}else(err=>{res.status(400).json({error:`${err}`+'Please Check Your Inputs'})})
 })
 
 //Delete Tasks

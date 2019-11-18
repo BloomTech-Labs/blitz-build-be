@@ -85,7 +85,7 @@ router.get('/:uid/projects/:projectID', (req, res) => {
                                    }
 ********************************************************************************************************
  */
-router.post('/:uid/projects', async (req, res) => {
+router.post('/:uid/projects',  (req, res) => {
     let body = req.body
     let projectID = req.body.project_name
    let  baths = body.baths
@@ -97,6 +97,7 @@ router.post('/:uid/projects', async (req, res) => {
     let  city = body.city
      let state = body.state
    let  zip_code = body.zip_code
+   
     // let taskObj = []
     //   let templateID = "90 Day Build"
 
@@ -104,13 +105,13 @@ router.post('/:uid/projects', async (req, res) => {
 //     let tasks = Firebaseconfig.database().ref(`${uid}/templates/${templateID}`)
 //    tasks.on("value",snap=>{return taskObj.push(snap.val())})
 
-    await dbRef.child(`/${uid}/projects/${projectID}`).set(
+     dbRef.child(`/${uid}/projects/${projectID}`).set(
 
         {
             uid: uid,
             projectID: projectID,
-            createdAt: moment().format("L"),
-            lastUpdated:moment().format("L"),
+            createdAt: moment().format('LLL'),
+            lastUpdated:moment().format("LLL"),
             baths: baths,
             beds:  beds,
             status: "onTime",
@@ -125,50 +126,14 @@ router.post('/:uid/projects', async (req, res) => {
             gps_cords: zipcodes.lookup(zip_code)
 
 
-        }).then(() => {
-
-            const projectsRef = dbRef.child(`/${uid}/projects/${projectID}`);
-            // projectsRef.update({ tasks: taskObj })
-            projectsRef.on("value", projectsObj => {
-
-
-
-                let data = projectsObj.val()
-
-
-
-        }).then(() => {
-
-                try {
-
-                    if (data) {
-
-                        res.status(201)
-                            .json({ message: `Project ${body.project_name} createdAT: ${moment().format('LLL')}`, projectObj: data })
-
-                    }
-
-                }
-
-                catch
-
-                (err) {
-                    res.status(500)
-
-                        .json(
-                            {
-                                message: err.message
-                            }
-                        )
-                }
-
-
-
-            })
-
         })
-})
-
+        .then("value",projetObj =>{
+            let data = projetObj.val();
+            res.status(201).json(data)
+        })
+        .catch(err =>{res.status(500).json(err)})
+    })
+    
 // Updates a project 
 router.put(`/:uid/projects/:projectID`, (req, res) => {
     let uid = req.params.uid
