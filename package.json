@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch",
+    "test":  "jest --watch",
     "nodemon": "nodemon index.js",
     "start": "node index.js"
   },
-  "author": "",
+  "author": "Mike Harley",
   "license": "MIT",
   "dependencies": {
     "@google-cloud/storage": "^4.1.1",
