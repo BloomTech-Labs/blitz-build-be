@@ -18,11 +18,7 @@ router.get('/:uid/projects', async (req, res) => {
     let uid = req.params.uid
 
 
-<<<<<<< HEAD
     dbRef.child(`/${uid}/projects`)
-=======
-    dbRef.child(`${uid}`)
->>>>>>> cd7cbbd4a95580af494a8458bb8cf57719ebeb82
 
         .on('value', snap => {
 
@@ -103,7 +99,6 @@ router.post('/:uid/projects', async (req, res) => {
    let  zip_code = body.zip_code
     // let taskObj = []
     //   let templateID = "90 Day Build"
-<<<<<<< HEAD
 
     // Pulls the tasks stored in templates and adds them to the project
 //     let tasks = Firebaseconfig.database().ref(`${uid}/templates/${templateID}`)
@@ -140,53 +135,12 @@ router.post('/:uid/projects', async (req, res) => {
 
                 let data = projectsObj.val()
 
-=======
-
-    // Pulls the tasks stored in templates and adds them to the project
-//     let tasks = Firebaseconfig.database().ref(`${uid}/templates/${templateID}`)
-//    tasks.on("value",snap=>{return taskObj.push(snap.val())})
-
-    await dbRef.child(`/${uid}/projects/${projectID}`).set(
-
-        {
-            uid: uid,
-            projectID: projectID,
-            createdAt: moment().format("L"),
-            baths: baths,
-            beds:  beds,
-            status: "onTime",
-            //    imageURL:body.imageURL,
-            project_name: project_name,
-            square_ft: square_ft,
-            street_address: street_address,
-            city: city,
-            state: state,
-            zip_code: zip_code,
-            //    status:body.status,
-            gps_cords: zipcodes.lookup(zip_code)
->>>>>>> cd7cbbd4a95580af494a8458bb8cf57719ebeb82
 
 
         }).then(() => {
 
-<<<<<<< HEAD
                 try {
 
-=======
-            const projectsRef = dbRef.child(`/${uid}/projects/${projectID}`);
-            // projectsRef.update({ tasks: taskObj })
-            projectsRef.on("value", projectsObj => {
-
-
-
-                let data = projectsObj.val()
-
-
-
-
-                try {
-
->>>>>>> cd7cbbd4a95580af494a8458bb8cf57719ebeb82
                     if (data) {
 
                         res.status(201)
@@ -219,16 +173,10 @@ router.post('/:uid/projects', async (req, res) => {
 router.put(`/:uid/projects/:projectID`, (req, res) => {
     let uid = req.params.uid
     let projectID = req.params.projectID
-<<<<<<< HEAD
     let lastUpdated = moment().format("LLL")
     const projectsRef = dbRef.child(`/${uid}/projects/${projectID}`)
     let body = req.body
     projectsRef.update(body,lastUpdated)
-=======
-    const projectsRef = dbRef.child(`/${uid}/projects/${projectID}`)
-    let body = req.body
-    projectsRef.update({ body, updatedAt: moment().format('L') })
->>>>>>> cd7cbbd4a95580af494a8458bb8cf57719ebeb82
     projectsRef.on("value", snap => {
         let newProjectObj = snap.val()
         if (newProjectObj) {
