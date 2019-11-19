@@ -181,7 +181,7 @@ router.delete('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
         })
 })
 
-=======
+
 const router = require('express').Router()
 const Firebaseconfig = require('../Firebaseconfig')
 const dbRef = Firebaseconfig.database()
