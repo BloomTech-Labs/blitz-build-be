@@ -2,7 +2,7 @@ const router = require('express').Router()
 const Firebaseconfig = require('../Firebaseconfig')
 const dbRef = Firebaseconfig.database()
 const moment = require('moment')
-const axios = require('axios')
+
 
 router.get('/:uid/projects/:projectID/tasks', async (req, res,next) => {
     let uid = req.params.uid
@@ -16,6 +16,9 @@ router.get('/:uid/projects/:projectID/tasks', async (req, res,next) => {
         } 
         catch(err) {
             res.status(500).json({message: err.message})}})})
+
+
+           
 
 
 router.post('/:projectID/tasks',async(req,res)=>{
@@ -38,14 +41,50 @@ router.post('/:projectID/tasks',async(req,res)=>{
 
     if(body){
   
-     Firebaseconfig.database().ref(`iTSHTnTwLvPXtPlVdMo87AR1KXZ2/projects/${projectID}`).child('tasks').child(key).set(body)
+     Firebaseconfig.database().ref(`${uid}/projects/${projectID}`).child('tasks').child(key).set(body)
       .then(response =>{console.log(response)})
-      .then(Firebaseconfig.database().ref(`iTSHTnTwLvPXtPlVdMo87AR1KXZ2/projects`).child('tasks').child(key).set(body))
+      .then(Firebaseconfig.database().ref(`${uid}/projects`).child('tasks').child(key).set(body))
      
    .then( res.status(201).json({message:body}))
     }else{res.status(400).json({message:'Please Make Sure All Fields Are Entered'})}
 
 
+})
+router.put('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
+    console.log(req.body)
+    let uid = req.params.uid
+    let updates = req.body  
+    let projectID = req.params.projectID
+    let taskID = req.params.taskID
+    let tasksRef =  dbRef.child(`/${uid}/projects/${projectID}`).child('/tasks/').child(`${taskID}`)
+    let taskRef =  dbRef.child(`/${uid}/tasks/${taskID}/`)
+
+    tasksRef.update(updates);
+    tasksRef.update({lastUpdated:moment().format('LLL')});
+
+     taskRef.update(updates);
+     taskRef.update({lastUpdated:moment().format('LLL')});
+   taskRef.once("value",updatedTasks =>{return updatedTasks})
+   .then(tasksRef.once("value",updateTasks=>{res.status(200).json(updateTasks.val())}))
+   .catch(error =>{ res.status(500).json(error.message)})
+})
+router.delete('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
+    let uid = req.params.uid
+    let body = req.body
+
+    let projectID = req.params.projectID
+    let taskID = req.params.taskID
+    let tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks/${taskID}`)
+    let taskRef = dbRef.child(`/${uid}/tasks/${taskID}`)
+
+
+      
+      
+    tasksRef.remove()
+    taskRef.remove()
+        .then(delObj => {
+            res.status(200).json({ message: `${taskID} deleted ${moment().format('LLL')}`, delObj })
+        })
 })
 
 module.exports = router
