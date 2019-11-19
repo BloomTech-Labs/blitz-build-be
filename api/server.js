@@ -7,7 +7,11 @@ const tasksRouter = require('../routes/tasks-router')
 const register = require('../auth/authRouter')
 const login = require('../auth/authRouter')
 const weather = require('../routes/weather')
+
 const newToken = require('../auth/validate')
+
+const taskRouter = require('../routes/tasks-router')
+
 const delayRouter = require('../routes/delay-router')
 
 const server = express()
@@ -29,12 +33,18 @@ server.use('/api',login,register)
 
 // Add auth to routes
 server.use('/api/auth',projectsRouter)
+
 // server.use('/api/auth',,templateRouter)
-server.use('/api/auth',tasksRouter)
+
 // server.use('/api/auth',Verify,docCenter)
-server.use('/api/auth/:uid',weather)
- server.use('/api/auth',delayRouter)
+
 server.use('/api',newToken)
+
+server.use('/api/auth',templateRouter)
+server.use('/api/auth',delayRouter)
+server.use('/api/auth/:uid',weather)
+server.use('/api/auth/:uid/projects',taskRouter)
+
 
 
 
