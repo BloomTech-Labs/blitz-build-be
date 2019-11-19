@@ -51,7 +51,7 @@ router.post('/:projectID/tasks',async(req,res)=>{
 
 })
 router.put('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
-    console.log(req.body)
+
     let uid = req.params.uid
     let updates = req.body  
     let projectID = req.params.projectID
