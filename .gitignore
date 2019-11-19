@@ -189,3 +189,4 @@ functions/
 node_modules
 *env*
 .env
+*env*
