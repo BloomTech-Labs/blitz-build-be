@@ -52,7 +52,7 @@ router.post('/:projectID/tasks',async(req,res)=>{
 
 
 })
-router.put('/:projectID/tasks/:taskID', async (req, res) => {
+router.put('/:projectID/tasks/:taskID', async (req, res,next) => {
 
     let uid = req.params.uid
     let updates = req.body  
@@ -72,21 +72,20 @@ router.put('/:projectID/tasks/:taskID', async (req, res) => {
 })
 router.delete('/:projectID/tasks/:taskID', async (req, res) => {
     let uid = req.params.uid
-  
+   let taskID = req.params.taskID
 
     let projectID = req.params.projectID
-    let taskID = req.params.taskID
-    let tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks/${taskID}`)
-    let taskRef = dbRef.child(`/${uid}/tasks/${taskID}`)
+
+     let tasksRef =await dbRef.ref(`/${uid}/projects/`).child(`${projectID}/tasks/${taskID}`).remove(onComplete=>{console.log('FINISHED')})
+    let taskRef =await dbRef.ref(`/${uid}/tasks/`).child(`${taskID}`).remove(onComplete=>{console.log('FINISHED')})
 
 
       
-      
-    tasksRef.remove()
-    taskRef.remove()
-        .then(delObj => {
-            res.status(200).json({ message: `${taskID} deleted ${moment().format('LLL')}`, delObj })
-        })
-})
-
+  
+  if(!taskRef || !tasksRef){
+  return  res.status(200).json({message:'deleted'})
+  }
+    return (err)=>{err.message},next()
+    
+})  
 module.exports = router
