@@ -70,7 +70,7 @@ router.put('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
 })
 router.delete('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
     let uid = req.params.uid
-    let body = req.body
+  
 
     let projectID = req.params.projectID
     let taskID = req.params.taskID
