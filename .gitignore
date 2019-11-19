@@ -1,3 +1,4 @@
+
 # Created by https://www.gitignore.io/api/node,linux,macos,windows,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=node,linux,macos,windows,visualstudiocode
 
@@ -179,3 +180,12 @@ app.txt
 service-key.json"sendgrid.env" 
 service-key.json (2).json
 projects.json
+
+functions/
+*docCenter-router*
+"sendgrid.env" 
+*env*
+
+node_modules
+*env*
+.env

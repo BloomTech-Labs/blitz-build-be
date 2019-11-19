@@ -1,6 +1,7 @@
 const router = require('express').Router();
+const admin = require('firebase-admin')
 const Firebaseconfig = require('../Firebaseconfig')
-const dbRef = Firebaseconfig.database().ref()
+const dbRef = Firebaseconfig.database.ref
 const moment = require('moment')
 const zipcodes = require('zipcodes')
 
@@ -14,11 +15,11 @@ const zipcodes = require('zipcodes')
 
 /* Get request to /api/auth/:uid/projects will return all projects for that uid */
 
-router.get('/:uid/projects', async (req, res) => {
+router.get('/:uid/projects', (req, res) => {
     let uid = req.params.uid
 
 
-    dbRef.child(`/${uid}/projects`)
+    admin.database().ref(`${uid}`).child(`/projects/`)
 
         .on('value', snap => {
 
@@ -46,8 +47,7 @@ router.get('/:uid/projects/:projectID', (req, res) => {
     let uid = req.params.uid
     let projectID = req.params.projectID
 
-
-    dbRef.child(`${uid}/projects/${projectID}`)
+admin.database().ref(`${uid}`).child(`/projects/${projectID}`)
 
         .on('value', snap => {
 
@@ -96,25 +96,22 @@ router.post('/:uid/projects', async (req, res) => {
    let square_ft = body.square_ft
     let  city = body.city
      let state = body.state
-   let  zip_code = body.zip_code
-    // let taskObj = []
-    //   let templateID = "90 Day Build"
+     let  zip_code = body.zip_code
+ 
+   
 
-    // Pulls the tasks stored in templates and adds them to the project
-//     let tasks = Firebaseconfig.database().ref(`${uid}/templates/${templateID}`)
-//    tasks.on("value",snap=>{return taskObj.push(snap.val())})
 
-    await dbRef.child(`/${uid}/projects/${projectID}`).set(
+    await Firebaseconfig().database().ref().child(`/${uid}/projects/${projectID}`).set(
 
         {
             uid: uid,
             projectID: projectID,
-            createdAt: moment().format("L"),
-            lastUpdated:moment().format("L"),
+            createdAt: moment().format('LLL'),
+            lastUpdated:moment().format("LLL"),
             baths: baths,
             beds:  beds,
             status: "onTime",
-//             imageURL:body.imageURL,
+            // imageURL: imageURL,
             project_name: project_name,
             square_ft: square_ft,
             street_address: street_address,
@@ -123,51 +120,16 @@ router.post('/:uid/projects', async (req, res) => {
             zip_code: zip_code,
           
             gps_cords: zipcodes.lookup(zip_code)
-
-
-        }).then(() => {
-
-            const projectsRef = dbRef.child(`/${uid}/projects/${projectID}`);
-            // projectsRef.update({ tasks: taskObj })
-            projectsRef.on("value", projectsObj => {
-
-
-
-                let data = projectsObj.val()
-
-
-
-
-                try {
-
-                    if (data) {
-
-                        res.status(201)
-                            .json({ message: `Project ${body.project_name} createdAT: ${moment().format('LLL')}`, projectObj: data })
-
-                    }
-
-                }
-
-                catch
-
-                (err) {
-                    res.status(500)
-
-                        .json(
-                            {
-                                message: err.message
-                            }
-                        )
-                }
-
-
-
-            })
+    
 
         })
-})
-
+      .on("value",projectObj =>{
+           console.log(projectObj)
+            res.status(201).json(projectObj.val())
+        })
+        .catch(err =>{res.status(500).json(err)})
+    })
+    
 // Updates a project 
 router.put(`/:uid/projects/:projectID`, (req, res) => {
     let uid = req.params.uid
@@ -176,7 +138,7 @@ router.put(`/:uid/projects/:projectID`, (req, res) => {
     const projectsRef = dbRef.child(`/${uid}/projects/${projectID}`)
     let body = req.body
     projectsRef.update(body,lastUpdated)
-    projectsRef.on("value", snap => {
+    projectsRef.once("value", snap => {
         let newProjectObj = snap.val()
         if (newProjectObj) {
             res.status(201).json({ message: `${projectID} updated @ ${moment().format('LLL')}`, newProjectObj })

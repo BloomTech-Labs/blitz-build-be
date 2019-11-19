@@ -2,24 +2,10 @@ require('dotenv').config()
 const router = require('express').Router();
 const moment = require('moment')
 const Firebaseconfig = require('../Firebaseconfig')
-const admin = require('firebase-admin')
+
 
 /* Connects Backend to firebase database */
-admin.initializeApp({
-  credential:admin.credential.cert({
-    "type": process.env.FIREBASE_TYPE,
-    "project_id": process.env.FIREBASE_PROJECT_ID,
-    "private_key_id": process.env.FIREBASE_PRIVATE_KEY_ID,
-    "private_key": process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-    "client_email": process.env.FIREBASE_CLIENT_EMAIL,
-    "client_id": process.env.FIREBASE_CLIENT_ID,
-    "auth_uri": process.env.FIREBASE_AUTH_URI,
-    "token_uri": process.env.FIREBASE_TOKEN_URI,
-    "auth_provider_x509_cert_url": process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
-    "client_x509_cert_url": process.env.FIREBASE_CLIENT_X509_CERT_URL
-  }),
-  databaseURL:process.env.DATABASE_URL
-})
+const admin = require('./Firebase-admin')
 /* ****** All Endpoints Begin With /api  ********* */
 
 
@@ -47,7 +33,7 @@ router.post('/register',(req,res) =>{
     phoneNumber:user.phoneNumber,
     password:user.password,
     displayName:user.displayName,
-    imageURL:user.imageURL,
+    imageURL: 'https://fakeuser.com',
     disabled:false
   })
 
@@ -81,11 +67,11 @@ router.put('/:uid/updateuser',(req,res) =>{
 admin.auth().updateUser(uid,{
   email: req.body.email,
   phoneNumber: req.body.phoneNumber,
-  emailVerified: req.body.emailVerified,
+  emailVerified: false,
   password: req.body.password,
   displayName: req.body.displayName,
-  photoURL: req.body.photoURL,
-  disabled: req.body.disabled
+  photoURL: 'https://fakepics.com',
+  disabled: false
 })
 
 /* It waits for the database call to finish if sucessful it then returns the updatedUserObj to the client */
@@ -112,7 +98,7 @@ admin.auth().updateUser(uid,{
  
 router.post('/login', (req, res) => {
     let { email, password } = req.body;
-
+      console.log(req.body)
     // 1st it checks to  make sure email and password are entered
    
     if(!email || !password){
@@ -137,13 +123,14 @@ router.post('/login', (req, res) => {
     .then(userObj =>{
     
     
-    
+  
         res.status(200)
         .json(
             {
               message:`${userObj.user.email} signed in @ ${moment().format('LLL')}`,
-              token:userObj.user.refreshToken,
-               userObj:userObj
+              accessToken:userObj.user.b.b,
+              refreshToken:userObj.user.refreshToken,
+              uid:userObj.user.uid
             }
               )
   
@@ -159,23 +146,20 @@ router.post('/login', (req, res) => {
     })
 })
 // Auth event change listner
-
-Firebaseconfig.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    // User is signed in.
-    var displayName = user.displayName;
-    var email = user.email;
-    var emailVerified = user.emailVerified;
-    var photoURL = user.photoURL;
-    var isAnonymous = user.isAnonymous;
-    var uid = user.uid;
-    var providerData = user.providerData;
-    // ...
-  } else {
-    // User is signed out.
-    // ...
-  }
-});
+ // Refresh access token 
 
 
+
+
+
+
+ const Refresh = admin.auth()
+  const newToken =()=>{
+  axios({method: 'post',url: 'https://securetoken.googleapis.com/v1/token?key=AIzaSyBa2eSzmAvPkFNEO0zVUE0zp4IEKfFO0Kc',headers:'Content-Type: application/x-www-form-urlencoded',data:    'grant_type=refresh_token&refresh_token=AEu4IL1d4eGjjVi8qhceXB6kMBCrkUxtlGN0mUiRC5DPFwW4CqA_VJaLgmjE05jn4UHPMhdIMWTk0JKw7t2S5pTzLerGEMLQsuV1EmZtvdjplDcbuwQOrQz3ZcZagYzpX92lq2JwOai5UNIYRhWcXzM-fyVBuZLYLqVMsR4A06T8MqVMK3Y2pz-q25Sp4ZljykD73DtU7R6Eja6eoQJ4wtilxyWstsZDj3B5Td0iH3XkdwJQXT30Lavz21-t9H9rTqsd66ymA35bJhYqUb4QUJJzsGCdri2a1Q'},data=>{
+    upDatedToken = data
+    console.log(upDatedToken,data)
+    return upDatedToken
+  })
+  return newToken(Refresh)
+}
 module.exports = router;
