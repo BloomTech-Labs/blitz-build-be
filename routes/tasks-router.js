@@ -2,12 +2,14 @@ const router = require('express').Router()
 const Firebaseconfig = require('../Firebaseconfig')
 const dbRef = Firebaseconfig.database()
 const moment = require('moment')
+  
 
+// api/auth/:uid/projects
 
-router.get('/:projectID/tasks', async (req, res,next) => {
+router.get('/tasks', async (req, res,next) => {
     let uid = req.params.uid
     let projectID = req.params.projectID
-    const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks`);
+    const tasksRef = dbRef.ref(`${uid}/projects/`).child(`/${projectID}/tasks/`);
     await tasksRef.on("value", tasksObj => {
        let tasks = tasksObj.val()
   try { 
