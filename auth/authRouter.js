@@ -98,7 +98,7 @@ admin.auth().updateUser(uid,{
  
 router.post('/login', (req, res) => {
     let { email, password } = req.body;
-
+      console.log(req.body)
     // 1st it checks to  make sure email and password are entered
    
     if(!email || !password){

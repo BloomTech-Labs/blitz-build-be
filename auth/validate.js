@@ -20,7 +20,7 @@ router.post('/auth/getToken',(req,res)=>{
      
      res.status(200)
     }else{
-      res.status(444).json({message:'this shit dont work'})
+   
     }
   })
 .catch(err =>{console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@',err)})

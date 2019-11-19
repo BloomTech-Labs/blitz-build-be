@@ -29,7 +29,7 @@ server.use('/api',login,register)
 
 // Add auth to routes
 server.use('/api/auth',projectsRouter)
-// server.use('/api/auth',Verify,templateRouter)
+// server.use('/api/auth',,templateRouter)
 server.use('/api/auth',tasksRouter)
 // server.use('/api/auth',Verify,docCenter)
 server.use('/api/auth/:uid',weather)

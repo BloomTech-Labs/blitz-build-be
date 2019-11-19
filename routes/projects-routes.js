@@ -1,7 +1,7 @@
 const router = require('express').Router();
-
+const admin = require('firebase-admin')
 const Firebaseconfig = require('../Firebaseconfig')
-const dbRef = Firebaseconfig.database().ref()
+const dbRef = Firebaseconfig.database.ref
 const moment = require('moment')
 const zipcodes = require('zipcodes')
 
@@ -19,7 +19,7 @@ router.get('/:uid/projects', (req, res) => {
     let uid = req.params.uid
 
 
-    dbRef.child(`/${uid}/projects`)
+    admin.database().ref(`${uid}`).child(`/projects/`)
 
         .on('value', snap => {
 
@@ -47,8 +47,7 @@ router.get('/:uid/projects/:projectID', (req, res) => {
     let uid = req.params.uid
     let projectID = req.params.projectID
 
-
-    dbRef.child(`${uid}/projects/${projectID}`)
+admin.database().ref(`${uid}`).child(`/projects/${projectID}`)
 
         .on('value', snap => {
 
