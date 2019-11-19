@@ -4,7 +4,7 @@ const dbRef = Firebaseconfig.database()
 const moment = require('moment')
 
 
-router.get('/:uid/projects/:projectID/tasks', async (req, res,next) => {
+router.get('/:projectID/tasks', async (req, res,next) => {
     let uid = req.params.uid
     let projectID = req.params.projectID
     const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks`);
@@ -50,7 +50,7 @@ router.post('/:projectID/tasks',async(req,res)=>{
 
 
 })
-router.put('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
+router.put('/:projectID/tasks/:taskID', async (req, res) => {
 
     let uid = req.params.uid
     let updates = req.body  
@@ -68,7 +68,7 @@ router.put('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
    .then(tasksRef.once("value",updateTasks=>{res.status(200).json(updateTasks.val())}))
    .catch(error =>{ res.status(500).json(error.message)})
 })
-router.delete('/:uid/projects/:projectID/tasks/:taskID', async (req, res) => {
+router.delete('/:projectID/tasks/:taskID', async (req, res) => {
     let uid = req.params.uid
   
 
