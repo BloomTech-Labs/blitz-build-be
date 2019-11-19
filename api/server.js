@@ -40,7 +40,7 @@ server.use('/api/auth',projectsRouter)
 
 server.use('/api',newToken)
 
-server.use('/api/auth',templateRouter)
+// server.use('/api/auth',templateRouter)
 server.use('/api/auth',delayRouter)
 server.use('/api/auth/:uid',weather)
 server.use('/api/auth/:uid/projects',taskRouter)
