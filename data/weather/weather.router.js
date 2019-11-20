@@ -22,34 +22,37 @@ router.get("/:zipcode", (req, res) => {
   // const body = req.body;
   const zipcode = req.params.zipcode;
   const zipCodes = zipcodes.lookup(req.params.zipcode);
-  // let latitude = zipCodes.latitude;
-  // let longitude = zipCodes.longitude;
+  let latitude = zipCodes.latitude;
+  let longitude = zipCodes.longitude;
 
   // axios
   //   .get(
-  //     `https://api.darksky.net/forecast/${api_key}/${req.body.latitude},${req.body.longitude}`
+  //     `https://api.darksky.net/forecast/${api_key}/${latitude},${longitude}`
   //   )
-  axios
-    .get(
-      `https://api.darksky.net/forecast/${api_key}/${req.body.latitude},${req.body.longitude}`,
-      {
-        method: "HEAD",
-        mode: "no-cors",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        withCredentials: true,
-        credentials: "same-origin",
-        crossdomain: true
-      }
-    )
-    .then(response => {
-      res.status(200).json(response.data);
+  //   .then(response => {
+  //     res.status(200).json(response.data);
+  //   })
+  //   .catch(err => {
+  //     console.log(err);
+  //   });
+
+  const testURL = `https://api.darksky.net/forecast/${api_key}/${latitude},${longitude}`;
+  const myInit = {
+    method: "HEAD",
+    mode: "no-cors"
+  };
+
+  const myRequest = new Request(testURL, myInit);
+
+  fetch(myRequest)
+    .then(function(response) {
+      return response;
     })
-    .catch(err => {
-      console.log(err);
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function(e) {
+      console.log(e);
     });
 });
 // router.get("/weather/:zipcode", (req, res) => {
