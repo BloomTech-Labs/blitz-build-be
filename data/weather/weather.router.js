@@ -2,6 +2,9 @@ require("dotenv").config();
 const router = require("express").Router();
 const axios = require("axios");
 const zipcodes = require("zipcodes");
+var http = require("http");
+var proxy = require("http-proxy");
+var url = require("url");
 
 router.post("/", (req, res) => {
   const api_key = process.env.WEATHER_API_KEY;
@@ -25,10 +28,23 @@ router.get("/:zipcode", (req, res) => {
   let latitude = zipCodes.latitude;
   let longitude = zipCodes.longitude;
 
-  console.log("im here");
+  proxyServer = proxy.createProxyServer({ target: "http://127.0.0.1:9000" });
+
+  proxyServer.listen(8000);
+
+  server = http.createServer(function(req, res) {
+    console.log(req.url);
+
+    proxyServer.web(req, res, { target: req.url });
+
+    proxyServer.on("error", function(e) {
+      console.log("Error in proxy call");
+    });
+  });
+
   axios
     .get(
-      `https://cors-anywhere.blitz-build.herokuapp.com/https://api.darksky.net/forecast/${api_key}/${latitude},${longitude}`
+      `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/${api_key}/${latitude},${longitude}`
     )
     .then(response => {
       res.status(200).json(response.data);
