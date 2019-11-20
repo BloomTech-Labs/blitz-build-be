@@ -25,9 +25,10 @@ router.get("/:zipcode", (req, res) => {
   let latitude = zipCodes.latitude;
   let longitude = zipCodes.longitude;
 
+  console.log("im here");
   axios
     .get(
-      `https://cors-anywhere.herokuapp.com/http://api.darksky.net/forecast/${api_key}/${latitude},${longitude}`
+      `https://cors-anywhere.blitz-build.herokuapp.com/https://api.darksky.net/forecast/${api_key}/${latitude},${longitude}`
     )
     .then(response => {
       res.status(200).json(response.data);
