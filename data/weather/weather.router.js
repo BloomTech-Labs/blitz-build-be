@@ -28,19 +28,19 @@ router.get("/:zipcode", (req, res) => {
   let latitude = zipCodes.latitude;
   let longitude = zipCodes.longitude;
 
-  proxyServer = proxy.createProxyServer({ target: "http://127.0.0.1:9000" });
+  // proxyServer = proxy.createProxyServer({ target: "http://127.0.0.1:9000" });
 
-  proxyServer.listen(8000);
+  // proxyServer.listen(8000);
 
-  server = http.createServer(function(req, res) {
-    console.log(req.url);
+  // server = http.createServer(function(req, res) {
+  //   console.log(req.url);
 
-    proxyServer.web(req, res, { target: req.url });
+  //   proxyServer.web(req, res, { target: req.url });
 
-    proxyServer.on("error", function(e) {
-      console.log("Error in proxy call");
-    });
-  });
+  //   proxyServer.on("error", function(e) {
+  //     console.log("Error in proxy call");
+  //   });
+  // });
 
   axios
     .get(
