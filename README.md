@@ -1,5 +1,4 @@
 
-
 # API Documentation
 
 ####  Backend delpoyed at [Blitz Build API](https://api-blitz-build-dev.herokuapp.com/) <br>
