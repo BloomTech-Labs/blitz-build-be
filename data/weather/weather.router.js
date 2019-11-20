@@ -19,14 +19,16 @@ router.post("/", (req, res) => {
 
 router.get("/:zipcode", (req, res) => {
   const api_key = process.env.WEATHER_API_KEY;
-  const body = req.body;
+  // const body = req.body;
   const zipcode = req.params.zipcode;
   const zipCodes = zipcodes.lookup(req.params.zipcode);
-  let latitude = zipCodes.latitude;
-  let longitude = zipCodes.longitude;
+  // let latitude = zipCodes.latitude;
+  // let longitude = zipCodes.longitude;
 
   axios
-    .get(`https://api.darksky.net/forecast/${api_key}/${latitude},${longitude}`)
+    .get(
+      `https://api.darksky.net/forecast/${api_key}/${req.body.latitude},${req.body.longitude}`
+    )
     .then(response => {
       res.status(200).json(response.data);
     })
