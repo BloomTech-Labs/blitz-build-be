@@ -25,9 +25,25 @@ router.get("/:zipcode", (req, res) => {
   // let latitude = zipCodes.latitude;
   // let longitude = zipCodes.longitude;
 
+  // axios
+  //   .get(
+  //     `https://api.darksky.net/forecast/${api_key}/${req.body.latitude},${req.body.longitude}`
+  //   )
   axios
     .get(
-      `https://api.darksky.net/forecast/${api_key}/${req.body.latitude},${req.body.longitude}`
+      `https://api.darksky.net/forecast/${api_key}/${req.body.latitude},${req.body.longitude}`,
+      {
+        method: "HEAD",
+        mode: "no-cors",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        withCredentials: true,
+        credentials: "same-origin",
+        crossdomain: true
+      }
     )
     .then(response => {
       res.status(200).json(response.data);

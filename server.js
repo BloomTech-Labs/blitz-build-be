@@ -38,9 +38,8 @@ server.use(express.json());
 server.use(logger);
 server.use("/users", UsersRouter);
 server.use("/projects", ProjectsRouter);
-// server.use("/projects/tasks", TasksRouter);
 server.use("/tasks", TasksRouter);
-server.use("/template", TemplateTasksRouter);
+server.use("/template/tasks", TemplateTasksRouter);
 server.use("/templates", TemplatesRouter);
 server.use("/weather", Weather);
 
