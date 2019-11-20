@@ -7,6 +7,7 @@ const TasksRouter = require("./data/tasks/tasks.router");
 const TemplatesRouter = require("./data/templates/templates.router");
 const TemplateTasksRouter = require("./data/templates-tasks/templates-tasks.router");
 const Weather = require("./data/weather/weather.router");
+const mw = require("./data/middleware/restriced.middleware");
 
 const server = express();
 
@@ -37,10 +38,10 @@ server.use(helmet());
 server.use(express.json());
 server.use(logger);
 server.use("/users", UsersRouter);
-server.use("/projects", ProjectsRouter);
-server.use("/tasks", TasksRouter);
-server.use("/template/tasks", TemplateTasksRouter);
-server.use("/templates", TemplatesRouter);
-server.use("/weather", Weather);
+server.use("/projects", ProjectsRouter, mw.tokenVerify);
+server.use("/tasks", TasksRouter, mw.tokenVerify);
+server.use("/template/tasks", TemplateTasksRouter, mw.tokenVerify);
+server.use("/templates", TemplatesRouter, mw.tokenVerify);
+server.use("/weather", Weather, mw.tokenVerify);
 
 module.exports = server;
