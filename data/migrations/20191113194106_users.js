@@ -36,7 +36,8 @@ exports.up = function(knex) {
           .references("id")
           .inTable("projects")
           .onDelete("CASCADE")
-          .onUpdate("CASCADE");
+          .onUpdate("CASCADE")
+          .notNullable();
       })
 
       //MANY-TO-MANY TABLE WITH TEMPLATES AND TASKS

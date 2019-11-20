@@ -42,6 +42,6 @@ server.use("/projects", ProjectsRouter, mw.tokenVerify);
 server.use("/tasks", TasksRouter, mw.tokenVerify);
 server.use("/template/tasks", TemplateTasksRouter, mw.tokenVerify);
 server.use("/templates", TemplatesRouter, mw.tokenVerify);
-server.use("/weather", Weather, mw.tokenVerify);
+// server.use("/weather", Weather, mw.tokenVerify);
 
 module.exports = server;
