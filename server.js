@@ -20,7 +20,8 @@ function logger(req, res, next) {
 server.use(function(req, res, next) {
   res.header(
     "Access-Control-Allow-Origin",
-    "https://blitz-build-dev.netlify.com"
+    "https://blitz-build-dev.netlify.com",
+    "https://blitz-build-dev.netlify.com/weather"
   );
   res.header(
     "Access-Control-Allow-Headers",
