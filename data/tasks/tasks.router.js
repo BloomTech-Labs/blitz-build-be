@@ -4,6 +4,8 @@ const db = require("./tasks.model");
 const router = express.Router();
 
 router.get("/", (req, res) => {
+  console.log("im here");
+
   db.getTasks()
     .then(tasks => {
       res.status(200).json(tasks);
@@ -33,6 +35,7 @@ router.post("/", (req, res) => {
 
 //EDITS TASK
 router.put("/:id", (req, res) => {
+  console.log("im here ");
   const id = req.params.id;
   const changes = req.body;
 
@@ -65,6 +68,7 @@ router.delete("/:id", (req, res) => {
 
 //RETURNS TASKS BY PROJECT ID
 router.get("/:id", (req, res) => {
+  console.log("im here");
   const id = req.params.id;
 
   db.getTasksByProject(id)
