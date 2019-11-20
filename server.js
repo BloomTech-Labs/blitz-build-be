@@ -40,7 +40,7 @@ server.use("/users", UsersRouter);
 server.use("/projects", ProjectsRouter);
 // server.use("/projects/tasks", TasksRouter);
 server.use("/tasks", TasksRouter);
-server.use("/projects/tasks/templates", TemplateTasksRouter);
+server.use("/template", TemplateTasksRouter);
 server.use("/templates", TemplatesRouter);
 server.use("/weather", Weather);
 
