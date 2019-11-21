@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const db = require("./users-model");
+const connorDB = require("./users.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -103,21 +104,17 @@ router.put("/:id", async (req, res) => {
         const hash = bcrypt.hashSync(password, 10); // 2 ^ n
         user.password = hash;
         await db.updatePassword(id, hash);
-        res
-          .status(200)
-          .json({
-            updates: newUser,
-            message: `Password and email updated for user id # ${updatedEmail}`
-          });
+        res.status(200).json({
+          updates: newUser,
+          message: `Password and email updated for user id # ${updatedEmail}`
+        });
       } else if (email) {
         const updatedEmail = await db.updateEmail(id, email);
         const updateEmail = await db.findBy({ email }).select("id", "email");
-        res
-          .status(200)
-          .json({
-            updates: updateEmail,
-            message: `Email updated for user id # ${updatedEmail}`
-          });
+        res.status(200).json({
+          updates: updateEmail,
+          message: `Email updated for user id # ${updatedEmail}`
+        });
       } else if (password) {
         const hash = bcrypt.hashSync(password, 10); // 2 ^ n
         user.password = hash;
@@ -154,17 +151,18 @@ router.delete("/:id", (req, res) => {
     .catch(err => res.status(500).json({ error: err }));
 });
 
-router.get('/:id', (req, res) => {
-  const id = req.params.id
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
 
-  db.getUserById(id)
+  connorDB
+    .getUserById(id)
     .then(user => {
-      res.status(200).json(user)
+      res.status(200).json(user);
     })
     .catch(err => {
-      res.status(500).json(err)
-    })
-})
+      res.status(500).json(err);
+    });
+});
 
 function generateToken(user) {
   const payload = {
