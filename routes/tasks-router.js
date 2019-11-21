@@ -3,7 +3,7 @@ const router = require('express').Router();
 const Firebaseconfig = require('../Firebaseconfig')
 const dbRef = Firebaseconfig.database().ref()
 const moment = require('moment')
-const key = Date.now()
+let key;
 
 /* Route /api/auth/:uid/projects/:projectID/tasks  */
 
@@ -44,22 +44,22 @@ router.get('/:uid/tasks', async (req, res) => {
    .catch(err =>  { res.status(500).json({message: err.message})})
 })
     
-         
-    
-
 
 router.post('/:uid/tasks', async (req, res) => {
-
+  
+    
+    
     let body = req.body
     let uid = req.params.uid
-    let taskID = req.body.taskID
+      let isComplete = false
+      let taskID = Date.now()
     let projectsID= req.body.projectID
      let createdAt = moment().format('LLL') 
      let taskRef = dbRef.child(`${uid}/tasks/`)  
 let projectsRef = dbRef.child(`${uid}/projects/${projectsID}/`)
-taskRef.child(`${taskID}/`).set({...body,createdAt})
+taskRef.child(`${taskID}/`).set({...body,createdAt,isComplete})
 projectsRef.update({taskID})
-dbRef.child(`${uid}/projects/${projectsID}/`).child('tasks/').child(`${taskID}`).set({...body,createdAt})
+dbRef.child(`${uid}/projects/${projectsID}/`).child('tasks/').child(`${taskID}`).set({...body,createdAt,taskID})
 dbRef.once("value",snap=>{console.log(snap.val())})
 taskRef.once("value",snap =>{res.status(200).json(snap.val())})
 

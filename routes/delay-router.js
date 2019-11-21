@@ -2,12 +2,13 @@ const router = require('express').Router();
 const Firebaseconfig = require('../Firebaseconfig')
 const dbRef = Firebaseconfig.database().ref()
 const moment = require('moment')
-
+console.log('hello')
 
 
 // Get delay log
 
-router.post('/:uid/delays',async (req,res)=>{
+router.post('/:uid/delay_logs', (req,res)=>{
+    console.log('hello')
     let body = req.body
     let uid = req.params.uid
    let projectId = req.body.projectId
@@ -17,9 +18,9 @@ router.post('/:uid/delays',async (req,res)=>{
     let  reason = body.reason
     let key = Date.now()
    let  username = body.username
-  if(!null){
-  let delayRef = await dbRef.child(`/${uid}/delay_logs`).child(`${key}`)
- .set(
+   console.log('hello')
+  
+  let delayRef =  dbRef.child(`/${uid}/delay_logs`).set(
   
       {
           delay_id:key,
@@ -34,11 +35,11 @@ router.post('/:uid/delays',async (req,res)=>{
           username:username
       })
   
-      dbRef.child(`/${uid}/delay_logs`).once("value",delayObj =>{
+  delayRef.on("value",delayObj =>{
   res.status(201).json(delayObj.val())
   }).catch(err =>{res.status(500).json({message:err.message})})
+})
 
-}})
 
 router.get('/:uid/delay_logs',(req,res)=>{
    let uid = req.params.uid

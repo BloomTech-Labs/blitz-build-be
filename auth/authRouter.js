@@ -97,8 +97,9 @@ admin.auth().updateUser(uid,{
                 If a post request is made to /api/login */
  
 router.post('/login', (req, res) => {
-    let { email, password } = req.body;
-      console.log(req.body)
+    let email = req.body.email;
+    let password = req.body.password
+      console.log(email,password)
     // 1st it checks to  make sure email and password are entered
    
     if(!email || !password){

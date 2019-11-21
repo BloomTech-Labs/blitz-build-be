@@ -29,20 +29,18 @@ server.use(express.json())
 server.use(logger)
 
 // Sign in / Register 
-server.use('/api',login,register)
+server.use('/',login,register)
 
 // Add auth to routes
-server.use('/api/auth',validate,projectsRouter,taskRouter)
-
+server.use('/auth',projectsRouter,tasksRouter,weather,newToken)
+server.use('/auth/delay',delayRouter)
 // server.use('/api/auth',,templateRouter)
 
 // server.use('/api/auth',Verify,docCenter)
 
-server.use('/api',validate,newToken)
 
-// server.use('/api/auth',templateRouter)
-server.use('/api/auth',validate,delayRouter)
-server.use('/api/auth/:uid',validate,weather)
+
+
 
 
 
