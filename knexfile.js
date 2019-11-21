@@ -1,4 +1,5 @@
 // Update with your config settings.
+require('dotenv').config('./env')
 const productionConnection =
   process.env.DATABASE_URL || "postgres://localhost/postgres";
 
