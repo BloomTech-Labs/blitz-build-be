@@ -77,7 +77,6 @@ exports.up = function(knex) {
         tbl.integer("square_ft");
         tbl.string("state");
         tbl.string("status");
-        //boolean for completed
         tbl.string("street_address");
         tbl.integer("zip_code").notNullable();
         tbl.integer("latitude");
