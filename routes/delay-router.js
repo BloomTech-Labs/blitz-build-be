@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Firebaseconfig = require('../Firebaseconfig')
 const dbRef = Firebaseconfig.database().ref()
 const moment = require('moment')
-console.log('hello')
+
 
 
 // Get delay log

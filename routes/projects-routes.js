@@ -89,13 +89,13 @@ router.post('/:uid/projects', (req, res) => {
     let body = req.body
      let zipcode = req.body.zip_code
     let uid  = req.params.uid
-   
+    let gpsCords = zipcodes.lookup(zipcode)
      let projectID = req.body.project_name
       
      console.log(projectID)
      const projectsRef = dbRef.child(`${uid}/projects/`)
  
-     projectsRef.child(`${projectID}/`).set(body)
+     projectsRef.child(`${projectID}/`).set({...body,uid,projectID,gpsCords})
      projectsRef.once("value",snap=>{res.status(200).json(snap.val())})
 
     //  dbRef.once("value",projectObj   => {
