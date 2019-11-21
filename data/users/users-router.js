@@ -154,6 +154,18 @@ router.delete("/:id", (req, res) => {
     .catch(err => res.status(500).json({ error: err }));
 });
 
+router.get('/:id', (req, res) => {
+  const id = req.params.id
+
+  db.getUserById(id)
+    .then(user => {
+      res.status(200).json(user)
+    })
+    .catch(err => {
+      res.status(500).json(err)
+    })
+})
+
 function generateToken(user) {
   const payload = {
     username: user.username,
