@@ -30,12 +30,12 @@ router.put('/:uid/tasks/:taskID', async (req, res) => {
 // Get all tasks for all projects for user
 
 
-router.get('/:uid/projects/:projectID/tasks', async (req, res) => {
+router.get('/:uid/tasks', async (req, res) => {
 
     let uid = req.params.uid
     let projectID = req.params.projectID
 
-    const tasksRef = dbRef.child(`/${uid}/projects/${projectID}/tasks`)
+    const tasksRef = dbRef.child(`/${uid}/tasks`)
 
      tasksRef.once("value", tasksObj => {
   
