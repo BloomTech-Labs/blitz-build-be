@@ -10,11 +10,11 @@ const weather = require('../routes/weather')
 const validate = require('../auth/validate')
 const newToken = require('../auth/validate')
 
-const taskRouter = require('../routes/tasks-router')
+const server = require('express')
 
-const delayRouter = require('../routes/delay-router')
+const delay = require('../routes/delay-router')
 
-const server = express()
+
 
 // define logger middleware
 const logger = (req, res, next) => {
@@ -29,11 +29,13 @@ server.use(express.json())
 server.use(logger)
 
 // Sign in / Register 
-server.use('/',login,register)
-
+server.use('/auth/:uid/projects',projectsRouter)
+server.use('/',login,register,newToken)
+server.use('/auth/:uid/delay',delay)
 // Add auth to routes
-server.use('/auth',projectsRouter,tasksRouter,weather,newToken)
-server.use('/auth/delay',delayRouter)
+server.use('/auth',tasksRouter)
+
+
 // server.use('/api/auth',,templateRouter)
 
 // server.use('/api/auth',Verify,docCenter)

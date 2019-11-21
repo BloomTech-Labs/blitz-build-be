@@ -1,8 +1,8 @@
 require('dotenv').config('./env')
-
+const server = require('./server')
 require('./Firebaseconfig')
 require('./auth/Firebase-admin')
-const server = require('./server')
+
 
 
 
