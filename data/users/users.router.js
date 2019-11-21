@@ -6,6 +6,7 @@ const secret = require("../secret.config");
 
 const router = express.Router();
 
+
 router.get("/", (req, res) => {
   db.getUsers()
     .then(users => {
@@ -20,9 +21,10 @@ router.get("/", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-  const user = req.body;
 
-  const hash = bcrypt.hashSync(user.password, 8);
+  const user = req.body;
+  const passwords = user.password
+  const hash = bcrypt.hash(passwords,2);
 
   user.password = hash;
 
@@ -32,7 +34,7 @@ router.post("/register", (req, res) => {
     })
     .catch(error => {
       res.status(500).json({
-        error: error,
+        error: error.code,
         message: "there was a 500 server error on adding user"
       });
     });
@@ -95,7 +97,7 @@ function generateToken(user) {
     name: user.name
   };
   options = {
-    expiresIn: "1h"
+    expiresIn: "8h"
   };
 
   return jwt.sign(payload, secret.jwtSecret, options);
