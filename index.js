@@ -1,5 +1,7 @@
 require('dotenv').config('./env')
-require('express')
+
+require('./Firebaseconfig')
+require('./auth/Firebase-admin')
 const server = require('./api/server')
 
 

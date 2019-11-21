@@ -1,7 +1,8 @@
+require('dotenv').config('./env')
 const router = require('express').Router();
-const admin = require('firebase-admin')
 const Firebaseconfig = require('../Firebaseconfig')
-const dbRef = Firebaseconfig.database.ref
+const dbRef = Firebaseconfig.database().ref()
+const admin = require('../auth/Firebase-admin')
 const moment = require('moment')
 const zipcodes = require('zipcodes')
 
@@ -17,11 +18,10 @@ const zipcodes = require('zipcodes')
 
 router.get('/:uid/projects', (req, res) => {
     let uid = req.params.uid
+    const projectsRef = dbRef.child(`${uid}/projects/`)
 
-
-    admin.database().ref(`${uid}`).child(`/projects/`)
-
-        .on('value', snap => {
+   projectsRef
+        .once('value', snap => {
 
             let data = snap.val()
 
@@ -45,11 +45,10 @@ router.get('/:uid/projects', (req, res) => {
 
 router.get('/:uid/projects/:projectID', (req, res) => {
     let uid = req.params.uid
-    let projectID = req.params.projectID
+    const projectsRef = dbRef.child(`${uid}/projects/`)
 
-admin.database().ref(`${uid}`).child(`/projects/${projectID}`)
 
-        .on('value', snap => {
+        projectsRef.once('value', snap => {
 
             let data = snap.val()
 
@@ -85,59 +84,42 @@ admin.database().ref(`${uid}`).child(`/projects/${projectID}`)
                                    }
 ********************************************************************************************************
  */
-router.post('/:uid/projects', async (req, res) => {
+router.post('/:uid/projects', (req, res) => {
+   
     let body = req.body
-    let projectID = req.body.project_name
-   let  baths = body.baths
-    let  beds = body.beds
+     let zipcode = req.body.zip_code
     let uid  = req.params.uid
-    let street_address = body.street_address
-    let project_name = body.project_name
-   let square_ft = body.square_ft
-    let  city = body.city
-     let state = body.state
-     let  zip_code = body.zip_code
+   
+     let projectID = req.body.project_name
+      
+     console.log(projectID)
+     const projectsRef = dbRef.child(`${uid}/projects/`)
  
+     projectsRef.child(`${projectID}/`).set(body)
+     projectsRef.once("value",snap=>{res.status(200).json(snap.val())})
+
+    //  dbRef.once("value",projectObj   => {
+      
+// console.log(projectObj.val())
+//        return res.status(201).json(`${projectObj.val()}`)
+    })
    
 
 
-    await Firebaseconfig().database().ref().child(`/${uid}/projects/${projectID}`).set(
-
-        {
-            uid: uid,
-            projectID: projectID,
-            createdAt: moment().format('LLL'),
-            lastUpdated:moment().format("LLL"),
-            baths: baths,
-            beds:  beds,
-            status: "onTime",
-            // imageURL: imageURL,
-            project_name: project_name,
-            square_ft: square_ft,
-            street_address: street_address,
-            city: city,
-            state: state,
-            zip_code: zip_code,
-          
-            gps_cords: zipcodes.lookup(zip_code)
     
-
-        })
-      .on("value",projectObj =>{
-           console.log(projectObj)
-            res.status(201).json(projectObj.val())
-        })
-        .catch(err =>{res.status(500).json(err)})
-    })
+       
+  
     
 // Updates a project 
 router.put(`/:uid/projects/:projectID`, (req, res) => {
+    console.log(req.body)
     let uid = req.params.uid
     let projectID = req.params.projectID
     let lastUpdated = moment().format("LLL")
-    const projectsRef = dbRef.child(`/${uid}/projects/${projectID}`)
+    const projectsRef = dbRef.child(`/${uid}/projects/${projectID}/`)
     let body = req.body
-    projectsRef.update(body,lastUpdated)
+    projectsRef.update({...body});
+    projectsRef.update({lastUpdated});
     projectsRef.once("value", snap => {
         let newProjectObj = snap.val()
         if (newProjectObj) {
@@ -147,12 +129,13 @@ router.put(`/:uid/projects/:projectID`, (req, res) => {
         }
     })
 
-
+  
 })
-
+  
 //Removes a project 
 router.delete('/:uid/projects/:projectID', (req, res) => {
     let uid = req.params.uid
+    let projectID = req.params.projectID
     // let projectID = req.params.projectID
     let projectsRef = dbRef.child(`/${uid}/projects/${projectID}`)
     projectsRef.remove(() => {

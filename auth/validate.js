@@ -8,7 +8,7 @@ router.post('/auth/getToken',(req,res)=>{
   let refresh_token = req.headers.refresh_token
   console.log(refresh_token)
  let headers = {'Content-Type':'application/x-www-form-urlencoded'}
-  // console.log('@@@@@@@@@@@@@@',req.headers.config)
+
   const body = {grant_type:'refresh_token',refresh_token:`${refresh_token}`}
 
  
@@ -16,14 +16,14 @@ router.post('/auth/getToken',(req,res)=>{
 
   .then(res =>{
     if(!error){
-     console.log('newToken@@@@@@@',newToken)
+     console.log('newToken',newToken)
      
      res.status(200)
     }else{
    
     }
   })
-.catch(err =>{console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@',err)})
+.catch(err =>{console.log(err)})
  
 })
 module.exports=router
