@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const secret = require("../secret.config");
+const secret = require("../../config/secret.config");
 
 module.exports = {
   tokenVerify
@@ -18,7 +18,7 @@ function tokenVerify(req, res, next) {
           res.status(401).json({ message: "invalid" });
         } else {
           req.user = {
-            id = decodedToken.userid,
+            id : decodedToken.userid,
             name: decodedToken.name
           };
           next();
