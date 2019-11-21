@@ -90,8 +90,7 @@ router.delete("/:id", (req, res) => {
 
 function generateToken(user) {
   payload = {
-    sub: user.id,
-    email: user.email,
+    userid: user.id,
     name: user.name
   };
   options = {
