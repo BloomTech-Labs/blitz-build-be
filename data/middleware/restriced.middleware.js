@@ -18,7 +18,11 @@ function tokenVerify(req, res, next) {
           res.status(401).json({ message: "invalid" });
         } else {
           req.user = {
+
             id : decodedToken.userid,
+
+            // id = decodedToken.userid,
+
             name: decodedToken.name
           };
           next();
