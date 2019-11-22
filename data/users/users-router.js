@@ -9,7 +9,7 @@ const secrets = require('../../config/secret.config');
 // for endpoints beginning with /users
 router.post('/register', (req, res) => {
   let user = req.body
-  // console.log(user)
+   console.log(req.user)
   const hash = bcrypt.hashSync(user.password,10); // 2 ^ n
  user.password = hash
 
@@ -26,13 +26,13 @@ db.add(user)
       res.status(500).json({ message: 'cannot add the user', error });
     });
 });
-router.put('/username/update', (req, res) => {
+router.put('/:id', (req, res) => {
   const username = req.params.username;
   const changes = req.body;
 
 
   if(changes) {
-      Receipts.updateReceipt(username, changes)
+       (username, changes)
           .then(count => {
               if(count){ 
               res.status(202).json(count);
@@ -46,26 +46,25 @@ router.put('/username/update', (req, res) => {
 
 router.post('/login', (req, res) => {
   let { username, password } = req.body;
-  
-  if( username || password){
-    
+
+
+    if(!username){
     res.status(403).json({message:'Please enter login information'}) 
-  }
+    }
   db.findBy({ username })
     .first()
     .then(user => {
   
-       if (user && bcrypt.compareSync(password, user.password)) {
+       if (user(password, user.password)) {
         // produce token
-        const token = generateToken(user);
+        // const token = generateToken(user);
 
         // add token to response
         res.status(200).json({
           message: `Welcome ${user.username}!`,
           token,
         });
-      } else {
-        res.status(404).json({ message: 'User does not exist' });
+            res.status(404).json({ message: 'User does not exist' });
       }
     })
     .catch(error => {

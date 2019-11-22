@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const secret = require("../../config/secret.config");
 
 module.exports = () =>{
-  tokenVerify
+  // tokenVerify
 
 function tokenVerify(req, res, next) {
   const token = req.headers.authorization;
@@ -25,7 +25,9 @@ function tokenVerify(req, res, next) {
       })
     );
   } else {
-    res.status(401).json({ message: "you do not have access" });
+ res.status(401).json({ message: "you do not have access" });
   }
+  return tokenVerify(decodedToken)
 }
+    
 }
