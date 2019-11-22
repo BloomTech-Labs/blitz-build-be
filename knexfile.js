@@ -1,45 +1,46 @@
 // Update with your config settings.
 require('dotenv').config('./env')
-client= process.env.CLIENT
-module.exports = {
-    
-  development: {
-    client: 'sqlite3',
-    connection: {
-      filename: './data.db3'
-    }
-  },
+const productionConnection =
+  process.env.DATABASE_URL || "postgres://localhost/postgres";
 
-  staging: {
-    client:  'postgres',
+module.exports = {
+  development: {
+    client: "sqlite3",
     connection: {
-      database: '',
-      user:     'username',
-      password: 'password'
+      filename: "./data/information.db3"
     },
-    pool: {
-      min: 2,
-      max: 10
-    },
+    useNullAsDefault: true,
+
+    // pool: {
+    //   afterCreate: (conn, done) => {
+    //     conn.run("PRAGMA foreign_keys = ON", done);
+    //   }
+    // },
     migrations: {
-      tableName: 'knex_migrations'
+      directory: "./data/migrations"
+    },
+    seeds: {
+      directory: "./data/seeds"
     }
   },
 
   production: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+    client: "pg",
+    useNullAsDefault: true,
+
+    connection: productionConnection,
+
+    migrations: {
+      directory: "./data/migrations",
+      tableName: "knex_migrations"
+    },
+
+    seeds: {
+      directory: "./data/seeds"
     },
     pool: {
       min: 2,
       max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
     }
   }
-
 };
