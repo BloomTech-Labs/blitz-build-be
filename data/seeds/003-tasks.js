@@ -8,20 +8,20 @@ exports.seed = function(knex) {
     {
       task_name: "example",
       task_description: "example",
-      due_date: "example"
-      // project_id: 1
+      due_date: "example",
+      project_id: 1
     },
     {
       task_name: "example2",
       task_description: "example",
-      due_date: "example"
-      // project_id: 2
+      due_date: "example",
+      project_id: 2
     },
     {
       task_name: "example3",
       task_description: "example",
-      due_date: "example"
-      // project_id: 1
+      due_date: "example",
+      project_id: 1
     }
   ]);
   // });

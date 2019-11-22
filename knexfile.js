@@ -1,4 +1,5 @@
 // Update with your config settings.
+require("dotenv").config("./env");
 const productionConnection =
   process.env.DATABASE_URL || "postgres://localhost/postgres";
 
@@ -10,11 +11,11 @@ module.exports = {
     },
     useNullAsDefault: true,
 
-    pool: {
-      afterCreate: (conn, done) => {
-        conn.run("PRAGMA foreign_keys = ON", done);
-      }
-    },
+    // pool: {
+    //   afterCreate: (conn, done) => {
+    //     conn.run("PRAGMA foreign_keys = ON", done);
+    //   }
+    // },
     migrations: {
       directory: "./data/migrations"
     },

@@ -16,6 +16,21 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.getTaskById(id)
+    .then(task => {
+      res.status(200).json(task);
+    })
+    .catch(error => {
+      res.status(500).json({
+        error: error,
+        message: "500 server error on getting task id"
+      });
+    });
+});
+
 router.post("/", (req, res) => {
   const task = req.body;
 
@@ -33,6 +48,7 @@ router.post("/", (req, res) => {
 
 //EDITS TASK
 router.put("/:id", (req, res) => {
+  console.log("im here ");
   const id = req.params.id;
   const changes = req.body;
 
@@ -64,7 +80,8 @@ router.delete("/:id", (req, res) => {
 });
 
 //RETURNS TASKS BY PROJECT ID
-router.get("/:id", (req, res) => {
+router.get("/project/:id", (req, res) => {
+  console.log("im here");
   const id = req.params.id;
 
   db.getTasksByProject(id)
