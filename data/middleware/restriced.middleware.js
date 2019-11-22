@@ -1,9 +1,8 @@
 const jwt = require("jsonwebtoken");
-const secret = require("../secret.config");
+const secret = require("../../config/secret.config");
 
-module.exports = {
-  tokenVerify
-};
+module.exports = () =>{
+  // tokenVerify
 
 function tokenVerify(req, res, next) {
   const token = req.headers.authorization;
@@ -18,7 +17,12 @@ function tokenVerify(req, res, next) {
           res.status(401).json({ message: "invalid" });
         } else {
           req.user = {
-            email: decodedToken.email,
+
+
+            id : decodedToken.userid,
+
+            // id = decodedToken.userid,
+
             name: decodedToken.name
           };
           next();
@@ -26,6 +30,9 @@ function tokenVerify(req, res, next) {
       })
     );
   } else {
-    res.status(401).json({ message: "you do not have access" });
+ res.status(401).json({ message: "you do not have access" });
   }
+  return tokenVerify(decodedToken)
+}
+    
 }
