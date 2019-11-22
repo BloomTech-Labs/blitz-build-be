@@ -28,7 +28,9 @@ module.exports = {
     client: "pg",
     useNullAsDefault: true,
 
+
     connection: productionConnection,
+    ssl: true,
 
     migrations: {
       directory: "./data/migrations",
@@ -42,5 +44,6 @@ module.exports = {
       min: 2,
       max: 10
     }
+
   }
 };

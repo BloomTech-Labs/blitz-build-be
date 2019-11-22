@@ -1,5 +1,40 @@
 exports.up = function (knex) {
     return knex.schema
+    .createTable("projects", tbl => {
+        tbl.increments();
+
+        tbl
+            .string("project_name")
+            .unique()
+            .notNullable();
+        tbl.integer("baths");
+        tbl.integer("beds");
+        tbl.string("city");
+        tbl.string("imageURL");
+        tbl.integer("square_ft");
+        tbl.string("state");
+        tbl.string("status");
+        tbl.string("street_address");
+        tbl.integer("zip_code").notNullable();
+        tbl.enu("gpsCords",['lat','long'])
+            
+    })
+    .createTable("tasks", tbl => {
+        tbl.increments();
+      tbl.boolean('isComplete').notNullable().defaultTo(false)
+      tbl.timestamp('created_at')
+        tbl.string("task_name")
+            .notNullable();
+        tbl.string("task_description", 1100);
+        tbl.string("due_date");
+           
+            tbl.integer("project_id")
+                 .unsigned()
+                 .references("id")
+                 .inTable("projects")
+                .onDelete("CASCADE")
+               .onUpdate("CASCADE");
+    })
         .createTable('users', tbl => {
             tbl.increments();
             tbl.string('username', 50)
@@ -14,42 +49,10 @@ exports.up = function (knex) {
         })
         // tasks
 
-        .createTable("tasks", tbl => {
-            tbl.increments();
-          tbl.boolean('isComplete').notNullable().defaultTo(false)
-          tbl.timestamp('created_at')
-            tbl.string("task_name")
-                .notNullable();
-            tbl.string("task_description", 1100);
-            tbl.string("due_date");
-            tbl
-                .integer("project_id")
-                .unsigned()
-                .references("id")
-                .inTable("projects")
-                .onDelete("CASCADE")
-                .onUpdate("CASCADE");
-        })
-        // projects
-        .createTable("projects", tbl => {
-            tbl.increments();
+      
 
-            tbl
-                .string("project_name")
-                .unique()
-                .notNullable();
-            tbl.integer("baths");
-            tbl.integer("beds");
-            tbl.string("city");
-            tbl.string("imageURL");
-            tbl.integer("square_ft");
-            tbl.string("state");
-            tbl.string("status");
-            tbl.string("street_address");
-            tbl.integer("zip_code").notNullable();
-            tbl.enu("gpsCords",['lat','long'])
-                
-        })
+        // // projects
+   
 
         //   .createTable("templates", tbl => {
         //     tbl.increments();
@@ -106,11 +109,11 @@ exports.up = function (knex) {
 exports.down = function (knex) {
     return knex.scheme
         .dropTableIfExists("projects")
-        .dropTableIfExists("templates_tasks")
+        // .dropTableIfExists("templates_tasks")
         .dropTableIfExists("tasks")
-        .dropTableIfExists("templates")
+        // .dropTableIfExists("templates")
         .dropTableIfExists("users")
-        .dropTableIfExists('delay_logs');
+        // .dropTableIfExists('delay_logs');
 };
 
 

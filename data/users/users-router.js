@@ -47,7 +47,7 @@ router.put('/username/update', (req, res) => {
 router.post('/login', (req, res) => {
   let { username, password } = req.body;
   
-  if(!username || !password){
+  if( username || password){
     
     res.status(403).json({message:'Please enter login information'}) 
   }
@@ -72,20 +72,20 @@ router.post('/login', (req, res) => {
       res.status(500).json(error);
     });
 });
-router.get("/logout",(req,res) =>{
-  if(req.session){
-    req.session.destroy(err =>{
-      res
-        .status(200)
-        .json({
-          message:
-          'Logout successfull'
-        })
-    })
-  }else {
-    res.status(200).json({message:'Not logged in'})
-  }
-})
+// router.get("/logout",(req,res) =>{
+//   if(req.session){
+//     req.session.destroy(err =>{
+//       res
+//         .status(200)
+//         .json({
+//           message:
+//           'Logout successfull'
+//         })
+//     })
+//   }else {
+//     res.status(200).json({message:'Not logged in'})
+//   }
+// })
 // users/
 router.put("/:id", async (req,res) =>{
   const  id  = req.params.id
