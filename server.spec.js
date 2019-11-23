@@ -11,6 +11,6 @@ describe("Server Accessing Root",  () => {
             server.get('/',()=>{
                
             });
-            expect(res.body).toBe(undefined)})
+            expect(res.status).toBe(undefined)})
         
       })
