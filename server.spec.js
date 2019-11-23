@@ -7,10 +7,10 @@ const server = require('./server');
 describe("Server Accessing Root",  () => {
    
            it("returns a 401 CANNOT GET'/' ", async ()=>{
-            request(server)
-            server.get('/',(req,res)=>{
-               return req,res
-            })
-            expect(status).toBe(401).body().toInclude('cannotGet')})
+           const res = await request(server)
+            server.get('/',()=>{
+               
+            });
+            expect(res.body).toBe(undefined)})
         
       })
