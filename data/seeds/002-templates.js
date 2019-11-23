@@ -5,9 +5,9 @@ exports.seed = function(knex) {
   //   .then(function() {
   //     // Inserts seed entries
   return knex("templates").insert([
-    { template_name: "template 1" },
-    { template_name: "template 2" },
-    { template_name: "template 3" }
+    { template_name: "90_day" },
+    { template_name: "60_day" },
+    { template_name: "30_day" }
   ]);
   // });
 };
