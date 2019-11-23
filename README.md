@@ -1,6 +1,6 @@
 # API Documentation
 
-####  Backend delpoyed at [Blitz Build API](https://api-blitz-build-dev.herokuapp.com/) <br>
+####  Backend delpoyed at [Blitz Build API](https://staging-blitz-build.herokuapp.com/) <br>
 
 ##  Getting started
 
@@ -18,7 +18,7 @@ To get the server running locally:
 
 
 -    Node / Express
--    Firebase Realtime Database
+-    Postgres
 
 
 ## Endpoints
