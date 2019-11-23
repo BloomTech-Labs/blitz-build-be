@@ -1,6 +1,6 @@
 # API Documentation
 
-####  Backend delpoyed at [Blitz Build API](https://staging-blitz-build.herokuapp.com/) <br>
+####  Backend delpoyed at [Blitz Build](https://staging-blitz-build.herokuapp.com/) <br>
 
 ##  Getting started
 
