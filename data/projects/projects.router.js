@@ -38,24 +38,16 @@ router.post("/", (req, res) => {
   const newProject = req.body;
 
   db.addProject(newProject)
-    .then(project,(error) => {
-      if(project){
-      res.status(201).json({message:`Project added @ ${moment().format("LLL")}`});
-      // zipcodes.lookup(req.body.zip_code);
-      // project.latitude = cords.latitude;
-      // project.longitude = cords.longitude;
-      }else{
-        res.status(409).json(error,{message:'A project with that name already exists'})
-      }
-     
+    .then( newProject=>{
+    
+     res.status(201).json({message:`Project added @ ${moment().format("LLL")}`,newProject:newProject.message})
+   
     })
-    .catch(error => {
-      res.status(500).json({
-        error: error,
-        message: "500 server error on adding a project"
-      });
+    .catch(error =>{
+      res.status(409).json({message:"A Project with that name already exists",error:error.key});
     });
 });
+
 
 router.put("/:id", (req, res) => {
   const id = req.params.id;

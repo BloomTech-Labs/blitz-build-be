@@ -17,11 +17,8 @@ function getProjectById(id) {
 }
 
 function addProject(newProject) {
-   db("projects").insert(newProject)
-   if(newProject){
-     return newProject
-   }else{(error)=>error}
-  }
+  return db("projects").insert(newProject);
+}
 
 function editProject(id, changes) {
   return db("projects")
