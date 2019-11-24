@@ -16,14 +16,16 @@ function logger(req, res, next) {
   console.log(`There was a ${method} on ${url}`);
   next();
 }
-
+server.use('/',(req,res)=>{
+   res.status(200).json({message:'Working..........'})
+})
 // Notes
 server.use(cors());
 server.use(helmet());
 server.use(express.json());
 server.use(logger);
 server.use("/users", UsersRouter);
-server.use("/projects",Auth, ProjectsRouter);
+server.use("/projects",ProjectsRouter);
 server.use("/projects/tasks", TasksRouter);
 server.use("/templates", TemplatesRouter);
 server.use("/projects/tasks/templates", TemplateTasksRouter);

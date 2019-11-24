@@ -23,7 +23,7 @@ To get the server running locally:
 
 ## Endpoints
 
-https://app.swaggerhub.com/apis-docs/mharley12345/blitz-build_api/1.0
+https://app.swaggerhub.com/apis-docs/mharley12345/blitz-build_api/1.0  ** NOT CURRENT
 
 #### Non-Auth Routes
 

@@ -6,11 +6,12 @@ const server = require('./server');
 
 describe("Server Accessing Root",  () => {
    
-           it("returns a 401 CANNOT GET'/' ", async ()=>{
+           it("returns a 200 Working .... ", async ()=>{
            const res = await request(server)
-            server.get('/',()=>{
-               
-            });
-            expect(res.status).toBe(undefined)})
-        
+            .get('/')
+          
+            expect(res.status).toBe(200)
+            expect({message:'Working.....'})
+           })
+          
       })
