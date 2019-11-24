@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const db = require("./projects.model");
 const zipcodes = require("zipcodes");
-
+let moment = require('moment')
 
 
 
@@ -33,17 +33,18 @@ router.get("/:id", (req, res) => {
       });
     });
 });
-
+// TODO finish return message !!!!!!!!!!!!!!!!!!!!!!
 router.post("/", (req, res) => {
   const newProject = req.body;
 
   db.addProject(newProject)
     .then(project => {
-      res.status(201).json(project);
-      zipcodes.lookup(req.body.zip_code);
-      project.latitude = cords.latitude;
-      project.longitude = cords.longitude;
+      res.status(201).json({message:`Project added @ ${moment().format("LLL")}`});
+      // zipcodes.lookup(req.body.zip_code);
+      // project.latitude = cords.latitude;
+      // project.longitude = cords.longitude;
       console.log(project);
+     
     })
     .catch(error => {
       res.status(500).json({

@@ -27,8 +27,8 @@ router.post('/register', (req, res) => {
   
     db.addUser(user)
     .then(saved => {
-      if (saved) {
-        res.status(201).json({ message: `${saved} added` });
+         if (saved) {
+        res.status(201).json({ message: `${saved} added`,id:saved.id });
       } else {
         res.status(404).json({ message: "Please check username and email" });
       }
@@ -46,8 +46,9 @@ router.post("/login", (req, res) => {
     .then(user => {
       if (user && bcrypt.hashSync(password, user.password)) {
         const token = generateToken(user);
-
+        const id  = user.id
         res.status(200).json({
+          id,
           token,
           message: "you are now logged in!"
         });
