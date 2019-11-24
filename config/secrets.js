@@ -1,5 +1,5 @@
 require('dotenv').config('./env')
 module.exports = {
-    jwtSecret:process.env.JWT_SECRET ,
+    jwtSecret:process.env.SECRET || "keep it on the dl" ,
 
 }

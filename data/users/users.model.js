@@ -12,8 +12,11 @@ function getUsers() {
   return db("users");
 }
 
-function addUser(newUser) {
-  return db("users").insert(newUser);
+function addUser(user) {   
+  return  db('users')
+   .insert(user,"id")
+   .then(newUser => newUser )
+  
 }
 
 function findByEmail(email) {

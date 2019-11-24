@@ -5,20 +5,20 @@ const newLocal = 'sqlite3'
 
 module.exports = {
 
-  development: {
-    client: newLocal,
-    useNullAsDefault: true,
-    connection: {
-      filename: './data/information.db3'
-    },
-    migrations: {
-      directory: './data/migrations',
-      tableName: 'knex_migrations',
-    },
-    seeds: {
-      directory: './data/seeds',
-    },
-  },
+  // development: {
+  //   client: newLocal,
+  //   useNullAsDefault: true,
+  //   connection: {
+  //     filename: './data/information.db3'
+  //   },
+  //   migrations: {
+  //     directory: './data/migrations',
+  //     tableName: 'knex_migrations',
+  //   },
+  //   seeds: {
+  //     directory: './data/seeds',
+  //   },
+  // },
 
   production: {
     client: 'pg',

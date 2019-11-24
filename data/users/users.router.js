@@ -1,9 +1,9 @@
-const express = require("express");
+const router = require('express').Router()
 const db = require("./users.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const jwtSecret = require('../../config/secrets')
-const router = express.Router();
+const jwtSecret = process.env.SECRET
+
 
 router.get("/", (req, res) => {
   db.getUsers()
@@ -17,23 +17,24 @@ router.get("/", (req, res) => {
       });
     });
 });
+router.post('/register', (req, res) => {
+  let user = req.body
 
-router.post("/register", (req, res) => {
-  const user = req.body;
+  const hash = bcrypt.hashSync(user.password,10); // 2 ^ n
+ user.password = hash
 
-  const hash = bcrypt.hashSync(user.password, 8);
 
-  user.password = hash;
-
-  db.addUser(user)
-    .then(newUser => {
-      res.status(201).json(newUser);
+  
+    db.addUser(user)
+    .then(saved => {
+      if (saved) {
+        res.status(201).json({ message: `${saved} added` });
+      } else {
+        res.status(404).json({ message: "Please check username and email" });
+      }
     })
     .catch(error => {
-      res.status(500).json({
-        error: error,
-        message: "there was a 500 server error on adding user"
-      });
+      res.status(500).json({ message: "cannot add the user",error:error.message});
     });
 });
 

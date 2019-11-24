@@ -8,8 +8,8 @@ module.exports = {
   deleteProject
 };
 
-function getProjects() {
-  return db("projects");
+function getProjects(id) {
+  return db("projects").where("user_id","=", id);
 }
 
 function getProjectById(id) {

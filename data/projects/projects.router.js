@@ -1,11 +1,13 @@
-const express = require("express");
+const router = require("express").Router();
 const db = require("./projects.model");
 const zipcodes = require("zipcodes");
 
-const router = express.Router();
+
+
 
 router.get("/", (req, res) => {
-  db.getProjects()
+  const id = req.headers.id
+  db.getProjects(id)
     .then(projects => {
       res.status(200).json(projects);
     })
