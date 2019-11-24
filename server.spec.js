@@ -77,7 +77,7 @@ describe("Requests made to /projects endpoints",()=>{
         //     .post('/projects')
         //     .set({id:46})
         //     .send({
-        //         "project_name":"Server_Spec_Test 1",
+        //         "project_name":"Server_Spec_Test 9",
         //         "baths": 2.5,
         //         "beds": 4,
         //         "square_ft":4200,
@@ -89,7 +89,7 @@ describe("Requests made to /projects endpoints",()=>{
         //     })
         //     .expect(function(res){
         //         res.status = 201
-        //         res.body={message:`Project added @ ${moment().format("LLL")`}}
+        //         res.body={message:`Project added @ ${moment().format("LLL")}`}
         //     })
         // })
         it("Returns status 409, message:a project with that name already exists",async ()=>{
@@ -97,7 +97,7 @@ describe("Requests made to /projects endpoints",()=>{
             .post('/projects')
             .set({id:46})
             .send({
-                "project_name":"Server_Spec_Test 1",
+                "project_name":"Server_Spec_Test 9",
                 "baths": 2.5,
                 "beds": 4,
                 "square_ft":4200,
