@@ -16,9 +16,9 @@ function logger(req, res, next) {
   console.log(`There was a ${method} on ${url}`);
   next();
 }
-server.use('/',(req,res)=>{
-   res.status(200).json({message:'Working..........'})
-})
+// server.use('/',(req,res)=>{
+//    res.status(200).json({message:'Working..........'})
+// })
 // Notes
 server.use(cors());
 server.use(helmet());

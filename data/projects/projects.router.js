@@ -38,12 +38,15 @@ router.post("/", (req, res) => {
   const newProject = req.body;
 
   db.addProject(newProject)
-    .then(project => {
+    .then(project,(error) => {
+      if(project){
       res.status(201).json({message:`Project added @ ${moment().format("LLL")}`});
       // zipcodes.lookup(req.body.zip_code);
       // project.latitude = cords.latitude;
       // project.longitude = cords.longitude;
-      console.log(project);
+      }else{
+        res.status(409).json(error,{message:'A project with that name already exists'})
+      }
      
     })
     .catch(error => {
