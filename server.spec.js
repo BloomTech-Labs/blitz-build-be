@@ -116,3 +116,44 @@ describe("Requests made to /projects endpoints",()=>{
         })
     })
 })
+
+    describe("Get request with incorrect  user id in headers to /projects/:id",()=>{
+        it("Returns a 401 , message: project # 1 doesn't belong to user # 4", async ()=>{
+            const res = await request(server)
+            .get('/projects/1')
+            .set({id:4})
+            .expect(function(res){
+                res.status = 401
+                res.body ={message:"Project # 1 doesn't belong to user # 4"}
+            })
+        })
+    })
+    describe("Get request with correct user id in headers to /projects/:id",()=>{
+        it("Returns a project and status 200", async ()=>{
+            const res = await request(server)
+            .get('/projects/1')
+            .set({id:3})
+            .expect(function(res){
+                res.status = 200
+                res.body = [
+                    {
+                        "id": 1,
+                        "project_name": "Auburn",
+                        "baths": 3,
+                        "beds": 4,
+                        "city": "Auburn",
+                        "imageURL": "",
+                        "square_ft": 3200,
+                        "state": "WA",
+                        "status": "on time",
+                        "street_address": "212 Auburn Wa",
+                        "zip_code": 98001,
+                        "latitude": null,
+                        "longitude": null,
+                        "due_date": "2020-02-22T08:00:00.000Z",
+                        "user_id": 3
+                    }
+                ]
+            })
+        })
+    })

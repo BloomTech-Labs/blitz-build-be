@@ -21,10 +21,16 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   const id = req.params.id;
-
+  const uid = req.headers.id
   db.getProjectById(id)
+
     .then(project => {
-      res.status(200).json(project);
+ 
+      if(project[0].user_id == req.headers.id){
+      res.status(200).json(project)
+      }else{
+        res.status(401).json({message:`Project # ${id} doesn't belong to user # ${uid}`})
+      }
     })
     .catch(error => {
       res.status(500).json({
