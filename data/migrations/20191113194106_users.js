@@ -1,10 +1,29 @@
 const moment = require('moment')
 const date = moment().add(90,'days').calendar()
 const createdAt = moment().calendar()
+let tasks;
 exports.up = function(knex) {
   return (
     knex.schema
-           //PROJECTS
+      //USERS
+      .createTable("users", tbl => {
+        //USERS TABLE
+        tbl.increments();
+
+        tbl
+          .string("email")
+          .unique()
+          .notNullable();
+        tbl.string("name").notNullable();
+        tbl.string("password").notNullable();
+        tbl.string("phone_number").notNullable();
+       
+      })
+    
+    
+    
+    
+    //PROJECTS
       .createTable("projects", tbl => {
         tbl.increments();
 
@@ -24,34 +43,16 @@ exports.up = function(knex) {
         tbl.integer("latitude");
         tbl.integer("longitude");
         tbl.date("due_date").defaultsTo(date)
+        tbl.integer('user_id')
+            .unsigned()
+            .references('id')
+            .inTable('users')
+            .onUpdate('CASCADE')
+            .onDelete('CASCADE')
       })
-      //USERS
-      .createTable("users", tbl => {
-        //USERS TABLE
-        tbl.increments();
+     
 
-        tbl
-          .string("email")
-          .unique()
-          .notNullable();
-        tbl.string("name").notNullable();
-        tbl.string("password").notNullable();
-        tbl.string("phone_number").notNullable();
-        tbl.integer("project_id")
-           .unsigned()
-           .references("id")
-           .inTable("projects")
-           .onUpdate("CASCADE")
-           .onDelete("CASCADE");
-      })
-
-      //TEMPLATES
-      .createTable("templates", tbl => {
-        tbl.increments();
-
-        tbl.string("template_name").unique();
-          
-      })
+     
 
       //TASKS
       .createTable("tasks", tbl => {
@@ -70,8 +71,15 @@ exports.up = function(knex) {
           .onDelete("CASCADE")
           .onUpdate("CASCADE");
       })
+        //TEMPLATES
+      .createTable("templates", tbl => {
+       tbl.increments('id');
 
-      //MANY-TO-MANY TABLE WITH TEMPLATES AND TASKS
+      tbl.string("template_name")
+      tbl.enu("tasks",[{"task_number":Number},{"due_date":Date},{"task_name":String},{"isComplete":Boolean},{"createdAt":Date}])
+  
+      })
+      //MANY-TO-MANY TABLE WITH PROJECTS AND TASKS
       .createTable("projects_tasks", tbl => {
         tbl.increments();
 
@@ -99,8 +107,9 @@ exports.down = function(knex) {
   return knex.schema
     
     .dropTableIfExists("projects_tasks")
-    .dropTableIfExists("tasks")
     .dropTableIfExists("templates")
-    .dropTableIfExists("users")
-    .dropTableIfExists("projects");
+    .dropTableIfExists("tasks")
+  
+     .dropTableIfExists("projects")
+     .dropTableIfExists("users");
 };

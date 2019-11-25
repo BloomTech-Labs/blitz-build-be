@@ -18,7 +18,7 @@ describe("Requests made to /projects endpoints",()=>{
             const res = await request(server)
             
             .get('/projects')
-            .set({id:46})
+            .set({id:3})
             .expect(function(res){
                 res.status = 200
                 res.body =
@@ -38,25 +38,27 @@ describe("Requests made to /projects endpoints",()=>{
                         "latitude": null,
                         "longitude": null,
                         "due_date": "2020-02-21T08:00:00.000Z",
-                        "user_id": 46
+                        "user_id": 3
                     },
                     {
-                        "id": 3,
-                        "project_name": "Seattle Eastside",
-                        "baths": 3.5,
-                        "beds": 5,
-                        "city": "Seattle",
-                        "imageURL": "",
-                        "square_ft": 3800,
-                        "state": "WA",
-                        "status": "on time",
-                        "street_address": "5792 Eastside St",
-                        "zip_code": 98101,
+                        "id": 4,
+                        "project_name":"Server_Spec_Test 1",
+                        "baths": 2.5,
+                        "beds": 4,
+                        "square_ft":4200,
+                        "street_address": "1234 Lambda Way",
+                        "image_url":null,
+                        "city":"Lambda Labs",
+                        "state":"CA",
+                        "status":"on time",
+                        "zip_code": 94102,
+                        "due_date":"01-01-2020",
                         "latitude": null,
                         "longitude": null,
-                        "due_date": "2020-02-21T08:00:00.000Z",
-                        "user_id": 46
+                        "user_id":3,
+
                     }
+             
                 ]
            
            
@@ -75,9 +77,9 @@ describe("Requests made to /projects endpoints",()=>{
         // it("Returns status 201 w/  message project added @ + current time  ",async ()=>{
         //     const res = await request(server)
         //     .post('/projects')
-        //     .set({id:46})
+        //     .set({id:3})
         //     .send({
-        //         "project_name":"Server_Spec_Test 9",
+        //         "project_name":"Server_Spec_Test 1",
         //         "baths": 2.5,
         //         "beds": 4,
         //         "square_ft":4200,
@@ -95,9 +97,9 @@ describe("Requests made to /projects endpoints",()=>{
         it("Returns status 409, message:a project with that name already exists",async ()=>{
             const res = await request(server)
             .post('/projects')
-            .set({id:46})
+            .set({id:3})
             .send({
-                "project_name":"Server_Spec_Test 9",
+                "project_name":"Server_Spec_Test 1",
                 "baths": 2.5,
                 "beds": 4,
                 "square_ft":4200,

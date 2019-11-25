@@ -1,16 +1,14 @@
 const db = require("../db.config");
 
 module.exports = {
-  //   getAllTasksAndTemplates,
-  getTasksByTemplateId
+  //   get All tasks for a project,
+  getTasksByProjectId
 };
 
-//NEED A PRIMARY KEY TO RETURN ALL TEMPLATE AND TASK COMBOS
 
-// function getAllTasksAndTemplates() {
-//   return db("templates_tasks");
-// }
 
-function getTasksByTemplateId(template_id) {
-  return db("templates_tasks").where("template_id", "=", template_id);
+
+
+function getTasksByProjectId(template_id) {
+  return db("template_tasks").where("template", "=", template_id);
 }
