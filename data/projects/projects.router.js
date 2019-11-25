@@ -7,6 +7,7 @@ let moment = require('moment')
 
 router.get("/", (req, res) => {
   const id = req.headers.id
+  // Get all projects will check if user id == user_id in the DB before it returns the list to the client
   db.getProjects(id)
     .then(projects => {
       res.status(200).json(projects);
@@ -22,13 +23,16 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   const id = req.params.id;
   const uid = req.headers.id
+  // Get project from DB
   db.getProjectById(id)
 
     .then(project => {
- 
+      // Check if Project belongs to user
       if(project[0].user_id == req.headers.id){
+        // If so return project to client
       res.status(200).json(project)
       }else{
+        // If not return error message to client
         res.status(401).json({message:`Project # ${id} doesn't belong to user # ${uid}`})
       }
     })
@@ -39,7 +43,7 @@ router.get("/:id", (req, res) => {
       });
     });
 });
-// TODO finish return message !!!!!!!!!!!!!!!!!!!!!!
+
 router.post("/", (req, res) => {
   const newProject = req.body;
 
@@ -54,15 +58,27 @@ router.post("/", (req, res) => {
     });
 });
 
-
+// Update Project
 router.put("/:id", (req, res) => {
   const id = req.params.id;
   const changes = req.body;
-
-  db.editProject(id, changes)
+  const uid = req.headers.id
+  // Get project 1st
+ db.getProjectById(id)
+ 
+ .then(project => {
+   //Check to see if project belongs to user
+   if(project[0].user_id == req.headers.id)
+    //If so update project and send status 200 back to client
+    {db.editProject(id, changes)
     .then(updatedProject => {
-      res.status(200).json(updatedProject);
+      res.status(200).json({message:`Project # ${updatedProject} updated`})
     })
+   //If not send error message back to client
+  }else{
+    res.status(401).json({message:`Project # ${id} doesn't belong to user # ${uid}`})}
+  
+  })
     .catch(error => {
       res.status(500).json({
         error: error,
@@ -70,14 +86,21 @@ router.put("/:id", (req, res) => {
       });
     });
 });
-
+ 
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
-
+  const uid = req.headers.id
+  db.getProjectById(id)
+  .then(project =>{
+    if(project[0].user_id == req.headers.id){
+  
   db.deleteProject(id)
     .then(deletedProject => {
       res.status(204).json(deletedProject);
-    })
+    })}else{
+      res.status(401).json({message:`Project # ${id} doesn't belong to user # ${uid}`})
+    }
+  })
     .catch(error => {
       res.status(500).json({
         error: error,

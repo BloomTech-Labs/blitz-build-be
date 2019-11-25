@@ -87,7 +87,9 @@ describe("Requests made to /projects endpoints",()=>{
         //         "city":"Lambda Labs",
         //         "state":"CA",
         //         "zip_code": 94102,
-        //         "due_date":"01-01-2020"
+        //         "due_date":"01-01-2020",
+        //         "user_id":3,
+        //         "status":"on time"
         //     })
         //     .expect(function(res){
         //         res.status = 201
@@ -157,3 +159,57 @@ describe("Requests made to /projects endpoints",()=>{
             })
         })
     })
+
+    describe("PUT Request to /projects/:id with incorrect user_id in headers",()=>{
+        it("Returns 401 unauthorized",async ()=>{
+            const res = await request(server)
+            .put('/projects/1')
+            .set({id:4})
+            .send({"status":"delayed"})
+            .expect(function(res){
+                res.status = 401
+                res.body = {message:"Project #1 doesn't belong to user #4"}
+            })
+        })
+    })
+    describe("PUT Request to /projects/:id with correct user_id in headers",()=>{
+        it("Returns 200 ok",async ()=>{
+            const res = await request(server)
+            .put('/projects/1')
+            .set({id:3})
+            .send({"status":"delayed"})
+            .expect(function(res){
+                res.status = 200
+                res.body = {message:"Project #1 updated"}
+            })
+        })
+    })
+
+    describe("DELETE Request to /projects/:id with incorrect user_id in headers",()=>{
+        it("Returns 401 unauthorized",async ()=>{
+            const res = await request(server)
+            .delete('/projects/14')
+            .set({id:4})
+      
+            .expect(function(res){
+                res.status = 401
+                res.body = {message:"Project #14 doesn't belong to user #4"}
+            })
+        })
+    })
+    
+          // Test Passes 
+    // describe("DELETE Request to /projects/:id with correct user_id in headers",()=>{
+    //     it("Returns 204 deleted",async ()=>{
+    //         const res = await request(server)
+    //         .delete('/projects/14')
+    //         .set({id:3})
+      
+    //         .expect(function(res){
+    //             res.status = 204
+    //             res.body = {message:"Project #4 deleted"}
+    //         })
+    //     })
+    // })
+
+ 

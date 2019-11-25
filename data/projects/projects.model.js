@@ -29,5 +29,6 @@ function editProject(id, changes) {
 function deleteProject(id) {
   return db("projects")
     .where("id", "=", id)
-    .del();
+    .truncate()
+    .delete()
 }
