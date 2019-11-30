@@ -27,7 +27,7 @@ router.post("/add",(req,res) => {
 })
 
 router.put('/:id',(req,res)=>{
-    const changes = req.body,
+    const changes = req.body
     const id = req.params.id
     db.editLogs(id,changes)
     .then(updatedLog =>{
