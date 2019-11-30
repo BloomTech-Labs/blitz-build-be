@@ -97,8 +97,8 @@ exports.up = function(knex) {
           .inTable("tasks")
           .onDelete("CASCADE")
           .onUpdate("CASCADE")
-          
-   
+
+  
       })
 
   
@@ -114,6 +114,6 @@ exports.down = function(knex) {
   
      .dropTableIfExists("projects")
      .dropTableIfExists("users")
- 
+     
 
 };

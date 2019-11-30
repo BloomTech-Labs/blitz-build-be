@@ -1,4 +1,7 @@
 require('dotenv').config('./env')
+const moment = require('moment')
+const createdAt = moment().format("LLL")
+const updatedAt = moment().format("LLL")
 const db = require('../db.config')
 module.exports={
     getLogs,
@@ -7,15 +10,15 @@ module.exports={
     deleteLogs
 }
  
-function getLogs(user_id){
-    return db("delay_logs").where({user_id});
+function getLogs(id){
+    return db("delay_logs").where({id});
 }
 
 function addLogs(newLog){
-    return db("delay_logs").insert(newLog);
+    return db("delay_logs").insert({createdAt:createdAt},newLog);
 }
 function editLogs(id,changes){
-  return db("delay_logs").where({id}).update(changes)
+  return db("delay_logs").where({id}).update({updated:updatedAt},changes)
 }
 function deleteLogs(id){
     return db("delay_logs").where({id}).delete()
