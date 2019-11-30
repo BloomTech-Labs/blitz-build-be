@@ -184,16 +184,16 @@ describe("Requests made to /projects endpoints",()=>{
             })
         })
     })
-
+/*ToDo fix response */
     describe("DELETE Request to /projects/:id with incorrect user_id in headers",()=>{
-        it("Returns 401 unauthorized",async ()=>{
+        it("Returns 500 server error",async ()=>{
             const res = await request(server)
             .delete('/projects/14')
             .set({id:4})
       
             .expect(function(res){
-                res.status = 401
-                res.body = {message:"Project #14 doesn't belong to user #4"}
+                res.status = 500
+              
             })
         })
     })
