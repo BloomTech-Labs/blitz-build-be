@@ -7,7 +7,8 @@ const TasksRouter = require("./data/tasks/tasks.router");
 const TemplatesRouter = require("./data/templates/templates.router");
 const TemplateTasksRouter = require("./data/templates-tasks/templates-tasks-router");
 const Weather = require("./data/weather/weather.router");
-const Auth = require("./data/middleware/restriced.middleware")
+// const Auth = require("./data/middleware/restriced.middleware")
+const delayLogsRouter = require("./data/delay-logs/delay_logs.router")
 const server = express();
 
 function logger(req, res, next) {
