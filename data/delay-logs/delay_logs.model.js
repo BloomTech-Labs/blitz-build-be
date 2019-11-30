@@ -7,8 +7,8 @@ module.exports={
     deleteLogs
 }
  
-function getLogs(id){
-    return db("delay_logs").where({id});
+function getLogs(user_id){
+    return db("delay_logs").where({user_id});
 }
 
 function addLogs(newLog){

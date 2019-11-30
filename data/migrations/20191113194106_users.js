@@ -98,25 +98,7 @@ exports.up = function(knex) {
           .onDelete("CASCADE")
           .onUpdate("CASCADE")
           
-          // Delay Logs
-      .createTable("delay_logs", tbl =>{
-        tbl.increments();
-        tbl.string("p_id")
-           .unique();
-        tbl.string("project_name")
-            .unique();
    
-        tbl.string("reason")
-          .notNullable();
-        tbl.date("createdAt",createdAt)
-        tbl.string("userName")
-            .unique();
-        tbl.string("task_id")
-           .unique();
-        tbl.string("task_name")
-            .unique();
-         tbl.date("last_updated",now)
-    });
       })
 
   
@@ -132,6 +114,6 @@ exports.down = function(knex) {
   
      .dropTableIfExists("projects")
      .dropTableIfExists("users")
-     .dropTableIfExists("delay_logs");
+ 
 
 };
