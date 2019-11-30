@@ -2,16 +2,17 @@ const express = require("express");
 const db = require("./tasks.model");
 
 const router = express.Router();
-
-router.get("/", (req, res) => {
-  db.getTasks()
-    .then(tasks => {
-      res.status(200).json(tasks);
+//Get task by ID
+router.get("/:id", (req, res) => {
+  const id = req.params.id
+  db.getTaskByTaskID(id)
+    .then(task => {
+      res.status(200).json(task);
     })
     .catch(error => {
       res.status(500).json({
         error: error,
-        message: "500 server error on getting tasks"
+        message: "500 server error on getting task"
       });
     });
 });
@@ -63,9 +64,9 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-//RETURNS TASKS BY PROJECT ID
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
+//RETURNS All TASKS For Project BY PROJECT ID
+router.get("/byProject/:pid", (req, res) => {
+  const id = req.params.pid;
 
   db.getTasksByProject(id)
     .then(tasks => {
