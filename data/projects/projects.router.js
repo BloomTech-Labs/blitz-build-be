@@ -44,6 +44,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
+
 router.post("/", (req, res) => {
   const newProject = req.body;
 
@@ -72,7 +73,7 @@ router.put("/:id", (req, res) => {
     //If so update project and send status 200 back to client
     {db.editProject(id, changes)
     .then(updatedProject => {
-      res.status(200).json({message:`Project # ${updatedProject} updated`})
+      res.status(200).json({message:`Project # ${id} updated`,updatedProject})
     })
    //If not send error message back to client
   }else{
