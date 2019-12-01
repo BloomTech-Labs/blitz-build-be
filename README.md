@@ -23,7 +23,7 @@ To get the server running locally:
 
 ## Endpoints
 
-https://app.swaggerhub.com/apis-docs/mharley12345/blitz-build_api/1.0  ** NOT CURRENT
+[![END POINT DOCS](https://documenter.getpostman.com/view/7960570/SWDzeLuk)](https://documenter.getpostman.com/view/7960570/SWDzeLuk)
 
 #### Non-Auth Routes
 

@@ -76,7 +76,18 @@ exports.up = function(knex) {
        tbl.increments('id');
 
       tbl.string("template_name")
-      tbl.enu("tasks",[{"task_number":Number},{"due_date":Date},{"task_name":String},{"isComplete":Boolean},{"createdAt":Date}])
+      tbl.string("task_name").notNullable();
+        tbl.string("task_description", 1000);
+        tbl.string("due_date");
+        tbl.date("createdAt").defaultsTo(createdAt)
+        tbl.boolean("isComplete").defaultsTo(false)
+        tbl
+          .integer("project_id", [])
+          .unsigned()
+          .references("id")
+          .inTable("projects")
+          .onDelete("CASCADE")
+          .onUpdate("CASCADE");
   
       })
       //MANY-TO-MANY TABLE WITH PROJECTS AND TASKS

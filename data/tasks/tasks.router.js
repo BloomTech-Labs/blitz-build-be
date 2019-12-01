@@ -1,6 +1,6 @@
 const express = require("express");
 const db = require("./tasks.model");
-
+const templates = require('../templates/templates.model')
 const router = express.Router();
 //Get task by ID
 router.get("/:id", (req, res) => {
@@ -79,5 +79,24 @@ router.get("/byProject/:pid", (req, res) => {
       });
     });
 });
+/*TODO*/
+//projects/tasks
 
-module.exports = router;
+
+ router.post('/templates/:tid',(req,res)=>{
+   const tempid = req.params.tid
+ 
+   
+   templates.getTemplateById(tempid)
+   
+
+   .then(templates =>{
+     templates
+     const template = templates[0].tasks
+    console.log(template)
+    db.addTasks(template)
+     }).then(newTasksArr =>{console.log(newTasksArr)})
+     
+   })
+
+module.exports = router
