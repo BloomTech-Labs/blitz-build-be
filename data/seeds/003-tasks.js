@@ -10,7 +10,7 @@ exports.seed = function(knex) {
   return knex("tasks").insert([
     {
   
-			"id":1,
+			
 			"due_date": date,
 			"task_name": "Order Scrap Dumpster and Port-A-John",
 			"isComplete": false,
@@ -19,7 +19,7 @@ exports.seed = function(knex) {
 		},
 		{
     
-			"id":2,
+		
 			"due_date": date,
 			"task_name": "Pre Construction Meeting With Buyers (Start Forming)",
 			"isComplete": false,
@@ -28,7 +28,7 @@ exports.seed = function(knex) {
 		},
 		{ 
     
-			"id":3,
+		
 			"due_date": date,
 			"task_name": "Form Board Survey",
 			"isComplete": false,
@@ -37,7 +37,6 @@ exports.seed = function(knex) {
 		},
 		{
   
-			"id":4,
 			"due_date": date,
 			"task_name": "Fill The Form Boards ",
 			"isComplete": false,
@@ -46,7 +45,7 @@ exports.seed = function(knex) {
 		},
 		{
     
-			"id":5,
+		
 			"due_date": date,
 			"task_name": "Rough Plumbing",
 			"isComplete": false,
@@ -55,7 +54,7 @@ exports.seed = function(knex) {
 		},
 		{
     
-			"id":6,
+			
 			"due_date": date,
 			"task_name": "Sewer Hookup / Order Windows",
 			"isComplete": false,
@@ -64,7 +63,7 @@ exports.seed = function(knex) {
 		},
 		{
    
-			"id":7,
+			
 			"due_date": date,
 			"task_name": "Foundation and Sewer Hookup Inspection *** must be approved before new tasks to be started ***",
 			"isComplete": false,
@@ -73,7 +72,7 @@ exports.seed = function(knex) {
 		},
 		{
   
-			"id":8,
+	
 			"due_date": date,
 			"task_name": "Order Scrap Dumpster and Port-A-John",
 			"isComplete": false,
@@ -82,7 +81,7 @@ exports.seed = function(knex) {
 		},
 		{
     
-			"id":9,
+		
 			"due_date": date,
 			"task_name": "Pre Construction Meeting With Buyers (Start Forming)",
 			"isComplete": false,
@@ -91,7 +90,7 @@ exports.seed = function(knex) {
 		},
 		{ 
     
-			"id":10,
+		
 			"due_date": date,
 			"task_name": "Form Board Survey",
 			"isComplete": false,
@@ -100,7 +99,7 @@ exports.seed = function(knex) {
 		},
 		{
   
-			"id":11,
+			
 			"due_date": date,
 			"task_name": "Fill The Form Boards ",
 			"isComplete": false,
@@ -109,7 +108,7 @@ exports.seed = function(knex) {
 		},
 		{
     
-			"id":12,
+
 			"due_date": date,
 			"task_name": "Rough Plumbing",
 			"isComplete": false,
@@ -118,7 +117,7 @@ exports.seed = function(knex) {
 		},
 		{
     
-			"id":13,
+		
 			"due_date": date,
 			"task_name": "Sewer Hookup / Order Windows",
 			"isComplete": false,
@@ -127,7 +126,7 @@ exports.seed = function(knex) {
 		},
 		{
    
-			"id":14,
+		
 			"due_date": date,
 			"task_name": "Foundation and Sewer Hookup Inspection *** must be approved before new tasks to be started ***",
 			"isComplete": false,
@@ -136,7 +135,7 @@ exports.seed = function(knex) {
 		},
 		{
   
-			"id":15,
+	
 			"due_date": date,
 			"task_name": "Order Scrap Dumpster and Port-A-John",
 			"isComplete": false,
@@ -145,7 +144,7 @@ exports.seed = function(knex) {
 		},
 		{
     
-			"id":16,
+
 			"due_date": date,
 			"task_name": "Pre Construction Meeting With Buyers (Start Forming)",
 			"isComplete": false,
@@ -154,7 +153,7 @@ exports.seed = function(knex) {
 		},
 		{ 
     
-			"id":17,
+		
 			"due_date": date,
 			"task_name": "Form Board Survey",
 			"isComplete": false,
@@ -163,7 +162,7 @@ exports.seed = function(knex) {
 		},
 		{
   
-			"id":18,
+			
 			"due_date": date,
 			"task_name": "Fill The Form Boards ",
 			"isComplete": false,
@@ -172,7 +171,7 @@ exports.seed = function(knex) {
 		},
 		{
     
-			"id":19,
+			
 			"due_date": date,
 			"task_name": "Rough Plumbing",
 			"isComplete": false,
@@ -181,7 +180,7 @@ exports.seed = function(knex) {
 		},
 		{
     
-			"id":20,
+		
 			"due_date": date,
 			"task_name": "Sewer Hookup / Order Windows",
 			"isComplete": false,
@@ -190,7 +189,7 @@ exports.seed = function(knex) {
 		},
 		{
    
-			"id":21,
+		
 			"due_date": date,
 			"task_name": "Foundation and Sewer Hookup Inspection *** must be approved before new tasks to be started ***",
 			"isComplete": false,

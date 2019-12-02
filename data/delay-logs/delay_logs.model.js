@@ -15,7 +15,7 @@ function getLogs(id){
 }
 
 function addLogs(newLog){
-    return db("delay_logs").insert({createdAt:createdAt},newLog);
+    return db("delay_logs").insert(newLog);
 }
 function editLogs(id,changes){
   return db("delay_logs").where({id}).update({updatedAt:updatedAt},changes)

@@ -18,11 +18,11 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const task = req.body;
+  const tasks = req.body;
 
-  db.addTask(task)
+  db.addTasks(tasks)
     .then(newTask => {
-      res.status(200).json(newTask);
+      res.status(200).json({message:`${tasks.task_name} added`,"newTask":newTask.text});
     })
     .catch(error => {
       res.status(500).json({
@@ -39,7 +39,7 @@ router.put("/:id", (req, res) => {
 
   db.editTask(id, changes)
     .then(updatedTask => {
-      res.status(200).json(updatedTask);
+      res.status(200).json({message:`Task # ${id} updated`,updatedTask:updatedTask.text});
     })
     .catch(error => {
       res.status(500).json({

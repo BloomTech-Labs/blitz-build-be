@@ -8,7 +8,10 @@ const TemplatesRouter = require("./data/templates/templates.router");
 const TemplateTasksRouter = require("./data/templates-tasks/templates-tasks-router");
 const Weather = require("./data/weather/weather.router");
 // const Auth = require("./data/middleware/restriced.middleware")
-const delayLogsRouter = require("./data/delay-logs/delay_logs.router")
+const delayLogsRouter = require("./data/delay-logs/delay_logs.router");
+const jwt = require("express-jwt");
+const jwksRsa = require("jwks-rsa");
+
 const server = express();
 
 function logger(req, res, next) {
@@ -18,17 +21,44 @@ function logger(req, res, next) {
   next();
 }
 
+// server.use(function(req, res, next) {
+//   res.header(
+//     "Access-Control-Allow-Origin",
+//     "https://blitz-build-dev.netlify.com",
+//     "https://blitz-build-dev.netlify.com/weather"
+//   );
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+//   next();
+// });
+
+// const checkJwt = jwt({
+//   secret: jwksRsa.expressJwtSecret({
+//     cache: true,
+//     rateLimit: true,
+//     jwksRequestsPerMinute: 5,
+//     jwksUri: `https://gannondarcy2.auth0.com/.well-known/jwks.json`
+//   }),
+
+//   // Validate the audience and the issuer.
+//   audience: "OzMg1e7JDNF7DogxPEPvGzpG7fvvDHNe",
+//   issuer: `https://gannondarcy2.auth0.com/`,
+//   algorithms: ["RS256"]
+// });
 
 server.use(cors());
 server.use(helmet());
 server.use(express.json());
 server.use(logger);
 server.use("/users", UsersRouter);
-server.use("/projects",ProjectsRouter);
+server.use("/projects", ProjectsRouter);
 server.use("/projects/tasks", TasksRouter);
 server.use("/templates", TemplatesRouter);
 server.use("/projects/tasks/templates", TemplateTasksRouter);
 server.use("/weather", Weather);
-server.use("/delay_logs",delayLogsRouter);
+server.use("/delay_logs", delayLogsRouter);
 
 module.exports = server;

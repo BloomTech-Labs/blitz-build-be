@@ -10,7 +10,7 @@ exports.seed = function(knex) {
   return knex("templates").insert([
       { 
         "template_name":"90_day",
-        
+ 
         "due_date": "12/03/2019",
         "task_name": "Order Scrap Dumpster and Port-A-John",
         "isComplete": false,
@@ -388,7 +388,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 76,
+     
         "due_date": "02/28/2020",
         "task_name": "Specialites(towl bars,mirror,ect)",
         "task_description": "",
