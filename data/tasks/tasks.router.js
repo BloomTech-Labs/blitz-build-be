@@ -8,7 +8,7 @@ router.get("/:uid",(req,res)=>{
   const id = req.params.uid
   db.getTasksByID(id)
   .then(tasks =>{
-    req.status(200).json({tasks:tasks})
+    res.status(200).json({tasks:tasks})
   })
   .catch(error =>{res.status(500).json({message:error.message})})
 })
