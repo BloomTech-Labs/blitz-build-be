@@ -6,9 +6,9 @@ let moment = require('moment')
 
 
 router.get("/", (req, res) => {
-  const id = req.headers.id
-  // Get all projects will check if user id == user_id in the DB before it returns the list to the client
-  db.getProjects(id)
+  const user_id = req.headers.user_id
+  // Get all projects will check if user user_id == user_id in the DB before it returns the list to the client
+  db.getProjects(user_id)
     .then(projects => {
       res.status(200).json(projects);
     })
@@ -22,18 +22,18 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   const id = req.params.id;
-  const uid = req.headers.id
+  const user_id = req.headers.user_id
   // Get project from DB
   db.getProjectById(id)
 
     .then(project => {
       // Check if Project belongs to user
-      if(project[0].user_id == req.headers.id){
+      if(project[0].user_id == user_id){
         // If so return project to client
       res.status(200).json(project)
       }else{
         // If not return error message to client
-        res.status(401).json({message:`Project # ${id} doesn't belong to user # ${uid}`})
+        res.status(401).json({message:`Project # ${id} doesn't belong to user # ${user_id}`})
       }
     })
     .catch(error => {
@@ -45,17 +45,42 @@ router.get("/:id", (req, res) => {
 });
 
 
-router.post("/", (req, res) => {
-  const newProject = req.body;
+router.post("/",  (req, res) => {
 
-  db.addProject(newProject)
-    .then( newProject=>{
-    
-     res.status(201).json({message:`Project added @ ${moment().format("LLL")}`,newProject:newProject.message})
+  let zipcode = req.body.zip_code
+  const cords = zipcodes.lookup(zipcode)
+  let latitude = cords.latitude
+  let longitude = cords.longitude
+ 
+  const newProject = req.body;
+   db.addProject(newProject)
+  
+  .then(()=>{
+    const id = req.headers.user_id
+    db.getProjects(id).then(projects => {
+      let project = projects.slice(-1)
+  
+      let id = project[0].id
    
+      let changes = {
+        "latitude":latitude,
+        "longitude":longitude
+      
+      }
+    res.status(201).json({message:`Project added @ ${moment().format("LLL")}`,project_id:project[0].id})
+     return db.editProject(id,changes)
+  
     })
+  })
+
+  
+
+    
+  
+
+  
     .catch(error =>{
-      res.status(409).json({message:"A Project with that name already exists",error:error.key});
+      res.status(409).json({message:"A Project with that name already exists",error:error.message});
     });
 });
 
@@ -69,7 +94,7 @@ router.put("/:id", (req, res) => {
  
  .then(project => {
    //Check to see if project belongs to user
-   if(project[0].user_id == req.headers.id)
+   if(project[0].user_id == req.headers.user_id)
     //If so update project and send status 200 back to client
     {db.editProject(id, changes)
     .then(updatedProject => {
@@ -90,7 +115,7 @@ router.put("/:id", (req, res) => {
  
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
-  const uid = req.headers.id
+  const uid = req.headers.user_id
   db.getProjectById(id)
   .then(project =>{
     if(project[0].user_id == req.headers.id){
