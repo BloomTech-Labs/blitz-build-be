@@ -8,8 +8,8 @@ module.exports = {
   deleteProject
 };
 
-function getProjects(id) {
-  return db("projects").where("user_id","=", id);
+function getProjects(user_id) {
+  return db("projects").where("user_id","=", user_id);
 }
 
 function getProjectById(id) {
@@ -17,7 +17,10 @@ function getProjectById(id) {
 }
 
 function addProject(newProject) {
-  return db("projects").insert(newProject);
+  return db("projects")
+         .insert(newProject)
+      
+   
 }
 
 function editProject(id, changes) {
