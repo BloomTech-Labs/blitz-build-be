@@ -1,5 +1,5 @@
 // Update with your config settings.
-require('dotenv').config('./production.env')
+require('dotenv').config()
 const newLocal = 'sqlite3'
 
 
