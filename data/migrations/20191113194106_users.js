@@ -40,8 +40,8 @@ exports.up = function(knex) {
         tbl.string("status");
         tbl.string("street_address");
         tbl.integer("zip_code").notNullable();
-        tbl.integer("latitude");
-        tbl.integer("longitude");
+        tbl.float("longitude")
+        tbl.float("latitude")
         tbl.date("due_date").defaultsTo(date)
         tbl.integer('user_id')
             .unsigned()
@@ -111,6 +111,27 @@ exports.up = function(knex) {
 
   
       })
+      .createTable("delay_logs",tbl =>{
+        tbl.increments("id")
+        tbl.integer("projects_id")
+           .unsigned()
+           .references("id")
+           .inTable("projects")
+           .onDelete("CASCADE")
+           .onUpdate("CASCADE")
+        tbl.string("project_name").notNullable()
+        tbl.date("createdAt").defaultsTo(moment().format("L"))
+        tbl.string("reason").notNullable()
+        tbl.integer("task_id")
+        .unsigned()
+        .references("id")
+        .inTable("tasks")
+        .onDelete("CASCADE")
+        .onUpdate("CASCADE")
+        tbl.string("task_name").notNullable()
+        tbl.date("updatedAt").defaultsTo(moment().format("L"))
+          
+      })
 
   
   );
@@ -118,13 +139,26 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema
-    
-    .dropTableIfExists("projects_tasks")
-    .dropTableIfExists("templates")
-    .dropTableIfExists("tasks")
+  .dropTableIfExists("delay_logs")
+  .dropTableIfExists("templates")
+  .dropTableIfExists("projects_tasks")
+  .dropTableIfExists("tasks")
+  .dropTableIfExists("projects")
+ 
+  .dropTableIfExists("users")
+
+
   
-     .dropTableIfExists("projects")
-     .dropTableIfExists("users")
+
+
+ 
+    .dropTableIfExists("templates")
+  
+  
+
+  
+
+
      
 
 };
