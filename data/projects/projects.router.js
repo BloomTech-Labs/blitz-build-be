@@ -118,7 +118,7 @@ router.delete("/:id", (req, res) => {
   const uid = req.headers.user_id
   db.getProjectById(id)
   .then(project =>{
-    if(project[0].user_id == req.headers.id){
+    if(project[0].user_id == uid){
   
   db.deleteProject(id)
     .then(deletedProject => {
