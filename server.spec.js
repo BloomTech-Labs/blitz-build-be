@@ -18,7 +18,7 @@ describe("Requests made to /projects endpoints",()=>{
             const res = await request(server)
             
             .get('/projects')
-            .set({id:3})
+            .set({user_id:3})
             .expect(function(res){
                 res.status = 200
                 res.body =
@@ -77,9 +77,9 @@ describe("Requests made to /projects endpoints",()=>{
         // it("Returns status 201 w/  message project added @ + current time  ",async ()=>{
         //     const res = await request(server)
         //     .post('/projects')
-        //     .set({id:3})
+        //     .set({user_id:3})
         //     .send({
-        //         "project_name":"Server_Spec_Test 1",
+        //         "project_name":"Server_Spec_Test 4",
         //         "baths": 2.5,
         //         "beds": 4,
         //         "square_ft":4200,
@@ -99,7 +99,7 @@ describe("Requests made to /projects endpoints",()=>{
         it("Returns status 409, message:a project with that name already exists",async ()=>{
             const res = await request(server)
             .post('/projects')
-            .set({id:3})
+            .set({user_id:3})
             .send({
                 "project_name":"Server_Spec_Test 1",
                 "baths": 2.5,
@@ -123,7 +123,7 @@ describe("Requests made to /projects endpoints",()=>{
         it("Returns a 401 , message: project # 1 doesn't belong to user # 4", async ()=>{
             const res = await request(server)
             .get('/projects/1')
-            .set({id:4})
+            .set({user_id:4})
             .expect(function(res){
                 res.status = 401
                 res.body ={message:"Project # 1 doesn't belong to user # 4"}
@@ -134,28 +134,10 @@ describe("Requests made to /projects endpoints",()=>{
         it("Returns a project and status 200", async ()=>{
             const res = await request(server)
             .get('/projects/1')
-            .set({id:3})
+            .set({user_id:3})
             .expect(function(res){
                 res.status = 200
-                res.body = [
-                    {
-                        "id": 1,
-                        "project_name": "Auburn",
-                        "baths": 3,
-                        "beds": 4,
-                        "city": "Auburn",
-                        "imageURL": "",
-                        "square_ft": 3200,
-                        "state": "WA",
-                        "status": "on time",
-                        "street_address": "212 Auburn Wa",
-                        "zip_code": 98001,
-                        "latitude": null,
-                        "longitude": null,
-                        "due_date": "2020-02-22T08:00:00.000Z",
-                        "user_id": 3
-                    }
-                ]
+           
             })
         })
     })
@@ -164,7 +146,7 @@ describe("Requests made to /projects endpoints",()=>{
         it("Returns 401 unauthorized",async ()=>{
             const res = await request(server)
             .put('/projects/1')
-            .set({id:4})
+            .set({user_id:4})
             .send({"status":"delayed"})
             .expect(function(res){
                 res.status = 401
@@ -176,7 +158,7 @@ describe("Requests made to /projects endpoints",()=>{
         it("Returns 200 ok",async ()=>{
             const res = await request(server)
             .put('/projects/1')
-            .set({id:3})
+            .set({user_id:3})
             .send({"status":"delayed"})
             .expect(function(res){
                 res.status = 200
@@ -189,7 +171,7 @@ describe("Requests made to /projects endpoints",()=>{
         it("Returns 500 server error",async ()=>{
             const res = await request(server)
             .delete('/projects/14')
-            .set({id:4})
+            .set({user_id:4})
       
             .expect(function(res){
                 res.status = 500
