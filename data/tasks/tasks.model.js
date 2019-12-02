@@ -6,8 +6,13 @@ module.exports = {
   editTask,
   deleteTask,
   getTasksByProject,
-  getTaskByTaskID
+  getTaskByTaskID,
+  getTasksByID,
 };
+
+function getTasksByID(id){
+  return db("tasks").where("user_id","=",id)
+}
 
 function getTaskByTaskID(id) {
   return db("tasks").where({id});

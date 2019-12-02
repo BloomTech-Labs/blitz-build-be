@@ -2,6 +2,16 @@ const express = require("express");
 const db = require("./tasks.model");
 const templates = require('../templates/templates.model')
 const router = express.Router();
+
+//Get All Tasks for user
+router.get("/:uid",(req,res)=>{
+  const id = req.params.uid
+  db.getTasksByID(id)
+  .then(tasks =>{
+    req.status(200).json({tasks:tasks})
+  })
+  .catch(error =>{res.status(500).json({message:error.message})})
+})
 //Get task by ID
 router.get("/:id", (req, res) => {
   const id = req.params.id

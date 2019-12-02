@@ -57,14 +57,20 @@ exports.up = function(knex) {
       //TASKS
       .createTable("tasks", tbl => {
         tbl.increments();
-
+        tbl.string("project_name")
         tbl.string("task_name").notNullable();
         tbl.string("task_description", 1000);
-        tbl.string("due_date").defaultsTo(moment().add(90,"days").calendar())
+        tbl.string("due_date").defaultsTo(moment().add(90,"days").format("yyyymmdd"))
         tbl.date("createdAt").defaultsTo(createdAt)
         tbl.boolean("isComplete").defaultsTo(false)
+        tbl.integer("user_id")
+           .unsigned()
+           .references("id")
+           .inTable("users")
+           .onDelete("CASCADE")
+           .onUpdate("CASCADE")
         tbl
-          .integer("project_id", [])
+          .integer("project_id")
           .unsigned()
           .references("id")
           .inTable("projects")
