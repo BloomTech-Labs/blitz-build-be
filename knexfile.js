@@ -1,46 +1,46 @@
 // Update with your config settings.
 require('dotenv').config('./env')
-const productionConnection =
-  process.env.DATABASE_URL || "postgres://localhost/postgres";
+const newLocal = 'sqlite3'
+
 
 module.exports = {
-  development: {
-    client: "sqlite3",
-    connection: {
-      filename: "./data/information.db3"
-    },
-    useNullAsDefault: true,
 
-    // pool: {
-    //   afterCreate: (conn, done) => {
-    //     conn.run("PRAGMA foreign_keys = ON", done);
-    //   }
-    // },
-    migrations: {
-      directory: "./data/migrations"
-    },
-    seeds: {
-      directory: "./data/seeds"
-    }
-  },
+  // development: {
+  //   client: newLocal,
+  //   useNullAsDefault: true,
+  //   connection: {
+  //     filename: './data/information.db3'
+  //   },
+  //   migrations: {
+  //     directory: './data/migrations',
+  //     tableName: 'knex_migrations',
+  //   },
+  //   seeds: {
+  //     directory: './data/seeds',
+  //   },
+  // },
 
   production: {
-    client: "pg",
-    useNullAsDefault: true,
-
-    connection: productionConnection,
-
+    client: 'pg',
+    connection:{
+      host:process.env.HOST,
+      database:process.env.DATABASE,
+      user:process.env.USER,
+      password:process.env.PASSWORD,
+      ssl:true
+    },
+    pool:{
+      min:2,
+      max:10
+    },
     migrations: {
-      directory: "./data/migrations",
-      tableName: "knex_migrations"
+      directory: './data/migrations',
+      tableName: 'knex_migrations'
     },
-
     seeds: {
-      directory: "./data/seeds"
-    },
-    pool: {
-      min: 2,
-      max: 10
+      directory: './data/seeds',
     }
   }
+
 };
+

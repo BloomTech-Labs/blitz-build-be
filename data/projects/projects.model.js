@@ -1,4 +1,4 @@
-const db = require("../../config/db.config");
+const db = require("../db.config");
 
 module.exports = {
   getProjects,
@@ -8,8 +8,8 @@ module.exports = {
   deleteProject
 };
 
-function getProjects() {
-  return db("projects");
+function getProjects(user_id) {
+  return db("projects").where("user_id","=", user_id);
 }
 
 function getProjectById(id) {
@@ -17,7 +17,10 @@ function getProjectById(id) {
 }
 
 function addProject(newProject) {
-  return db("projects").insert(newProject);
+  return db("projects")
+         .insert(newProject)
+      
+   
 }
 
 function editProject(id, changes) {
@@ -29,5 +32,6 @@ function editProject(id, changes) {
 function deleteProject(id) {
   return db("projects")
     .where("id", "=", id)
-    .del();
+    .truncate()
+    .delete()
 }

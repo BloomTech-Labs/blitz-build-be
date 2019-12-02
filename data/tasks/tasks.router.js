@@ -1,32 +1,18 @@
 const express = require("express");
 const db = require("./tasks.model");
-
+const templates = require('../templates/templates.model')
 const router = express.Router();
-
-router.get("/", (req, res) => {
-  db.getTasks()
-    .then(tasks => {
-      res.status(200).json(tasks);
-    })
-    .catch(error => {
-      res.status(500).json({
-        error: error,
-        message: "500 server error on getting tasks"
-      });
-    });
-});
-
+//Get task by ID
 router.get("/:id", (req, res) => {
-  const id = req.params.id;
-
-  db.getTaskById(id)
+  const id = req.params.id
+  db.getTaskByTaskID(id)
     .then(task => {
       res.status(200).json(task);
     })
     .catch(error => {
       res.status(500).json({
         error: error,
-        message: "500 server error on getting task id"
+        message: "500 server error on getting task"
       });
     });
 });
@@ -48,7 +34,6 @@ router.post("/", (req, res) => {
 
 //EDITS TASK
 router.put("/:id", (req, res) => {
-  console.log("im here ");
   const id = req.params.id;
   const changes = req.body;
 
@@ -79,10 +64,9 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-//RETURNS TASKS BY PROJECT ID
-router.get("/project/:id", (req, res) => {
-  console.log("im here");
-  const id = req.params.id;
+//RETURNS All TASKS For Project BY PROJECT ID
+router.get("/byProject/:pid", (req, res) => {
+  const id = req.params.pid;
 
   db.getTasksByProject(id)
     .then(tasks => {
@@ -95,5 +79,24 @@ router.get("/project/:id", (req, res) => {
       });
     });
 });
+/*TODO*/
+//projects/tasks
 
-module.exports = router;
+
+ router.post('/templates/:tid',(req,res)=>{
+   const tempid = req.params.tid
+ 
+   
+   templates.getTemplateById(tempid)
+   
+
+   .then(templates =>{
+     templates
+     const template = templates[0].tasks
+    console.log(template)
+    db.addTasks(template)
+     }).then(newTasksArr =>{console.log(newTasksArr)})
+     
+   })
+
+module.exports = router

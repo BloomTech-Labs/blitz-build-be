@@ -1,8 +1,7 @@
-const db = require("../../config/db.config");
+const db = require("../db.config");
 
 module.exports = {
   getUsers,
-  getUserById,
   addUser,
   findByEmail,
   editUser,
@@ -13,12 +12,11 @@ function getUsers() {
   return db("users");
 }
 
-function getUserById(id) {
-  return db("users").where("id", "=", id);
-}
-
-function addUser(newUser) {
-  return db("users").insert(newUser);
+function addUser(user) {   
+  return  db('users')
+   .insert(user,"id")
+   .then(newUser => newUser )
+  
 }
 
 function findByEmail(email) {

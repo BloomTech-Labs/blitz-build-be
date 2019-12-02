@@ -1,19 +1,20 @@
-const db = require("../../config/db.config");
+const db = require("../db.config");
 
 module.exports = {
-  getTemplates,
+  // getTemplates,
+  getTemplateByName,
   getTemplateById,
   addTemplate,
   editTemplate,
   deleteTemplate
 };
 
-function getTemplates() {
-  return db("templates");
+function getTemplateByName(name) {
+  return db("templates").where("template_name","=",name);
 }
 
-function getTemplateById(id) {
-  return db("templates").where("id", "=", id);
+function getTemplateById(tempid) {
+  return db("templates").select("tasks").where("id", "=", tempid);
 }
 
 function addTemplate(newTemplate) {

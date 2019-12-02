@@ -3,18 +3,18 @@ const db = require("./templates.model");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  db.getTemplates()
-    .then(templates => {
-      res.status(200).json(templates);
-    })
-    .catch(error => {
-      res.status(500).json({
-        error: error,
-        message: "500 server error on getting templates"
-      });
-    });
-});
+// router.get("/", (req, res) => {
+//   db.getTemplates()
+//     .then(templates => {
+//       res.status(200).json(templates);
+//     })
+//     .catch(error => {
+//       res.status(500).json({
+//         error: error,
+//         message: "500 server error on getting templates"
+//       });
+//     });
+// });
 
 router.get("/:id", (req, res) => {
   const id = req.params.id;

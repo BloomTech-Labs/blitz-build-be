@@ -1,26 +1,21 @@
-const db = require("../../config/db.config");
+const db = require("../db.config");
 
 module.exports = {
-  getTasks,
-  getTaskById,
-  addTask,
+
+  addTasks,
   editTask,
   deleteTask,
-  getTasksByProject
+  getTasksByProject,
+  getTaskByTaskID
 };
 
-function getTasks() {
-  return db("tasks")
-    .join("projects", "tasks.project_id", "=", "projects.id")
-    .select("projects.project_name", "tasks.*");
+function getTaskByTaskID(id) {
+  return db("tasks").where({id});
 }
 
-function getTaskById(id) {
-  return db("tasks").where("id", "=", id);
-}
-
-function addTask(newTask) {
-  return db("tasks").insert(newTask);
+function addTasks([tasks]) {
+  db("tasks").insert(tasks)
+  .then(newTasksArr =>{return newTasksArr})
 }
 
 function editTask(id, changes) {
@@ -35,13 +30,10 @@ function deleteTask(id) {
     .del();
 }
 
-// function getTasksByProject(project_id) {
-//   return db("tasks").where("project_id", "=", project_id);
-// }
 
-function getTasksByProject(project_id) {
+
+function getTasksByProject(id) {
   return db("tasks")
-    .join("projects", "tasks.project_id", "=", "projects.id")
-    .select("projects.*", "tasks.*")
-    .where("tasks.project_id", "=", project_id);
+ 
+    .where("project_id", "=", id);
 }

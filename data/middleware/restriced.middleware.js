@@ -1,38 +1,24 @@
 const jwt = require("jsonwebtoken");
-const secret = require("../../config/secret.config");
+const secrets =  process.env.SECRET;
+module.exports = (req,res,next) =>{
+    const token = req.headers.authorization;
 
-module.exports = () =>{
-  // tokenVerify
+    if(token){
+               //Checks if token is valid
+       jwt.verify(token,secrets, (err,decodedToken) => {
+           if (err){
+               // Invalid token
+               res.status(401).json({message:"Invalid Token !!!! Please Log In"});
 
-function tokenVerify(req, res, next) {
-  const token = req.headers.authorization;
-
-  if (token) {
-    jwt.verify(
-      token,
-      secret.jwtSecret,
-      (err,
-      decodedToken => {
-        if (err) {
-          res.status(401).json({ message: "invalid" });
-        } else {
-          req.user = {
-
-
-            id : decodedToken.userid,
-
-            // id = decodedToken.userid,
-
-            name: decodedToken.name
-          };
-          next();
-        }
-      })
-    );
-  } else {
- res.status(401).json({ message: "you do not have access" });
-  }
-  return tokenVerify(decodedToken)
-}
+           }else{
+               // Valid Token
+               req.user = decodedToken.email;
+               //Finished Moving On
+               next()
+           }
+        });
+    }else{
+        res.status(400).json({message:"Please Login"});
+    }
     
-}
+};
