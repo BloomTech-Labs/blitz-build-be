@@ -1,6 +1,6 @@
 const express = require("express");
 const db = require("./templates.model");
-
+const dbt = require("../tasks/tasks.model")
 const router = express.Router();
 
 // router.get("/", (req, res) => {
@@ -16,10 +16,10 @@ const router = express.Router();
 //     });
 // });
 
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
+router.get("/:name", (req, res) => {
+  const name = req.params.name;
 
-  db.getTemplateById(id)
+  db.getTemplateByName(name)
     .then(template => {
       res.status(200).json(template);
     })
@@ -31,20 +31,31 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
-  const template = req.body;
+router.post("/:id", (req, res) => {
+   const name = "90_day";
+   const project_id = req.params.id;
+   db.getTemplateByName(name).then(response=>{
+   let template = [];
+   template.push(response.map(function(response){return {"task_name":response.task_name,"task_description":response.task_description,"project_id":project_id}}));
+     return template[0]
+     
+   })
+   .then(template=>{
+     dbt.addTasks(template).then(response=>{
+     
+      res.status(201).json({message:`Tasks added to project # ${project_id}`,tasks:response.message})})
+   })
 
-  db.addTemplate(template)
-    .then(newTemplate => {
-      res.status(200).json(newTemplate);
-    })
+
     .catch(error => {
       res.status(500).json({
         error: error,
         message: "500 server error on adding templates"
-      });
-    });
-});
+      })
+    })
+    
+
+})
 
 router.put("/:id", (req, res) => {
   const id = req.params.id;

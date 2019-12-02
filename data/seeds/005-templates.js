@@ -10,7 +10,7 @@ exports.seed = function(knex) {
   return knex("templates").insert([
       { 
         "template_name":"90_day",
-        "id": 31,
+ 
         "due_date": "12/03/2019",
         "task_name": "Order Scrap Dumpster and Port-A-John",
         "isComplete": false,
@@ -18,7 +18,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 32,
+       
         "due_date": "12/03/2019",
         "task_name": "Pre Construction Meeting With Buyers (Start Forming)",
         "isComplete": false,
@@ -26,7 +26,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 33,
+      
         "due_date": "12/03/2019",
         "task_name": "Form Board Survey",
         "isComplete": false,
@@ -34,7 +34,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 34,
+    
         "due_date": "12/03/2019",
         "task_name": "Fill The Form Boards ",
         "isComplete": false,
@@ -42,7 +42,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 35,
+     
         "due_date": "12/03/2019",
         "task_name": "Rough Plumbing",
         "isComplete": false,
@@ -50,7 +50,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 36,
+        
         "due_date": "12/03/2019",
         "task_name": "Sewer Hookup / Order Windows",
         "isComplete": false,
@@ -58,7 +58,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 37,
+        
         "due_date": "12/03/2019",
         "task_name": "Foundation and Sewer Hookup Inspection *** must be approved before new tasks to be started ***",
         "isComplete": false,
@@ -66,7 +66,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 38,
+        
         "due_date": "02/28/2020",
         "task_name": "Prep Slab",
         "task_description": "",
@@ -75,7 +75,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 39,
+        
         "due_date": "02/28/2020",
         "task_name": "Ground Wire Tests",
         "task_description": "",
@@ -84,7 +84,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 40,
+        
         "due_date": "02/28/2020",
         "task_name": "Foundation and Ground Wire inspection ***** Can Not Pour Slab Until Inspection Passed ******",
         "task_description": "",
@@ -93,7 +93,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 41,
+        
         "due_date": "02/28/2020",
         "task_name": "Pour Foundation Start Framing",
         "task_description": "",
@@ -103,7 +103,7 @@ exports.seed = function(knex) {
       },
       
       { "template_name":"90_day",
-        "id": 42,
+        
         "due_date": "02/28/2020",
         "task_name": "Wall and Roof Sheathing Inspections ",
         "task_description": "",
@@ -112,7 +112,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 43,
+        
         "due_date": "02/28/2020",
         "task_name": "Install Meter, Tug Inspection",
         "task_description": "",
@@ -121,7 +121,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 44,
+        
         "due_date": "02/28/2020",
         "task_name": "Tyvek, Install Exterior Doors",
         "task_description": "",
@@ -130,7 +130,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 45,
+        
         "due_date": "02/28/2020",
         "task_name": "Install Windows, Load Roof",
         "task_description": "",
@@ -139,7 +139,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 46,
+        
         "due_date": "02/28/2020",
         "task_name": "Tape Windows",
         "task_description": "",
@@ -148,7 +148,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 47,
+        
         "due_date": "02/28/2020",
         "task_name": "Dry Inspection",
         "task_description": "",
@@ -157,7 +157,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 48,
+        
         "due_date": "02/28/2020",
         "task_name": "Shingle Roof",
         "task_description": "",
@@ -166,7 +166,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 49,
+        
         "due_date": "02/28/2020",
         "task_name": "Rough Install HVAC",
         "task_description": "",
@@ -175,7 +175,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 50,
+        
         "due_date": "02/28/2020",
         "task_name": "Topout/Finish Roof",
         "task_description": "",
@@ -184,7 +184,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 51,
+        
         "due_date": "02/28/2020",
         "task_name": "Rough Install Electrical",
         "task_description": "",
@@ -193,7 +193,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 52,
+        
         "due_date": "02/28/2020",
         "task_name": "Rough Install Security",
         "task_description": "",
@@ -202,7 +202,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 53,
+      
         "due_date": "02/28/2020",
         "task_name": "Inspections",
         "task_description": "HVAC Rough,Plumbing 2nd,Electrical Rough, Pre-drywall orentation, bore care (SE States Only)",
@@ -211,7 +211,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 54,
+    
         "due_date": "02/28/2020",
         "task_name": "Inspect Frame , Load Drywall",
         "task_description": "***** Must be completed before moving on ******",
@@ -220,7 +220,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 55,
+    
         "due_date": "02/28/2020",
         "task_name": "Insulation",
         "task_description": "",
@@ -229,7 +229,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 56,
+      
         "due_date": "02/28/2020",
         "task_name": "Insulation Inspection",
         "task_description": "Must Be Completed Before Drywall is hung",
@@ -238,7 +238,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 57,
+        
         "due_date": "02/28/2020",
         "task_name": "Order Appliances ,Hang Drywall",
         "task_description": "",
@@ -248,7 +248,7 @@ exports.seed = function(knex) {
       },
     
       { "template_name":"90_day",
-        "id": 58,
+       
         "due_date": "02/28/2020",
         "task_name": "Order Blinds",
         "task_description": "",
@@ -257,7 +257,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 59,
+     
         "due_date": "02/28/2020",
         "task_name": "Finish Exterior",
         "task_description": "",
@@ -266,7 +266,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 60,
+    
         "due_date": "02/28/2020",
         "task_name": "Inspect Finish",
         "task_description": "",
@@ -275,7 +275,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 61,
+    
         "due_date": "02/28/2020",
         "task_name": "Finish Drywall",
         "task_description": "Tape,mud,top coat 3 days and should be finished",
@@ -285,7 +285,7 @@ exports.seed = function(knex) {
       },
       
       { "template_name":"90_day",
-        "id": 62,
+     
         "due_date": "02/28/2020",
         "task_name": "Install Garage Door",
         "task_description": "",
@@ -294,7 +294,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 63,
+     
         "due_date": "02/28/2020",
         "task_name": "Trim",
         "task_description": "",
@@ -303,7 +303,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 64,
+        
         "due_date": "02/28/2020",
         "task_name": "Cut Driveway",
         "task_description": "",
@@ -312,7 +312,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 65,
+      
         "due_date": "02/28/2020",
         "task_name": "Rail up driveway",
         "task_description": "",
@@ -321,7 +321,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 66,
+      
         "due_date": "02/28/2020",
         "task_name": "Paint",
         "task_description": "",
@@ -330,7 +330,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 67,
+      
         "due_date": "02/28/2020",
         "task_name": "Pour Driveway",
         "task_description": "",
@@ -339,7 +339,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 68,
+     
         "due_date": "02/28/2020",
         "task_name": "Tile",
         "task_description": "",
@@ -348,7 +348,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 69,
+       
         "due_date": "02/28/2020",
         "task_name": "Soffit",
         "task_description": "",
@@ -357,7 +357,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 70,
+       
         "due_date": "02/28/2020",
         "task_name": "Grout Tile",
         "task_description": "",
@@ -366,7 +366,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 71,
+      
         "due_date": "02/28/2020",
         "task_name": "Measure Shower Door",
         "task_description": "Only after tile is finished",
@@ -375,7 +375,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 72,
+     
         "due_date": "02/28/2020",
         "task_name": "Cabinets",
         "task_description": "",
@@ -384,7 +384,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 73,
+   
         "due_date": "02/28/2020",
         "task_name": "HVAC Trim",
         "task_description": "",
@@ -393,7 +393,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 74,
+     
         "due_date": "02/28/2020",
         "task_name": "Plumbing Trim",
         "task_description": "",
@@ -402,7 +402,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 75,
+   
         "due_date": "02/28/2020",
         "task_name": "Electrical Trim",
         "task_description": "",
@@ -411,7 +411,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 76,
+     
         "due_date": "02/28/2020",
         "task_name": "Specialites(towl bars,mirror,ect)",
         "task_description": "",
@@ -420,7 +420,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 77,
+       
         "due_date": "02/28/2020",
         "task_name": "Electrical Meter",
         "task_description": "",
@@ -429,7 +429,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 78,
+        
         "due_date": "02/28/2020",
         "task_name": "Hot Check, Irrigation",
         "task_description": "",
@@ -438,7 +438,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 79,
+      
         "due_date": "02/28/2020",
         "task_name": "AC Start up , Landscaping",
         "task_description": "",
@@ -447,7 +447,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 80,
+        
         "due_date": "02/28/2020",
         "task_name": "Drywall Bump",
         "task_description": "",
@@ -456,7 +456,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 81,
+     
         "due_date": "02/28/2020",
         "task_name": "Rough Clean",
         "task_description": "",
@@ -465,7 +465,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 82,
+     
         "due_date": "02/28/2020",
         "task_name": "Pre Carpet Paint, Final Grade Survey",
         "task_description": "",
@@ -474,7 +474,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 83,
+       
         "due_date": "02/28/2020",
         "task_name": "Lay Carpet, Paint,Final Clean",
         "task_description": "",
@@ -483,7 +483,7 @@ exports.seed = function(knex) {
         "project_id": 1
       },
       { "template_name":"90_day",
-        "id": 84,
+    
         "due_date": "02/28/2020",
         "task_name": "Final Inspection, Screen Out",
         "task_description": "",

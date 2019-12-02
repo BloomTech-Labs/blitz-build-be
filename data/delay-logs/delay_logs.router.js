@@ -41,7 +41,7 @@ router.delete('/:id',(req,res) => {
     db.deleteLogs(id)
     .then(deletedLog =>{
         if(deletedLog){
-            res.status(200).json({message:`Log # ${id} delated @ ${moment().format("LLL")}`})
+            res.status(200).json({message:`Log # ${id} deleted @ ${moment().format("LLL")}`})
         }else{
             res.status(409).json({message:"Sorry no log matching that id was found"})
         }
