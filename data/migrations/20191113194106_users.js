@@ -60,7 +60,7 @@ exports.up = function(knex) {
 
         tbl.string("task_name").notNullable();
         tbl.string("task_description", 1000);
-        tbl.string("due_date");
+        tbl.string("due_date").defaultsTo(moment().add(90,"days").calendar())
         tbl.date("createdAt").defaultsTo(createdAt)
         tbl.boolean("isComplete").defaultsTo(false)
         tbl
@@ -112,7 +112,7 @@ exports.up = function(knex) {
   
       })
       .createTable("delay_logs",tbl =>{
-        tbl.increments("id")
+        tbl.increments()
         tbl.integer("projects_id")
            .unsigned()
            .references("id")

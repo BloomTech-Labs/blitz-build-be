@@ -13,9 +13,9 @@ function getTaskByTaskID(id) {
   return db("tasks").where({id});
 }
 
-function addTasks([tasks]) {
-  db("tasks").insert(tasks)
-  .then(newTasksArr =>{return newTasksArr})
+function addTasks(tasks) {
+  return db("tasks").insert(tasks)
+  
 }
 
 function editTask(id, changes) {

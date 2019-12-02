@@ -6,7 +6,7 @@ exports.seed = function(knex) {
       // Inserts seed entries
       return knex('delay_logs').insert([
       	{
-          "id": 1,
+         
           "projects_id": 1,
           "project_name": "Auburn",
          
@@ -15,7 +15,7 @@ exports.seed = function(knex) {
           "task_name": "Foundation and Sewer Hookup Inspection"
         },
         {
-          "id": 2,
+          
           "projects_id": 2,
           "project_name": "Tacoma",
      
@@ -24,7 +24,7 @@ exports.seed = function(knex) {
           "task_name": "Pre Construction Meeting With Buyers (Start Forming)"
         },
         {
-          "id": 3,
+        
           "projects_id": 3,
           "project_name": "Seattle Eastside",
        
