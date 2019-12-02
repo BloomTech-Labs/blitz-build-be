@@ -6,7 +6,7 @@
   "scripts": {
     "server": "nodemon index.js",
     "start": "node index.js",
-    "test": "git init && jest --watch"
+    "test": " jest --watch server.spec.js"
   },
   "repository": {
     "type": "git",
