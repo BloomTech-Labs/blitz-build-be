@@ -1,5 +1,5 @@
 const moment = require('moment')
-const date = 2019-12-30
+const date = "2019-12-30"
 const createdAt = moment().format('LLL')
 exports.seed = function(knex) {
   // // Deletes ALL existing entries

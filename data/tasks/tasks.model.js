@@ -11,11 +11,11 @@ module.exports = {
 };
 
 function getTasksByID(id){
-  return db("tasks").where("user_id","=",id)
+  return db("tasks").where("user_id","=",id).orderBy("id")
 }
 
 function getTaskByTaskID(id) {
-  return db("tasks").where({id});
+  return db("tasks").where({id}).orderBy("id")
 }
 
 function addTasks(tasks) {
@@ -26,7 +26,7 @@ function addTasks(tasks) {
 function editTask(id, changes) {
   return db("tasks")
     .where({ id })
-    .update(changes);
+    .update(changes).orderBy("id")
 }
 
 function deleteTask(id) {
@@ -40,5 +40,5 @@ function deleteTask(id) {
 function getTasksByProject(id) {
   return db("tasks")
  
-    .where("project_id", "=", id);
+    .where("project_id", "=", id).orderBy("id")
 }
