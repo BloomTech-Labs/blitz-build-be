@@ -1,7 +1,6 @@
 const moment = require('moment')
 const date = moment().add(90,'days').calendar()
 const createdAt = moment().calendar()
-let tasks;
 exports.up = function(knex) {
   return (
     knex.schema
@@ -29,7 +28,6 @@ exports.up = function(knex) {
 
         tbl
           .string("project_name")
-          .unique()
           .notNullable();
         tbl.float("baths");
         tbl.float("beds");
@@ -58,7 +56,6 @@ exports.up = function(knex) {
       .createTable("tasks", tbl => {
         tbl.increments();
         tbl.string("user_id")
-       tbl.string("project_name")
         tbl.string("task_name").notNullable();
         tbl.string("task_description", 1000);
         tbl.string("due_date")
@@ -91,7 +88,7 @@ exports.up = function(knex) {
           .onUpdate("CASCADE");
   
       })
-      //MANY-TO-MANY TABLE WITH PROJECTS AND TASKS
+      // MANY-TO-MANY TABLE WITH PROJECTS AND TASKS
       .createTable("projects_tasks", tbl => {
         tbl.increments();
 
