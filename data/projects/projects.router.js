@@ -53,34 +53,25 @@ router.post("/",  (req, res) => {
   let longitude = cords.longitude
  
   const newProject = req.body;
+  const id = req.headers.user_id
+  newProject.user_id = id
    db.addProject(newProject)
-  
-  .then(()=>{
-    const id = req.headers.user_id
+  .then((projectId)=>{
     db.getProjects(id).then(projects => {
       let project = projects.slice(-1)
   
       let id = project[0].id
-   
       let changes = {
         "latitude":latitude,
         "longitude":longitude
-      
       }
-    res.status(201).json({message:`Project added @ ${moment().format("LLL")}`,project_id:project[0].id})
+
+    res.status(201).json({message:`Project added @ ${moment().format("LLL")}`,projectId})
      return db.editProject(id,changes)
-  
     })
   })
-
-  
-
-    
-  
-
-  
     .catch(error =>{
-      res.status(409).json({message:"A Project with that name already exists",error:error.message});
+      res.status(500).json(error.message)
     });
 });
 
