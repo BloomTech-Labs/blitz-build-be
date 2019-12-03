@@ -56,7 +56,7 @@ router.post("/",  (req, res) => {
   const id = req.headers.user_id
   newProject.user_id = id
    db.addProject(newProject)
-  .then((projectId)=>{
+
     db.getProjects(id).then(projects => {
       let project = projects.slice(-1)
   
@@ -65,15 +65,18 @@ router.post("/",  (req, res) => {
         "latitude":latitude,
         "longitude":longitude
       }
+      return db.editProject(id,changes)
 
-    res.status(201).json({message:`Project added @ ${moment().format("LLL")}`,projectId})
-     return db.editProject(id,changes)
     })
-  })
+    .then(newProject =>{
+      res.status(201).json({message:`Project added @ ${moment().format("LLL")}`,newProject})
+   
+    })
+
     .catch(error =>{
       res.status(500).json(error.message)
     });
-});
+  })
 
 // Update Project
 router.put("/:id", (req, res) => {
