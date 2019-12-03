@@ -67,7 +67,7 @@ router.post("/",  (req, res) => {
         "longitude":longitude
       }
 
-    res.status(201).json({message:`Project added @ ${moment().format("LLL")}`,newProject})
+    res.status(201).json({message:`Project added @ ${moment().format("LLL")}`,project})
      return db.editProject(id,changes)
     })
 
