@@ -20,7 +20,7 @@ module.exports = {
   //   },
   // },
 
-  production: {
+  development: {
     client: 'pg',
     connection:{
       host:process.env.HOST,

@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
+
 const UsersRouter = require("./data/users/users.router");
 const ProjectsRouter = require("./data/projects/projects.router");
 const TasksRouter = require("./data/tasks/tasks.router");
@@ -12,28 +13,11 @@ const delayLogsRouter = require("./data/delay-logs/delay_logs.router");
 const jwt = require("express-jwt");
 const jwksRsa = require("jwks-rsa");
 
+
+
+
 const server = express();
 
-function logger(req, res, next) {
-  const url = req.url;
-  const method = req.method;
-  console.log(`There was a ${method} on ${url}`);
-  next();
-}
-
-server.use(function(req, res, next) {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://blitz-build-dev.netlify.com",
-    "https://blitz-build-dev.netlify.com/weather"
-  );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
-  next();
-});
 
 const checkJwt = jwt({
   secret: jwksRsa.expressJwtSecret({
@@ -41,6 +25,7 @@ const checkJwt = jwt({
     rateLimit: true,
     jwksRequestsPerMinute: 5,
     jwksUri: `https://gannondarcy2.auth0.com/.well-known/jwks.json`
+     
   }),
 
   // Validate the audience and the issuer.
@@ -49,16 +34,28 @@ const checkJwt = jwt({
   algorithms: ["RS256"]
 });
 
+function logger(req, res, next) {
+  const url = req.url;
+  const method = req.method;
+  console.log(`There was a ${method} on ${url}`);
+  next();
+}
+
+
+
+
+
 server.use(cors());
 server.use(helmet());
 server.use(express.json());
 server.use(logger);
-server.use("/users", UsersRouter,checkJwt);
-server.use("/projects", ProjectsRouter,checkJwt);
-server.use("/projects/tasks", TasksRouter,checkJwt);
-server.use("/templates", TemplatesRouter,checkJwt);
-server.use("/projects/tasks/templates", TemplateTasksRouter,checkJwt);
+// server.use('/auth',authRouter)
+server.use("/users", UsersRouter);
+server.use("/projects",checkJwt, ProjectsRouter);
+server.use("/projects/tasks",checkJwt,TasksRouter);
+server.use("/templates", checkJwt,TemplatesRouter);
+server.use("/projects/tasks/templates", checkJwt,TemplateTasksRouter);
 server.use("/weather", Weather);
-server.use("/delay_logs", delayLogsRouter);
+server.use("/delay_logs",checkJwt,delayLogsRouter);
 
 module.exports = server;

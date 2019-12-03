@@ -1,5 +1,5 @@
 const moment = require('moment')
-const date = moment().add(90,'days').calendar()
+const date = moment().add(90,'days').calendar("l")
 const createdAt = moment().calendar()
 let tasks;
 exports.up = function(knex) {
@@ -16,7 +16,7 @@ exports.up = function(knex) {
           .notNullable();
         tbl.string("name").notNullable();
         tbl.string("password").notNullable();
-        tbl.string("phone_number").notNullable();
+    
        
       })
     
@@ -42,7 +42,7 @@ exports.up = function(knex) {
         tbl.integer("zip_code").notNullable();
         tbl.float("longitude")
         tbl.float("latitude")
-        tbl.date("due_date").defaultsTo(date)
+        tbl.string("due_date").defaultsTo(date)
         tbl.integer('user_id')
             .unsigned()
             .references('id')
@@ -121,7 +121,7 @@ exports.up = function(knex) {
            .onDelete("CASCADE")
            .onUpdate("CASCADE")
         tbl.string("project_name").notNullable()
-        tbl.date("createdAt").defaultsTo(moment().format("L"))
+        tbl.string("createdAt").defaultsTo(moment().calendar("l"))
         tbl.string("reason").notNullable()
         tbl.integer("task_id")
         .unsigned()
@@ -130,7 +130,7 @@ exports.up = function(knex) {
         .onDelete("CASCADE")
         .onUpdate("CASCADE")
         tbl.string("task_name").notNullable()
-        tbl.date("updatedAt").defaultsTo(moment().format("L"))
+        tbl.string("updatedAt").defaultsTo(moment().format("l"))
           
       })
 
