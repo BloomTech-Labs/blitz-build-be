@@ -68,7 +68,7 @@ router.post("/",  (req, res) => {
          
       }
      db.editProject(id,changes)
-    res.status(201).json({message:`Project added @ ${moment().format("LLL")}`,projects})
+    res.status(201).json({message:`Project added @ ${moment().format("LLL")}`,project})
  
     })
 
