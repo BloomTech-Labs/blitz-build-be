@@ -16,7 +16,7 @@ exports.up = function(knex) {
           .notNullable();
         tbl.string("name").notNullable();
         tbl.string("password").notNullable();
-    
+        tbl.string('user_id')
        
       })
     
@@ -43,9 +43,9 @@ exports.up = function(knex) {
         tbl.float("longitude")
         tbl.float("latitude")
         tbl.string("due_date").defaultsTo(date)
-        tbl.integer('user_id')
+        tbl.integer('users_id')
             .unsigned()
-            .references('id')
+            .references('user_id')
             .inTable('users')
             .onUpdate('CASCADE')
             .onDelete('CASCADE')
