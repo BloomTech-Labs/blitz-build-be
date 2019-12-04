@@ -41,12 +41,7 @@ exports.up = function(knex) {
         tbl.float("longitude")
         tbl.float("latitude")
         tbl.string("due_date").defaultsTo(date)
-        tbl.integer('users_id')
-            .unsigned()
-            .references('user_id')
-            .inTable('users')
-            .onUpdate('CASCADE')
-            .onDelete('CASCADE')
+        tbl.string('user_id').notNullable();
       })
      
 
@@ -55,7 +50,7 @@ exports.up = function(knex) {
       //TASKS
       .createTable("tasks", tbl => {
         tbl.increments();
-        tbl.string("user_id")
+        tbl.string("user_id").notNullable();
         tbl.string("task_name").notNullable();
         tbl.string("task_description", 1000);
         tbl.string("due_date")
