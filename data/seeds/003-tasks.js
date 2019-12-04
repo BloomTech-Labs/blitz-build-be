@@ -15,7 +15,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-			"user_id":3
+			
 		},
 		{
 
@@ -24,7 +24,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-			"user_id":3
+		
 		},
 		{ 
 
@@ -33,7 +33,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-			"user_id":3
+		
 		},
 		{
 
@@ -42,7 +42,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-			"user_id":3
+	
 		},
 		{
     
@@ -52,7 +52,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-			"user_id":3
+		
 		},
 		{
     
@@ -62,7 +62,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-			"user_id":3
+			
 		},
 		{
 
@@ -71,7 +71,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-			"user_id":3
+		
 		},
 		{
 			"due_date": date,
@@ -79,7 +79,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 2,
-			"user_id":2
+			
 		},
 		{
 			"due_date": date,
@@ -87,7 +87,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 2,
-			"user_id":2
+		
 		},
 		{ 
 			"due_date": date,
@@ -95,7 +95,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 2,
-			"user_id":2
+		
 		},
 		{
 			"due_date": date,
@@ -103,7 +103,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 2,
-			"user_id":2
+	
 		},
 		{
 			"due_date": date,
@@ -111,7 +111,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 2,
-			"user_id":2
+		
 		},
 		{
 			"due_date": date,
@@ -119,7 +119,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 2,
-			"user_id":2
+		
 		},
 		{
 
@@ -128,14 +128,14 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 2,
-			"user_id":2
+		
 		},
 		{
 			"task_name": "Order Scrap Dumpster and Port-A-John",
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-			"user_id":1,
+			
 		},
 		{
 			"due_date": date,
@@ -143,7 +143,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-			"user_id":1,
+	
 		},
 		{ 
 			"due_date": date,
@@ -151,7 +151,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-			"user_id":1,
+	
 		},
 		{
 			"due_date": date,
@@ -159,7 +159,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-			"user_id":1,
+		
 		},
 		{
 			"due_date": date,
@@ -167,7 +167,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-			"user_id":1,
+		
 		},
 		{
 			"due_date": date,
@@ -175,7 +175,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-			"user_id":1,
+		
 		},
 		{
 			"due_date": date,
@@ -183,7 +183,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-			"user_id":1,
+			
 		}
   ]);
   // });

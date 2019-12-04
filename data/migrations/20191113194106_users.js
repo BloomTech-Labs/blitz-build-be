@@ -5,19 +5,7 @@ exports.up = function(knex) {
   return (
     knex.schema
       //USERS
-      .createTable("users", tbl => {
-        //USERS TABLE
-        tbl.increments();
 
-        tbl
-          .string("email")
-          .unique()
-          .notNullable();
-        tbl.string("name").notNullable();
-        tbl.string("password").notNullable();
-        tbl.string('user_id')
-       
-      })
     
     
     
@@ -41,12 +29,7 @@ exports.up = function(knex) {
         tbl.float("longitude")
         tbl.float("latitude")
         tbl.string("due_date").defaultsTo(date)
-        tbl.integer('users_id')
-            .unsigned()
-            .references('user_id')
-            .inTable('users')
-            .onUpdate('CASCADE')
-            .onDelete('CASCADE')
+ 
       })
      
 
@@ -80,7 +63,7 @@ exports.up = function(knex) {
         tbl.date("createdAt").defaultsTo(createdAt)
         tbl.boolean("isComplete").defaultsTo(false)
         tbl
-          .integer("project_id", [])
+          .integer("project_id")
           .unsigned()
           .references("id")
           .inTable("projects")

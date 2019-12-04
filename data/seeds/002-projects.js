@@ -16,7 +16,7 @@ exports.seed = function(knex) {
       status: "on time",
       street_address: "212 Auburn Wa",
       zip_code: 98001,
-      user_id:3
+ 
     },
     {
       project_name: "Tacoma",
@@ -29,7 +29,7 @@ exports.seed = function(knex) {
       status: "on time",
       street_address: "2552 Tacoma Way",
       zip_code: 98402,
-      user_id:3
+   
     },
     {
       project_name: "Seattle Eastside",
@@ -42,7 +42,7 @@ exports.seed = function(knex) {
       status: "on time",
       street_address: "5792 Eastside St",
       zip_code: 98101,
-      user_id:3
+
     }
   ]);
   // });
