@@ -64,11 +64,20 @@ router.post("/",  (req, res) => {
       let changes = {
 
         "latitude":latitude,
+<<<<<<< HEAD
         "longitude":longitude
       }
 
     res.status(201).json({message:`Project added @ ${moment().format("LLL")}`,project})
      return db.editProject(id,changes)
+=======
+        "longitude":longitude,
+         
+      }
+     db.editProject(id,changes)
+    res.status(201).json({message:`Project added @ ${moment().format("LLL")}`,project})
+ 
+>>>>>>> 5b83d9c7d5a749890b0a59baaa714c0ba4f9d0f8
     })
 
     .catch(error =>{

@@ -1,7 +1,6 @@
 const db = require("../db.config");
 
 module.exports = {
-
   addTasks,
   editTask,
   deleteTask,
@@ -9,9 +8,12 @@ module.exports = {
   getTaskByTaskID,
   getTasksByID,
 };
-
 function getTasksByID(id){
-  return db("tasks").where("user_id","=",id).orderBy("id")
+  return db("tasks")
+  .join("projects", "tasks.project_id", "=", "projects.id")
+  .select("projects.project_name", "tasks.*")
+  .where("tasks.user_id","=",id)
+  .orderBy("tasks.id")
 }
 
 function getTaskByTaskID(id) {
@@ -19,7 +21,7 @@ function getTaskByTaskID(id) {
 }
 
 function addTasks(tasks) {
-  return db("tasks").insert(tasks)
+  return db("tasks").insert(tasks, "id")
   
 }
 

@@ -4,6 +4,8 @@ const templates = require('../templates/templates.model')
 const router = express.Router();
 
 //Get All Tasks for user
+
+
 router.get("/:uid",(req,res)=>{
   const id = req.params.uid
   db.getTasksByID(id)
@@ -29,10 +31,12 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
   const tasks = req.body;
+  const uid  = req.headers.user_id
+  tasks.user_id = uid
 
   db.addTasks(tasks)
-    .then(newTask => {
-      res.status(200).json({message:`${tasks.task_name} added`,"newTask":newTask.text});
+    .then(taskId => {
+      res.status(200).json({message:`${tasks.task_name} added`, taskId});
     })
     .catch(error => {
       res.status(500).json({
@@ -77,7 +81,6 @@ router.delete("/:id", (req, res) => {
 //RETURNS All TASKS For Project BY PROJECT ID
 router.get("/byProject/:pid", (req, res) => {
   const id = req.params.pid;
-
   db.getTasksByProject(id)
     .then(tasks => {
       res.status(200).json(tasks);

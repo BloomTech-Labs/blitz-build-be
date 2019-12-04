@@ -17,10 +17,9 @@ function getProjectById(id) {
 }
 
 function addProject(newProject) {
-  return db("projects")
-         .insert(newProject)
-      
-   
+     db("projects")
+    .insert(newProject, "id")
+    return newProject
 }
 
 function editProject(id, changes) {
