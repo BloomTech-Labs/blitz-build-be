@@ -1,8 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
-
-const UsersRouter = require("./data/users/users.router");
 const ProjectsRouter = require("./data/projects/projects.router");
 const TasksRouter = require("./data/tasks/tasks.router");
 const TemplatesRouter = require("./data/templates/templates.router");
@@ -50,7 +48,6 @@ server.use(helmet());
 server.use(express.json());
 server.use(logger);
 // server.use('/auth',authRouter)
-server.use("/users", UsersRouter);
 server.use("/projects", ProjectsRouter);
 server.use("/projects/tasks",TasksRouter);
 server.use("/templates",TemplatesRouter);
