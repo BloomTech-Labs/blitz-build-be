@@ -4,11 +4,6 @@ const createdAt = moment().calendar()
 exports.up = function(knex) {
   return (
     knex.schema
-
-    
-    
-    
-    
     //PROJECTS
       .createTable("projects", tbl => {
         tbl.increments();
@@ -29,8 +24,6 @@ exports.up = function(knex) {
         tbl.float("latitude")
         tbl.string("due_date").defaultsTo(date)
         tbl.string('user_id').notNullable();
-
-     
       })
      
 
