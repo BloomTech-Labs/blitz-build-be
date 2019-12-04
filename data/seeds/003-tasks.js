@@ -16,7 +16,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-			"user_id":3
+		
 		},
 		{
     
@@ -26,7 +26,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-			"user_id":3
+		
 		},
 		{ 
     
@@ -36,7 +36,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-			"user_id":3
+	
 		},
 		{
 			project_name: "Auburn",
@@ -45,7 +45,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-			"user_id":3
+		
 		},
 		{
     
@@ -55,7 +55,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-			"user_id":3
+		
 		},
 		{
     
@@ -65,7 +65,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-			"user_id":3
+		
 		},
 		{
    
@@ -75,7 +75,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-			"user_id":3
+			
 		},
 		{
 			
@@ -85,7 +85,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 2,
-			"user_id":2
+		
 		},
 		{
     
@@ -95,7 +95,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 2,
-			"user_id":2
+		
 		},
 		{ 
 			project_name: "Tacoma",
@@ -105,7 +105,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 2,
-			"user_id":2
+		
 		},
 		{
   
@@ -115,7 +115,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 2,
-			"user_id":2
+		
 		},
 		{
 			project_name: "Tacoma",
@@ -125,7 +125,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 2,
-			"user_id":2
+		
 		},
 		{
 			project_name: "Tacoma",
@@ -135,7 +135,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 2,
-			"user_id":2
+		
 		},
 		{
    
@@ -145,7 +145,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 2,
-			"user_id":2
+		
 		},
 		{
   
@@ -155,7 +155,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-			"user_id":1,
+	
 		},
 		{
 			project_name: "Seattle Eastside",
@@ -165,7 +165,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-			"user_id":1,
+		
 		},
 		{ 
 			project_name: "Seattle Eastside",
@@ -175,7 +175,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-			"user_id":1,
+	
 		},
 		{
   
@@ -185,7 +185,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-			"user_id":1,
+		
 		},
 		{
 			project_name: "Seattle Eastside",
@@ -195,7 +195,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-			"user_id":1,
+			
 		},
 		{
 			project_name: "Seattle Eastside",
@@ -205,7 +205,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-			"user_id":1,
+		
 		},
 		{
    
@@ -215,7 +215,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-			"user_id":1,
+		
 		}
   ]);
   // });
