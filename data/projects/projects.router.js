@@ -47,30 +47,22 @@ router.get("/:id", (req, res) => {
 
 router.post("/",  (req, res) => {
 
-  let zipcode = req.body.zip_code
-  const cords = zipcodes.lookup(zipcode)
-  let latitude = cords.latitude
-  let longitude = cords.longitude
+  // let zipcode = req.body.zip_code
+  // const cords = zipcodes.lookup(zipcode)
+  // let latitude = cords.latitude
+  // let longitude = cords.longitude
  
   const newProject = req.body;
-  const id = req.headers.user_id
-  newProject.user_id = id
+  const user_id = req.headers.user_id
+  newProject.user_id = user_id
    db.addProject(newProject)
-
-    db.getProjects(id).then(projects => {
-      let project = projects.slice(-1)
-  
-      let id = project[0].id
-      let changes = {
-
-        "latitude":latitude,
-        "longitude":longitude,
-         
-      }
-     db.editProject(id,changes)
-    res.status(201).json({message:`Project added @ ${moment().format("LLL")}`,project})
- 
-    })
+   .then(projectId => {
+     db.getProjectById(projectId[0])
+     .then(project => {
+     res.status(201).json({message:`Project added @ ${moment().format("LLL")}`,project})
+     //  return db.editProject(id,changes)
+     })
+   })
 
     .catch(error =>{
       res.status(500).json(error.message)
@@ -90,8 +82,11 @@ router.put("/:id", (req, res) => {
    if(project[0].user_id == req.headers.user_id)
     //If so update project and send status 200 back to client
     {db.editProject(id, changes)
-    .then(updatedProject => {
-      res.status(200).json({message:`Project # ${id} updated`,updatedProject})
+    .then(() => {
+      db.getProjectById(id)
+      .then(updatedProject => {
+        res.status(200).json({message:`Project # ${id} updated`,updatedProject})
+      })
     })
    //If not send error message back to client
   }else{

@@ -15,7 +15,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-			
+		
 		},
 		{
 
@@ -33,7 +33,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-		
+	
 		},
 		{
 
@@ -42,7 +42,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-	
+		
 		},
 		{
     
@@ -62,7 +62,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-			
+		
 		},
 		{
 
@@ -71,7 +71,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 1,
-		
+			
 		},
 		{
 			"due_date": date,
@@ -79,7 +79,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 2,
-			
+		
 		},
 		{
 			"due_date": date,
@@ -103,7 +103,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 2,
-	
+		
 		},
 		{
 			"due_date": date,
@@ -135,7 +135,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-			
+	
 		},
 		{
 			"due_date": date,
@@ -143,7 +143,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-	
+		
 		},
 		{ 
 			"due_date": date,
@@ -167,7 +167,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-		
+			
 		},
 		{
 			"due_date": date,
@@ -183,7 +183,7 @@ exports.seed = function(knex) {
 			"isComplete": false,
 			"createdAt": createdAt,
 			"project_id": 3,
-			
+		
 		}
   ]);
   // });
