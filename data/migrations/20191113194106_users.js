@@ -4,24 +4,6 @@ const createdAt = moment().calendar()
 exports.up = function(knex) {
   return (
     knex.schema
-      //USERS
-      .createTable("users", tbl => {
-        //USERS TABLE
-        tbl.increments();
-
-        tbl
-          .string("email")
-          .unique()
-          .notNullable();
-        tbl.string("name").notNullable();
-        tbl.string("password").notNullable();
-        tbl.string('user_id')
-       
-      })
-    
-    
-    
-    
     //PROJECTS
       .createTable("projects", tbl => {
         tbl.increments();
