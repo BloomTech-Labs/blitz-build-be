@@ -40,11 +40,7 @@ exports.up = function(knex) {
       //   tbl.boolean("isComplete").defaultsTo(false)
       //   tbl
       //     .integer("project_id", [])
-      //     .unsigned()
-      //     .references("id")
-      //     .inTable("projects")
-      //     .onDelete("CASCADE")
-      //     .onUpdate("CASCADE");
+
       // })
         //TEMPLATES
       .createTable("templates", tbl => {

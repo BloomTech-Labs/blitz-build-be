@@ -60,8 +60,8 @@ router.post("/:pid", (req, res) => {
      
    })
    .then(template=>{
-     console.log(template[0])
-     dbt.addTasks(template).then(response=>{
+  
+     dbt.addTasks(template[0]).then(response=>{
      
       res.status(201).json({message:`Tasks added to project # ${project_id}`,tasks:response.message})})
    })
