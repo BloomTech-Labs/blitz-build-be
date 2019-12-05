@@ -3,18 +3,7 @@ const db = require("./templates.model");
 const dbt = require("../tasks/tasks.model")
 const router = express.Router();
 
-// router.get("/", (req, res) => {
-//   db.getTemplates()
-//     .then(templates => {
-//       res.status(200).json(templates);
-//     })
-//     .catch(error => {
-//       res.status(500).json({
-//         error: error,
-//         message: "500 server error on getting templates"
-//       });
-//     });
-// });
+
 
 
 router.get("/:id", (req, res) => {
@@ -36,42 +25,50 @@ router.get("/:id", (req, res) => {
 
 
 router.get("/",(req,res) =>{
-  // const template = req.body
-  console.log("IWORKROUTER 1")
+
+
   db.getTemplate()
-  // console.log("IWORKROUTER 2")
+
   .then(template =>{
-    console.log("IWORKROUTER 3")
+
   res.status(200).json(template)})
 
   .catch(error =>{res.status(500).json({message:error.message})})
-  console.log("IWORKROUTER 4")
+
 })
-// router.post("/:id", (req, res) => {
+router.post("/:pid", (req, res) => {
 
-//    const project_id = req.params.id;
-//    db.getTemplates().then(response=>{
-//    let template = [];
-//    template.push(response.map(function(response){return {"task_name":response.task_name,"task_description":response.task_description,"project_id":project_id}}));
-//      return template[0]
+   const project_id = req.params.pid;
+   const id= req.body.id
+   const user_id = req.headers.user_id
+   db.getTemplates(id).then(response=>{
+  let resp = response[0].data
+
+   let template = [];
+   
+   template.push(resp.map(function(response){return {"task_name":response.task_name,"task_description":response.task_description,"project_id":project_id,"user_id":user_id}}));
+
+  //  console.log(template[0])
+   return template[0]
      
-//    })
-//    .then(template=>{
-//      dbt.addTasks(template).then(response=>{
+   })
+   .then(template=>{
+     console.log(template)
+     dbt.addTasks(template).then(response=>{
      
-//       res.status(201).json({message:`Tasks added to project # ${project_id}`,tasks:response.message})})
-//    })
+      res.status(201).json({message:`Tasks added to project # ${project_id}`,tasks:response.message})})
+   })
 
 
-//     .catch(error => {
-//       res.status(500).json({
-//         error: error,
-//         message: "500 server error on adding templates"
-//       })
-//     })
+    .catch(error => {
+      res.status(500).json({
+        error: error,
+        message: "500 server error on adding templates"
+      })
+    })
     
 
-// })
+})
 
 router.put("/:id", (req, res) => {
   const id = req.params.id;
