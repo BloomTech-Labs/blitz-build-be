@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post("/",(req,res)=>{
   const template = req.body
+  
   db.addTemplate(template)
   .then(id =>{
     res.status(201).json({template_id:id[0].id})
