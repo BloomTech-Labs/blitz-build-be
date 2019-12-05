@@ -53,11 +53,11 @@ server.use(helmet());
 server.use(express.json());
 server.use(logger);
 // server.use('/auth',authRouter)
-server.use("/projects", ProjectsRouter,checkJwt);
-server.use("/projects/tasks",TasksRouter,checkJwt);
+server.use("/projects", ProjectsRouter);
+server.use("/projects/tasks",TasksRouter);
 server.use("/templates",TemplatesRouter);
 server.use("/projects/tasks/templates",TemplateTasksRouter);
 server.use("/weather", Weather);
-server.use("/delay_logs",delayLogsRouter,checkJwt);
+server.use("/delay_logs",delayLogsRouter);
 
 module.exports = server;

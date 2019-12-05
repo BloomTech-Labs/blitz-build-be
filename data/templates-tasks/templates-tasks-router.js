@@ -7,10 +7,10 @@ const router = express.Router();
 
 
 
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
+router.get("/:name", (req, res) => {
+  const name = req.params.name;
 
-  db.getTasksByTemplateID(id)
+  db.getTasksByProjectId(name)
     .then(tasks => {
       res.status(200).json(tasks);
     })
