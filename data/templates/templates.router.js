@@ -36,12 +36,16 @@ router.get("/:id", (req, res) => {
 
 
 router.get("/",(req,res) =>{
-  // const template = req.body\
-  
+  // const template = req.body
+  console.log("IWORKROUTER 1")
   db.getTemplate()
+  // console.log("IWORKROUTER 2")
   .then(template =>{
+    console.log("IWORKROUTER 3")
   res.status(200).json(template)})
+
   .catch(error =>{res.status(500).json({message:error.message})})
+  console.log("IWORKROUTER 4")
 })
 // router.post("/:id", (req, res) => {
 
