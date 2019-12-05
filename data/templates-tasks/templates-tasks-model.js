@@ -9,6 +9,6 @@ module.exports = {
 
 
 
-function getTasksByProjectId(template_id) {
-  return db("template_tasks").where("template", "=", template_id);
+function getTasksByProjectId(name) {
+  return db("templates").where("template_name", "=", name );
 }

@@ -6,8 +6,8 @@ const router = express.Router();
 //Get All Tasks for user
 
 
-router.get("/:uid",(req,res)=>{
-  const id = req.params.uid
+router.get("/:id",(req,res)=>{
+  const id = req.params.id
   db.getTasksByID(id)
   .then(tasks =>{
     res.status(200).json({tasks:tasks})
