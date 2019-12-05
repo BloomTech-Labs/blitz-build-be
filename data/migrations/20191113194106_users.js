@@ -44,9 +44,9 @@ exports.up = function(knex) {
       // })
         //TEMPLATES
       .createTable("templates", tbl => {
-       tbl.increments('id');
+      tbl.increments();
     
-      tbl.specificType("data",'json ARRAY')
+      tbl.specificType("template",'json ARRAY')
  
   
       })
