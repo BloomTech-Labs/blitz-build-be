@@ -3,25 +3,25 @@ const db = require("./templates.model");
 const dbt = require("../tasks/tasks.model")
 const router = express.Router();
 
-// router.get("/", (req, res) => {
-//   db.getTemplates()
-//     .then(templates => {
-//       res.status(200).json(templates);
-//     })
-//     .catch(error => {
-//       res.status(500).json({
-//         error: error,
-//         message: "500 server error on getting templates"
-//       });
-//     });
-// });
 
-router.get("/:name", (req, res) => {
-  const name = req.params.name;
+router.post("/",(req,res)=>{
+  const template = req.body
+  
+  db.addTemplate(template)
+  .then(id =>{
+    res.status(201).json({template_id:id[0].id})
+  })
+  .catch(error =>{res.status(500).json({message:`Error:${error.message}`})})
+})
 
-  db.getTemplateByName(name)
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.getTemplates(id,"id")
     .then(template => {
-      res.status(200).json(template);
+      if(template){
+      res.status(200).send(template)
+      }
     })
     .catch(error => {
       res.status(500).json({
@@ -31,17 +31,38 @@ router.get("/:name", (req, res) => {
     });
 });
 
-router.post("/:id", (req, res) => {
-   const name = "90_day";
-   const project_id = req.params.id;
-   db.getTemplateByName(name).then(response=>{
+
+router.get("/",(req,res) =>{
+
+  console.log(req.headers)
+  db.getTemplate()
+
+  .then(template =>{
+
+  res.status(200).json(template)})
+
+  .catch(error =>{res.status(500).json({message:error.message})})
+
+})
+router.post("/:pid", (req, res) => {
+
+   const project_id = req.params.pid;
+   const id = req.body.template_id
+   const user_id = req.headers.user_id
+   db.getTemplates(id).then(response=>{
+  let resp = response[0].data
+
    let template = [];
-   template.push(response.map(function(response){return {"task_name":response.task_name,"task_description":response.task_description,"project_id":project_id}}));
-     return template[0]
+   
+   template.push(resp.map(function(response){return {"task_name":response.task_name,"task_description":response.task_description,"project_id":project_id,"user_id":user_id}}));
+
+  //  console.log(template[0])
+   return template
      
    })
    .then(template=>{
-     dbt.addTasks(template).then(response=>{
+  
+     dbt.addTasks(template[0]).then(response=>{
      
       res.status(201).json({message:`Tasks added to project # ${project_id}`,tasks:response.message})})
    })
