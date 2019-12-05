@@ -46,7 +46,7 @@ router.get("/",(req,res) =>{
 router.post("/:pid", (req, res) => {
 
    const project_id = req.params.pid;
-   const id= req.body.id
+   const id = req.body.template_id
    const user_id = req.headers.user_id
    db.getTemplates(id).then(response=>{
   let resp = response[0].data
