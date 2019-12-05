@@ -15,7 +15,12 @@ function getLogsByUserId(user_id) {
     return db("delay_logs")
       .join("projects", "delay_logs.project_id", "=", "projects.id")
       .join("tasks", "delay_logs.task_id", "=", "tasks.id")
-      .select("projects.project_name", "tasks.task_name", "delay_logs.*")
+      .select(
+        "projects.project_name",
+        "tasks.task_name",
+        "tasks.task_description",
+        "delay_logs.*"
+      )
       .where("delay_logs.user_id", "=", user_id)
       .orderBy("delay_logs.id");
 }
