@@ -34,7 +34,7 @@ router.get("/:id", (req, res) => {
 
 router.get("/",(req,res) =>{
 
-
+  console.log(req.headers)
   db.getTemplate()
 
   .then(template =>{
