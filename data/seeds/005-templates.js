@@ -8,7 +8,7 @@ exports.seed = function(knex) {
     .then(function() {
   //     // Inserts seed entries
   return knex("templates").insert(
-       {"template":[ 
+       {"template_name":"90_day","template":[ 
       {  
         "due_date": "12/03/2019",
         "task_name": "Order Scrap Dumpster and Port-A-John",
