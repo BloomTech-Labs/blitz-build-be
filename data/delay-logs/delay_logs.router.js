@@ -2,50 +2,117 @@ const router = require("express").Router()
 const db = require('./delay_logs.model')
 const moment = require("moment")
 
-router.get('/:id',(req,res) =>{
-const id = req.params.id
-db.getLogs(id)
-.then(logs =>{
-    if(logs){
-    res.status(200).json({delay_logs:logs})
-    }else{
-        res.status(400).json({message:"Sorry no logs found for that ID"})
-    }
-}).catch(error =>{res.status(500).json({message:error.message})})})
-
-router.post("/add",(req,res) => {
-    const newLog = req.body
-    db.addLogs(newLog)
-    .then(newLog =>{
-        if(newLog){
-            res.status(201).json({newLog:`New Delay Log Created at ${moment().format("LLL")}`})
-        }else{
-            res.status(409).json({message:"Sorry a log for that project already exists try updating that one!!!"})
-        }
+router.get("/", (req, res) => {
+  const user_id = req.headers.user_id;
+  db.getLogsByUserId(user_id)
+    .then(logs => {
+      if (logs) {
+        res.status(200).json(logs);
+      } else {
+        res.status(400).json({ message: "Sorry no logs found for that ID" });
+      }
     })
-    .catch(error => {res.status(500).json({error:error.message})})
-})
+    .catch(error => {
+      res.status(500).json({ message: error.message });
+    });
+});
 
-router.put('/:id',(req,res)=>{
-    const changes = req.body
-    const id = req.params.id
-    db.editLogs(id,changes)
-    .then(updatedLog =>{
-        res.status(200).json({updatedLog:updatedLog})
-    })
-    .catch(error => {message:error.message})
-})
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  const user_id = req.headers.user_id;
 
-router.delete('/:id',(req,res) => {
-    const id = req.params.id
-    db.deleteLogs(id)
-    .then(deletedLog =>{
-        if(deletedLog){
-            res.status(200).json({message:`Log # ${id} deleted @ ${moment().format("LLL")}`})
-        }else{
-            res.status(409).json({message:"Sorry no log matching that id was found"})
-        }
+  db.getLogsByLogId(id)
+
+    .then(log => {
+      // Check if log belongs to user
+      if (log[0].user_id == user_id) {
+        // If so return project to client
+        res.status(200).json(log);
+      } else {
+        // If not return error message to client
+        res
+          .status(401)
+          .json({ message: `Log # ${id} doesn't belong to user # ${user_id}` });
+      }
     })
-    .catch(error => {res.status(500).json({error:error.message})})
-})
-module.exports=router
+    .catch(error => {
+      res.status(500).json({
+        error: error,
+        message: "500 server error on getting log id"
+      });
+    });
+});
+
+router.post("/", (req, res) => {
+  const newLog = req.body;
+  const user_id = req.headers.user_id;
+  newLog.user_id = user_id;
+  db.addLogs(newLog)
+    .then(newLogId => {
+      db.getLogsByLogId(newLogId[0]).then(log => {
+        res.status(201).json({
+          newLog: `New Delay Log Created at ${moment().format("LLL")}`,log
+        });
+      });
+    })
+    .catch(error => {
+      res.status(500).json({ error: error.message });
+    });
+});
+
+router.put("/:id", (req, res) => {
+  const id = req.params.id;
+  const changes = req.body;
+  const user_id = req.headers.user_id;
+  // Get log 1st
+  db.getLogsByLogId(id)
+
+    .then(log => {
+      //Check to see if log belongs to user
+      if (log[0].user_id == req.headers.user_id) {
+        //If so update log and send status 200 back to client
+        db.editLogs(id, changes).then(() => {
+          db.getLogsByLogId(id).then(updatedLog => {
+            res
+              .status(200)
+              .json({ message: `Log # ${id} updated`, updatedLog });
+          });
+        });
+        //If not send error message back to client
+      } else {
+        res
+          .status(401)
+          .json({ message: `Log # ${id} doesn't belong to user # ${user_id}` });
+      }
+    })
+    .catch(error => {
+      res.status(500).json({
+        error: error,
+        message: "500 server error on updating log"
+      });
+    });
+});
+
+router.delete("/:id", (req, res) => {
+  const id = req.params.id;
+  const user_id = req.headers.user_id;
+  db.getLogsByLogId(id)
+    .then(log => {
+      if (log[0].user_id == user_id) {
+        db.deleteLogs(id).then(deletedLog => {
+          res.status(204).json({ message: `Log # ${id} is removed` });
+        });
+      } else {
+        res
+          .status(401)
+          .json({ message: `Log # ${id} doesn't belong to user # ${user_id}` });
+      }
+    })
+    .catch(error => {
+      res.status(500).json({
+        error: error,
+        message: "server error on deleting Log"
+      });
+    });
+});
+module.exports = router;
