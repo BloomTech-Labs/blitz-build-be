@@ -1,3 +1,4 @@
+
 const moment = require('moment')
 const date = moment().add(90,'days').calendar("l")
 const createdAt = moment().calendar()
@@ -88,13 +89,12 @@ exports.up = function(knex) {
       })
       .createTable("delay_logs",tbl =>{
         tbl.increments()
-        tbl.integer("projects_id")
+        tbl.integer("project_id")
            .unsigned()
            .references("id")
            .inTable("projects")
            .onDelete("CASCADE")
            .onUpdate("CASCADE")
-        tbl.string("project_name").notNullable()
         tbl.string("createdAt").defaultsTo(moment().calendar("l"))
         tbl.string("reason").notNullable()
         tbl.integer("task_id")
@@ -103,9 +103,8 @@ exports.up = function(knex) {
         .inTable("tasks")
         .onDelete("CASCADE")
         .onUpdate("CASCADE")
-        tbl.string("task_name").notNullable()
-        tbl.string("updatedAt").defaultsTo(moment().format("l"))
-          
+       tbl.string("updatedAt").defaultsTo(moment().format("l"))
+          tbl.string("user_id").notNullable();
       })
 
   
