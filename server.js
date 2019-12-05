@@ -8,28 +8,7 @@ const TemplateTasksRouter = require("./data/templates-tasks/templates-tasks-rout
 const Weather = require("./data/weather/weather.router");
 // const Auth = require("./data/middleware/restriced.middleware")
 const delayLogsRouter = require("./data/delay-logs/delay_logs.router");
-const jwt = require("express-jwt");
-const jwksRsa = require("jwks-rsa");
-
-
-
-
-const checkJwt = jwt({
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: `https://gannondarcy2.auth0.com/.well-known/jwks.json`
-     
-  }),
-
-  // Validate the audience and the issuer.
-  audience: "OzMg1e7JDNF7DogxPEPvGzpG7fvvDHNe",
-  issuer: `https://gannondarcy2.auth0.com/`,
-  algorithms: ["RS256"],
-
-});
-
+const authenticate = require('./auth/authenticate')
 
 
 const server = express();
@@ -53,11 +32,11 @@ server.use(helmet());
 server.use(express.json());
 server.use(logger);
 // server.use('/auth',authRouter)
-server.use("/projects", ProjectsRouter);
-server.use("/projects/tasks",TasksRouter);
-server.use("/templates",TemplatesRouter);
+server.use("/projects", authenticate,ProjectsRouter);
+server.use("/projects/tasks",authenticate,TasksRouter);
+server.use("/templates",authenticate,TemplatesRouter);
 server.use("/projects/tasks/templates",TemplateTasksRouter);
 server.use("/weather", Weather);
-server.use("/delay_logs",delayLogsRouter);
+server.use("/delay_logs",authenticate,delayLogsRouter);
 
 module.exports = server;
