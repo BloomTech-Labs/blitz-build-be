@@ -4,7 +4,14 @@ const dbt = require("../tasks/tasks.model")
 const router = express.Router();
 
 
-
+router.post("/",(req,res)=>{
+  const template = req.body
+  db.addTemplate(template)
+  .then(id =>{
+    res.status(201).json({template_id:id[0].id})
+  })
+  .catch(error =>{res.status(500).json({message:`Error:${error.message}`})})
+})
 
 router.get("/:id", (req, res) => {
   const id = req.params.id;
@@ -36,39 +43,39 @@ router.get("/",(req,res) =>{
   .catch(error =>{res.status(500).json({message:error.message})})
 
 })
-router.post("/:pid", (req, res) => {
+// router.post("/:pid", (req, res) => {
 
-   const project_id = req.params.pid;
-   const id= req.body.id
-   const user_id = req.headers.user_id
-   db.getTemplates(id).then(response=>{
-  let resp = response[0].data
+//    const project_id = req.params.pid;
+//    const id= req.body.id
+//    const user_id = req.headers.user_id
+//    db.getTemplates(id).then(response=>{
+//   let resp = response[0].data
 
-   let template = [];
+//    let template = [];
    
-   template.push(resp.map(function(response){return {"task_name":response.task_name,"task_description":response.task_description,"project_id":project_id,"user_id":user_id}}));
+//    template.push(resp.map(function(response){return {"task_name":response.task_name,"task_description":response.task_description,"project_id":project_id,"user_id":user_id}}));
 
-  //  console.log(template[0])
-   return template[0]
+//   //  console.log(template[0])
+//    return template
      
-   })
-   .then(template=>{
-     console.log(template)
-     dbt.addTasks(template).then(response=>{
+//    })
+//    .then(template=>{
+//      console.log(template[0])
+//      dbt.addTasks(template).then(response=>{
      
-      res.status(201).json({message:`Tasks added to project # ${project_id}`,tasks:response.message})})
-   })
+//       res.status(201).json({message:`Tasks added to project # ${project_id}`,tasks:response.message})})
+//    })
 
 
-    .catch(error => {
-      res.status(500).json({
-        error: error,
-        message: "500 server error on adding templates"
-      })
-    })
+//     .catch(error => {
+//       res.status(500).json({
+//         error: error,
+//         message: "500 server error on adding templates"
+//       })
+//     })
     
 
-})
+// })
 
 router.put("/:id", (req, res) => {
   const id = req.params.id;

@@ -16,13 +16,18 @@ module.exports = {
 function getTemplate(){
   return db("templates").select("*")
 }
+
 function getTemplates(id) {
   return db("templates").where("id","=",id)
          
 }
 
 function addTemplate(template) {
-  return db("templates").insert(template);
+    return db('templates')
+    .insert(template,"id")
+    .then(templateIdArr => getTemplates(templateIdArr[0]))
+           
+          
 }
 
 function editTemplate(id, changes) {
