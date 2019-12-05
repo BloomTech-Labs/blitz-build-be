@@ -34,7 +34,7 @@ server.use(logger);
 // server.use('/auth',authRouter)
 server.use("/projects", authenticate,ProjectsRouter);
 server.use("/projects/tasks",authenticate,TasksRouter);
-server.use("/templates",authenticate,TemplatesRouter);
+server.use("/templates",TemplatesRouter);
 server.use("/projects/tasks/templates",TemplateTasksRouter);
 server.use("/weather", Weather);
 server.use("/delay_logs",authenticate,delayLogsRouter);
