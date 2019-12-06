@@ -32,18 +32,18 @@ router.get("/:id", (req, res) => {
 });
 
 
-router.get("/",(req,res) =>{
+// router.get("/",(req,res) =>{
+//    const user_id = req.headers.user_id
+//   console.log(req.headers)
+//   db.getTemplate()
 
-  console.log(req.headers)
-  db.getTemplate()
+//   .then(template =>{
 
-  .then(template =>{
+//   res.status(200).json(template)})
 
-  res.status(200).json(template)})
+//   .catch(error =>{res.status(500).json({message:error.message})})
 
-  .catch(error =>{res.status(500).json({message:error.message})})
-
-})
+// })
 router.post("/:pid", (req, res) => {
 
    const project_id = req.params.pid;
