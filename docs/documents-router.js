@@ -1,5 +1,5 @@
 require('dotenv').config('./env')
-
+const db = require('./docs-model')
 const aws = require('aws-sdk')
 const router = require('express').Router();
 aws.config.update({
@@ -37,6 +37,24 @@ const s3Params = {
     
 
  
+})
+router.post('/url',(req,res)=>{
+    const  url = req.body
+    db.addURL(url)
+    .then(data =>{
+        res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json(err,err.stack))
+})
+router.get('/url',(req,res)=>{
+    let id = req.headers.user_id
+    
+    console.log(id)
+    db.getURL(id)
+    .then(data =>{
+        res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json(err,err.stack))
 })
 
 router.post('/get',  (req,res)=>{
