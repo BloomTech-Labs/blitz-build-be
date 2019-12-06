@@ -95,7 +95,7 @@ exports.up = function(knex) {
            .inTable("projects")
            .onDelete("CASCADE")
            .onUpdate("CASCADE")
-        tbl.string("createdAt").defaultsTo(moment().calendar("l"))
+        tbl.string("createdAt")
         tbl.string("reason").notNullable()
         tbl.integer("task_id")
         .unsigned()
@@ -103,7 +103,7 @@ exports.up = function(knex) {
         .inTable("tasks")
         .onDelete("CASCADE")
         .onUpdate("CASCADE")
-       tbl.string("updatedAt").defaultsTo(moment().format("l"))
+       tbl.string("updatedAt")
           tbl.string("user_id").notNullable();
       })
 
