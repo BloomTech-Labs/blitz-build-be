@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 5ad8d2068cc68718dc19bb727aead556f3796954
 const moment = require('moment')
 // const date = moment().add(90,'days').calendar("l")
 const createdAt = moment().calendar('l')
