@@ -10,7 +10,7 @@ aws.config.update({
  const S3_BUCKET = process.env.BUCKET_NAME
 const s3 = new aws.S3();  // Create a new instance of S3
 
-router.post("/",(req,res)=>{
+router.post("/documents",(req,res)=>{
     const fileName = req.body.fileName;
 const fileType = req.body.fileType;
 const uid = req.body.user_id
