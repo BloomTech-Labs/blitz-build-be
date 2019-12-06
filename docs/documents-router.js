@@ -1,4 +1,5 @@
 require('dotenv').config('./env')
+const db = require('./docs-model')
 const aws = require('aws-sdk')
 const router = require('express').Router();
 aws.config.update({
@@ -6,7 +7,7 @@ aws.config.update({
     accessKeyId: process.env.ID,
     secretAccessKey: process.env.AWS_SECRET
   })
-  const S3_BUCKET = process.env.BUCKET_NAME
+ const S3_BUCKET = process.env.BUCKET_NAME
 const s3 = new aws.S3();  // Create a new instance of S3
 
 router.post("/",(req,res)=>{
@@ -34,7 +35,25 @@ const s3Params = {
       res.json({success:true,data:{returnData}});
   })
     
+
  
 })
+
+router.post('/get',  (req,res)=>{
+    let uid = req.headers.user_id
+    let fileName = req.body.fileName
+ 
+    const params = {
+        Bucket: S3_BUCKET,
+        Key: `${uid}/${fileName}`
+     }
+     s3.getObject(params,(err,data)=>{
+         if(err) console.log(err,err.stack)
+          else return res.status(200).json(data)
+       
+     })
+    
+    })
+
 
 module.exports = router

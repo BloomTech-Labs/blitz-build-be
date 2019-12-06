@@ -9,8 +9,8 @@ const Weather = require("./data/weather/weather.router");
 // const Auth = require("./data/middleware/restriced.middleware")
 const delayLogsRouter = require("./data/delay-logs/delay_logs.router");
 const authenticate = require('./auth/authenticate')
-const documentRouter = require('./docs/documents-router')
-
+// const documentRouter = require('./docs/documents-router')
+const docs = require('./amplify/backend/function/getDocs/src/app')
 const server = express();
 
 
@@ -19,7 +19,7 @@ const server = express();
 function logger(req, res, next) {
   const url = req.url;
   const method = req.method;
-  console.log(`There was a ${method} on ${url}`);
+  console.log(`There was a ${method} on ${url} @${Date.now()}`);
   next();
 }
 
@@ -39,6 +39,6 @@ server.use("/templates",TemplatesRouter);
 server.use("/projects/tasks/templates",TemplateTasksRouter);
 server.use("/weather", Weather);
 server.use("/delay_logs",authenticate,delayLogsRouter);
-server.use('/s3',documentRouter)
-
+// server.use('/s3',documentRouter)
+server.use('/docs',docs)
 module.exports = server;

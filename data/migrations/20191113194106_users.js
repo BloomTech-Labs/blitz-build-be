@@ -1,6 +1,6 @@
-const moment = require('moment')
+// const moment = require('moment')
 // const date = moment().add(90,'days').calendar("l")
-const createdAt = moment().calendar('l')
+// const createdAt = moment().calendar('l')
 exports.up = function(knex) {
   return (
     knex.schema
@@ -71,26 +71,33 @@ exports.up = function(knex) {
 
   
       // })
-      .createTable("delay_logs",tbl =>{
-        tbl.increments()
-        tbl.integer("projects_id")
-           .unsigned()
-           .references("id")
-           .inTable("projects")
-           .onDelete("CASCADE")
-           .onUpdate("CASCADE")
-        tbl.string("project_name").notNullable()
-        tbl.string("createdAt").defaultsTo(moment().calendar("l"))
-        tbl.string("reason").notNullable()
-        tbl.integer("task_id")
-        .unsigned()
-        .references("id")
-        .inTable("tasks")
-        .onDelete("CASCADE")
-        .onUpdate("CASCADE")
-        tbl.string("task_name").notNullable()
-        tbl.string("updatedAt").defaultsTo(moment().format("l"))
+      // .createTable("delay_logs",tbl =>{
+      //   tbl.increments()
+      //   tbl.integer("projects_id")
+      //      .unsigned()
+      //      .references("id")
+      //      .inTable("projects")
+      //      .onDelete("CASCADE")
+      //      .onUpdate("CASCADE")
+      //   tbl.string("project_name").notNullable()
+      //   tbl.string("createdAt").defaultsTo(moment().calendar("l"))
+      //   tbl.string("reason").notNullable()
+      //   tbl.integer("task_id")
+      //   .unsigned()
+      //   .references("id")
+      //   .inTable("tasks")
+      //   .onDelete("CASCADE")
+      //   .onUpdate("CASCADE")
+      //   tbl.string("task_name").notNullable()
+      //   tbl.string("updatedAt").defaultsTo(moment().format("l"))
           
+      // })
+      .createTable("docs_url",tbl =>{
+        tbl.increments()
+        tbl.string("file_name",2000);
+        tbl.string("doc_url",2000);
+        tbl.string("user_id")
+        tbl.string("project_id")
       })
 
   
@@ -99,7 +106,8 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema
-  .dropTableIfExists("delay_logs")
+  .dropTableIfExists("docs_url")
+  // .dropTableIfExists("delay_logs")
   // .dropTableIfExists("templates")
   // .dropTableIfExists("projects_tasks")
   // .dropTableIfExists("tasks")
