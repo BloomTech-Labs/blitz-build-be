@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 
->>>>>>> 5ad8d2068cc68718dc19bb727aead556f3796954
 const moment = require('moment')
 // const date = moment().add(90,'days').calendar("l")
 const createdAt = moment().calendar('l')
@@ -9,6 +6,29 @@ exports.up = function(knex) {
   return (
     knex.schema
     //PROJECTS
+
+      .createTable("projects", tbl => {
+        tbl.increments();
+
+        tbl
+          .string("project_name")
+          .notNullable();
+        tbl.float("baths");
+        tbl.float("beds");
+        tbl.string("city");
+        tbl.string("imageURL");
+        tbl.integer("square_ft");
+        tbl.string("state");
+        tbl.string("status");
+        tbl.string("createdAt");
+        tbl.string("street_address");
+        tbl.integer("zip_code").notNullable();
+        tbl.float("longitude")
+        tbl.float("latitude")
+        tbl.string("due_date").defaultsTo(date)
+        tbl.string('user_id').notNullable();
+      })
+
       // .createTable("projects", tbl => {
       //   tbl.increments();
 
@@ -29,6 +49,7 @@ exports.up = function(knex) {
       //   tbl.string("due_date").defaultsTo(date)
       //   tbl.string('user_id').notNullable();
       // })
+
      
 
      
@@ -83,8 +104,8 @@ exports.up = function(knex) {
            .inTable("projects")
            .onDelete("CASCADE")
            .onUpdate("CASCADE")
-        tbl.string("project_name").notNullable()
-        tbl.string("createdAt").defaultsTo(moment().calendar("l"))
+        tbl.string("createdAt")
+
         tbl.string("reason").notNullable()
         tbl.integer("task_id")
         .unsigned()
@@ -92,9 +113,10 @@ exports.up = function(knex) {
         .inTable("tasks")
         .onDelete("CASCADE")
         .onUpdate("CASCADE")
-        tbl.string("task_name").notNullable()
-        tbl.string("updatedAt").defaultsTo(moment().format("l"))
-          
+
+       tbl.string("updatedAt")
+          tbl.string("user_id").notNullable();
+
       })
 
   
