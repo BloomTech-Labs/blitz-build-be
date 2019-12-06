@@ -1,11 +1,12 @@
 
 const moment = require('moment')
-const date = moment().add(90,'days').calendar("l")
-const createdAt = moment().calendar()
+// const date = moment().add(90,'days').calendar("l")
+const createdAt = moment().calendar('l')
 exports.up = function(knex) {
   return (
     knex.schema
     //PROJECTS
+
       .createTable("projects", tbl => {
         tbl.increments();
 
@@ -19,6 +20,7 @@ exports.up = function(knex) {
         tbl.integer("square_ft");
         tbl.string("state");
         tbl.string("status");
+        tbl.string("createdAt");
         tbl.string("street_address");
         tbl.integer("zip_code").notNullable();
         tbl.float("longitude")
@@ -26,76 +28,84 @@ exports.up = function(knex) {
         tbl.string("due_date").defaultsTo(date)
         tbl.string('user_id').notNullable();
       })
-     
+
+      // .createTable("projects", tbl => {
+      //   tbl.increments();
+
+      //   tbl
+      //     .string("project_name")
+      //     .notNullable();
+      //   tbl.float("baths");
+      //   tbl.float("beds");
+      //   tbl.string("city");
+      //   tbl.string("imageURL");
+      //   tbl.integer("square_ft");
+      //   tbl.string("state");
+      //   tbl.string("status");
+      //   tbl.string("street_address");
+      //   tbl.integer("zip_code").notNullable();
+      //   tbl.float("longitude")
+      //   tbl.float("latitude")
+      //   tbl.string("due_date").defaultsTo(date)
+      //   tbl.string('user_id').notNullable();
+      // })
 
      
 
-      //TASKS
-      .createTable("tasks", tbl => {
-        tbl.increments();
-        tbl.string("user_id").notNullable();
-        tbl.string("task_name").notNullable();
-        tbl.string("task_description", 1000);
-        tbl.string("due_date")
-        tbl.date("createdAt").defaultsTo(createdAt)
-        tbl.boolean("isComplete").defaultsTo(false)
-        tbl
-          .integer("project_id", [])
-          .unsigned()
-          .references("id")
-          .inTable("projects")
-          .onDelete("CASCADE")
-          .onUpdate("CASCADE");
-      })
+     
+
+      // TASKS
+      // .createTable("tasks", tbl => {
+      //   tbl.increments();
+      //   tbl.string("user_id").notNullable();
+      //   tbl.string("task_name").notNullable();
+      //   tbl.string("task_description", 1000);
+      //   tbl.string("due_date")
+      //   tbl.date("createdAt").defaultsTo(createdAt)
+      //   tbl.boolean("isComplete").defaultsTo(false)
+      //   tbl
+      //     .integer("project_id", [])
+
+      // })
         //TEMPLATES
-      .createTable("templates", tbl => {
-       tbl.increments('id');
-    
-      tbl.string("template_name")
-      tbl.string("task_name").notNullable();
-        tbl.string("task_description", 1000);
-        tbl.string("due_date");
-        tbl.date("createdAt").defaultsTo(createdAt)
-        tbl.boolean("isComplete").defaultsTo(false)
-        tbl
-          .integer("project_id", [])
-          .unsigned()
-          .references("id")
-          .inTable("projects")
-          .onDelete("CASCADE")
-          .onUpdate("CASCADE");
+      // .createTable("templates", tbl => {
+      // tbl.increments();
+      // tbl.string("template_name");
+      // tbl.specificType("template",'json ARRAY')
+ 
   
-      })
+      // })
       // MANY-TO-MANY TABLE WITH PROJECTS AND TASKS
-      .createTable("projects_tasks", tbl => {
-        tbl.increments();
+      // .createTable("projects_tasks", tbl => {
+      //   tbl.increments();
 
-        tbl
-          .integer("project_id")
-          .unsigned()
-          .references("id")
-          .inTable("projects")
-          .onDelete("CASCADE")
-          .onUpdate("CASCADE");
-        tbl
-          .integer("task_id")
-          .unsigned()
-          .references("id")
-          .inTable("tasks")
-          .onDelete("CASCADE")
-          .onUpdate("CASCADE")
+      //   tbl
+      //     .integer("project_id")
+      //     .unsigned()
+      //     .references("id")
+      //     .inTable("projects")
+      //     .onDelete("CASCADE")
+      //     .onUpdate("CASCADE");
+      //   tbl
+      //     .integer("task_id")
+      //     .unsigned()
+      //     .references("id")
+      //     .inTable("tasks")
+      //     .onDelete("CASCADE")
+      //     .onUpdate("CASCADE")
 
   
-      })
+      // })
       .createTable("delay_logs",tbl =>{
         tbl.increments()
-        tbl.integer("project_id")
+        tbl.integer("projects_id")
            .unsigned()
            .references("id")
            .inTable("projects")
            .onDelete("CASCADE")
            .onUpdate("CASCADE")
-        tbl.string("createdAt").defaultsTo(moment().calendar("l"))
+        tbl.string("createdAt")
+
         tbl.string("reason").notNullable()
         tbl.integer("task_id")
         .unsigned()
@@ -103,8 +113,10 @@ exports.up = function(knex) {
         .inTable("tasks")
         .onDelete("CASCADE")
         .onUpdate("CASCADE")
-       tbl.string("updatedAt").defaultsTo(moment().format("l"))
+
+       tbl.string("updatedAt")
           tbl.string("user_id").notNullable();
+
       })
 
   
@@ -114,19 +126,18 @@ exports.up = function(knex) {
 exports.down = function(knex) {
   return knex.schema
   .dropTableIfExists("delay_logs")
-  .dropTableIfExists("templates")
-  .dropTableIfExists("projects_tasks")
-  .dropTableIfExists("tasks")
-  .dropTableIfExists("projects")
+  // .dropTableIfExists("templates")
+  // .dropTableIfExists("projects_tasks")
+  // .dropTableIfExists("tasks")
+  // .dropTableIfExists("projects")
  
-  .dropTableIfExists("users")
+  // .dropTableIfExists("users")
 
 
   
 
 
  
-    .dropTableIfExists("templates")
   
   
 

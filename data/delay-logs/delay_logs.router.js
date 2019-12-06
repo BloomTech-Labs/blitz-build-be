@@ -48,6 +48,7 @@ router.post("/", (req, res) => {
   const newLog = req.body;
   const user_id = req.headers.user_id;
     newLog.user_id = user_id;
+    newLog.createdAt = moment().format("l");
     // check if the task_id is valid.
   tasksDB.getTaskByTaskID(newLog.task_id).then(task => {
       if (task[0]) {
@@ -81,7 +82,8 @@ router.post("/", (req, res) => {
 router.put("/:id", (req, res) => {
   const id = req.params.id;
   const changes = req.body;
-  const user_id = req.headers.user_id;
+    const user_id = req.headers.user_id;
+    changes.updatedAt = moment().format("l");
   // Get log 1st
   db.getLogsByLogId(id)
 
