@@ -1,6 +1,7 @@
-const router = require("express").Router()
-const db = require('./delay_logs.model')
-const moment = require("moment")
+const router = require("express").Router();
+const db = require("./delay_logs.model");
+const moment = require("moment");
+const tasksDB = require("../tasks/tasks.model");
 
 router.get("/", (req, res) => {
   const user_id = req.headers.user_id;
@@ -46,18 +47,35 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   const newLog = req.body;
   const user_id = req.headers.user_id;
-  newLog.user_id = user_id;
-  db.addLogs(newLog)
-    .then(newLogId => {
-      db.getLogsByLogId(newLogId[0]).then(log => {
-        res.status(201).json({
-          newLog: `New Delay Log Created at ${moment().format("LLL")}`,log
-        });
-      });
-    })
-    .catch(error => {
-      res.status(500).json({ error: error.message });
-    });
+    newLog.user_id = user_id;
+    // check if the task_id is valid.
+  tasksDB.getTaskByTaskID(newLog.task_id).then(task => {
+      if (task[0]) {
+        // check if this task belong to the project.
+      if (task[0].project_id == newLog.project_id) {
+        db.addLogs(newLog)
+          .then(newLogId => {
+            db.getLogsByLogId(newLogId[0]).then(log => {
+              res.status(201).json({
+                newLog: `New Delay Log Created at ${moment().format("LLL")}`,
+                log
+              });
+            });
+          })
+          .catch(error => {
+            res.status(500).json({ error: error.message });
+          });
+      } else {
+        res
+          .status(401)
+          .json({
+            message: `The task # ${newLog.task_id} is not belong to the project #${newLog.project_id}`
+          });
+      }
+    } else {
+      res.status(401).json({ message: "This task_id is invalid" });
+    }
+  });
 });
 
 router.put("/:id", (req, res) => {
