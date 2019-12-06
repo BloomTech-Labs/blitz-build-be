@@ -1,5 +1,5 @@
 require('dotenv').config('./env')
-const db = require('./docs-model')
+
 const aws = require('aws-sdk')
 const router = require('express').Router();
 aws.config.update({
@@ -54,6 +54,5 @@ router.post('/get',  (req,res)=>{
      })
     
     })
-
 
 module.exports = router

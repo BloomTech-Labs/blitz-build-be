@@ -9,8 +9,8 @@ const Weather = require("./data/weather/weather.router");
 // const Auth = require("./data/middleware/restriced.middleware")
 const delayLogsRouter = require("./data/delay-logs/delay_logs.router");
 const authenticate = require('./auth/authenticate')
-// const documentRouter = require('./docs/documents-router')
-const docs = require('./amplify/backend/function/getDocs/src/app')
+const documentRouter = require('./docs/documents-router')
+
 const server = express();
 
 
@@ -40,5 +40,5 @@ server.use("/projects/tasks/templates",TemplateTasksRouter);
 server.use("/weather", Weather);
 server.use("/delay_logs",authenticate,delayLogsRouter);
 // server.use('/s3',documentRouter)
-server.use('/docs',docs)
+server.use('/docs',documentRouter)
 module.exports = server;
