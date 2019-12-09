@@ -13,7 +13,7 @@ module.exports = {
 
 function getLogsByUserId(user_id) {
     return db("delay_logs")
-      .join("projects", "delay_logs.projects_id", "=", "projects.id")
+      .join("projects", "delay_logs.project_id", "=", "projects.id")
       .join("tasks", "delay_logs.task_id", "=", "tasks.id")
       .select(
         "projects.project_name",
