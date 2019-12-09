@@ -7,12 +7,19 @@ module.exports = {
   // getTemplateById,
   addTemplate,
   editTemplate,
-  deleteTemplate
+  deleteTemplate,
+  getAll
 };
 
 // function getTemplateByName(id) {
 //   return db("templates").where("id","=",id);
 // }
+function getAll(id)
+return db("templates")
+ .select('*')
+ .where("user_id","=", id)
+ .orderBy("template_name")
+ 
 function getTemplate(id){
   return db("templates").select("*").where("id","=",id)
 }

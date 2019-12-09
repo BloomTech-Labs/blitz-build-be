@@ -5,15 +5,25 @@ const router = express.Router();
 
 
 router.post("/",(req,res)=>{
-  const template = req.body
   
+  const user_id = req.headers.user_id
+  const template ={
+    template_name:req.body.template_name,
+    user_id:user_id
+  }
   db.addTemplate(template)
   .then(id =>{
     res.status(201).json({template_id:id[0].id})
   })
   .catch(error =>{res.status(500).json({message:`Error:${error.message}`})})
 })
-
+router.get('/',(req,res)=>{
+  const id = req.headers.user_id
+  db.getAll(id)
+  .then(templates =>{
+    res.status(200).json(templates)
+  }).catch(err =>{res.status(400).json(err)})
+})
 router.get("/:id", (req, res) => {
   const id = req.params.id;
 
