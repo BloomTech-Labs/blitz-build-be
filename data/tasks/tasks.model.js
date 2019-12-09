@@ -7,6 +7,7 @@ module.exports = {
   getTasksByProject,
   getTaskByTaskID,
   getTasksByID,
+  getTaskByTemplateId
 };
 function getTasksByID(id){
   return db("tasks")
@@ -14,6 +15,10 @@ function getTasksByID(id){
   .select("projects.project_name", "tasks.*")
   .where("tasks.user_id","=",id)
   .orderBy("tasks.id")
+}
+function getTaskByTemplateId(id){
+  return db("tasks")
+   .where("template_id","=",id)
 }
 
 function getTaskByTaskID(id) {

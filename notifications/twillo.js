@@ -1,0 +1,22 @@
+
+// Download the Node helper library from www.twilio.com/docs/libraries/node#installation
+// These identifiers are your accountSid and authToken from
+// https://www.twilio.com/console
+require('dotenv').config('./env')
+const accountSid = 'AC1a3e67c46f814a0fe0de161d39a5ae6b';
+const authToken = process.env.TWILLO_KEY
+const client = require('twilio')(accountSid, authToken);
+
+const notificationOpts = {
+  toBinding: JSON.stringify({
+    binding_type: 'sms',
+    address: '+1651000000000',
+  }),
+  body: 'Knock-Knock! This is your first Notify SMS',
+};
+
+client.notify
+  .services('ISXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+  .notifications.create(notificationOpts)
+  .then(notification => console.log(notification.sid))
+  .catch(error => console.log(error));

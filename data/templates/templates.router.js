@@ -20,7 +20,7 @@ router.get("/:id", (req, res) => {
   db.getTemplates(id,"id")
     .then(template => {
       if(template){
-      res.status(200).send(template)
+      res.status(200).json(template)
       }
     })
     .catch(error => {
@@ -44,39 +44,36 @@ router.get("/:id", (req, res) => {
 //   .catch(error =>{res.status(500).json({message:error.message})})
 
 // })
-router.post("/:pid", (req, res) => {
 
-   const project_id = req.params.pid;
-   const id = req.body.template_id
-   const user_id = req.headers.user_id
-   db.getTemplates(id).then(response=>{
-  let resp = response[0].data
+    
+  //  db.getTemplates(id).then(response=>{
+  // let resp = response[0].data
 
-   let template = [];
+  //  let template = [];
    
-   template.push(resp.map(function(response){return {"task_name":response.task_name,"task_description":response.task_description,"project_id":project_id,"user_id":user_id}}));
+  //  template.push(resp.map(function(response){return {"task_name":response.task_name,"task_description":response.task_description,"project_id":project_id,"user_id":user_id}}));
 
   //  console.log(template[0])
-   return template
+  //  return template
      
-   })
-   .then(template=>{
+  //  })
+  //  .then(template=>{
   
-     dbt.addTasks(template[0]).then(response=>{
+  //    dbt.addTasks(template[0]).then(response=>{
      
-      res.status(201).json({message:`Tasks added to project # ${project_id}`,tasks:response.message})})
-   })
+  //     res.status(201).json({message:`Tasks added to project # ${project_id}`,tasks:response.message})})
+  //  })
 
 
-    .catch(error => {
-      res.status(500).json({
-        error: error,
-        message: "500 server error on adding templates"
-      })
-    })
+  //   .catch(error => {
+  //     res.status(500).json({
+  //       error: error,
+  //       message: "500 server error on adding templates"
+  //     })
+  //   })
     
 
-})
+// })
 
 router.put("/:id", (req, res) => {
   const id = req.params.id;

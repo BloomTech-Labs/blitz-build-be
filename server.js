@@ -4,7 +4,7 @@ const helmet = require("helmet");
 const ProjectsRouter = require("./data/projects/projects.router");
 const TasksRouter = require("./data/tasks/tasks.router");
 const TemplatesRouter = require("./data/templates/templates.router");
-const TemplateTasksRouter = require("./data/projects_templates_tasks/projects_templates_tasks-router");
+
 const Weather = require("./data/weather/weather.router");
 // const Auth = require("./data/middleware/restriced.middleware")
 const delayLogsRouter = require("./data/delay-logs/delay_logs.router");
@@ -36,7 +36,7 @@ server.use(logger);
 server.use("/projects", authenticate,ProjectsRouter);
 server.use("/projects/tasks",authenticate,TasksRouter);
 server.use("/templates",TemplatesRouter);
-server.use("/projects/tasks/templates",TemplateTasksRouter);
+
 server.use("/weather", Weather);
 server.use("/delay_logs",authenticate,delayLogsRouter);
 // server.use('/s3',documentRouter)
