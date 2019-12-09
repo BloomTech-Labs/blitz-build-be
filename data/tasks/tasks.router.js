@@ -28,7 +28,14 @@ router.get("/:id", (req, res) => {
       });
     });
 });
-
+//Get Tasks by Templates
+router.get('/template/:id',(req,res)=>{
+  let id = req.params.id
+  db.getTaskByTemplateId(id)
+  .then(tasks =>{
+    res.status(200).json(tasks)
+  }).catch(err =>{res.status(401).json(err)})
+})
 router.post("/", (req, res) => {
   const tasks = req.body;
   const uid  = req.headers.user_id

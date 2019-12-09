@@ -13,8 +13,8 @@ module.exports = {
 // function getTemplateByName(id) {
 //   return db("templates").where("id","=",id);
 // }
-function getTemplate(){
-  return db("templates").select("*")
+function getTemplate(id){
+  return db("templates").select("*").where("id","=",id)
 }
 
 function getTemplates(id) {
