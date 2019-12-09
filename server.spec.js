@@ -5,11 +5,11 @@ const moment = require('moment')
 
 describe("Requests made to /projects endpoints",()=>{
     describe("Get Request Made to /projects w/o user id in header",()=>{
-        it("Throws an error status 500",async ()=>{
+        it("Throws an error status 401 ",async ()=>{
             const res = await request(server)
             .get('/projects')
             
-            expect(res.status).toBe(500)
+            expect(res.status).toBe(401)
         })
     })
     describe("Get Request Made To /projects with user id in headers",()=>{
@@ -181,17 +181,17 @@ describe("Requests made to /projects endpoints",()=>{
     })
     
           // Test Passes 
-    // describe("DELETE Request to /projects/:id with correct user_id in headers",()=>{
-    //     it("Returns 204 deleted",async ()=>{
-    //         const res = await request(server)
-    //         .delete('/projects/14')
-    //         .set({id:3})
+    describe("DELETE Request to /projects/:id with correct user_id in headers",()=>{
+        it("Returns 204 deleted",async ()=>{
+            const res = await request(server)
+            .delete('/projects/14')
+            .set({id:3})
       
-    //         .expect(function(res){
-    //             res.status = 204
-    //             res.body = {message:"Project #4 deleted"}
-    //         })
-    //     })
-    // })
+            .expect(function(res){
+                res.status = 204
+                res.body = {message:"Project #4 deleted"}
+            })
+        })
+    })
 
  
