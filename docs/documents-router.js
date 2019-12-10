@@ -4,7 +4,7 @@ const aws = require('aws-sdk')
 const router = require('express').Router();
 aws.config.update({
     region: 'us-west-2', // Put your aws region here
-    accessKeyId: process.env.ID,
+    accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET
   })
  const S3_BUCKET = process.env.BUCKET_NAME
