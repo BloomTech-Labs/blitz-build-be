@@ -468,3 +468,4 @@ exports.seed = function(knex) {
    });
   
   }
+  

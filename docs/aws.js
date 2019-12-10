@@ -4,7 +4,7 @@ require('dotenv').config('./env'); // Configure dotenv to load in the .env file
 module.exports= (req,res) =>{
 aws.config.update({
   region: 'us-west-2', // Put your aws region here
-  accessKeyId: process.env.ID,
+  accessKeyId: process.env.AWS_ACCESS_KEY,
   secretAccessKey: process.env.AWS_SECRET
 })
 
