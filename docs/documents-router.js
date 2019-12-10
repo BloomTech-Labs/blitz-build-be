@@ -38,6 +38,15 @@ const s3Params = {
 
  
 })
+router.delete('/url/:id',(req,res)=>{
+    const id = req.params.id
+    db.deleteUrl(id)
+    
+    .then(deletedTask =>{
+        console.log(deletedTask)
+     res.status(204).json(deletedTask)
+    }).catch(error => console.log(error))
+})
 router.post('/url',(req,res)=>{
     const  url = req.body
     db.addURL(url)
@@ -48,7 +57,7 @@ router.post('/url',(req,res)=>{
 })
 router.get('/url',(req,res)=>{
     let id = req.headers.user_id
-    
+    console.log(req.headers)
     console.log(id)
     db.getURL(id)
     .then(data =>{

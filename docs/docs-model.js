@@ -3,7 +3,7 @@ const createdAt = Date.now()
 module.exports = {
     addURL,
     getURL,
-    del
+    deleteUrl
 }
 
 function addURL(url){
@@ -18,8 +18,9 @@ function getURL(id){
       .where("user_id","=",id)
 }
 
-function del(id){
+function deleteUrl(id){
     return db("docs_url")
     .where("id","=",id)
+    .truncate()
     .delete()
 }
