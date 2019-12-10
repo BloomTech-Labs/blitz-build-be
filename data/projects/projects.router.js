@@ -56,8 +56,8 @@ router.post("/",  (req, res) => {
   const newProject = req.body;
   const user_id = req.headers.user_id
   newProject.user_id = user_id
-     newProject.createdAt = Date.now();
-
+     newProject.createdAt = moment().unix();
+   
    db.addProject(newProject)
    .then(projectId => {
      db.getProjectById(projectId[0])
