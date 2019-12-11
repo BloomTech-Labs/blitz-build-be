@@ -103,21 +103,21 @@ router.get("/byProject/:pid", (req, res) => {
 //projects/tasks
 
 
- router.get('/templates/:id',(req,res)=>{
-   const tempid = req.params.id
+//  router.get('/templates/:id',(req,res)=>{
+//    const tempid = req.params.id
  
    
-   templates.getTemplateById(tempid)
+//    templates.getTemplateById(tempid)
    
 
-   .then(templates =>{
-     templates
-     const template = templates[0].tasks
-    console.log(template)
-    db.addTasks(template)
-     })
+//    .then(templates =>{
+//      templates
+//      const template = templates[0].tasks
+//     console.log(template)
+//     db.addTasks(template)
+//      })
     //  .then(newTasksArr =>{console.log(newTasksArr)})
      
-   })
+  //  })
 
 module.exports = router
