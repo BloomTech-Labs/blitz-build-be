@@ -53,17 +53,15 @@ router.post('/url',(req,res)=>{
     .then(data =>{
         res.status(200).json(data)
     })
-    .catch(err => res.status(500).json(err,err.stack))
+    .catch(err => res.status(500).json({err:err,stack:err.stack}))
 })
 router.get('/url',(req,res)=>{
     let id = req.headers.user_id
-    console.log(req.headers)
-    console.log(id)
     db.getURL(id)
     .then(data =>{
         res.status(200).json(data)
     })
-    .catch(err => res.status(500).json(err,err.stack))
+    .catch(err => res.status(500).json({err:err.message}))
 })
 
 router.post('/get',  (req,res)=>{
@@ -75,7 +73,7 @@ router.post('/get',  (req,res)=>{
         Key: `${uid}/${fileName}`
      }
      s3.getObject(params,(err,data)=>{
-         if(err) console.log(err,err.stack)
+         if(err) console.log({err:err,stack:err.stack})
           else return res.status(200).json(data)
        
      })
