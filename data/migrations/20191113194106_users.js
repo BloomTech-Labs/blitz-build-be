@@ -61,15 +61,15 @@ exports.up = function(knex) {
       // tbl.string("template_name")
       // tbl.specificType("template","json ARRAY");
        
-        // .createTable("90_day",tbl=>{
-        //   tbl.integer("id")
-        //   tbl.string('due_date')
-        //   tbl.string('task_name')
-        //   tbl.string('task_description')
-        //   tbl.boolean('isComplete').defaultsTo(false)
-        //   tbl.string('project_id')
-        //   tbl.string('template_name')
-        // })
+        .createTable("90_day",tbl=>{
+          tbl.integer("id")
+          tbl.string('due_date')
+          tbl.string('task_name')
+          tbl.string('task_description')
+          tbl.boolean('isComplete').defaultsTo(false)
+          tbl.string('project_id')
+          tbl.string('template_name')
+        })
  
   
       //  })
@@ -114,16 +114,16 @@ exports.up = function(knex) {
       //     tbl.string("user_id").notNullable();
 
       // })
-      .createTable("docs_url",tbl =>{
-        tbl.increments()
-        tbl.string("file_name",2000);
-        tbl.string("doc_url",2000);
-        tbl.string("user_id")
-        tbl.string("project_id")
-        tbl.string("project_name")
-        tbl.string("createdAt").defaultsTo(createdAt)
+      // .createTable("docs_url",tbl =>{
+      //   tbl.increments()
+      //   tbl.string("file_name",2000);
+      //   tbl.string("doc_url",2000);
+      //   tbl.string("user_id")
+      //   tbl.string("project_id")
+      //   tbl.string("project_name")
+      //   tbl.string("createdAt").defaultsTo(createdAt)
         
-      })
+      // })
 
   
   );
@@ -131,7 +131,7 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema
-  .dropTableIfExists("docs_url")
+  // .dropTableIfExists("docs_url")
   // .dropTableIfExists("delay_logs")
   // .dropTableIfExists("tasks")
   // .dropTableIfExists("templates")
@@ -139,7 +139,7 @@ exports.down = function(knex) {
   // .dropTableIfExists("projects")
 
  
-  // .dropTableIfExists("90_day")
+  .dropTableIfExists("90_day")
 
 
   // .dropTableIfExists("projects_tasks")

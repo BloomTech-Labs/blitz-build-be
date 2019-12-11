@@ -20,7 +20,8 @@ router.post('/', (req, res) => {
     db.get()
 
         .then(data => {
-            console.log(tasks.push(data.map(function (response) { return { "task_name": response.task_name, 'due_date': "", 'isComplete': false, "task_description": response.task_description, "project_id": project_id, 'user_id': user_id } })))
+            console.log(data)
+            console.log(tasks.push(data.map(function (response) { return { "task_name": response.task_name,createdAt:moment().format('L') ,'due_date': "", 'isComplete': false, "task_description": response.task_description, "project_id": project_id, 'user_id': user_id } })))
         })
         .then(() => {
             // taskDB.addTasks(tasks)

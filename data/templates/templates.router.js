@@ -2,7 +2,7 @@ const express = require("express");
 const db = require("./templates.model");
 const dbt = require("../tasks/tasks.model")
 const router = express.Router();
-
+const moment = require('moment')
 
 router.post("/", (req, res) => {
 
@@ -55,66 +55,79 @@ router.get("/:id", (req, res) => {
 
 // })
 
-router.post('/ ', (req, res) => {
-  db.getTemplates(id).then(response => {
-    let resp = response[0].data
+router.post('/addTasks/:id', (req, res) => {
 
-    let template = [];
+  let id = req.body.template_id
+  let project_id = req.params.id
+  let user_id = req.headers.user_id
+  let tasks = []
 
-    template.push(resp.map(function (response) { return { "task_name": response.task_name, "task_description": response.task_description, "project_id": project_id, "user_id": user_id } }));
 
-    console.log(template[0])
-    return template
 
+
+
+  dbt.getTaskByTemplateId(id)
+    .then(data => {
+
+      tasks.push(data.map(function (response) { return { "task_name": response.task_name, createdAt: moment().format('L'), 'due_date': "", 'isComplete': false, "task_description": response.task_description, "project_id": project_id, 'user_id': user_id } }))
+
+        .then(() => {
+
+          tasks.forEach(task => {
+            dbt.addTasks(task)
+              .then(resp => {
+                if (resp) {
+                  res.status(200).json({ "Added": moment().format('L'), tasksArr: resp })
+                } else {
+                  res.status(403).json({ message: err.message })
+                }
+              })
+          })
+
+        }).catch(err => { res.status(500).json(err) })
+
+    })
   })
-    .then(template => {
 
-      dbt.addTasks(template[0]).then(response => {
 
-        res.status(201).json({ message: `Tasks added to project # ${project_id}`, tasks: response.message })
+
+
+
+
+
+
+
+  router.put("/:id", (req, res) => {
+    const id = req.params.id;
+    const changes = req.body;
+
+    db.editTemplate(id, changes)
+      .then(updatedTemplate => {
+        res.status(200).json(updatedTemplate);
       })
-    })
+      .catch(error => {
+        res.status(500).json({
+          error: error,
+          message: "500 server error on editing templates"
+        });
+      });
+  });
 
+  router.delete("/:id", (req, res) => {
+    const id = req.params.id;
 
-    .catch(error => {
-      res.status(500).json({
-        error: error,
-        message: "500 server error on adding templates"
+    db.deleteTemplate(id)
+      .then(deletedTemplate => {
+        res.status(200).json(deletedTemplate);
       })
-    })
-
-
-})
-
-router.put("/:id", (req, res) => {
-  const id = req.params.id;
-  const changes = req.body;
-
-  db.editTemplate(id, changes)
-    .then(updatedTemplate => {
-      res.status(200).json(updatedTemplate);
-    })
-    .catch(error => {
-      res.status(500).json({
-        error: error,
-        message: "500 server error on editing templates"
+      .catch(error => {
+        res.status(500).json({
+          error: error,
+          message: "500 server error on editing templates"
+        });
       });
-    });
-});
+  });
 
-router.delete("/:id", (req, res) => {
-  const id = req.params.id;
 
-  db.deleteTemplate(id)
-    .then(deletedTemplate => {
-      res.status(200).json(deletedTemplate);
-    })
-    .catch(error => {
-      res.status(500).json({
-        error: error,
-        message: "500 server error on editing templates"
-      });
-    });
-});
 
-module.exports = router;
+  module.exports = router;
