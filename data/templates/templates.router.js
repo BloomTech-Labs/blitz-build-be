@@ -56,7 +56,7 @@ router.get("/:id", (req, res) => {
 // })
 
 router.post('/addTasks/:id', (req, res) => {
-
+          console.log(req)
   let id = req.body.template_id
   let project_id = req.params.id
   let user_id = req.headers.user_id
