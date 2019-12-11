@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+    console.log(req.headers)
     const project_id = req.body.project_id
     let tasks = []
     let user_id = req.headers.user_id

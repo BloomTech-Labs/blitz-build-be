@@ -39,14 +39,43 @@ const s3Params = {
  
 })
 router.delete('/url/:id',(req,res)=>{
+   
     const id = req.params.id
-    db.deleteUrl(id)
+    const url = req.body.url
+    const uid=req.headers.user_id
+    const fileName=req.body.fileName
+    const s3Params ={
+        Bucket: S3_BUCKET,
+    Key: `${uid}/${fileName}`,
+    Expires: 500,
+ 
+    }
+
+  
+    console.log(uid,fileName)
+    s3.deleteObject(s3Params,(err,res)=>{
+        if(err){
+            console.log(err.message)
+            res.json({sucess:false,error:err})
+        }
+        res.json({sucess:true})
+    }).then(success =>{
+    if(success === true ){
+     db.deleteUrl(id)
     
     .then(deletedTask =>{
         console.log(deletedTask)
      res.status(204).json(deletedTask)
     }).catch(error => console.log(error))
+}else(err =>{console.log(err.message)})
 })
+})
+
+
+
+
+
+
 router.post('/url',(req,res)=>{
     const  url = req.body
     db.addURL(url)

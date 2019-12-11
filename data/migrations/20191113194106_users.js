@@ -120,6 +120,8 @@ exports.up = function(knex) {
         tbl.string("doc_url",2000);
         tbl.string("user_id")
         tbl.string("project_id")
+        tbl.string("project_name")
+        tbl.string("createdAt").defaultsTo(createdAt)
         
       })
 
@@ -129,7 +131,7 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema
-  // .dropTableIfExists("docs_url")
+  .dropTableIfExists("docs_url")
   // .dropTableIfExists("delay_logs")
   // .dropTableIfExists("tasks")
   // .dropTableIfExists("templates")
