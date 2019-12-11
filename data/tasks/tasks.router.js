@@ -103,8 +103,8 @@ router.get("/byProject/:pid", (req, res) => {
 //projects/tasks
 
 
- router.post('/templates/:tid',(req,res)=>{
-   const tempid = req.params.tid
+ router.get('/templates/:id',(req,res)=>{
+   const tempid = req.params.id
  
    
    templates.getTemplateById(tempid)
@@ -115,7 +115,8 @@ router.get("/byProject/:pid", (req, res) => {
      const template = templates[0].tasks
     console.log(template)
     db.addTasks(template)
-     }).then(newTasksArr =>{console.log(newTasksArr)})
+     })
+    //  .then(newTasksArr =>{console.log(newTasksArr)})
      
    })
 

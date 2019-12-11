@@ -56,14 +56,23 @@ exports.up = function(knex) {
 
 //       })
         //TEMPLATES
-      .createTable("90_day", tbl => {
-      tbl.increments();
-      tbl.string("template_name")
-      tbl.specificType("template","json ARRAY");
+      // .createTable("90_day", tbl => {
+      // tbl.increments();
+      // tbl.string("template_name")
+      // tbl.specificType("template","json ARRAY");
        
+        .createTable("90_day",tbl=>{
+          tbl.integer("id")
+          tbl.string('due_date')
+          tbl.string('task_name')
+          tbl.string('task_description')
+          tbl.boolean('isComplete').defaultsTo(false)
+          tbl.string('project_id')
+          tbl.string('template_name')
+        })
  
   
-       })
+      //  })
       // MANY-TO-MANY TABLE WITH PROJECTS AND TASKS
       // .createTable("templates_tasks", tbl => {
       //   tbl.increments();
@@ -111,6 +120,7 @@ exports.up = function(knex) {
       //   tbl.string("doc_url",2000);
       //   tbl.string("user_id")
       //   tbl.string("project_id")
+        
       // })
 
   
@@ -127,6 +137,7 @@ exports.down = function(knex) {
   // .dropTableIfExists("projects")
 
  
+  .dropTableIfExists("90_day")
 
 
   // .dropTableIfExists("projects_tasks")

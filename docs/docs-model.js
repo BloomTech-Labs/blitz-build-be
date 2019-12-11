@@ -15,7 +15,12 @@ function addURL(url){
 
 function getURL(id){
     return db("docs_url")
-      .where("user_id","=",id)
+        .select('*')
+       .join('projects','projects.id','docs_url.project_id')
+       .select('project.name')
+       .where('id','=','docs_url.project_id')
+     
+      .orderBy("project_name")
 }
 
 function deleteUrl(id){

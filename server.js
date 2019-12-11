@@ -26,11 +26,11 @@ function logger(req, res, next) {
 
 
 
+server.use(logger);
 
 server.use(cors());
 server.use(helmet());
 server.use(express.json());
-server.use(logger);
 // server.use('/auth',authRouter)
 
 server.use("/projects", authenticate,ProjectsRouter);
