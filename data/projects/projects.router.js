@@ -30,12 +30,12 @@ router.get("/:id", (req, res) => {
 
     .then(project => {
       // Check if Project belongs to user
-      if(project[0].user_id == user_id){
+      if (project[0].user_id == user_id) {
         // If so return project to client
-      res.status(200).json(project)
-      }else{
+        res.status(200).json(project)
+      } else {
         // If not return error message to client
-        res.status(401).json({message:`Project # ${id} doesn't belong to user # ${user_id}`})
+        res.status(401).json({ message: `Project # ${id} doesn't belong to user # ${user_id}` })
       }
     })
     .catch(error => {
@@ -47,31 +47,31 @@ router.get("/:id", (req, res) => {
 });
 
 
-router.post("/",  (req, res) => {
+router.post("/", (req, res) => {
 
   // let zipcode = req.body.zip_code
   // const cords = zipcodes.lookup(zipcode)
   // let latitude = cords.latitude
   // let longitude = cords.longitude
- 
+
   const newProject = req.body;
   const user_id = req.headers.user_id
   newProject.user_id = user_id
-     newProject.createdAt = moment().format("L");
-   
-   db.addProject(newProject)
-   .then(projectId => {
-     db.getProjectById(projectId[0])
-     .then(project => {
-     res.status(201).json({message:`Project added @ ${moment().format("LLL")}`,project})
-     //  return db.editProject(id,changes)
-     })
-   })
+  newProject.createdAt = moment().format("L");
 
-    .catch(error =>{
+  db.addProject(newProject)
+    .then(projectId => {
+      db.getProjectById(projectId[0])
+        .then(project => {
+          res.status(201).json({ message: `Project added @ ${moment().format("LLL")}`, project })
+          //  return db.editProject(id,changes)
+        })
+    })
+
+    .catch(error => {
       res.status(500).json(error.message)
     });
-  })
+})
 
 // Update Project
 router.put("/:id", (req, res) => {
@@ -79,24 +79,26 @@ router.put("/:id", (req, res) => {
   const changes = req.body;
   const uid = req.headers.id
   // Get project 1st
- db.getProjectById(id)
- 
- .then(project => {
-   //Check to see if project belongs to user
-   if(project[0].user_id == req.headers.user_id)
-    //If so update project and send status 200 back to client
-    {db.editProject(id, changes)
-    .then(() => {
-      db.getProjectById(id)
-      .then(updatedProject => {
-        res.status(200).json({message:`Project # ${id} updated`,updatedProject})
-      })
+  db.getProjectById(id)
+
+    .then(project => {
+      //Check to see if project belongs to user
+      if (project[0].user_id == req.headers.user_id)
+      //If so update project and send status 200 back to client
+      {
+        db.editProject(id, changes)
+        .then(() => {
+          db.getProjectById(id)
+            .then(updatedProject => {
+              res.status(200).json({ message: `Project # ${id} updated`, updatedProject })
+            })
+        })
+        //If not send error message back to client
+      } else {
+        res.status(401).json({ message: `Project # ${id} doesn't belong to user # ${uid}` })
+      }
+
     })
-   //If not send error message back to client
-  }else{
-    res.status(401).json({message:`Project # ${id} doesn't belong to user # ${uid}`})}
-  
-  })
     .catch(error => {
       res.status(500).json({
         error: error,
@@ -104,21 +106,22 @@ router.put("/:id", (req, res) => {
       });
     });
 });
- 
+
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
   const uid = req.headers.user_id
   db.getProjectById(id)
-  .then(project =>{
-    if(project[0].user_id == uid){
-  
-  db.deleteProject(id)
-    .then(deletedProject => {
-      res.status(204).json(deletedProject);
-    })}else{
-      res.status(401).json({message:`Project # ${id} doesn't belong to user # ${uid}`})
-    }
-  })
+    .then(project => {
+      if (project[0].user_id == uid) {
+
+        db.deleteProject(id)
+          .then(deletedProject => {
+            res.status(204).json(deletedProject);
+          })
+      } else {
+        res.status(401).json({ message: `Project # ${id} doesn't belong to user # ${uid}` })
+      }
+    })
     .catch(error => {
       res.status(500).json({
         error: error,
