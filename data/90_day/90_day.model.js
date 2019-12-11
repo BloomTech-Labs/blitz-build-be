@@ -5,4 +5,5 @@ module.exports ={
 }
 function get(){
 return db('90_day')
+   .orderBy('template_name')
 }

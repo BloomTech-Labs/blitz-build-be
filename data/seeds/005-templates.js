@@ -9,7 +9,7 @@ exports.seed = function(knex) {
   //     // Inserts seed entries
   return knex("90_day").insert(
        
-    {"template_name":"90_day","template":[ 
+    [
       {  
         "template_name":"90_day",
         "due_date":"",
@@ -463,8 +463,8 @@ exports.seed = function(knex) {
         "project_id": null
       }
       
-    ]
-  });
+    
+    ]);
    });
   
   }

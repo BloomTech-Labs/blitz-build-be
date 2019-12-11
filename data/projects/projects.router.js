@@ -7,6 +7,7 @@ let moment = require('moment')
 
 router.get("/", (req, res) => {
   const user_id = req.headers.user_id
+  console.log(req.headers)
   const id_token = req.headers.id_token
   // Get all projects will check if user user_id == user_id in the DB before it returns the list to the client
   db.getProjects(user_id)
