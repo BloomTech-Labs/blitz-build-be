@@ -56,7 +56,7 @@ router.get("/:id", (req, res) => {
 // })
 
 router.post('/addTasks/:id', (req, res) => {
-          console.log(req)
+       
   let id = req.body.template_id
   let project_id = req.params.id
   let user_id = req.headers.user_id
@@ -71,7 +71,7 @@ router.post('/addTasks/:id', (req, res) => {
 
       tasks.push(data.map(function (response) { return { "task_name": response.task_name, createdAt: moment().format('L'), 'due_date': "", 'isComplete': false, "task_description": response.task_description, "project_id": project_id, 'user_id': user_id } }))
 
-        .then(() => {
+try {     
 
           tasks.forEach(task => {
             dbt.addTasks(task)
@@ -82,9 +82,9 @@ router.post('/addTasks/:id', (req, res) => {
                   res.status(403).json({ message: err.message })
                 }
               })
-          })
+          })}
 
-        }).catch(err => { res.status(500).json(err) })
+       catch(err){ res.status(500).json(err) }
 
     })
   })
