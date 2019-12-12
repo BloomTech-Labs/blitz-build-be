@@ -8,24 +8,25 @@ exports.up = function(knex) {
 // .createTable("projects", tbl => {
 //         tbl.increments();
 
-//         tbl
-//           .string("project_name")
-//           .notNullable();
-//         tbl.float("baths");
-//         tbl.float("beds");
-//         tbl.string("city");
-//         tbl.string("imageURL");
-//         tbl.integer("square_ft");
-//         tbl.string("state");
-//         tbl.string("status");
-//         tbl.string("street_address");
-//         tbl.integer("zip_code").notNullable();
-//         tbl.float("longitude")
-//         tbl.float("latitude")
-//         tbl.string("createdAt").defaultsTo(createdAt)
-//         tbl.string("due_date").defaultsTo(date)
-//         tbl.string('user_id').notNullable();
-//       })
+      //   tbl
+      //     .string("project_name")
+      //     .notNullable();
+      //   tbl.float("baths");
+      //   tbl.float("beds");
+      //   tbl.string("city");
+      //   tbl.string("start_date").defaultsTo(null)
+      //   tbl.string("imageURL");
+      //   tbl.integer("square_ft");
+      //   tbl.string("state");
+      //   tbl.string("status");
+      //   tbl.string("street_address");
+      //   tbl.integer("zip_code").notNullable();
+      //   tbl.float("longitude")
+      //   tbl.float("latitude")
+      //   tbl.string("createdAt").defaultsTo(createdAt)
+      //   tbl.string("due_date").defaultsTo(date)
+      //   tbl.string('user_id').notNullable();
+      // })
 
      
 
@@ -38,6 +39,7 @@ exports.up = function(knex) {
 //         tbl.string("task_name").notNullable();
 //         tbl.string("task_description", 1000);
 //         tbl.string("due_date")
+//         tbl.string("start_date").defaultsTo(null)
 //         tbl.date("createdAt").defaultsTo(createdAt)
 //         tbl.boolean("isComplete").defaultsTo(false)
 //         tbl.integer("project_id")
@@ -65,10 +67,12 @@ exports.up = function(knex) {
           tbl.integer("id")
           tbl.string('due_date')
           tbl.string('task_name')
+          tbl.string('start_date').defaultsTo(null)
           tbl.string('task_description')
           tbl.boolean('isComplete').defaultsTo(false)
           tbl.string('project_id')
           tbl.string('template_name')
+          tb
         })
  
   
