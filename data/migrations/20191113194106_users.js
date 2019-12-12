@@ -72,11 +72,11 @@ exports.up = function(knex) {
           tbl.boolean('isComplete').defaultsTo(false)
           tbl.string('project_id')
           tbl.string('template_name')
-          tb
+          
         })
  
   
-      //  })
+        // })
       // MANY-TO-MANY TABLE WITH PROJECTS AND TASKS
       // .createTable("templates_tasks", tbl => {
       //   tbl.increments();
