@@ -18,12 +18,12 @@ function getTasksByID(id, query){
     .where("tasks.user_id","=",id)
     .orderBy("tasks.id")
   }
-  else if(query.sortby && query.sortdir && !query.sortcondition) {
+  else if(query.orderby && query.sortdir) {
     return db("tasks")
     .join("projects", "tasks.project_id", "=", "projects.id")
     .select("projects.project_name", "tasks.*")
     .where("tasks.user_id","=",id)
-    .orderBy(query.sortby, query.sortdir)
+    .orderBy(query.orderby, query.sortdir)
   }
 
   else if (query.sortby && query.sortdir && query.sortcondition) {
