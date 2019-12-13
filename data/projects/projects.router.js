@@ -58,24 +58,50 @@ router.post("/", (req, res) => {
   const user_id = req.headers.user_id
   newProject.user_id = user_id
   newProject.createdAt = moment().format("L");
-  db.getProjects(user_id)
+  // projects.forEach(project=>{
+  //   let checkName = false
+  //   if(project.project_name === project_name){
+  //     return checkName = true
+  //   }else{
+  //     console.log("NOO")
+  //   }
+  const checkName = (list) => {
+    let sameName = false;
+    //  console.log("2222");
+    list.forEach(item => {
+      // console.log("11111")
+      if (item.project_name == project_name) {
+        sameName = true;
+    
+      }
+    })
+    return sameName
+  }
+  db.checkProjectName(user_id)
   .then(projects=>{
-   if(projects.project_name != project_name){
+   console.log(checkName(projects))
   
-  db.addProject(newProject)
-
-    .then(projectId => {
+     if(checkName(projects) == true){
+      res.status(409).json({message:`A project with the name ${project_name} already exists!!!!!!` })
+     }
+     else{
+        db.addProject(newProject)
+  
+        .then(projectId => {
       db.getProjectById(projectId[0])
         .then(project => {
           res.status(201).json({ message: `Project added @ ${moment().format("LLL")}`, project })
           //  return db.editProject(id,changes)
         })
-    })}
-    res.status(409).json({message:`A project with the name ${project_name} already exists for user ${user_id}` })
-  })
+
+     })
+    
+  
     .catch(error => {
       res.status(500).json(error.message)
     });
+  }})
+  
 })
 
 // Update Project

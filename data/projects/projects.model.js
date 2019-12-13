@@ -5,8 +5,13 @@ module.exports = {
   getProjectById,
   addProject,
   editProject,
-  deleteProject
+  deleteProject,
+  checkProjectName,
 };
+
+function checkProjectName(user_id){
+  return db("projects").select("project_name").where("user_id","=",user_id)
+}
 
 function getProjects(user_id) {
   return db("projects").where("user_id","=", user_id).orderBy("id")
