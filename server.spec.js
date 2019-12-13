@@ -21,7 +21,7 @@ describe("Requests made to /projects endpoints", () => {
             const res = await request(server)
 
                 .get('/projects')
-                .set({ user_id: user_id, id_token: id_token})
+                .set({ user_id: user_id, id_token: id_token })
                 .expect(function (res) {
                     res.status = 200
                     res.body =
@@ -107,27 +107,27 @@ describe("Requests made to /projects endpoints", () => {
 
 
 
-            describe("Get request with incorrect  user id in headers to /projects/:id",()=>{
-                it("Returns a 401 , message: project # 1 doesn't belong to user # 4", async ()=>{
-                    const res = await request(server)
+        describe("Get request with incorrect  user id in headers to /projects/:id", () => {
+            it("Returns a 401 , message: project # 1 doesn't belong to user # 4", async () => {
+                const res = await request(server)
                     .get('/projects/7')
-                    .set({user_id:4,id_token:id_token})
-                    .expect(function(res){
+                    .set({ user_id: 4, id_token: id_token })
+                    .expect(function (res) {
                         console.log(res.body)
                         res.status = 401
-                        res.body ={message:"Project # 1 doesn't belong to user # 4"}
+                        res.body = { message: "Project # 1 doesn't belong to user # 4" }
                     })
-                })
             })
-            describe("Get request with correct user id in headers to /projects/:id",()=>{
-                it("Returns a project and status 200", async ()=>{
-                    const res = await request(server)
+        })
+        describe("Get request with correct user id in headers to /projects/:id", () => {
+            it("Returns a project and status 200", async () => {
+                const res = await request(server)
                     .get('/projects/7')
-                    .set({user_id:user_id,id_token:id_token})
-                    .expect(function(res){
+                    .set({ user_id: user_id, id_token: id_token })
+                    .expect(function (res) {
                         res.status = 200
                         res.body = {
-                            "id":7,
+                            "id": 7,
                             "project_name": "Server_Spec_Test 1",
                             "baths": 2.5,
                             "beds": 4,
@@ -137,71 +137,71 @@ describe("Requests made to /projects endpoints", () => {
                             "state": "CA",
                             "zip_code": 94102,
                             "due_date": "01-01-2020",
-                            "image_url":null,
-                            "createdAt":12/12/2019,
-                            "start_date":null,
-                            "status":"delayed"
+                            "image_url": null,
+                            "createdAt": 12 / 12 / 2019,
+                            "start_date": null,
+                            "status": "delayed"
 
                         }
 
                     })
-                })
-            })
-
-            describe("PUT Request to /projects/:id with incorrect user_id in headers",()=>{
-                it("Returns 401 unauthorized",async ()=>{
-                    const res = await request(server)
-                    .put('/projects/1')
-                    .set({user_id:4})
-                    .send({"status":"delayed"})
-                    .expect(function(res){
-                        res.status = 401
-                        res.body = {message:"Project #1 doesn't belong to user #4"}
-                    })
-                })
-            })
-            describe("PUT Request to /projects/:id with correct user_id in headers",()=>{
-                it("Returns 200 ok",async ()=>{
-                    const res = await request(server)
-                    .put('/projects/7')
-                    .set({user_id:user_id,id_token:id_token})
-                    .send({"status":"delayed"})
-                    .expect(function(res){
-                        res.status = 200
-                        res.body = {message:"Project #7 updated"}
-                    })
-                })
-            })
-        // /*ToDo fix response */
-            describe("DELETE Request to /projects/:id with incorrect user_id in headers",()=>{
-                it("Returns 401 unauthorized",async ()=>{
-                    const res = await request(server)
-                    .delete('/projects/4')
-                    .set({user_id:user_id,id_token:id_token})
-
-                    .expect(function(res){
-                        res.status = 401
-                        res.body={
-                            message:`Project # 14 doesn't belong to user`
-                        }
-
-                    })
-                })
-            })
-
-        //           // Test Passes 
-            describe("DELETE Request to /projects/:id with correct user_id in headers",()=>{
-                it("Returns 204 deleted",async ()=>{
-                    const res = await request(server)
-                    .delete('/projects/26')
-                    .set({user_id:user_id,id_token:id_token})
-
-                    .expect(function(res){
-                        res.status = 204
-                        res.body = {message:"Project #14 deleted"}
-                    })
-    })
             })
         })
+
+        describe("PUT Request to /projects/:id with incorrect user_id in headers", () => {
+            it("Returns 401 unauthorized", async () => {
+                const res = await request(server)
+                    .put('/projects/1')
+                    .set({ user_id: 4 })
+                    .send({ "status": "delayed" })
+                    .expect(function (res) {
+                        res.status = 401
+                        res.body = { message: "Project #1 doesn't belong to user #4" }
+                    })
+            })
+        })
+        describe("PUT Request to /projects/:id with correct user_id in headers", () => {
+            it("Returns 200 ok", async () => {
+                const res = await request(server)
+                    .put('/projects/7')
+                    .set({ user_id: user_id, id_token: id_token })
+                    .send({ "status": "delayed" })
+                    .expect(function (res) {
+                        res.status = 200
+                        res.body = { message: "Project #7 updated" }
+                    })
+            })
+        })
+        // /*ToDo fix response */
+        describe("DELETE Request to /projects/:id with incorrect user_id in headers", () => {
+            it("Returns 401 unauthorized", async () => {
+                const res = await request(server)
+                    .delete('/projects/4')
+                    .set({ user_id: user_id, id_token: id_token })
+
+                    .expect(function (res) {
+                        res.status = 401
+                        res.body = {
+                            message: `Project # 14 doesn't belong to user`
+                        }
+
+                    })
+            })
+        })
+
+        // Test Passes uncomment and change /:id params
+        //         describe("DELETE Request to /projects/:id with correct user_id in headers",()=>{
+        //             it("Returns 204 deleted",async ()=>{
+        //                 const res = await request(server)
+        //                 .delete('/projects/26')
+        //                 .set({user_id:user_id,id_token:id_token})
+
+        //                 .expect(function(res){
+        //                     res.status = 204
+        //                     res.body = {message:"Project #14 deleted"}
+        //                 })
+        // })
+        //         })
     })
+})
 
