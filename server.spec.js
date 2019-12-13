@@ -139,7 +139,8 @@ describe("Requests made to /projects endpoints", () => {
                             "due_date": "01-01-2020",
                             "image_url":null,
                             "createdAt":12/12/2019,
-                            "start_date":null
+                            "start_date":null,
+                            "status":"delayed"
 
                         }
 
@@ -159,43 +160,48 @@ describe("Requests made to /projects endpoints", () => {
                     })
                 })
             })
-        //     describe("PUT Request to /projects/:id with correct user_id in headers",()=>{
-        //         it("Returns 200 ok",async ()=>{
-        //             const res = await request(server)
-        //             .put('/projects/1')
-        //             .set({user_id:3})
-        //             .send({"status":"delayed"})
-        //             .expect(function(res){
-        //                 res.status = 200
-        //                 res.body = {message:"Project #1 updated"}
-        //             })
-        //         })
-        //     })
+            describe("PUT Request to /projects/:id with correct user_id in headers",()=>{
+                it("Returns 200 ok",async ()=>{
+                    const res = await request(server)
+                    .put('/projects/7')
+                    .set({user_id:user_id,id_token:id_token})
+                    .send({"status":"delayed"})
+                    .expect(function(res){
+                        res.status = 200
+                        res.body = {message:"Project #7 updated"}
+                    })
+                })
+            })
         // /*ToDo fix response */
-        //     describe("DELETE Request to /projects/:id with incorrect user_id in headers",()=>{
-        //         it("Returns 500 server error",async ()=>{
-        //             const res = await request(server)
-        //             .delete('/projects/14')
-        //             .set({user_id:4})
+            describe("DELETE Request to /projects/:id with incorrect user_id in headers",()=>{
+                it("Returns 401 unauthorized",async ()=>{
+                    const res = await request(server)
+                    .delete('/projects/4')
+                    .set({user_id:user_id,id_token:id_token})
 
-        //             .expect(function(res){
-        //                 res.status = 500
+                    .expect(function(res){
+                        res.status = 401
+                        res.body={
+                            message:`Project # 14 doesn't belong to user`
+                        }
 
-        //             })
-        //         })
-        //     })
+                    })
+                })
+            })
 
         //           // Test Passes 
-        //     describe("DELETE Request to /projects/:id with correct user_id in headers",()=>{
-        //         it("Returns 204 deleted",async ()=>{
-        //             const res = await request(server)
-        //             .delete('/projects/14')
-        //             .set({id:3})
+            describe("DELETE Request to /projects/:id with correct user_id in headers",()=>{
+                it("Returns 204 deleted",async ()=>{
+                    const res = await request(server)
+                    .delete('/projects/26')
+                    .set({user_id:user_id,id_token:id_token})
 
-        //             .expect(function(res){
-        //                 res.status = 204
-        //                 res.body = {message:"Project #4 deleted"}
-        //             })
+                    .expect(function(res){
+                        res.status = 204
+                        res.body = {message:"Project #14 deleted"}
+                    })
     })
-})
+            })
+        })
+    })
 
