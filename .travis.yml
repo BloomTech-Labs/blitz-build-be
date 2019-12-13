@@ -4,8 +4,3 @@ script:
   -"npm run lint"
   -"npm run test"
 
-# safelist
-branches:
-  only:
-    -master
-    -staging_env
