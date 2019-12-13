@@ -7,8 +7,8 @@ let moment = require('moment')
 
 router.get("/", (req, res) => {
   const user_id = req.headers.user_id
-  console.log(req.headers)
-  const id_token = req.headers.id_token
+
+
   // Get all projects will check if user user_id == user_id in the DB before it returns the list to the client
   db.getProjects(user_id)
     .then(projects => {
@@ -53,21 +53,26 @@ router.post("/", (req, res) => {
   // const cords = zipcodes.lookup(zipcode)
   // let latitude = cords.latitude
   // let longitude = cords.longitude
-
+  const project_name = req.body.project_name
   const newProject = req.body;
   const user_id = req.headers.user_id
   newProject.user_id = user_id
   newProject.createdAt = moment().format("L");
-
+  db.getProjects(user_id)
+  .then(projects=>{
+   if(projects.project_name != project_name){
+  
   db.addProject(newProject)
+
     .then(projectId => {
       db.getProjectById(projectId[0])
         .then(project => {
           res.status(201).json({ message: `Project added @ ${moment().format("LLL")}`, project })
           //  return db.editProject(id,changes)
         })
-    })
-
+    })}
+    res.status(409).json({message:`A project with the name ${project_name} already exists for user ${user_id}` })
+  })
     .catch(error => {
       res.status(500).json(error.message)
     });
