@@ -7,8 +7,9 @@ const router = express.Router();
 
 
 router.get("/:id",(req,res)=>{
+  const query = req.query
   const id = req.params.id
-  db.getTasksByID(id)
+  db.getTasksByID(id, query)
   .then(tasks =>{
     res.status(200).json({tasks:tasks})
   })
