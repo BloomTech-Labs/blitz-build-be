@@ -1466,6 +1466,17 @@ describe('testing all crud operations on tasks router', ()=>{
         })
 
 })
-
-    })
+/* TEST WILL PASS UNCOMMENT AND CHANGE TASK ID */
+//  describe("Delete to /url/:id",()=>{
+//      it("returns status 204", async ()=>{
+//          const res = await request(server)
+//          .delete(`${url}/275`)
+//          .set(id)
+//          .expect(function (res){
+//              res.status = 204
+//          })
+//      })
+//  })
 })
+})
+
