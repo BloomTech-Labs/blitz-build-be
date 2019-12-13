@@ -64,6 +64,7 @@ router.put("/:id", (req, res) => {
       res.status(200).json({message:`Task # ${id} updated`,updatedTask:updatedTask.text});
     })
     .catch(error => {
+      console.log(error)
       res.status(500).json({
         error: error,
         message: "500 server error on editing tasks"
