@@ -6,7 +6,8 @@
   "scripts": {
     "server": "nodemon index.js",
     "start": "node index.js",
-    "test": " jest --watchAll"
+    "test": " jest",
+    "lint": "eslint src/**/*.js src/**/*.mjs"
   },
   "repository": {
     "type": "git",
