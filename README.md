@@ -1,3 +1,4 @@
+![Heroku](https://heroku-badge.herokuapp.com/app={blitz-build-production&root=index.js})
 # API Documentation
 
 ####  Backend delpoyed at [Blitz Build](https://build-build-production.herokuapp.com/) <br>
@@ -23,7 +24,7 @@ To get the server running locally:
 
 ## Endpoints
 
-[![END POINT DOCS](https://documenter.getpostman.com/view/7960570/SWDzeLuk)](https://documenter.getpostman.com/view/7960570/SWDzeLuk)
+[END POINT DOCS](https://documenter.getpostman.com/view/7960570/SWDzeLuk)
 
 #### Non-Auth Routes
 
