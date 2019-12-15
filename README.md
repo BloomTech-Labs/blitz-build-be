@@ -1,4 +1,5 @@
 
+![Heroku](http://heroku-badge.herokuapp.com/?app=heroku-badge&root=projects.html)
 # API Documentation
 
 ####  Backend delpoyed at [Blitz Build](https://build-build-production.herokuapp.com/) <br>
