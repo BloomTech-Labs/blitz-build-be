@@ -1,4 +1,4 @@
-![Heroku](https://heroku-badge.herokuapp.com/app={blitz-build-production&root=index.js})
+
 # API Documentation
 
 ####  Backend delpoyed at [Blitz Build](https://build-build-production.herokuapp.com/) <br>
