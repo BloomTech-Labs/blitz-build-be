@@ -109,9 +109,11 @@ router.delete("/byProject/:pid",(req,res)=>{
  
       db.deleteTasks(id,template_name)
       .then(response =>{
-        res.status(204)
+        res.status(204).json(response)
       })
-      .catch(error)
+      .catch(error=>{
+        res.status(500).json(error)
+      })
     
     
   }) 
