@@ -45,7 +45,7 @@ exports.up = function(knex) {
         tbl.string("task_description", 1000);
         tbl.string("due_date")
         tbl.string("start_date").defaultsTo(null)
-        
+        tbl.string("template_name")
         tbl.date("createdAt").defaultsTo(createdAt)
         tbl.boolean("isComplete").defaultsTo(false)
         tbl.integer("project_id")
@@ -63,7 +63,7 @@ exports.up = function(knex) {
  
 
      })
-        //TEMPLATES
+        //Delay_Logs
    
       .createTable("delay_logs",tbl =>{
         tbl.increments()

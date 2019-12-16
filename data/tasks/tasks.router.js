@@ -101,6 +101,21 @@ router.get("/byProject/:pid", (req, res) => {
       });
     });
 });
+
+router.delete("/byProject/:pid",(req,res)=>{
+  const id = req.params.pid
+  const template_name = req.body.template_name
+
+ 
+      db.deleteTasks(id,template_name)
+      .then(response =>{
+        res.status(204)
+      })
+      .catch(error)
+    
+    
+  }) 
+
 /*TODO*/
 //projects/tasks
 
