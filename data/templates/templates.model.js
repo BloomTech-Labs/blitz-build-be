@@ -8,7 +8,8 @@ module.exports = {
   addTemplate,
   editTemplate,
   deleteTemplate,
-  getAll
+  getAll,
+  getTasksByTempName
 };
 
 // function getTemplateByName(id) {
@@ -40,11 +41,15 @@ function addTemplate(template) {
 function editTemplate(id, changes) {
   return db("templates")
     .where({ id })
-    .update(changes);
+    .update({...changes});
 }
 
 function deleteTemplate(id) {
   return db("templates")
     .where("id", "=", id)
     .del();
+}
+function getTasksByTempName(template_name){
+  return db("templates")
+  .where("template_name","=",template_name)
 }

@@ -8,7 +8,8 @@ module.exports = {
   getTaskByTaskID,
   getTasksByID,
   getTaskByTemplateId,
-  deleteTasks
+  deleteTasks,
+  getTasksByTempName
 };
 function getTasksByID(id, query){
 
@@ -70,4 +71,9 @@ function deleteTasks(id,template_name){
 
 function getTasksByProject(id) {
   return db("tasks").where("project_id", "=", id)
+}
+
+function getTasksByTempName(template_name){
+  return db("tasks")
+  .where("template_name","=",template_name)
 }

@@ -58,6 +58,7 @@ router.get("/:id", (req, res) => {
 router.post('/addTasks/:id', (req, res) => {
        
   let id = req.body.template_id
+  let template_name = req.body.template_name
   let project_id = req.params.id
   let user_id = req.headers.user_id
   let tasks = []
@@ -69,7 +70,7 @@ router.post('/addTasks/:id', (req, res) => {
   dbt.getTaskByTemplateId(id)
     .then(data => {
 
-      tasks.push(data.map(function (response) { return { "task_name": response.task_name, createdAt: moment().format('L'), 'due_date': "", 'isComplete': false, "task_description": response.task_description, "project_id": project_id, 'user_id': user_id } }))
+      tasks.push(data.map(function (response) { return { "task_name": response.task_name, createdAt: moment().format('L'), 'due_date': "", 'isComplete': false, "task_description": response.task_description, "project_id": project_id, 'user_id': user_id ,template_name:template_name} }))
 
 try {     
 
@@ -91,7 +92,40 @@ try {
 
 
 
+  router.post('/addTasks/byTempName/:id', (req, res) => {
+     
+    let template_name = req.body.template_name
+    let project_id = req.params.id
+    let user_id = req.headers.user_id
 
+    let tasks = []
+  
+  
+  
+  
+  
+    db.getTasksByTempName(template_name)
+      .then(data => {
+  
+        tasks.push(data.map(function (response) { return { "task_name": response.task_name, createdAt: moment().format('L'), 'due_date': "", 'isComplete': false, "task_description": response.task_description, "project_id": project_id, 'user_id': user_id ,template_name:response.template_name} }))
+  
+  try {     
+  
+            tasks.forEach(task => {
+              dbt.addTasks(task)
+                .then(resp => {
+                  if (resp) {
+                    res.status(200).json({ "Added": moment().format('L'), tasksArr: resp })
+                  } else {
+                    res.status(403).json({ message: err.message })
+                  }
+                })
+            })}
+  
+         catch(err){ res.status(500).json(err) }
+  
+      })
+    })
 
 
 
