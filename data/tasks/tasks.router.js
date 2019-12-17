@@ -92,7 +92,10 @@ router.get("/byProject/:pid", (req, res) => {
   const id = req.params.pid;
   db.getTasksByProject(id)
     .then(tasks => {
+     if(tasks.isComplete != true){
+     
       res.status(200).json(tasks);
+     }
     })
     .catch(error => {
       res.status(500).json({

@@ -3,7 +3,7 @@ const db = require("../db.config");
 module.exports = {
   getTemplate,
   getTemplates,
-  // getTemplateByName,
+   getTemplatesByName,
   // getTemplateById,
   addTemplate,
   editTemplate,
@@ -28,6 +28,9 @@ function getTemplate(id){
 function getTemplates(id) {
   return db("templates").where("id","=",id)
          
+}
+function getTemplatesByName(template_name){
+  return db("templates").where("template_name","=",template_name)
 }
 
 function addTemplate(template) {
