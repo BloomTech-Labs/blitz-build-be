@@ -92,10 +92,7 @@ router.get("/byProject/:pid", (req, res) => {
   const id = req.params.pid;
   db.getTasksByProject(id)
     .then(tasks => {
-     if(tasks.isComplete != true){
-     
       res.status(200).json(tasks);
-     }
     })
     .catch(error => {
       res.status(500).json({
@@ -121,25 +118,26 @@ router.delete("/byProject/:pid",(req,res)=>{
     
   }) 
 
-/*TODO*/
-//projects/tasks
 
 
-//  router.get('/templates/:id',(req,res)=>{
-//    const tempid = req.params.id
+  //Get templates 
+
+
+ router.get('/templates/:id',(req,res)=>{
+   const tempid = req.params.id
  
    
-//    templates.getTemplateById(tempid)
+   templates.getTemplateById(tempid)
    
 
-//    .then(templates =>{
-//      templates
-//      const template = templates[0].tasks
-//     console.log(template)
-//     db.addTasks(template)
-//      })
-    //  .then(newTasksArr =>{console.log(newTasksArr)})
+   .then(templates =>{
+     templates
+     const template = templates[0].tasks
+
+    db.addTasks(template)
+     })
+     .then(newTasksArr =>{console.log(newTasksArr)})
      
-  //  })
+   })
 
 module.exports = router

@@ -13,7 +13,7 @@ router.post("/", (req, res) => {
   }
   db.addTemplate(template)
     .then(id => {
-      res.status(201).json({ template_id: id[0].id })
+      res.status(201).json({ template_id: id[0].id ,template_name:template_name})
     })
     .catch(error => { res.status(500).json({ message: `Error:${error.message}` }) })
 })
@@ -41,13 +41,14 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.get('/:template_name',(req,res)=>{
-    const template_name = req.params.template_name
-    db.getTemplatesByName(template_name,"template_name")
+router.post('/byName',(req,res)=>{
+    const template_name = req.body.template_name
+    console.log(template_name)
+    db.getTemplatesByName(template_name)
     .then(template =>{
-      if (template) {
+        console.log(template)
         res.status(200).json(template)
-      }
+      
     })
     .catch(error =>{
       res.status(500).json({
@@ -56,18 +57,6 @@ router.get('/:template_name',(req,res)=>{
       })
     })
 })
-// router.get("/",(req,res) =>{
-//    const user_id = req.headers.user_id
-//   console.log(req.headers)
-//   db.getTemplate()
-
-//   .then(template =>{
-
-//   res.status(200).json(template)})
-
-//   .catch(error =>{res.status(500).json({message:error.message})})
-
-// })
 
 router.post('/addTasks/:id', (req, res) => {
        
@@ -80,8 +69,7 @@ router.post('/addTasks/:id', (req, res) => {
 
 
 
-
-  dbt.getTaskByTemplateId(id)
+  dbt.getTaskByTemplateId(req.body.template_name)
     .then(data => {
         console.log(data)
       tasks.push(data.map(function (response) { return { "task_name": response.task_name, createdAt: moment().format('L'), 'due_date': "", 'isComplete': false, "task_description": response.task_description, "project_id": project_id, 'user_id': user_id ,template_name:template_name} }))

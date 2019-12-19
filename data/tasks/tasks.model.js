@@ -37,9 +37,9 @@ function getTasksByID(id, query){
     .orderBy(query.sortby, query.sortdir)
   }
 }
-function getTaskByTemplateId(id){
+function getTaskByTemplateId(template_name){
   return db("tasks")
-   .where("template_id","=",id)
+   .where("template_name","=",template_name)
 }
 
 function getTaskByTaskID(id) {
