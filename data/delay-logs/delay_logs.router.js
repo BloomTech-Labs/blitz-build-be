@@ -3,6 +3,12 @@ const db = require("./delay_logs.model");
 const moment = require("moment");
 const tasksDB = require("../tasks/tasks.model");
 
+/** @GET /delay_logs
+*
+ *  @returns A list of delay logs for a specific user_id
+ * 
+ *  
+ */
 router.get("/", (req, res) => {
   const user_id = req.headers.user_id;
   db.getLogsByUserId(user_id)
@@ -18,6 +24,10 @@ router.get("/", (req, res) => {
     });
 });
 
+/**@GET /delay_logs/:id
+ *  id = delay_logs.id
+ * @require in @params 
+ */
 router.get("/:id", (req, res) => {
   const id = req.params.id;
   const user_id = req.headers.user_id;
@@ -44,15 +54,20 @@ router.get("/:id", (req, res) => {
     });
 });
 
+
+/**  @POST /delay_logs
+ * @ADDS a new delay_log to the database
+ * @body = newLog
+ */
 router.post("/", (req, res) => {
   const newLog = req.body;
   const user_id = req.headers.user_id;
     newLog.user_id = user_id;
     newLog.createdAt = moment().format("l");
-    // check if the task_id is valid.
+    /** check if the task_id is valid. */
   tasksDB.getTaskByTaskID(newLog.task_id).then(task => {
       if (task[0]) {
-        // check if this task belong to the project.
+      /** check if this task belong to the project.*/
       if (task[0].project_id == newLog.project_id) {
         db.addLogs(newLog)
           .then(newLogId => {
@@ -78,19 +93,22 @@ router.post("/", (req, res) => {
     }
   });
 });
-
+/**@PUT /delay_logs/:id
+ * @body = changes to update
+ * 
+ */
 router.put("/:id", (req, res) => {
   const id = req.params.id;
   const changes = req.body;
     const user_id = req.headers.user_id;
     changes.updatedAt = moment().format("l");
-  // Get log 1st
+  /** Get log 1st */
   db.getLogsByLogId(id)
 
     .then(log => {
-      //Check to see if log belongs to user
+      /** Check to see if log belongs to user */
       if (log[0].user_id == req.headers.user_id) {
-        //If so update log and send status 200 back to client
+        /** If so update log and send status 200 back to client */
         db.editLogs(id, changes).then(() => {
           db.getLogsByLogId(id).then(updatedLog => {
             res
@@ -98,7 +116,7 @@ router.put("/:id", (req, res) => {
               .json({ message: `Log # ${id} updated`, updatedLog });
           });
         });
-        //If not send error message back to client
+        /** If not send error message back to client */
       } else {
         res
           .status(401)
@@ -112,6 +130,8 @@ router.put("/:id", (req, res) => {
       });
     });
 });
+
+/**@DELETE /delay_logs/:id */
 
 router.delete("/:id", (req, res) => {
   const id = req.params.id;

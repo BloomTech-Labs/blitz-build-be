@@ -6,7 +6,8 @@
   "scripts": {
     "server": "nodemon index.js",
     "start": "node index.js",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "generate-docs":"jsdoc -c ./package.json"
   },
   "repository": {
     "type": "git",
@@ -55,5 +56,19 @@
   "engines": {
     "node": "12.13.0",
     "npm": "6.10.3"
+  },
+  "source":{
+    "includePattern":".+\\.js(doc|x)?$",
+    "include": ["."],  
+    "exclude": ["node_modules",".env"]          
+
+  },
+  "recurseDepth": 10,                       
+  "opts": {
+      "destination": "./docs/",              
+      "recurse": true                        
   }
 }
+
+  
+
