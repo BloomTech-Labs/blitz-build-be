@@ -24,7 +24,7 @@ router.post("/", (req, res) => {
   }
   db.addTemplate(template)
     .then(id => {
-      res.status(201).json({ template_id: id[0].id ,template_name:template_name})
+      res.status(201).json({ template_id: id[0].id ,template_name:id.template_name})
     })
     .catch(error => { res.status(500).json({ message: `Error:${error.message}` }) })
 })
@@ -79,7 +79,7 @@ router.post('/byName',(req,res)=>{
     db.getTemplatesByName(template_name)
     .then(template =>{
         console.log(template)
-        res.status(200).json(template)
+      return  res.status(200).json(template)
       
     })
     .catch(error =>{
