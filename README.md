@@ -29,10 +29,7 @@ To get the server running locally:
 
 #### Non-Auth Routes
 
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| POST   | `/users/register`                   | Public     | *Please see above link for detailed instructions |
-| POST | `/users/login`|Public|*Please see above link for detailed instructions |
+All Routes require authorization
 
 
 

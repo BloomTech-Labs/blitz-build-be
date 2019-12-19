@@ -35,11 +35,11 @@ server.use(express.json());
 
 server.use("/projects", authenticate,ProjectsRouter);
 server.use("/projects/tasks",authenticate,TasksRouter);
-server.use("/templates",TemplatesRouter);
+server.use("/templates",authenticate,TemplatesRouter);
 
 server.use("/weather", Weather);
 server.use("/delay_logs",authenticate,delayLogsRouter);
 // server.use('/s3',documentRouter)
-server.use('/90_day',NinetyDayRouter)
+server.use('/90_day',authenticate,NinetyDayRouter)
 server.use('/docs',documentRouter)
 module.exports = server;
