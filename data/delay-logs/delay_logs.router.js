@@ -3,6 +3,18 @@ const db = require("./delay_logs.model");
 const moment = require("moment");
 const tasksDB = require("../tasks/tasks.model");
 
+/** 
+ * @swagger
+ *  /:
+ *    get:
+ *      description: Returns all tasks per user_id
+ *      responses:
+ *                   200:
+ *                
+ *              description: All logs returned
+ * 
+ *  
+ */
 router.get("/", (req, res) => {
   const user_id = req.headers.user_id;
   db.getLogsByUserId(user_id)
@@ -18,6 +30,15 @@ router.get("/", (req, res) => {
     });
 });
 
+/**
+ * @swagger
+ *     /:
+ *      get /delay_logs/:id:
+ *       description: id = delay_logs.id gets logs by delay_logs.id
+ *          responses: 200 : Returns delay_logs
+ *        
+ * @require in @params 
+ */
 router.get("/:id", (req, res) => {
   const id = req.params.id;
   const user_id = req.headers.user_id;
@@ -44,15 +65,26 @@ router.get("/:id", (req, res) => {
     });
 });
 
+
+/**
+ * @swagger
+ * /:
+ * post /delay_logs :
+ *      description: Adds a new delay_log to the database
+ *           required: @body = newLog
+ *               responses:
+ *                   200:
+ *                     description: New Delay Log Created at 'date and time'
+ */
 router.post("/", (req, res) => {
   const newLog = req.body;
   const user_id = req.headers.user_id;
     newLog.user_id = user_id;
     newLog.createdAt = moment().format("l");
-    // check if the task_id is valid.
+    /** check if the task_id is valid. */
   tasksDB.getTaskByTaskID(newLog.task_id).then(task => {
       if (task[0]) {
-        // check if this task belong to the project.
+      /** check if this task belong to the project.*/
       if (task[0].project_id == newLog.project_id) {
         db.addLogs(newLog)
           .then(newLogId => {
@@ -78,19 +110,22 @@ router.post("/", (req, res) => {
     }
   });
 });
-
+/**@PUT /delay_logs/:id
+ * @body = changes to update
+ * 
+ */
 router.put("/:id", (req, res) => {
   const id = req.params.id;
   const changes = req.body;
     const user_id = req.headers.user_id;
     changes.updatedAt = moment().format("l");
-  // Get log 1st
+  /** Get log 1st */
   db.getLogsByLogId(id)
 
     .then(log => {
-      //Check to see if log belongs to user
+      /** Check to see if log belongs to user */
       if (log[0].user_id == req.headers.user_id) {
-        //If so update log and send status 200 back to client
+        /** If so update log and send status 200 back to client */
         db.editLogs(id, changes).then(() => {
           db.getLogsByLogId(id).then(updatedLog => {
             res
@@ -98,7 +133,7 @@ router.put("/:id", (req, res) => {
               .json({ message: `Log # ${id} updated`, updatedLog });
           });
         });
-        //If not send error message back to client
+        /** If not send error message back to client */
       } else {
         res
           .status(401)
@@ -112,6 +147,8 @@ router.put("/:id", (req, res) => {
       });
     });
 });
+
+/**@DELETE /delay_logs/:id */
 
 router.delete("/:id", (req, res) => {
   const id = req.params.id;

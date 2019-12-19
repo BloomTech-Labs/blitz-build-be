@@ -6,7 +6,8 @@
   "scripts": {
     "server": "nodemon index.js",
     "start": "node index.js",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "generate-docs": "jsdoc -c ./package.json"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "express-jwt": "^5.3.1",
     "express-session": "^1.17.0",
     "formidable": "^1.2.1",
+    "goodparts": "^1.2.1",
     "helmet": "^3.21.2",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.6.0",
@@ -55,5 +57,24 @@
   "engines": {
     "node": "12.13.0",
     "npm": "6.10.3"
+  },
+  "source": {
+    "includePattern": ".+\\.js(doc|x)?$",
+    "include": [
+      ".",
+      "README.md"
+    ],
+    "exclude": [
+      "node_modules",
+      ".env"
+    ],
+    "plugins": [
+      "plugins/markdown"
+    ]
+  },
+  "recurseDepth": 10,
+  "opts": {
+    "destination": "./jsdocs/",
+    "recurse": true
   }
 }

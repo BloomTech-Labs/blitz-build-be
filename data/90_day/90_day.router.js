@@ -3,6 +3,11 @@ const db = require('./90_day.model')
 const taskDB = require('../tasks/tasks.model')
 const moment = require('moment')
 
+
+
+/** A @GET to @URL/90_day
+ * @returns the 90_day template
+ */
 router.get('/', (req, res) => {
     db.get()
         .then(templates => {
@@ -10,7 +15,14 @@ router.get('/', (req, res) => {
         })
         .catch(err => { res.status(400).json(err) })
 })
-
+/**  @POST 
+ *   @URL/90_day
+ * @required 
+ * @body = project_id 
+ * It will adds a list of tasks to the @tasks_table
+ * using the @project_id as A @FK  
+ * 
+ */
 router.post('/', (req, res) => {
     console.log(req.headers)
     const project_id = req.body.project_id

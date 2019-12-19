@@ -9,7 +9,16 @@ aws.config.update({
   })
  const S3_BUCKET = process.env.BUCKET_NAME
 const s3 = new aws.S3();  // Create a new instance of S3
-
+/** A Post to /docs/documents will start the upload process
+ *  If all requirements are met it will send a signed url
+ *  back to the client
+ * @swagger:
+ * /:   post:
+ *         description: Start the upload process
+ *               responses:
+ *                     success:true
+ *                        description: A signed url 
+ */
 router.post("/documents",(req,res)=>{
     const fileName = req.body.fileName;
 const fileType = req.body.fileType;
@@ -38,6 +47,18 @@ const s3Params = {
 
  
 })
+
+/** Delete /url/:id 
+ * @swagger
+ * /: 
+ *     delete:
+ *        description: Deletes the record from the table
+ *                requires: @params = id 
+ *                              @body = fileName 
+ *              responses:
+ *                  204:
+ *                   description: Deletes The Record From The Database
+ *  */
 router.delete('/url/:id',(req,res)=>{
    
     const id = req.params.id
@@ -75,7 +96,9 @@ router.delete('/url/:id',(req,res)=>{
 
 
 
-
+/** Add Doc url to the database
+ *   This is automatically handled in the FE
+ */
 router.post('/url',(req,res)=>{
     const  url = req.body
     db.addURL(url)
