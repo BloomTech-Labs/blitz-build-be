@@ -4,6 +4,17 @@ const dbt = require("../tasks/tasks.model")
 const router = express.Router();
 const moment = require('moment')
 
+
+/**
+ * @swagger
+ * /:
+ *   post:
+ *     description: Adds A template of tasks
+ *        responses: 
+ *              201:
+ *                description: Returns template_id,template_name
+ *           
+ */
 router.post("/", (req, res) => {
 
   const user_id = req.headers.user_id
@@ -17,6 +28,17 @@ router.post("/", (req, res) => {
     })
     .catch(error => { res.status(500).json({ message: `Error:${error.message}` }) })
 })
+
+/**
+ * @swagger
+ * /:
+ *   get:
+ *      description:  Get All Templates For a User
+ *        responses:
+ *             200:
+ *                description: Returns All Templates For That User
+ *                                  
+ */
 router.get('/', (req, res) => {
   const id = req.headers.user_id
   db.getAll(id)
@@ -41,6 +63,16 @@ router.get("/:id", (req, res) => {
     });
 });
 
+/**
+ * @swagger
+ * /:
+ *   post:
+ *      description: Get A Template By template_name
+ *          requires: @body = template_name
+ *         responses:
+ *                200:
+ *                   description:  Returns A template
+ */
 router.post('/byName',(req,res)=>{
     const template_name = req.body.template_name
     console.log(template_name)
@@ -78,14 +110,14 @@ try {
 
           tasks.forEach(task => {
             console.log(tasks)
-            // dbt.addTasks(task)
-            //   .then(resp => {
-            //     if (resp) {
-            //       res.status(200).json({ "Added": moment().format('L'), tasksArr: resp })
-            //     } else {
-            //       res.status(403).json({ message: err.message })
-            //     }
-            //   })
+            dbt.addTasks(task)
+              .then(resp => {
+                if (resp) {
+                  res.status(200).json({ "Added": moment().format('L'), tasksArr: resp })
+                } else {
+                  res.status(403).json({ message: err.message })
+                }
+              })
           })}
 
        catch(err){ res.status(500).json(err) }
@@ -93,8 +125,18 @@ try {
     })
   })
 
-
-
+ 
+  /**
+   * Adds Tasks By Template Name
+   * @swagger
+   * /:
+   *    post: 
+   *       requires: @body = template_name @params = project_id
+   *         responses:  
+   *              200:
+   *                description: Returns createdAt message , template_id
+   *        
+   */
   router.post('/addTasks/byTempName/:id', (req, res) => {
      
     let template_name = req.body.template_name
@@ -114,16 +156,16 @@ try {
   
   try {     
            console.log(tasks)
-            // tasks.forEach(task => {
-            //   dbt.addTasks(task)
-            //     .then(resp => {
-            //       if (resp) {
-            //         res.status(200).json({ "Added": moment().format('L'), tasksArr: resp })
-            //       } else {
-            //         res.status(403).json({ message: err.message })
-            //       }
-            //     })
-            // })
+            tasks.forEach(task => {
+              dbt.addTasks(task)
+                .then(resp => {
+                  if (resp) {
+                    res.status(200).json({ "Added": moment().format('L'), tasksArr: resp })
+                  } else {
+                    res.status(403).json({ message: err.message })
+                  }
+                })
+            })
   }
   
          catch(err){ res.status(500).json(err) }
@@ -133,7 +175,7 @@ try {
 
 
 
-
+   /** Update */
 
   router.put("/:id", (req, res) => {
     const id = req.params.id;
@@ -150,7 +192,7 @@ try {
         });
       });
   });
-
+/**    Delete */
   router.delete("/:id", (req, res) => {
     const id = req.params.id;
 

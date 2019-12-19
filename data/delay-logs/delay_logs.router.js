@@ -3,9 +3,15 @@ const db = require("./delay_logs.model");
 const moment = require("moment");
 const tasksDB = require("../tasks/tasks.model");
 
-/** @GET /delay_logs
-*
- *  @returns A list of delay logs for a specific user_id
+/** 
+ * @swagger
+ *  /:
+ *    get:
+ *      description: Returns all tasks per user_id
+ *      responses:
+ *                   200:
+ *                
+ *              description: All logs returned
  * 
  *  
  */
@@ -24,8 +30,13 @@ router.get("/", (req, res) => {
     });
 });
 
-/**@GET /delay_logs/:id
- *  id = delay_logs.id
+/**
+ * @swagger
+ *     /:
+ *      get /delay_logs/:id:
+ *       description: id = delay_logs.id gets logs by delay_logs.id
+ *          responses: 200 : Returns delay_logs
+ *        
  * @require in @params 
  */
 router.get("/:id", (req, res) => {
@@ -55,9 +66,15 @@ router.get("/:id", (req, res) => {
 });
 
 
-/**  @POST /delay_logs
- * @ADDS a new delay_log to the database
- * @body = newLog
+/**
+ * @swagger
+ * /:
+ * post /delay_logs :
+ *      description: Adds a new delay_log to the database
+ *           required: @body = newLog
+ *               responses:
+ *                   200:
+ *                     description: New Delay Log Created at 'date and time'
  */
 router.post("/", (req, res) => {
   const newLog = req.body;

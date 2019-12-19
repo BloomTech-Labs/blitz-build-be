@@ -19,7 +19,7 @@ const checkJwt = jwt({
   }),
 
   /** Validate the audience and the issuer.
-   * With @auth0
+   * 
    * */
   audience: process.env.AUDIENCE,
   issuer: `https://gannondarcy2.auth0.com/`,

@@ -3,7 +3,7 @@ const db = require("./tasks.model");
 const templates = require('../templates/templates.model')
 const router = express.Router();
 
-//Get All Tasks for user
+/** Get All Tasks for user */
 
 
 router.get("/:id",(req,res)=>{
@@ -15,7 +15,7 @@ router.get("/:id",(req,res)=>{
   })
   .catch(error =>{res.status(500).json({message:error.message})})
 })
-//Get task by ID
+/** Get task by ID */
 router.get("/:id", (req, res) => {
   const id = req.params.id
   db.getTaskByTaskID(id)
@@ -29,7 +29,7 @@ router.get("/:id", (req, res) => {
       });
     });
 });
-//Get Tasks by Templates
+/** Get Tasks by Templates */
 router.get('/template/:id',(req,res)=>{
   let id = req.params.id
   db.getTaskByTemplateId(id)
@@ -54,7 +54,7 @@ router.post("/", (req, res) => {
     });
 });
 
-//EDITS TASK
+/** EDIT A TASK */
 router.put("/:id", (req, res) => {
   const id = req.params.id;
   const changes = req.body;
@@ -87,7 +87,8 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-//RETURNS All TASKS For Project BY PROJECT ID
+
+/** RETURNS All TASKS For Project BY PROJECT ID */
 router.get("/byProject/:pid", (req, res) => {
   const id = req.params.pid;
   db.getTasksByProject(id)
@@ -120,7 +121,7 @@ router.delete("/byProject/:pid",(req,res)=>{
 
 
 
-  //Get templates 
+  /** Get templates  */
 
 
  router.get('/templates/:id',(req,res)=>{
