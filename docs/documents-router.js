@@ -2,6 +2,7 @@ require('dotenv').config('./env')
 const db = require('./docs-model')
 const aws = require('aws-sdk')
 const router = require('express').Router();
+
 aws.config.update({
     region: 'us-west-2', // Put your aws region here
     accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -109,6 +110,7 @@ router.post('/url',(req,res)=>{
 })
 router.get('/url',(req,res)=>{
     let id = req.headers.user_id
+    let project_id = req.body.project_id
     db.getURL(id)
     .then(data =>{
         res.status(200).json(data)
@@ -118,6 +120,7 @@ router.get('/url',(req,res)=>{
 
 router.post('/get',  (req,res)=>{
     let uid = req.headers.user_id
+
     let fileName = req.body.fileName
  
     const params = {

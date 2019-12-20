@@ -13,9 +13,9 @@ function addURL(url){
     
 }
 
-function getURL(id){
-    return db("docs_url")
-       .where("user_id",'=',id)
+function getURL(id,project_id){
+    return db("docs_url").select('doc_url','user_id','file_name','project_name')
+       .where("user_id",'=',id,"&&","project_id","=",project_id)
 }
 
 function deleteUrl(id){
