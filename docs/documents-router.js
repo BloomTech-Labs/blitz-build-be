@@ -60,39 +60,38 @@ const s3Params = {
  *                  204:
  *                   description: Deletes The Record From The Database
  *  */
-router.delete('/url/:id',(req,res)=>{
+router.delete('/url/:file_name',(req,res)=>{
    
-    const id = req.params.id
+
     const url = req.body.url
     const uid=req.headers.user_id
-    const fileName=req.body.fileName
-    const s3Params ={
-        Bucket: S3_BUCKET,
-    Key: `${uid}/${fileName}`,
-    Expires: 500,
+    const S3_BUCKET = process.env.BUCKET_NAME
+    const file_name=req.params.file_name  
+      const s3Params ={
+    Bucket: S3_BUCKET,
+    Key: `${uid}/${file_name}`,
+  
  
     }
 
   
-    console.log(uid,fileName)
+   
     s3.deleteObject(s3Params,(err,res)=>{
-        if(err){
-            console.log(err.message)
-            res.json({sucess:false,error:err})
-        }
-        res.json({sucess:true})
-    }).then(success =>{
-    if(success === true ){
-     db.deleteUrl(id)
+      
+        return res
+    })
+ 
+ 
+     db.deleteUrl(file_name)
     
-    .then(deletedTask =>{
-        console.log(deletedTask)
-     res.status(204).json(deletedTask)
+    .then(resp =>{
+        console.log(resp)
+     res.status(204).json({response:resp})
     }).catch(error => console.log(error))
-}else(err =>{console.log(err.message)})
-})
-})
 
+
+
+})
 
 
 

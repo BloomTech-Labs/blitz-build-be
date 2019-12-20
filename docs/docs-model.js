@@ -18,9 +18,9 @@ function getURL(id,project_id){
        .where("user_id",'=',id,"&&","project_id","=",project_id)
 }
 
-function deleteUrl(id){
+function deleteUrl(file_name){
     return db("docs_url")
-    .where("id","=",id)
-    .truncate()
-    .delete()
+    .where("file_name","=",file_name)
+
+    .del()
 }
