@@ -23,6 +23,7 @@ To get the server running locally:
 -    Node / Express 
 -    Postgres
 -    AWS S3 
+-    Jest / Supertest
 
 
 ## Endpoints
