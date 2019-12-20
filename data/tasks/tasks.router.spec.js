@@ -29,23 +29,10 @@ describe('testing all crud operations on tasks router', ()=>{
             })
         })
     })
- describe("Put to /url/:id  ",()=>{
-  it("Returns a 200 with message",async ()=>{
-      const res = await request(server)
-       .put(`${url}/275`)
-       .set(id)
-       .send({
-           "due_date":"01/22/2020"
-       })
-       .expect(function (res){
-           res.status = 200
-           res.body = {
-               message:"Task # 275 updated"
-           }
-         })
-        })
 
-})
+    
+
+
 /* TEST WILL PASS UNCOMMENT AND CHANGE TASK ID */
 //  describe("Delete to /url/:id",()=>{
 //      it("returns status 204", async ()=>{
