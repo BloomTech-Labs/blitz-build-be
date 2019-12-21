@@ -29,6 +29,7 @@ module.exports = {
   production: {
     client: "pg",
     connection:process.env.DATABASE_URI,
+    ssl:true,
     pool: {
       min: 2,
       max: 10
@@ -40,5 +41,6 @@ module.exports = {
     seeds: {
       directory: "./data/seeds"
     }
+
   }
 };
