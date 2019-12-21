@@ -11,6 +11,7 @@ const delayLogsRouter = require("./data/delay-logs/delay_logs.router");
 const authenticate = require('./auth/authenticate')
 const documentRouter = require('./docs/documents-router')
 const reminderRouter = require('./data/send_sms')
+
 const server = express();
 
 
@@ -42,4 +43,5 @@ server.use("/delay_logs",authenticate,delayLogsRouter);
 // server.use('/s3',documentRouter)
 server.use('/90_day',authenticate,NinetyDayRouter)
 server.use('/docs',documentRouter)
+server.use('/jsdocs',express.static(__dirname +'/index.html'))
 module.exports = server;
