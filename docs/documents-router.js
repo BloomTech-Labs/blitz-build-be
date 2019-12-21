@@ -1,9 +1,13 @@
 require('dotenv').config('./env')
 const db = require('./docs-model')
-const aws = require('./aws')
+const aws = require('aws-sdk')
 const router = require('express').Router();
 const moment = require('moment')
-
+aws.config.update({
+    region: 'us-west-2',
+    accessKeyId: process.env.AWS_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET
+  })
  const S3_BUCKET = process.env.BUCKET_NAME
 const s3 = new aws.S3();  // Create a new instance of S3
 /** A Post to /docs/documents will start the upload process
