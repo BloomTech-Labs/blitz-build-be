@@ -6,20 +6,16 @@
   "scripts": {
     "server": "nodemon index.js",
     "start": "node index.js",
-    "test": "jest --watch --detectOpenHandles",
+    "test": "mocha --exit",
     "generate-docs": "jsdoc -c ./package.json"
   },
-  "jest":{
-    "testEnvironment": "node"
-  },
-  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lambda-School-Labs/blitz-build-be.git"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Lambda-School-Labs/blitz-build-be/issues"
   },
@@ -43,6 +39,7 @@
     "knex": "^0.20.1",
     "knex-cleaner": "^1.3.0",
     "mocha": "^6.2.2",
+    "mockery": "^2.1.0",
     "moment": "^2.24.0",
     "multer": "^1.4.2",
     "multer-s3": "^2.9.0",
