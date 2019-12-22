@@ -76,7 +76,7 @@
   },
   "recurseDepth": 10,
   "opts": {
-    "destination": "./jsdocs/",
+    "destination": "./public/jsdocs",
     "recurse": true
   }
 }

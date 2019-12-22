@@ -2,9 +2,9 @@ require('dotenv').config('./env')
 const db = require('./docs-model')
 const aws = require('aws-sdk')
 const router = require('express').Router();
-
+const moment = require('moment')
 aws.config.update({
-    region: 'us-west-2', // Put your aws region here
+    region: 'us-west-2',
     accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET
   })
@@ -22,17 +22,18 @@ const s3 = new aws.S3();  // Create a new instance of S3
  */
 router.post("/documents",(req,res)=>{
     const fileName = req.body.fileName;
-const fileType = req.body.fileType;
-const uid = req.body.user_id
+    const fileType = req.body.fileType;
+   const uid = req.body.user_id
 
 
-const s3Params = {
-    Bucket: S3_BUCKET,
-    Key: `${uid}/${fileName}`,
-    Expires: 500,
-    ContentType: fileType,
-    ACL: 'public-read'
+   const s3Params = {
+     Bucket: S3_BUCKET,
+     Key: `${uid}/${fileName}`,
+     Expires: 500,
+     ContentType: fileType,
+     ACL: 'public-read'
   };
+  
   s3.getSignedUrl('putObject',s3Params,(err,data) =>{
       if(err){
           console.log(err)
@@ -49,74 +50,63 @@ const s3Params = {
  
 })
 
-/** Delete /url/:id 
- * @swagger
- * /: 
- *     delete:
- *        description: Deletes the record from the table
- *                requires: @params = id 
- *                              @body = fileName 
- *              responses:
- *                  204:
- *                   description: Deletes The Record From The Database
+/** 
+       Deletes The Record Of The Url From The DB
  *  */
-router.delete('/url/:file_name',(req,res)=>{
-   
+router.delete('/url/:file_name', async (req,res)=>{
 
     const url = req.body.url
     const uid=req.headers.user_id
     const S3_BUCKET = process.env.BUCKET_NAME
     const file_name=req.params.file_name  
-      const s3Params ={
-    Bucket: S3_BUCKET,
-    Key: `${uid}/${file_name}`,
-  
+    let   success = false
+    const s3Params = { Bucket: S3_BUCKET , Key: `/${uid}/${file_name}`}
+    /** Calling deleteObject on the AWS Bucket Will Delete The Object That Is Passed In */
+    await s3.deleteObject(s3Params,(err,success)=>{
+          if(err){ success = false ,err.message}
+           success = true 
+           return success , err   
+        })
  
-    }
-
-  
-   
-    s3.deleteObject(s3Params,(err,res)=>{
-      
-        return res
-    })
- 
- 
+    /** Calling deleteUrl to the DB  */
+    if(success === true){
      db.deleteUrl(file_name)
     
     .then(resp =>{
         console.log(resp)
-     res.status(204).json({response:resp})
-    }).catch(error => console.log(error))
-
-
-
+        res.status(204).json({response:resp})})
+        .catch(error => console.log(error))
+    }
+    res.status(409)
 })
 
 
 
 
-/** Add Doc url to the database
- *   This is automatically handled in the FE
+/** Add A Document's  url to the database
+ *   This called in the FE after it receives success:true from the getSignedUrl()
  */
 router.post('/url',(req,res)=>{
-    const  url = req.body
+     
+    const  url = {...req.body,createdAt:moment().format('l'),project_name:req.headers.project_name}
     db.addURL(url)
     .then(data =>{
         res.status(200).json(data)
     })
     .catch(err => res.status(500).json({err:err,stack:err.stack}))
 })
+
+/** Get All Document Url's For A User   */
 router.get('/url',(req,res)=>{
     let id = req.headers.user_id
-    let project_id = req.body.project_id
+    
     db.getURL(id)
     .then(data =>{
         res.status(200).json(data)
     })
     .catch(err => res.status(500).json({err:err.message}))
 })
-
+/** Get A Specific Document Url For a User */
 router.post('/get',  (req,res)=>{
     let uid = req.headers.user_id
 
