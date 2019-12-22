@@ -38,5 +38,23 @@ module.exports = {
       directory: "./data/seeds"
     }
 
+  },
+  
+  test: {
+    client: "pg",
+    connection:process.env.DATABASE_URI,
+    ssl:true,
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      directory: "./data/migrations",
+      tableName: "knex_migrations"
+    },
+    seeds: {
+      directory: "./data/seeds"
+    }
+
   }
 };
