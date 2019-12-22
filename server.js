@@ -42,6 +42,6 @@ server.use("/weather", Weather);
 server.use("/delay_logs",authenticate,delayLogsRouter);
 // server.use('/s3',documentRouter)
 server.use('/90_day',authenticate,NinetyDayRouter)
-server.use('/docs',documentRouter)
-server.use('/jsdocs',express.static(__dirname +'/index.html'))
+server.use('/docs',authenticate,documentRouter)
+
 module.exports = server;

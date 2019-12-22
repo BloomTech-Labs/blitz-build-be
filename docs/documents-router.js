@@ -87,7 +87,8 @@ router.delete('/url/:file_name', async (req,res)=>{
  *   This called in the FE after it receives success:true from the getSignedUrl()
  */
 router.post('/url',(req,res)=>{
-    const  url = {...req.body,createdAt:moment().format('l')}
+     
+    const  url = {...req.body,createdAt:moment().format('l'),project_name:req.headers.project_name}
     db.addURL(url)
     .then(data =>{
         res.status(200).json(data)
