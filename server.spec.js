@@ -142,7 +142,9 @@ describe("Requests made to /projects endpoints", () => {
                         res.status = 401
                   
                     })
+                 
             })
+       
         })
         /**Test Will Pass Uncomment And Change Project Id */
         // describe("PUT Request to /projects/:id with correct user_id in headers", () => {
@@ -159,7 +161,7 @@ describe("Requests made to /projects endpoints", () => {
         // })
        
         describe("DELETE Request to /projects/:id with incorrect user_id in headers", () => {
-            it("Returns 401 unauthorized", async () => {
+            it("Returns 401 unauthorized", async (next) => {
                 const res = await request(server)
                     .delete('/projects/4')
                    
@@ -169,7 +171,9 @@ describe("Requests made to /projects endpoints", () => {
                     
 
                     })
+                    next();
             })
+
         })
 
         // Test Passes uncomment and change /:id params
