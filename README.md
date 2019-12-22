@@ -1,5 +1,5 @@
 
-![Heroku](http://heroku-badge.herokuapp.com/?app=heroku-badge&root=projects.html) ![NPM](https://badgen.net/npm/v/express) [![Inline docs](http://inch-ci.org/github/LAMBDA-SCHOOL-LABS/blitz-build-be.svg?branch=master)](http://inch-ci.org/github/LAMBDA-SCHOOL-LABS/blitz-build-be) ![node](https://badgen.net/npm/node/next)
+![Heroku](http://heroku-badge.herokuapp.com/?app=heroku-badge&root=projects.html) ![NPM](https://badgen.net/npm/v/express) [![Build Status](https://travis-ci.org/Lambda-School-Labs/blitz-build-be.svg?branch=master)](https://travis-ci.org/Lambda-School-Labs/blitz-build-be) [![Inline docs](http://inch-ci.org/github/LAMBDA-SCHOOL-LABS/blitz-build-be.svg?branch=master)](http://inch-ci.org/github/LAMBDA-SCHOOL-LABS/blitz-build-be) ![node](https://badgen.net/npm/node/next)
 
 # API Documentation
 
