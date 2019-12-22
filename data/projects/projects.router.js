@@ -86,7 +86,7 @@ router.post("/", (req, res) => {
    */
   db.checkProjectName(user_id)
   .then(projects=>{
-   console.log(checkName(projects))
+ 
   /** If it does we @return and 409 */
      if(checkName(projects) == true){
       res.status(409).json({message:`A project with the name ${project_name} already exists!!!!!!` })
@@ -167,7 +167,7 @@ router.delete("/:id", (req, res) => {
     .catch(error => {
 
       res.status(409).json({
-     
+        error:error.text,
         message:  `Project # ${id} Does Not Exist`
       });
     });
