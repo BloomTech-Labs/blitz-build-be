@@ -152,7 +152,8 @@ router.delete("/:id", (req, res) => {
   const id = req.params.id;
   const uid = req.headers.user_id
   db.getProjectById(id)
-    .then(project => {
+      .then(project => {
+     
       if (project[0].user_id == uid) {
 
         db.deleteProject(id)
@@ -164,9 +165,10 @@ router.delete("/:id", (req, res) => {
       }
     })
     .catch(error => {
-      res.status(500).json({
-        error: error,
-        message: "server error on deleting project"
+
+      res.status(409).json({
+     
+        message:  `Project # ${id} Does Not Exist`
       });
     });
 });

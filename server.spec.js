@@ -161,17 +161,18 @@ describe("Requests made to /projects endpoints", () => {
         // })
        
         describe("DELETE Request to /projects/:id with incorrect user_id in headers", () => {
-            it("Returns 401 unauthorized", async (next) => {
+            it("Returns 401 unauthorized", async (error) => {
                 const res = await request(server)
+               
                     .delete('/projects/4')
-                   
+                    .set({user_id:user_id,id_token:1})
 
                     .expect(function (res) {
                         res.status = 401
-                    
+              
 
                     })
-                    next();
+                  console.log(error)
             })
 
         })

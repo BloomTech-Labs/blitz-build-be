@@ -6,7 +6,7 @@
   "scripts": {
     "server": "nodemon index.js",
     "start": "node index.js",
-    "test": "jest --forceExit",
+    "test": "jest --watch --detectOpenHandles",
     "generate-docs": "jsdoc -c ./package.json"
   },
   "jest":{
