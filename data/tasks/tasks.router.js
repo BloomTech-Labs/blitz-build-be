@@ -13,7 +13,7 @@ router.get("/:id",(req,res)=>{
   .then(tasks =>{
     res.status(200).json({tasks:tasks})
   })
-  .catch(error =>{res.status(500).json({message:error.message})})
+  .catch(error =>{res.status(409).json({message:`Sorry No Tasks For ID # ${id}`})})
 })
 /** Get task by ID */
 router.get("/:id", (req, res) => {
@@ -23,9 +23,9 @@ router.get("/:id", (req, res) => {
       res.status(200).json(task);
     })
     .catch(error => {
-      res.status(500).json({
-        error: error,
-        message: "500 server error on getting task"
+      res.status(409).json({
+        error: error.message,
+        message: `Sorry no tasks for # ${id} Exist`
       });
     });
 });
@@ -93,7 +93,10 @@ router.get("/byProject/:pid", (req, res) => {
   const id = req.params.pid;
   db.getTasksByProject(id)
     .then(tasks => {
+     if(tasks = tasks[0]) {
       res.status(200).json(tasks);
+     }else
+     res.status(409).json({message:`No Tasks Exist For Project # ${id}`})
     })
     .catch(error => {
       res.status(500).json({
