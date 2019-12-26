@@ -101,7 +101,7 @@ router.post('/addTasks/:id', (req, res) => {
 
 
 
-  dbt.getTaskByTemplateId(req.body.template_name)
+  dbt.getTaskByTemplateId({...id,template_name:template_name,})
     .then(data => {
         console.log(data)
       tasks.push(data.map(function (response) { return { "task_name": response.task_name, createdAt: moment().format('L'), 'due_date': "", 'isComplete': false, "task_description": response.task_description, "project_id": project_id, 'user_id': user_id ,template_name:template_name} }))
