@@ -54,33 +54,33 @@ router.post("/documents",(req,res)=>{
        Deletes The Record Of The Url From The DB
  *  */
 router.delete('/url/:file_name', async (req,res)=>{
-
+    
     const url = req.body.url
     const uid=req.headers.user_id
     const S3_BUCKET = process.env.BUCKET_NAME
     const file_name=req.params.file_name  
     let   success = false
-    const s3Params = { Bucket: S3_BUCKET , Key: `/${uid}/${file_name}`}
-    /** Calling deleteObject on the AWS Bucket Will Delete The Object That Is Passed In */
-    await s3.deleteObject(s3Params,(err,success)=>{
-          if(err){ success = false ,err.message}
-           success = true 
-           return success , err   
-        })
+    const s3Params = { Bucket: S3_BUCKET , Key: `${uid}/${file_name}`}
+    // /** Calling deleteObject on the AWS Bucket Will Delete The Object That Is Passed In */
+           await s3.deleteObject(s3Params, function(err,data){
+                  console.log(s3Params)
+                 if(err) console.log(err.message)
+                else console.log(data)
+            
+             })
  
-    /** Calling deleteUrl to the DB  */
-    if(success === true){
+    // /** Calling deleteUrl to the DB  */
+         
      db.deleteUrl(file_name)
-    
+
     .then(resp =>{
         console.log(resp)
         res.status(204).json({response:resp})})
         .catch(error => console.log(error))
-    }
+    
     res.status(409)
-})
-
-
+          }
+    )
 
 
 /** Add A Document's  url to the database
