@@ -1,8 +1,10 @@
 require('dotenv').config('./env')
 const db = require('./docs-model')
 const aws = require('aws-sdk')
+const fs = require('fs')
 const router = require('express').Router();
 const moment = require('moment')
+
 aws.config.update({
     region: 'us-west-2',
     accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -123,5 +125,37 @@ router.post('/get',  (req,res)=>{
      })
     
     })
+
+    router.post('/download/:file_name', (req,res) =>{
+       const fileName = req.params.file_name
+      const uid = req.headers.user_id
+     const filePath = '/users/:user/downloads/:fileName'
+     const bucketName = process.env.BUCKET_NAME
+     const Key = `${uid}/${fileName}`
+ const file = fs.createWriteStream();
+     userEffect(()=>{
+         downLoadFile();
+     },[downLoadFile])
+     const s3 = new AWS.S3()
+     function downLoadFile(filePath,bucketName,key){
+       
+        const params = {
+        Bucket: bucketName,
+        Key : key
+    }
+     return s3.getObject(params, (err,data) => {
+          if(error) console.log(err)
+          fs.writeFileSync(filePath, data.Body.toString());
+          console.log(`${filePath} has ben created`)
+         })
+      
+        }
+  
+    })
+    
+    
+
+
+
 
 module.exports = router
