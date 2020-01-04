@@ -30,7 +30,6 @@ describe('testing all crud operations on tasks router', ()=>{
              const res = await request(server)
             
             .get(`/projects/tasks/byProject/`)
-            .set(id)
             .expect('Content-Type',/json/)
             .expect(409)
             
