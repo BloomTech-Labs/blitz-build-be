@@ -29,7 +29,7 @@ describe('testing all crud operations on tasks router', ()=>{
             
              const res = await request(server)
             
-            .get(`/projects/tasks/byProject/1`)
+            .get(`/projects/tasks/byProject/`)
             .set(id)
             .expect('Content-Type',/json/)
             .expect(409)
@@ -39,18 +39,17 @@ describe('testing all crud operations on tasks router', ()=>{
 
     
 
-
-/* TEST WILL PASS UNCOMMENT AND CHANGE TASK ID */
-//  describe("Delete to /url/:id",()=>{
-//      it("returns status 204", async ()=>{
-//          const res = await request(server)
-//          .delete(`${url}/275`)
-//          .set(id)
-//          .expect(function (res){
-//              res.status = 204
-//          })
-//      })
-//  })
+ /** TEST WILL PASS UNCOMMENT AND CHANGE TASK ID */
+  describe("Delete to /url/:id",()=>{
+      it("returns status 204", async ()=>{
+          const res = await request(server)
+          .delete(`${url}/275`)
+          .set(id)
+          .expect(function (res){
+              res.status = 204
+          })
+      })
+  })
 })
 })
 
