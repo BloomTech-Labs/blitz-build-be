@@ -139,12 +139,18 @@ router.post('/get',  (req,res)=>{
     router.get('/download/:file_name', (req,res) =>{
        const file_name = req.params.file_name
        const uid = req.headers.user_id
-       db.getDocByFileName(file_name)
-       .then(response =>{
-           console.log(response)
-           res.status(200)
-           .json(response)
-       })
+       const options = {
+           Bucket:S3_BUCKET,
+           Key:`${uid}/${file_name}`
+       }
+        s3.getObject(options,function(err,data){
+            if(err){
+                console.log(err)
+            }
+            
+            res.attachment(file_name)
+            res.send(data.Body)
+        })
     })
     
     
