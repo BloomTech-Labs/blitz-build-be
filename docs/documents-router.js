@@ -24,19 +24,19 @@ const s3 = new aws.S3();  // Create a new instance of S3
  */
 router.post("/documents",(req,res)=>{
     const fileName = req.body.fileName;
-    const fileType = req.body.fileType;
-   const uid = req.body.user_id
+
+   const uid = req.headers.user_id
 
 
    const s3Params = {
      Bucket: S3_BUCKET,
      Key: `${uid}/${fileName}`,
      Expires: 500,
-     ContentType: fileType,
+  
      ACL: 'public-read'
   };
   
-  s3.getSignedUrl('putObject',s3Params,(err,data) =>{
+  s3.getSignedUrl('getObject',s3Params,(err,data) =>{
       if(err){
           console.log(err)
           res.json({success:false,error:err})
@@ -139,34 +139,30 @@ router.post('/get',  (req,res)=>{
     router.get('/download/:file_name', (req,res) =>{
        const fileName = req.params.file_name
        const uid = req.headers.user_id
-       s3.getObject(
-         {  Bucket : S3_BUCKET,
-            Key : `${uid}/${fileName}`
-         },
-         (error,data) =>{
-             if(error != null){
-                
-                console.log("DOWNLOAD ERROR MESSAGE",error)
-             }else {
-              console.log(data)
-                     const file = data;
-                
-                     console.log("HERE" + file);
-                      
-                    
-                     res.status(200)
-                     res.send(file)
-                  
-         
-                     
-                 
-             }
+   
+       const s3Params = {
+        Bucket: S3_BUCKET,
+        Key: `${uid}/${fileName}`,
+        Expires: 60*10,
+        ContentType: fileType,
+        ACL: 'public-read'
+     };
+     
+     s3.getSignedUrl('putObject',s3Params,(err,data) =>{
+         if(err){
+             console.log(err)
+             res.json({success:false,error:err})
          }
-         
-       )
-
-  
-    })
+         const returnData = {
+             signedRequest :data,
+             url: `https://${S3_BUCKET}.s3.amazonaws.com/${uid}/${fileName}`
+         };
+         res.json({success:true,data:{returnData}});
+     })
+       
+   
+    
+   })
     
     
 
