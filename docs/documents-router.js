@@ -149,7 +149,7 @@ router.post('/get',  (req,res)=>{
                 console.log("DOWNLOAD ERROR MESSAGE",error)
              }else {
               console.log(data)
-                     const file = `${__dirname}` +`/`+`${fileName}`;
+                     const file = data;
                 
                      console.log("HERE" + file);
                      res.status(200);
