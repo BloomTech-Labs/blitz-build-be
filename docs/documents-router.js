@@ -136,7 +136,7 @@ router.post('/get',  (req,res)=>{
         Bucket: S3_BUCKET,
         Key: `${uid}/${fileName}`,
         Expires: 60*10,
-        ContentType: fileType,
+         
         ACL: 'public-read'
      };
      
