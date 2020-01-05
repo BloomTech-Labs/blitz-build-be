@@ -4,7 +4,7 @@ const aws = require('aws-sdk')
 const fs = require('fs')
 const router = require('express').Router();
 const moment = require('moment')
-
+const request = require('request')
 aws.config.update({
     region: 'us-west-2',
     accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -147,10 +147,12 @@ router.post('/get',  (req,res)=>{
             if(err){
                 console.log(err)
             }
-            
-            res.attachment(file_name)
-            res.send(data.Body)
+            res.set(
+                'Content-Disposition',
+                `attachment; filename=${file_name}`
+            )
         })
+         request(`https://${S3_BUCKET}.s3.amazonaws.com/${uid}/${file_name}`).pipe(res)
     })
     
     
