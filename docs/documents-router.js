@@ -142,6 +142,8 @@ router.post('/get',  (req,res)=>{
        db.getDocByFileName(file_name)
        .then(response =>{
            console.log(response)
+           res.status(200)
+           .json(response)
        })
     })
     
