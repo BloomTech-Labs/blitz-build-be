@@ -108,6 +108,16 @@ router.get('/url',(req,res)=>{
     })
     .catch(err => res.status(500).json({err:err.message}))
 })
+router.get('/url/:file_name',(req,res)=>{
+   
+    let file_name= req.params.file_name
+    db.getDocByFileName(file_name)
+    .then(data =>{
+        res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({err:err.message}))
+})
+
 /** Get A Specific Document Url For a User */
 router.post('/get',  (req,res)=>{
     let uid = req.headers.user_id
@@ -126,30 +136,34 @@ router.post('/get',  (req,res)=>{
     
     })
 
-    router.post('/download/:file_name', (req,res) =>{
+    router.get('/download/:file_name', (req,res) =>{
        const fileName = req.params.file_name
-      const uid = req.headers.user_id
-     const filePath = '/users/:user/downloads/:fileName'
-     const bucketName = process.env.BUCKET_NAME
-     const Key = `${uid}/${fileName}`
- const file = fs.createWriteStream();
-     userEffect(()=>{
-         downLoadFile();
-     },[downLoadFile])
-     const s3 = new AWS.S3()
-     function downLoadFile(filePath,bucketName,key){
-       
-        const params = {
-        Bucket: bucketName,
-        Key : key
-    }
-     return s3.getObject(params, (err,data) => {
-          if(error) console.log(err)
-          fs.writeFileSync(filePath, data.Body.toString());
-          console.log(`${filePath} has ben created`)
-         })
-      
-        }
+       const uid = req.headers.user_id
+       s3.getObject(
+         {  Bucket : S3_BUCKET,
+            Key : `${uid}/${fileName}`
+         },
+         (error,data) =>{
+             if(error != null){
+                
+                console.log("DOWNLOAD ERROR MESSAGE",error)
+             }else {
+              console.log(data)
+                     const file = `${__dirname}` +`/`+`${fileName}`;
+                
+                     console.log("HERE" + file);
+                     res.status(200);
+                     res.set('ACCESS-CONTROL-ALLOW-ORIGIN',"http://localhost:5000/*")
+                    
+                     res.set("Access-Control-Allow-Headers, Origin, X-Requested-With, Content-Type, Accept");
+         
+                     
+                 
+             }
+         }
+         
+       )
+
   
     })
     
