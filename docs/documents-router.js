@@ -144,6 +144,7 @@ router.post('/get',  (req,res)=>{
         `attachment; filename=${file_name}`
     )
        const options = {
+           
            Bucket:S3_BUCKET,
            Key:`${uid}/${file_name}`
        }
