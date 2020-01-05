@@ -153,6 +153,7 @@ router.post('/get',  (req,res)=>{
                 
                      console.log("HERE" + file);
                      res.status(200);
+                     res.send(file)
                      res.set('ACCESS-CONTROL-ALLOW-ORIGIN','http://localhost:5000/*,https://*.herokuapp.com/*')
                     
                      res.set("Access-Control-Allow-Headers, Origin, X-Requested-With, Content-Type, Accept");
