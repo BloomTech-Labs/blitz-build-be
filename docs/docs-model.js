@@ -21,6 +21,7 @@ function getURL(id){
 
 function getDocByFileName(file_name){
     return db("docs_url")
+           .select("doc_url")
            .where("file_name","=",file_name)
  }
 function deleteUrl(file_name){

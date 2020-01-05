@@ -24,20 +24,28 @@ const s3 = new aws.S3();  // Create a new instance of S3
  */
 router.post("/documents",(req,res)=>{
     const fileName = req.body.fileName;
-
-   const uid = req.headers.user_id
+    const fileType = req.body.fileType;
+   const uid = req.body.user_id
 
 
    const s3Params = {
      Bucket: S3_BUCKET,
      Key: `${uid}/${fileName}`,
      Expires: 500,
-  
+     ContentType: fileType,
      ACL: 'public-read'
   };
   
-  s3.getSignedUrl('getObject',s3Params,(err,data) =>{
-
+  s3.getSignedUrl('putObject',s3Params,(err,data) =>{
+      if(err){
+          console.log(err)
+          res.json({success:false,error:err})
+      }
+      const returnData = {
+          signedRequest :data,
+          url: `https://${S3_BUCKET}.s3.amazonaws.com/${uid}/${fileName}`
+      };
+      res.json({success:true,data:{returnData}});
   })
     
 
@@ -129,32 +137,13 @@ router.post('/get',  (req,res)=>{
     })
 
     router.get('/download/:file_name', (req,res) =>{
-       const fileName = req.params.file_name
+       const file_name = req.params.file_name
        const uid = req.headers.user_id
-   
-       const s3Params = {
-        Bucket: S3_BUCKET,
-        Key: `${uid}/${fileName}`,
-        Expires: 60*10,
-         
-        ACL: 'public-read'
-     };
-     
-     s3.getSignedUrl('putObject',s3Params,(err,data) =>{
-
-         const returnData = {
-             signedRequest :data,
-             url: `https://${S3_BUCKET}.s3.amazonaws.com/${uid}/${fileName}`
-         };
-         const file = fs.createReadStream(returnData.url)
-         file.pipe(res)
-         res.status(200).json(returnData)
-     }).catch(err =>{res.status(401).json(err)})
-
-       
-   
-    
-   })
+       db.getDocByFileName(file_name)
+       .then(response =>{
+           console.log(response)
+       })
+    })
     
     
 
