@@ -137,14 +137,17 @@ router.post('/get',  (req,res)=>{
     })
 
     router.get('/download/:file_name', (req,res) =>{
+        
        const file_name = req.params.file_name
        const uid = req.headers.user_id
+        
+
        res.set(
         'Content-Disposition',
         `attachment; filename=${file_name}`
     )
        const options = {
-           
+
            Bucket:S3_BUCKET,
            Key:`${uid}/${file_name}`
        }
@@ -152,9 +155,9 @@ router.post('/get',  (req,res)=>{
             if(err){
                 console.log(err)
             }
-         
-        })
-         request(`https://${S3_BUCKET}.s3.amazonaws.com/${uid}/${file_name}`).pipe(res)
+            return data
+        }).then(data =>{
+         request(`https://${S3_BUCKET}.s3.amazonaws.com/${uid}/${file_name}`).pipe(data)})
     })
     
     
