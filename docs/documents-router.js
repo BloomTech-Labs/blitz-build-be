@@ -141,17 +141,16 @@ router.post('/get',  (req,res)=>{
      };
      
      s3.getSignedUrl('putObject',s3Params,(err,data) =>{
-         if(err){
-             console.log(err)
-             res.json({success:false,error:err})
-         }
+
          const returnData = {
              signedRequest :data,
              url: `https://${S3_BUCKET}.s3.amazonaws.com/${uid}/${fileName}`
          };
          const file = fs.createReadStream(returnData.url)
          file.pipe(res)
-     })
+         res.status(200).json(returnData)
+     }).catch(err =>{res.status(401).json(err)})
+
        
    
     
