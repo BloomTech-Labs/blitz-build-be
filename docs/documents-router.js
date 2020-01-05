@@ -37,15 +37,7 @@ router.post("/documents",(req,res)=>{
   };
   
   s3.getSignedUrl('getObject',s3Params,(err,data) =>{
-      if(err){
-          console.log(err)
-          res.json({success:false,error:err})
-      }
-      const returnData = {
-          signedRequest :data,
-          url: `https://${S3_BUCKET}.s3.amazonaws.com/${uid}/${fileName}`
-      };
-      res.json({success:true,data:{returnData}});
+
   })
     
 
@@ -157,7 +149,8 @@ router.post('/get',  (req,res)=>{
              signedRequest :data,
              url: `https://${S3_BUCKET}.s3.amazonaws.com/${uid}/${fileName}`
          };
-         res.json({success:true,data:{returnData}});
+         const file = fs.createReadStream(returnData.url)
+         file.pipe(res)
      })
        
    
