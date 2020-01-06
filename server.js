@@ -10,7 +10,7 @@ const Weather = require("./data/weather/weather.router");
 const delayLogsRouter = require("./data/delay-logs/delay_logs.router");
 const authenticate = require('./auth/authenticate')
 const documentRouter = require('./docs/documents-router')
-const reminderRouter = require('./data/send_sms')
+
 
 const server = express();
 
@@ -39,7 +39,7 @@ server.use(cors());
 server.use(helmet());
 server.use(express.json());
 // server.use('/auth',authRouter)
-server.use('/',reminderRouter)
+
 server.use("/projects", authenticate,ProjectsRouter);
 server.use("/projects/tasks",authenticate,TasksRouter);
 server.use("/templates",authenticate,TemplatesRouter);

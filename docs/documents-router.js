@@ -136,16 +136,13 @@ router.post('/get',  (req,res)=>{
     
     })
 
-    router.get('/download/:file_name', (req,res) =>{
+    router.get('/download/:file_name/bucket', (req,res) =>{
         
        const file_name = req.params.file_name
        const uid = req.headers.user_id
         
 
-       res.set(
-        'Content-Disposition',
-        `attachment; filename=${file_name}`
-    )
+ 
        const options = {
 
            Bucket:S3_BUCKET,
@@ -155,10 +152,60 @@ router.post('/get',  (req,res)=>{
             if(err){
                 console.log(err)
             }
-            return data
-        }).then(data =>{
-         request(`https://${S3_BUCKET}.s3.amazonaws.com/${uid}/${file_name}`).pipe(data)})
-    })
+           console.log(data)
+           res.status(200).json(data)})
+        })
+    /** getDocuments
+     * @name Douments
+     * 
+     * @private 
+     * @path /downloads/:filename?file='type'
+     * @param {req} required filename and type
+     * @param {res} 
+     * @code {200}
+     * @response {File} Send the requested file to the client 
+     * 
+     *  */   
+    router.get('/downloads/:filename',(req,res)=>{
+        const fileTypes = [
+            'csv',
+            'jpg',
+            'pdf',
+            'png',
+            'xslx'
+        ];
+
+        /**
+         * Check if the request is correct
+         * 
+         */
+        return new Promise((resolve, reject) => {
+            if (req.query.file && fileTypes.indexOf(req.query.file.toLowerCase()) > -1) {
+                return resolve(`sample.${fileTypes[fileTypes.indexOf(req.query.file.toLowerCase())]}`);
+            }
+            return reject(`Please provide a file type of ?file=${fileTypes.join('|')}`);
+        })
+        .then((file) => {
+            return new Promise((resolve, reject) => {
+                if(fs.existsSync(`./files/${file}`)) {
+                    return resolve(`./files/${file}`)
+                }
+                return reject(`File '${file}' was not found.`);
+            })
+        })
+        // Return the file to download
+        .then((filePath) => {
+            res.download(filePath);
+        })
+        // Catches errors and displays them
+        .catch((e) => {
+            res.status(400).send({
+                message: e,
+            });
+        });
+    });
+  
+
     
     
 
