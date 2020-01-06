@@ -140,7 +140,7 @@ router.delete("/byProject/:pid",(req,res)=>{
 
     db.addTasks(template)
      })
-     .then(newTasksArr =>{console.log(newTasksArr)})
+     .then(newTasksArr =>{res.status(200).json(newTasksArr)})
      
    })
 
