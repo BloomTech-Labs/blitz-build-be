@@ -3,7 +3,8 @@ const createdAt = Date.now()
 module.exports = {
     addURL,
     getURL,
-    deleteUrl
+    deleteUrl,
+    getDocByFileName
 }
 
 function addURL(url){
@@ -18,6 +19,10 @@ function getURL(id){
        .where("user_id",'=',id)
 }
 
+function getDocByFileName(file_name){
+    return db("docs_url")
+       .where("file_name","=",file_name)
+ }
 function deleteUrl(file_name){
     return db("docs_url")
     .where("file_name","=",file_name)

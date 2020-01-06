@@ -4,7 +4,7 @@ const aws = require('aws-sdk')
 const fs = require('fs')
 const router = require('express').Router();
 const moment = require('moment')
-
+const request = require('request')
 aws.config.update({
     region: 'us-west-2',
     accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -108,6 +108,16 @@ router.get('/url',(req,res)=>{
     })
     .catch(err => res.status(500).json({err:err.message}))
 })
+router.get('/url/:file_name',(req,res)=>{
+   
+    let file_name= req.params.file_name
+    db.getDocByFileName(file_name)
+    .then(data =>{
+        res.status(200).json(data)
+    })
+    .catch(err => res.status(500).json({err:err.message}))
+})
+
 /** Get A Specific Document Url For a User */
 router.post('/get',  (req,res)=>{
     let uid = req.headers.user_id
@@ -126,32 +136,76 @@ router.post('/get',  (req,res)=>{
     
     })
 
-    router.post('/download/:file_name', (req,res) =>{
-       const fileName = req.params.file_name
-      const uid = req.headers.user_id
-     const filePath = '/users/:user/downloads/:fileName'
-     const bucketName = process.env.BUCKET_NAME
-     const Key = `${uid}/${fileName}`
- const file = fs.createWriteStream();
-     userEffect(()=>{
-         downLoadFile();
-     },[downLoadFile])
-     const s3 = new AWS.S3()
-     function downLoadFile(filePath,bucketName,key){
-       
-        const params = {
-        Bucket: bucketName,
-        Key : key
-    }
-     return s3.getObject(params, (err,data) => {
-          if(error) console.log(err)
-          fs.writeFileSync(filePath, data.Body.toString());
-          console.log(`${filePath} has ben created`)
-         })
-      
-        }
+    router.get('/download/:file_name/bucket', (req,res) =>{
+        
+       const file_name = req.params.file_name
+       const uid = req.headers.user_id
+        
+
+ 
+       const options = {
+
+           Bucket:S3_BUCKET,
+           Key:`${uid}/${file_name}`
+       }
+        s3.getObject(options,function(err,data){
+            if(err){
+                console.log(err)
+            }
+           console.log(data)
+           res.status(200).json(data)})
+        })
+    /** getDocuments
+     * @name Douments
+     * 
+     * @private 
+     * @path /downloads/:filename?file='type'
+     * @param {req} required filename and type
+     * @param {res} 
+     * @code {200}
+     * @response {File} Send the requested file to the client 
+     * 
+     *  */   
+    router.get('/downloads/:filename',(req,res)=>{
+        const fileTypes = [
+            'csv',
+            'jpg',
+            'pdf',
+            'png',
+            'xslx'
+        ];
+
+        /**
+         * Check if the request is correct
+         * 
+         */
+        return new Promise((resolve, reject) => {
+            if (req.query.file && fileTypes.indexOf(req.query.file.toLowerCase()) > -1) {
+                return resolve(`sample.${fileTypes[fileTypes.indexOf(req.query.file.toLowerCase())]}`);
+            }
+            return reject(`Please provide a file type of ?file=${fileTypes.join('|')}`);
+        })
+        .then((file) => {
+            return new Promise((resolve, reject) => {
+                if(fs.existsSync(`./files/${file}`)) {
+                    return resolve(`./files/${file}`)
+                }
+                return reject(`File '${file}' was not found.`);
+            })
+        })
+        // Return the file to download
+        .then((filePath) => {
+            res.download(filePath);
+        })
+        // Catches errors and displays them
+        .catch((e) => {
+            res.status(400).send({
+                message: e,
+            });
+        });
+    });
   
-    })
+
     
     
 

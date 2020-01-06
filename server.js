@@ -10,7 +10,7 @@ const Weather = require("./data/weather/weather.router");
 const delayLogsRouter = require("./data/delay-logs/delay_logs.router");
 const authenticate = require('./auth/authenticate')
 const documentRouter = require('./docs/documents-router')
-const reminderRouter = require('./data/send_sms')
+
 
 const server = express();
 
@@ -25,6 +25,12 @@ function logger(req, res, next) {
 }
 
 
+server.use(function(req,res,next){
+  res.header("Access-Control-Allow-Origin", "*");
+
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+})
 
 
 server.use(logger);
@@ -33,7 +39,7 @@ server.use(cors());
 server.use(helmet());
 server.use(express.json());
 // server.use('/auth',authRouter)
-server.use('/',reminderRouter)
+
 server.use("/projects", authenticate,ProjectsRouter);
 server.use("/projects/tasks",authenticate,TasksRouter);
 server.use("/templates",authenticate,TemplatesRouter);
