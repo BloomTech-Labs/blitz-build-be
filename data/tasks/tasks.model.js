@@ -56,7 +56,7 @@ function deleteTask(id) {
 }
 function deleteTasks(id,template_name){
   return db("tasks")
-     .where("project_id","=",id,"&&","template_id","=",template_name)
+     .where("project_id","=",id,"&&","template_name","=",template_name)
       .del()
 }
 function getTasksByProject(id) {
@@ -64,5 +64,5 @@ function getTasksByProject(id) {
 }
 function getTasksByTempName(template_name){
   return db("tasks")
-  .where("template_id","=",template_name)
+  .where("template_name","=",template_name)
 }
