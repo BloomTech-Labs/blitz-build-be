@@ -4,7 +4,7 @@ require("dotenv").config("./env");
 module.exports = {
   development: {
     client: "pg",
-    connection: process.env.DATABASE_URL,
+    connection: process.env.DATABASE_URI,
     
       ssl: true,
     
@@ -24,7 +24,7 @@ module.exports = {
 
   production: {
     client: "pg",
-    connection:process.env.DATABASE_URI,
+    connection:process.env.DATABASE_URL,
     ssl:true,
     pool: {
       min: 2,
