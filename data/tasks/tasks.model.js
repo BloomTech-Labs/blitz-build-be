@@ -34,9 +34,9 @@ function getTasksByID(id, query){
     .orderBy(query.sortby, query.sortdir)
   }
 }
-function getTaskByTemplateId(template_name){
+function getTaskByTemplateId(template_id){
   return db("tasks")
-   .where("template_name","=",template_name)
+   .where("template_id","=",template_id)
 }
 function getTaskByTaskID(id) {
   return db("tasks").where({id}).orderBy("id")
@@ -54,15 +54,15 @@ function deleteTask(id) {
     .where("id", "=", id)
     .del();
 }
-function deleteTasks(id,template_name){
+function deleteTasks(id,template_id){
   return db("tasks")
-     .where("project_id","=",id,"&&","template_name","=",template_name)
+     .where("project_id","=",id,"&&","template_id","=",template_id)
       .del()
 }
 function getTasksByProject(id) {
   return db("tasks").where("project_id", "=", id)
 }
-function getTasksByTempName(template_name){
+function getTasksByTempName(template_id){
   return db("tasks")
-  .where("template_name","=",template_name)
+  .where("template_id","=",template_id)
 }
