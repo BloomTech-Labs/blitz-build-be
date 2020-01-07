@@ -54,15 +54,15 @@ function deleteTask(id) {
     .where("id", "=", id)
     .del();
 }
-function deleteTasks(id,template_id){
+function deleteTasks(id,template_name){
   return db("tasks")
-     .where("project_id","=",id,"&&","template_id","=",template_id)
+     .where("project_id","=",id,"&&","template_id","=",template_name)
       .del()
 }
 function getTasksByProject(id) {
   return db("tasks").where("project_id", "=", id)
 }
-function getTasksByTempName(template_id){
+function getTasksByTempName(template_name){
   return db("tasks")
-  .where("template_id","=",template_id)
+  .where("template_id","=",template_name)
 }
