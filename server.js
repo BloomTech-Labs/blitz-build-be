@@ -10,10 +10,9 @@ const Weather = require("./data/weather/weather.router");
 const delayLogsRouter = require("./data/delay-logs/delay_logs.router");
 const authenticate = require('./auth/authenticate')
 const documentRouter = require('./docs/documents-router')
-
+const cors = require('cors')
 
 const server = express();
-
 
 
 
@@ -27,12 +26,13 @@ function logger(req, res, next) {
 
 server.use(function(req,res,next){
   res.header("Access-Control-Allow-Origin", "*");
-
+  
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 })
 
 
+server.use(cors())
 server.use(logger);
 
 
