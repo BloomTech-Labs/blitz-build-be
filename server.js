@@ -51,7 +51,7 @@ server.use('/90_day',authenticate,NinetyDayRouter)
 server.use('/docs',authenticate,documentRouter)
 
 module.exports = server;
-nodemon
+
 
 
 
