@@ -4,7 +4,7 @@ const aws = require('aws-sdk')
 const fs = require('fs')
 const router = require('express').Router();
 const moment = require('moment')
-const request = require('request')
+
 aws.config.update({
     region: 'us-west-2',
     accessKeyId: process.env.AWS_ACCESS_KEY,
@@ -57,11 +57,10 @@ router.post("/documents",(req,res)=>{
  *  */
 router.delete('/url/:file_name', async (req,res)=>{
     
-    const url = req.body.url
+  
     const uid=req.headers.user_id
     const S3_BUCKET = process.env.BUCKET_NAME
-    const file_name=req.params.file_name  
-    let   success = false
+    const file_name=req.params.file_name   
     const s3Params = { Bucket: S3_BUCKET , Key: `${uid}/${file_name}`}
     // /** Calling deleteObject on the AWS Bucket Will Delete The Object That Is Passed In */
            await s3.deleteObject(s3Params, function(err,data){
