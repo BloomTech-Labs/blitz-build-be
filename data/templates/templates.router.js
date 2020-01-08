@@ -3,14 +3,13 @@ const router = express.Router();
 const moment = require('moment')
 const db = require("./templates.model");
 
-/**
- * @swagger
- * /:
- *   post:
- *     description: Adds A template of tasks
- *        responses: 
- *              201:
- *                description: Returns template_id,template_name
+/** Templates Router
+ * @auth Requires Login
+ *@param {String} template_name - The name of the template 
+ *@param {String} user_id - The user_id for current user
+ *@code 201 
+ *@returns {Object} ResponseObj - template_id , template_name
+ *  
  *           
  */
 router.post("/", (req, res) => {

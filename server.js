@@ -49,7 +49,7 @@ server.use("/delay_logs",authenticate,delayLogsRouter);
 // server.use('/s3',documentRouter)
 server.use('/90_day',authenticate,NinetyDayRouter)
 server.use('/docs',authenticate,documentRouter)
-
+server.use('/devdocs',express.static(__dirname + '/public/jsdocs/index.html'))
 module.exports = server;
 
 
