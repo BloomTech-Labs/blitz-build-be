@@ -135,7 +135,10 @@ router.post('/get',  (req,res)=>{
      })
     
     })
-
+     /**
+      * Sends the actual file from the s3 bucket to the FE to 
+      * be saved to the users local.
+      */
     router.get('/download/:file_name/bucket', (req,res) =>{
         
        const file_name = req.params.file_name
