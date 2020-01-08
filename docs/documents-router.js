@@ -155,6 +155,12 @@ router.post('/get',  (req,res)=>{
            console.log(data)
            res.status(200).json(data)})
         })
+
+   /** TODO 
+    *  This is an option added to it's suppossed to display and download static documents.
+    *  It does not work as expected. On the hosted URL. It does work locally. I was going to remove it but i'm leaving for the next dev team to make that 
+    *  call.
+    */
     /** getDocuments
      * @name Douments
      * 
