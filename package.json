@@ -7,7 +7,18 @@
     "server": "nodemon index.js",
     "start": "node index.js",
     "test": "mocha --exit",
-    "generate-docs": "jsdoc -c ./package.json"
+    "generate-docs": "jsdoc -c ./package.json",
+    "scss": "node-sass -o dist/css assets/scss/style.scss",
+    "concat:css": "concat -o dist/css/styles.css dist/css/style.css assets/css/test.css",
+    "concat:js": "mkdir -p dist/js && concat -o dist/js/scripts.js assets/js/test1.js assets/js/test2.js",
+    "concat": "npm run concat:css && npm run concat:js",
+    "cssmin": "cleancss -o dist/css/styles.min.css dist/css/styles.css",
+    "uglify": "uglifyjs -o dist/js/scripts.min.js dist/js/scripts.js",
+    "imagemin": "imagemin --out-dir=dist/img assets/img/**/*.{png,jpg,gif}",
+    "build:css": "npm run scss && npm run concat:css && npm run cssmin",
+    "build:js": "npm run concat:js && npm run uglify",
+    "build:img": "npm run imagemin",
+    "build": "npm run build:css && npm run build:js && npm run build:img"
   },
   "repository": {
     "type": "git",
@@ -21,6 +32,7 @@
   },
   "homepage": "https://github.com/Lambda-School-Labs/blitz-build-be#readme",
   "dependencies": {
+    "@now/node": "^1.3.5",
     "aws-sdk": "^2.582.0",
     "axios": "^0.19.0",
     "bcryptjs": "^2.4.3",
@@ -39,16 +51,22 @@
     "mockery": "^2.1.0",
     "moment": "^2.24.0",
     "node-static": "^0.7.11",
+    "now": "^16.7.3",
     "passport": "^0.4.0",
     "passport-auth0": "^1.3.0",
     "pg": "^7.12.1",
     "zipcodes": "^8.0.0"
   },
   "devDependencies": {
+    "clean-css-cli": "^4.3.0",
+    "concat": "^1.0.3",
     "eslint": "^6.7.2",
+    "imagemin-cli": "^5.1.0",
     "jest": "^24.9.0",
+    "node-sass": "^4.13.1",
     "nodemon": "^1.19.4",
-    "supertest": "^4.0.2"
+    "supertest": "^4.0.2",
+    "uglify-js": "^3.7.6"
   },
   "engines": {
     "node": "12.13.0",
