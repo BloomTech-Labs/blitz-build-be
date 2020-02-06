@@ -1,33 +1,58 @@
-const db = require("../../config/db.config");
+const db = require("../db.config");
 
 module.exports = {
+  getTemplate,
   getTemplates,
-  getTemplateById,
+   getTemplatesByName,
+  // getTemplateById,
   addTemplate,
   editTemplate,
-  deleteTemplate
+  deleteTemplate,
+  getAll,
+  getTasksByTempName
 };
 
-function getTemplates() {
-  return db("templates");
+// function getTemplateByName(id) {
+//   return db("templates").where("id","=",id);
+// }
+function getAll(id){
+return db("templates")
+ .select('*')
+ .where("user_id","=", id)
+ .orderBy("template_name")
+}
+function getTemplate(id){
+  return db("templates").select("*").where("id","=",id)
 }
 
-function getTemplateById(id) {
-  return db("templates").where("id", "=", id);
+function getTemplates(id) {
+  return db("templates").where("id","=",id)
+         
+}
+function getTemplatesByName(template_name){
+  return db("templates").where("template_name","=",template_name)
 }
 
-function addTemplate(newTemplate) {
-  return db("templates").insert(newTemplate);
+function addTemplate(template) {
+    return db('templates')
+    .insert(template,"id")
+    .then(templateIdArr => getTemplates(templateIdArr[0]))
+           
+          
 }
 
 function editTemplate(id, changes) {
   return db("templates")
     .where({ id })
-    .update(changes);
+    .update({...changes});
 }
 
 function deleteTemplate(id) {
   return db("templates")
     .where("id", "=", id)
     .del();
+}
+function getTasksByTempName(template_name){
+  return db("templates")
+  .where("template_name","=",template_name)
 }

@@ -1,42 +1,50 @@
 const express = require("express");
 const db = require("./tasks.model");
-
+const templates = require('../templates/templates.model')
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  db.getTasks()
-    .then(tasks => {
-      res.status(200).json(tasks);
-    })
-    .catch(error => {
-      res.status(500).json({
-        error: error,
-        message: "500 server error on getting tasks"
-      });
-    });
-});
+/** Get All Tasks for user */
 
+
+router.get("/:id",(req,res)=>{
+  const query = req.query
+  const id = req.params.id
+  db.getTasksByID(id, query)
+  .then(tasks =>{
+    res.status(200).json({tasks:tasks})
+  })
+  .catch(error =>{res.status(409).json({message:`Sorry No Tasks For ID # ${id}`})})
+})
+/** Get task by ID */
 router.get("/:id", (req, res) => {
-  const id = req.params.id;
-
-  db.getTaskById(id)
+  const id = req.params.id
+  db.getTaskByTaskID(id)
     .then(task => {
       res.status(200).json(task);
     })
     .catch(error => {
-      res.status(500).json({
-        error: error,
-        message: "500 server error on getting task id"
+      res.status(409).json({
+        error: error.message,
+        message: `Sorry no tasks for # ${id} Exist`
       });
     });
 });
-
+/** Get Tasks by Templates */
+router.get('/template/:id',(req,res)=>{
+  let id = req.params.id
+  db.getTaskByTemplateId(id)
+  .then(tasks =>{
+    res.status(200).json(tasks)
+  }).catch(err =>{res.status(401).json(err)})
+})
 router.post("/", (req, res) => {
-  const task = req.body;
+  const tasks = req.body;
+  const uid  = req.headers.user_id
+  tasks.user_id = uid
 
-  db.addTask(task)
-    .then(newTask => {
-      res.status(200).json(newTask);
+  db.addTasks(tasks)
+    .then(taskId => {
+      res.status(200).json({message:`${tasks.task_name} added`, taskId});
     })
     .catch(error => {
       res.status(500).json({
@@ -46,17 +54,17 @@ router.post("/", (req, res) => {
     });
 });
 
-//EDITS TASK
+/** EDIT A TASK */
 router.put("/:id", (req, res) => {
-  console.log("im here ");
   const id = req.params.id;
   const changes = req.body;
 
   db.editTask(id, changes)
     .then(updatedTask => {
-      res.status(200).json(updatedTask);
+      res.status(200).json({message:`Task # ${id} updated`,updatedTask:updatedTask.text});
     })
     .catch(error => {
+      console.log(error)
       res.status(500).json({
         error: error,
         message: "500 server error on editing tasks"
@@ -79,14 +87,16 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-//RETURNS TASKS BY PROJECT ID
-router.get("/project/:id", (req, res) => {
-  console.log("im here");
-  const id = req.params.id;
 
+/** RETURNS All TASKS For Project BY PROJECT ID */
+router.get("/byProject/:pid", (req, res) => {
+  const id = req.params.pid;
   db.getTasksByProject(id)
     .then(tasks => {
+     if(tasks = tasks[0]) {
       res.status(200).json(tasks);
+     }else
+     res.status(409).json({message:`No Tasks Exist For Project # ${id}`})
     })
     .catch(error => {
       res.status(500).json({
@@ -96,4 +106,42 @@ router.get("/project/:id", (req, res) => {
     });
 });
 
-module.exports = router;
+router.delete("/byProject/:pid",(req,res)=>{
+  const id = req.params.pid
+  const template_name = req.body.template_name
+
+ 
+      db.deleteTasks(id,template_name)
+      .then(response =>{
+        res.status(204).json(response)
+      })
+      .catch(error=>{
+        res.status(500).json(error)
+      })
+    
+    
+  }) 
+
+
+
+  /** Get templates  */
+
+
+ router.get('/templates/:id',(req,res)=>{
+   const tempid = req.params.id
+ 
+   
+   templates.getTemplateById(tempid)
+   
+
+   .then(templates =>{
+     templates
+     const template = templates[0].tasks
+
+    db.addTasks(template)
+     })
+     .then(newTasksArr =>{res.status(200).json(newTasksArr)})
+     
+   })
+
+module.exports = router

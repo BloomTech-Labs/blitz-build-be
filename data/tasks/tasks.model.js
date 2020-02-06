@@ -1,47 +1,68 @@
-const db = require("../../config/db.config");
-
+const db = require("../db.config");
 module.exports = {
-  getTasks,
-  getTaskById,
-  addTask,
+  addTasks,
   editTask,
   deleteTask,
-  getTasksByProject
+  getTasksByProject,
+  getTaskByTaskID,
+  getTasksByID,
+  getTaskByTemplateId,
+  deleteTasks,
+  getTasksByTempName
 };
-
-function getTasks() {
-  return db("tasks")
+function getTasksByID(id, query){
+  if(Object.entries(query).length === 0){
+    return db("tasks")
     .join("projects", "tasks.project_id", "=", "projects.id")
-    .select("projects.project_name", "tasks.*");
+    .select("projects.project_name", "tasks.*")
+    .where("tasks.user_id","=",id)
+    .orderBy("tasks.id")
+  }
+  else if(query.orderby && query.sortdir) {
+    return db("tasks")
+    .join("projects", "tasks.project_id", "=", "projects.id")
+    .select("projects.project_name", "tasks.*")
+    .where("tasks.user_id","=",id)
+    .orderBy(query.orderby, query.sortdir)
+  }
+  else if (query.sortby && query.sortdir && query.sortcondition) {
+    return db("tasks")
+    .join("projects", "tasks.project_id", "=", "projects.id")
+    .select("projects.project_name", "tasks.*")
+    .where("tasks.user_id","=",id)
+    .where(query.sortby,"=", query.sortcondition)
+    .orderBy(query.sortby, query.sortdir)
+  }
 }
-
-function getTaskById(id) {
-  return db("tasks").where("id", "=", id);
+function getTaskByTemplateId(template_id){
+  return db("tasks")
+   .where("template_id","=",template_id)
 }
-
-function addTask(newTask) {
-  return db("tasks").insert(newTask);
+function getTaskByTaskID(id) {
+  return db("tasks").where({id}).orderBy("id")
 }
-
+function addTasks(tasks) {
+  return db("tasks").insert(tasks, "id")
+}
 function editTask(id, changes) {
   return db("tasks")
     .where({ id })
-    .update(changes);
+    .update(changes).orderBy("id")
 }
-
 function deleteTask(id) {
   return db("tasks")
     .where("id", "=", id)
     .del();
 }
-
-// function getTasksByProject(project_id) {
-//   return db("tasks").where("project_id", "=", project_id);
-// }
-
-function getTasksByProject(project_id) {
+function deleteTasks(id,template_name){
   return db("tasks")
-    .join("projects", "tasks.project_id", "=", "projects.id")
-    .select("projects.*", "tasks.*")
-    .where("tasks.project_id", "=", project_id);
+     .where("project_id","=",id,"&&","template_name","=",template_name)
+      .del()
+}
+function getTasksByProject(id) {
+  return db("tasks").where("project_id", "=", id)
+}
+function getTasksByTempName(template_name){
+  return db("tasks")
+  .where("template_name","=",template_name)
 }
