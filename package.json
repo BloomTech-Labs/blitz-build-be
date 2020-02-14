@@ -8,9 +8,7 @@
     "start": "node index.js",
     "test": "mocha --exit",
     "generate-docs": "jsdoc -c ./package.json",
-
-   
-    "build": "npm run build:css && npm run build:js && npm run build:img"
+    "build": "npm run start "
   },
   "repository": {
     "type": "git",
