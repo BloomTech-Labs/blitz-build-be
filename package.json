@@ -53,7 +53,7 @@
     "eslint": "^6.7.2",
     "imagemin-cli": "^5.1.0",
     "jest": "^24.9.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "nodemon": "^1.19.4",
     "supertest": "^4.0.2",
     "uglify-js": "^3.7.6"
